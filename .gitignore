@@ -4,3 +4,5 @@
 **/Logs
 **/logs
 Extras/
+**/.vs/
+**/.vscode/
