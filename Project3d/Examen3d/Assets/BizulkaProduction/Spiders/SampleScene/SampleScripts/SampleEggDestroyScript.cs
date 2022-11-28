@@ -1,3 +1,31 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c7d26630a03053d164741a19ccea436bd50b0095456dbf0d279a855670ade351
-size 711
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// This is sample script
+/// </summary>
+public class SampleEggDestroyScript : MonoBehaviour
+{
+    [SerializeField] private EggController[] _eggControllers;
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(DestroyEggs());
+        }
+    }
+
+    IEnumerator DestroyEggs()
+    {
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < _eggControllers.Length; i++)
+        {
+            _eggControllers[i].Destroy();
+            yield return new WaitForSeconds(Random.value);
+            
+        }
+    }
+}

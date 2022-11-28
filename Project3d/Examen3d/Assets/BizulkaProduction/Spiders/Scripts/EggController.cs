@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b23da27a1cb38ed8c7de7a6729cc55865d7d5a94619f64fadf75d687ec1ed1e3
-size 576
+﻿using UnityEngine;
+
+public class EggController : MonoBehaviour
+{
+    [SerializeField] GameObject _full;
+    [SerializeField] GameObject _damaged;
+    [SerializeField] private ParticleSystem _particleSystem;
+
+    void OnMouseOver()
+    {
+        Destroy();
+    }
+
+    public void Clear()
+    {
+        _full.gameObject.SetActive(true);
+        _damaged.gameObject.SetActive(false); 
+    }
+    public void Destroy()
+    {
+        _full.gameObject.SetActive(false);
+        _damaged.gameObject.SetActive(true);
+        _particleSystem.Play();
+    }
+
+}

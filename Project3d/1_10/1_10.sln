@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8b80d3e166fc15f6caea0bccd69091b5789f5d2fcc58690731d2d3d24e78a5f7
-size 712
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{96bcd79a-94a4-fcee-3d7d-5f582e07bb02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96bcd79a-94a4-fcee-3d7d-5f582e07bb02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96bcd79a-94a4-fcee-3d7d-5f582e07bb02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

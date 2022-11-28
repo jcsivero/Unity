@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ba16d02a7948980088ea880f4a048067031748e9d86cc42ebdab18e2a7ab2ebd
-size 739
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Character : MonoBehaviour
+{
+    [SerializeField] public bool collision_;
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("posicion actual en trigguer ++++++++++++++++++++++++++: " +transform.position);
+        //Debug.Log("onTrigger enter");                
+        collision_ = true;
+        
+        GameEvents.TriggerOnActionGameObject(this.gameObject,other.gameObject);
+        
+        
+    }
+    void OnTriggerExit(Collider other)
+    {
+        //Debug.Log("saliendo del tria trigguer ???????????????????????????: " +transform.position);
+        collision_ = false;
+    }
+}
+
+
