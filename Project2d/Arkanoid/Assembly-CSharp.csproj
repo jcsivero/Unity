@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\HUD_GamePlay.cs" />
      <Compile Include="Assets\Scripts\maria.cs" />
+     <Compile Include="Assets\Scripts\Goblin.cs" />
      <Compile Include="Assets\Scripts\BlockViolet.cs" />
      <Compile Include="Assets\Scripts\HUD_InitialOptions.cs" />
      <Compile Include="Assets\Scripts\Kid.cs" />

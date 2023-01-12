@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager_;
 
-    public int  numberOfLevels_ {get; set;}   
+    public int  numberOfLevels_;
     public int countEnemies_;    
     public int activeLevel_; //por defecto comienza en la escena 1. La 0 es el menú principal
     public int totalPoints_ = 0;
