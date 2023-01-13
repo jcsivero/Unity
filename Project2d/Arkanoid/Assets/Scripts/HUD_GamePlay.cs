@@ -45,6 +45,7 @@ public class HUD_GamePlay : MonoBehaviour
 
         draft = GameObject.Find("TextEnemiesLeft");
         textEnemiesLeft_ = draft.GetComponent<Text>();
+        UpdateHud();
 
     }
     /// <summary>
