@@ -23,20 +23,17 @@ public class FollowPath : MonoBehaviour
         //g = wpManager.GetComponent<WPManager>().graph;
         //currentNode = wps[0];
     }
-    public void GoToHeli()
-    {
+    public void GoToHeli() {
         //g.AStar(currentNode,wps[1]);
         //currentWP = 0;
         agent.SetDestination(wps[1].transform.position);
     }
-    public void GoToRuin()
-    {
+    public void GoToRuin() {
         agent.SetDestination(wps[6].transform.position);
         //g.AStar(currentNode,wps[6]);
         //currentWP = 0;
     }
-    public void GoToTank()
-    {
+    public void GoToTank() {
         agent.SetDestination(wps[8].transform.position);
         //g.AStar(currentNode,wps[8]);
         //currentWP = 0;
