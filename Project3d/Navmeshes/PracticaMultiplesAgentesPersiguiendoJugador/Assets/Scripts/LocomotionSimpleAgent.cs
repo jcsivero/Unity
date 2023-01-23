@@ -21,6 +21,8 @@ public class LocomotionSimpleAgent : MonoBehaviour {
 		//anim.SetFloat ("velx", agent.velocity.magnitude);
 		anim.SetFloat ("velx", agent.velocity.x);
 		anim.SetFloat ("vely", agent.velocity.y);
+		anim.SetFloat("velz",agent.velocity.z);
+		anim.SetFloat("magnitude",agent.velocity.magnitude);
 
 		/*Vector3 worldDeltaPosition = agent.nextPosition - transform.position;
 

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int  levelPoints_ = 0;
     public int lifes_ = 3;
     
+    public bool isBallMoving_ = false;
     
     /// <summary>
     /// Awake is called when the script instance is being loaded.

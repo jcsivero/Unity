@@ -26,8 +26,8 @@ public class LoseTrigger : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("colision enter");
-        GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_HUD_VALUES,EventData.Create(EVENT_UPDATE_HUD_VALUES)
-            .Set<bool>("lost",true));     
+        //GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_HUD_VALUES,EventData.Create(EVENT_UPDATE_HUD_VALUES)
+          //  .Set<bool>("lost",true));     
      
     }
    
