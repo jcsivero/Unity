@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     void Start()
     {
         ballRb_ = GetComponent<Rigidbody2D>();
+        initialVelocity_ = new Vector2(0,0);
         
                 
     }
@@ -24,11 +25,11 @@ public class Ball : MonoBehaviour
         {
             transform.parent= null;       
             ballRb_.simulated = true;     
-            if (initialVelocity_ == Vector2.zero)
-            {
+            //if (initialVelocity_ == Vector2.zero)
+            //{
                 initialVelocity_.x = Random.Range(3f,5f) * GameManager.gameManager_.activeLevel_;
                 initialVelocity_.y = Random.Range(3f,5f) * GameManager.gameManager_.activeLevel_;
-            }   
+            //}   
             
             GameManager.gameManager_.isBallMoving_= true;                                                
             

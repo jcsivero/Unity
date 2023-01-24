@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
-                        
+        activeLevel_ =SceneManager.GetActiveScene().buildIndex;
         if (gameManager_!= null && gameManager_ != this)
             Destroy(gameObject);
         else
