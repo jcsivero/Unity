@@ -31,6 +31,11 @@ public class AIControl : MonoBehaviour {
             NavMeshPath path = new NavMeshPath();
             agent.CalculatePath(newgoal, path);
 
+            /*agent.SetDestination(newgoal);
+            anim.SetTrigger("isRunning");
+            agent.speed = 10;
+            agent.angularSpeed = 500;*/
+
             if (path.status != NavMeshPathStatus.PathInvalid)
             {
                 agent.SetDestination(path.corners[path.corners.Length - 1]);

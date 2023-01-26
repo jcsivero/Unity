@@ -25,7 +25,7 @@ public class AIControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (agent.remainingDistance < 1)
+		if (agent.remainingDistance < 2)
 		{
 			agent.SetDestination(goalLocations[Random.Range(0,goalLocations.Length)].transform.position);
 			//anim.SetTrigger("isIdle");

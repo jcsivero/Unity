@@ -124,8 +124,11 @@ public class Bot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CanSeeTarget())
-            CleverHide();
+        //if (CanSeeTarget())
+            ///CleverHide();
+            Hide();
+          //Wander();
+          //Pursue();
     }
 
 }
