@@ -14,15 +14,15 @@ public class Chase : NPCBaseFSM
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-    
+        npcComponentAIController_.UpdateCurrentsSpeeds();
+        
         if (npcComponentAIController_.useNavMeshAI_)
-            npcComponentAIController_.agent_.SetDestination(npcComponentAIController_.target_.transform.position);
+            npcComponentAIController_.agent_.SetDestination(target_.transform.position);
         else
         {
-            var direction = npcComponentAIController_.target_.transform.position - npc_.transform.position;
-            npc_.transform.rotation = Quaternion.Slerp(npc_.transform.rotation, Quaternion.LookRotation(direction), npcComponentAIController_.rotationSpeed_ * Time.deltaTime);
-            npcComponentAIController_.currentSpeedAI_ =  Time.deltaTime * npcComponentAIController_.speed_;
-            npc_.transform.Translate(0, 0, npcComponentAIController_.currentSpeedAI_);
+            var direction = target_.transform.position - npc_.transform.position;
+            npc_.transform.rotation = Quaternion.Slerp(npc_.transform.rotation, Quaternion.LookRotation(direction), npcComponentAIController_.rotationSpeed_ * Time.deltaTime);             
+            npc_.transform.Translate(0, 0, npcComponentAIController_.GetCurrentSpeedAI());
     
         }
 

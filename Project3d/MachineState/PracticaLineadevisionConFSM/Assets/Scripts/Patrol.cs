@@ -16,6 +16,7 @@ public class Patrol : NPCBaseFSM
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+         npcComponentAIController_.UpdateCurrentsSpeeds();
         if (npcComponentAIController_.waypoints_ == null) 
             npcComponentAIController_.bot_.Wander();
 
@@ -40,7 +41,7 @@ public class Patrol : NPCBaseFSM
                     var direction = npcComponentAIController_.waypoints_[npcComponentAIController_.currentWP_].transform.position - npc_.transform.position;
                     npc_.transform.rotation = Quaternion.Slerp(npc_.transform.rotation, Quaternion.LookRotation(direction), npcComponentAIController_.rotationSpeed_ * Time.deltaTime);
                     npcComponentAIController_.currentSpeedAI_ =  Time.deltaTime * npcComponentAIController_.speed_;
-                    npc_.transform.Translate(0, 0, npcComponentAIController_.currentSpeedAI_);
+                    npc_.transform.Translate(0, 0, npcComponentAIController_.GetCurrentSpeedAI());
             
                 }
 

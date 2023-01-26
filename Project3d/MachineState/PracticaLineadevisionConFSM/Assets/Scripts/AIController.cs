@@ -32,7 +32,6 @@ public class AIController : MonoBehaviour
     public float visAngle_ = 30.0f;
     public float shootDist_ = 5.0f;
 
-    string state = "IDLE";
 
     // Use this for initialization
     void Start()
@@ -44,7 +43,7 @@ public class AIController : MonoBehaviour
             //haberle asignado una.
         
         if (agent_ == null)
-            agent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
+            agent_ = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         if (waypoints_ == null)
             waypoints_ = GameObject.FindGameObjectsWithTag("waypoint");
@@ -60,7 +59,7 @@ public class AIController : MonoBehaviour
         float angle = Vector3.Angle(direction, this.transform.forward);
         
         anim_.SetFloat("distance", Vector3.Distance(transform.position, target_.transform.position));     
-        anim_.SetFloat("angle", Vector3.Distance(transform.position, target_.transform.position));     
+        anim_.SetFloat("angle", angle);     
         
         if (direction.magnitude < visDist_ && angle < visAngle_)
         {
@@ -70,40 +69,7 @@ public class AIController : MonoBehaviour
                 anim_.SetBool("visibleTarget",false);
         }    
         else   
-            anim_.SetBool("visibleTarget",false);
-            /*
-
-        if (direction.magnitude < visDist_ && angle < visAngle_)
-        {
-            direction.y = 0;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed_);
-            if (direction.magnitude > shootDist_)
-            {
-                if (state != "RUNNING")
-                {
-                    state = "RUNNING";
-                    anim_.SetTrigger("isRunning");
-                }
-            }
-            else
-            {
-                if (state != "SHOOTING")
-                {
-                    state = "SHOOTING";
-                    anim_.SetTrigger("isShooting");
-                }
-            }
-        }
-        else
-        {
-            if (state != "IDLE")
-            {
-                state = "IDLE";
-                anim_.SetTrigger("isIdle");
-            }
-        }
-        if (state == "RUNNING")
-            this.transform.Translate(0, 0, Time.deltaTime * speed_);*/
+            anim_.SetBool("visibleTarget",false);    
 
         
     }
@@ -113,24 +79,32 @@ public class AIController : MonoBehaviour
         
     }
 
-    public float GetCurrentSpeedTarget()
+    public void UpdateCurrentsSpeeds()
     {
-        
-        if (useNavMeshTarget_)
-            currentSpeedTarget_ = target_.GetComponent<UnityEngine.AI.NavMeshAgent>().speed;
+        ///Actualizo velocidad actual a la que se mueve el target.
+     if ((useNavMeshTarget_) && (target_.GetComponent<UnityEngine.AI.NavMeshAgent>() != null))        
+            currentSpeedTarget_ = target_.GetComponent<UnityEngine.AI.NavMeshAgent>().velocity.magnitude;
         else
         {
             if (target_.GetComponent<CharacterController>() != null)
-                currentSpeedTarget_ = GetComponent<CharacterController>().velocity.magnitude;
+                currentSpeedTarget_ = target_.GetComponent<CharacterController>().velocity.magnitude;
         }
+
+        ///Actualizo veclocidad actual de movimiento del NPC.
+        if ((useNavMeshAI_) && (agent_ != null))
+            currentSpeedAI_ =  agent_.velocity.magnitude;
+        else 
+            currentSpeedAI_ = Time.deltaTime * speed_;
+
+    }
+    public float GetCurrentSpeedTarget()
+    {        
         return currentSpeedTarget_;
         
     }
 
     public float GetCurrentSpeedAI()
     {
-        if (useNavMeshAI_)
-            currentSpeedAI_ =  agent_.speed;
 
         return currentSpeedAI_;
     }

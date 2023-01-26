@@ -17,7 +17,8 @@ public class Attack : NPCBaseFSM
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        npc_.transform.LookAt(opponent_.transform.position);
+        npcComponentAIController_.UpdateCurrentsSpeeds();
+        npc_.transform.LookAt(target_.transform.position);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
