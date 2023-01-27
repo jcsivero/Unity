@@ -23,7 +23,11 @@ public class Patrol : NPCBaseFSM
         else
         {
             if (npcComponentAIController_.waypoints_.Length == 0)             
-                npcComponentAIController_.bot_.Wander();
+            {
+                    npcComponentAIController_.bot_.Wander();
+                    Debug.Log("Modo Wander");
+            }   
+            
             
             else 
             {
@@ -34,14 +38,27 @@ public class Patrol : NPCBaseFSM
                         npcComponentAIController_.currentWP_ = 0;
 
                 }
-                if (npcComponentAIController_.useNavMeshAI_)
-                    npcComponentAIController_.agent_.SetDestination(npcComponentAIController_.waypoints_[npcComponentAIController_.currentWP_].transform.position);
+                if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
+                {
+                    if  (!npcComponentAIController_.agent_.hasPath)
+                    {
+                        
+                        Debug.Log("asignando nuevo path");                        
+                        npcComponentAIController_.agent_.SetDestination(npcComponentAIController_.waypoints_[npcComponentAIController_.currentWP_].transform.position);
+                    }
+                        
+                    
+                        Debug.Log("Movimiento navmesh");
+                }
+                    
                 else
                 {
+                    npcComponentAIController_.agent_.ResetPath();
                     var direction = npcComponentAIController_.waypoints_[npcComponentAIController_.currentWP_].transform.position - npc_.transform.position;
-                    npc_.transform.rotation = Quaternion.Slerp(npc_.transform.rotation, Quaternion.LookRotation(direction), npcComponentAIController_.rotationSpeed_ * Time.deltaTime);
-                    npcComponentAIController_.currentSpeedAI_ =  Time.deltaTime * npcComponentAIController_.speed_;
+                    npc_.transform.rotation = Quaternion.Slerp(npc_.transform.rotation, Quaternion.LookRotation(direction), npcComponentAIController_.rotationSpeed_ * Time.deltaTime);                    
                     npc_.transform.Translate(0, 0, npcComponentAIController_.GetCurrentSpeedAI());
+
+                    Debug.Log("Movimiento manual");
             
                 }
 

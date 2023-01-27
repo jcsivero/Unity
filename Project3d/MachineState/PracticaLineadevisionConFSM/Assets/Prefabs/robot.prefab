@@ -351,7 +351,6 @@ Transform:
   - {fileID: 5220501718481017187}
   - {fileID: 5220501718481017185}
   - {fileID: 5220501718481017209}
-  - {fileID: 8011245359750826062}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -389,7 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target_: {fileID: 0}
   bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
-  originOfFire_: {fileID: 8732760853139762500}
+  originOfFire_: {fileID: 0}
   waypoints_: []
   currentWP_: 0
   useNavMeshAI_: 1
@@ -760,7 +759,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5220501718481017189}
-  - {fileID: 5843087884461892437}
   m_Father: {fileID: 5220501718481017141}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -49.933643, y: -0.0087320795, z: -163.46439}
@@ -793,7 +791,8 @@ Transform:
   m_LocalPosition: {x: 0.75674677, y: -0.07813829, z: 0.22673266}
   m_LocalScale: {x: 0.10978496, y: 0.10978496, z: 0.10978496}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8011245359750826062}
   m_Father: {fileID: 5220501718481017187}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 4.0061048e-16, z: 0}
@@ -1673,42 +1672,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7966449750454512719}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 7.158388, y: -0.6094353, z: 0.32771257}
+  m_LocalScale: {x: 9.108713, y: 9.108714, z: 9.108714}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5220501718481017141}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8732760853139762500
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5843087884461892437}
-  m_Layer: 0
-  m_Name: originOfFire
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5843087884461892437
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8732760853139762500}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8428371, y: 0.32028186, z: -2.357683}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5220501718481017187}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 5220501718481017189}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}

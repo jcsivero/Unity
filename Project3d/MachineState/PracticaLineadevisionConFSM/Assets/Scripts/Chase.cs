@@ -16,13 +16,18 @@ public class Chase : NPCBaseFSM
     {
         npcComponentAIController_.UpdateCurrentsSpeeds();
         
-        if (npcComponentAIController_.useNavMeshAI_)
+        if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
+        {
+            npcComponentAIController_.agent_.speed = npcComponentAIController_.speed_ * 2; 
             npcComponentAIController_.agent_.SetDestination(target_.transform.position);
+        }
+            
         else
         {
+            npcComponentAIController_.agent_.ResetPath();
             var direction = target_.transform.position - npc_.transform.position;
             npc_.transform.rotation = Quaternion.Slerp(npc_.transform.rotation, Quaternion.LookRotation(direction), npcComponentAIController_.rotationSpeed_ * Time.deltaTime);             
-            npc_.transform.Translate(0, 0, npcComponentAIController_.GetCurrentSpeedAI());
+            npc_.transform.Translate(0, 0, npcComponentAIController_.GetCurrentSpeedAI()*2); ///puesto que voy corriendo
     
         }
 

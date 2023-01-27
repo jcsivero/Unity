@@ -113,21 +113,13 @@ public class Bot
         Vector3 rayToTarget = ai_.target_.transform.position - ai_.transform.position;
         if (Physics.Raycast(ai_.transform.position, rayToTarget, out raycastInfo))
         {
-            //if (raycastInfo.transform.gameObjecttag == "cop")
-                if (raycastInfo.transform.gameObject == target)
+            if (raycastInfo.transform.gameObject.tag == "Player")
+                //if (raycastInfo.transform.gameObject == target)
                     return true;
         }
         return false;
     }
 
-    // Update is called once per frame
-/*    void Update()
-    {
-        //if (CanSeeTarget())
-            ///CleverHide();
-            //Hide();
-          //Wander();
-          //Pursue();
-    }*/
+
 
 }

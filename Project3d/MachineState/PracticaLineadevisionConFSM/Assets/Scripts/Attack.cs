@@ -10,6 +10,7 @@ public class Attack : NPCBaseFSM
     {
         
         base.OnStateEnter(animator, stateInfo, layerIndex);
+        
         npcComponentAIController_.StartFiring();
     
     }
@@ -18,6 +19,13 @@ public class Attack : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         npcComponentAIController_.UpdateCurrentsSpeeds();
+        if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
+        {
+            npcComponentAIController_.agent_.ResetPath();
+            Debug.Log("desactivando navmesh");
+        }
+            
+        
         npc_.transform.LookAt(target_.transform.position);
     }
 

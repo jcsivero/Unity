@@ -47,6 +47,8 @@ public class AIController : MonoBehaviour
 
         if (waypoints_ == null)
             waypoints_ = GameObject.FindGameObjectsWithTag("waypoint");
+        
+        UpdateCurrentsSpeeds();
 
     }
 
@@ -80,19 +82,17 @@ public class AIController : MonoBehaviour
     }
 
     public void UpdateCurrentsSpeeds()
-    {
+    {                
         ///Actualizo velocidad actual a la que se mueve el target.
-     if ((useNavMeshTarget_) && (target_.GetComponent<UnityEngine.AI.NavMeshAgent>() != null))        
-            currentSpeedTarget_ = target_.GetComponent<UnityEngine.AI.NavMeshAgent>().velocity.magnitude;
-        else
-        {
-            if (target_.GetComponent<CharacterController>() != null)
+        if (target_.GetComponent<CharacterController>() != null)
                 currentSpeedTarget_ = target_.GetComponent<CharacterController>().velocity.magnitude;
-        }
 
         ///Actualizo veclocidad actual de movimiento del NPC.
         if ((useNavMeshAI_) && (agent_ != null))
+        {
+            agent_.speed = speed_;    
             currentSpeedAI_ =  agent_.velocity.magnitude;
+        }            
         else 
             currentSpeedAI_ = Time.deltaTime * speed_;
 
