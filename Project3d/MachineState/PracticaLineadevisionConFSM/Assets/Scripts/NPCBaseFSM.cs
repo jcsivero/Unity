@@ -9,20 +9,52 @@ public class NPCBaseFSM : StateMachineBehaviour
     public AIController npcComponentAIController_;
     
     public GameObject target_;
+    public Animator animator_; 
+    public AnimatorStateInfo stateInfo_;
     
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (npc_ == null)
+    {        
             npc_ = animator.gameObject;
-
-
-        if (npcComponentAIController_ == null)
             npcComponentAIController_ = npc_.GetComponent<AIController>();
-
-        if (target_ == null)  
             target_ = npcComponentAIController_.GetTarget();
-        
+            animator_ = animator;
+            stateInfo_ = stateInfo;
+            UpdateState();
         
     }
 
+    public virtual void UpdateState()
+    {
+        Vector3 direction = target_.transform.position - npc_.transform.position;
+        animator_.SetFloat("angle",Vector3.Angle(direction, npc_.transform.forward));        
+        animator_.SetFloat("distance", Vector3.Distance(npc_.transform.position, target_.transform.position));   
+
+        if (animator_.GetFloat("distance") < npcComponentAIController_.visDist_)
+            animator_.SetBool("targetClose",true);
+        else
+            animator_.SetBool("targetClose",false);
+
+        if (animator_.GetFloat("distance") < npcComponentAIController_.visDistToAttack_)
+            animator_.SetBool("attackMode",true);
+        else
+            animator_.SetBool("attackMode",false);               
+
+        
+        if (animator_.GetFloat("angle") < npcComponentAIController_.visAngle_)
+            animator_.SetBool("angleValid", true);
+        else 
+            animator_.SetBool("angleValid", false);
+
+
+        if (((animator_.GetBool("targetClose")) || (animator_.GetBool("attackMode"))) && (animator_.GetBool("angleValid"))) ///para economizar, si no se cumplen las condiciones de distancia y ángulo, no realizo el RayCast
+        ///para comprobar si es visible el objetivo.
+        {
+            if (npcComponentAIController_.bot_.CanSeeTarget(npcComponentAIController_.target_))
+                animator_.SetBool("visibleTarget",true);
+            else
+                animator_.SetBool("visibleTarget",false);
+        }            
+        else  
+            animator_.SetBool("visibleTarget",false);
+    }
 }

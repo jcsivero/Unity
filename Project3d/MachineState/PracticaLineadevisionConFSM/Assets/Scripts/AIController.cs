@@ -17,8 +17,7 @@ public class AIController : MonoBehaviour
     public int currentWP_;
 
     public bool useNavMeshAI_ = true;
-    public bool useNavMeshTarget_ = true;
-
+    public bool useNavMeshTarget_ = true;    
     public float currentSpeedAI_;
     public float currentSpeedTarget_;
 
@@ -30,7 +29,8 @@ public class AIController : MonoBehaviour
     public float accuracy_ = 1.0f;
     public float visDist_ = 20.0f;
     public float visAngle_ = 30.0f;
-    public float shootDist_ = 5.0f;
+    public float visDistToAttack_ = 10.0f;
+    
 
 
     // Use this for initialization
@@ -57,7 +57,7 @@ public class AIController : MonoBehaviour
     void Update()
     {   
         
-        Vector3 direction = target_.transform.position - this.transform.position;
+      /*  Vector3 direction = target_.transform.position - this.transform.position;
         float angle = Vector3.Angle(direction, this.transform.forward);
         
         anim_.SetFloat("distance", Vector3.Distance(transform.position, target_.transform.position));     
@@ -71,7 +71,7 @@ public class AIController : MonoBehaviour
                 anim_.SetBool("visibleTarget",false);
         }    
         else   
-            anim_.SetBool("visibleTarget",false);    
+            anim_.SetBool("visibleTarget",false);    */
 
         
     }
