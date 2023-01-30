@@ -5,6 +5,10 @@ using UnityEngine;
 public class Chase : NPCBaseFSM
 {
 
+   void Awake()
+    {
+        Debug.Log("creada instancia chase");
+    }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -16,13 +20,14 @@ public class Chase : NPCBaseFSM
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        UpdateState();        
+        //UpdateState();        
         npcComponentAIController_.UpdateCurrentsSpeeds();
         
         if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
         {
             npcComponentAIController_.agent_.speed = npcComponentAIController_.speed_ * 2; 
             npcComponentAIController_.agent_.SetDestination(target_.transform.position);
+            //npcComponentAIController_.bot_.Pursue();
         }
             
         else
@@ -40,7 +45,9 @@ public class Chase : NPCBaseFSM
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        //if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
+          //  npcComponentAIController_.bot_.Pursue();
+        
     }
 
 

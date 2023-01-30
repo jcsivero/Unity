@@ -13,6 +13,9 @@ public class Patrol : NPCBaseFSM
     private void Awake()
     {
         waypoints = GameObject.FindGameObjectsWithTag("waypoint");
+       
+        Debug.Log("creada instancia PATROL" + this.name + " " );
+        
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

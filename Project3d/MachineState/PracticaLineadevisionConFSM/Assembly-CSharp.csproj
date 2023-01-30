@@ -40,7 +40,6 @@
      <Compile Include="Assets\Scripts\Drive.cs" />
      <Compile Include="Assets\Scripts\AIController.cs" />
      <Compile Include="Assets\Scripts\Chase.cs" />
-     <Compile Include="Assets\Scripts\Hide.cs" />
      <Compile Include="Assets\Scripts\TankAI.cs" />
      <Compile Include="Assets\Scripts\NPCBaseFSM.cs" />
      <Compile Include="Assets\Scripts\Bot.cs" />

@@ -12,6 +12,10 @@ public class NPCBaseFSM : StateMachineBehaviour
     public float rotSpeed = 1.0f;
     public float accuracy = 3.0f;
 
+    void Awake()
+    {
+        Debug.Log("creada instancia NFCBASEFSM");
+    }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         NPC = animator.gameObject;

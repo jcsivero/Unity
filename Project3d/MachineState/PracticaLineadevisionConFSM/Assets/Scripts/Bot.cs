@@ -25,7 +25,7 @@ public class Bot
         ai_.agent_.SetDestination(ai_.transform.position - fleeVector);
     }
 
-    void Pursue()
+    public void Pursue()
     {
         Vector3 targetDir = ai_.target_.transform.position - ai_.transform.position;
 
@@ -110,11 +110,15 @@ public class Bot
     public bool CanSeeTarget(GameObject target)
     {
         RaycastHit raycastInfo;
-        Vector3 rayToTarget = ai_.target_.transform.position - ai_.transform.position;
+        Vector3 rayToTarget = target.transform.position - ai_.transform.position;
+        Debug.DrawRay(ai_.transform.position, target.transform.position - ai_.transform.position ,Color.red);
+
         if (Physics.Raycast(ai_.transform.position, rayToTarget, out raycastInfo))
-        {
-            if (raycastInfo.transform.gameObject.tag == "Player")
-                //if (raycastInfo.transform.gameObject == target)
+        {            
+            //Debug.Log("etiqueta" + raycastInfo.transform.tag);
+            //Debug.Log("nombre: " +raycastInfo.transform.gameObject.name);
+            //if (raycastInfo.transform.gameObject.tag == "Player")
+                if (raycastInfo.transform.gameObject == target)
                     return true;
         }
         return false;

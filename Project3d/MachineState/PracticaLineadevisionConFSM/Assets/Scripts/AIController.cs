@@ -33,21 +33,27 @@ public class AIController : MonoBehaviour
     
 
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
+        Debug.Log("creada instancia AIController");
         bot_ = new Bot(this);
         anim_ = this.GetComponent<Animator>();
-        if (target_ == null)
-            target_ = GameObject.FindGameObjectWithTag("Player"); ///etiqueta del jugador, que será el objetivo por devecto de la AI, en caso de no
-            //haberle asignado una.
         
+        GetTarget();
+
         if (agent_ == null)
-            agent_ = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
+            agent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         if (waypoints_ == null)
             waypoints_ = GameObject.FindGameObjectsWithTag("waypoint");
         
+        
+    }
+    ///
+    // Use this for initialization
+    void Start()
+    {
+        Debug.Log("ejecutando start AIController");
         UpdateCurrentsSpeeds();
 
     }
@@ -57,26 +63,14 @@ public class AIController : MonoBehaviour
     void Update()
     {   
         
-      /*  Vector3 direction = target_.transform.position - this.transform.position;
-        float angle = Vector3.Angle(direction, this.transform.forward);
-        
-        anim_.SetFloat("distance", Vector3.Distance(transform.position, target_.transform.position));     
-        anim_.SetFloat("angle", angle);     
-        
-        if (direction.magnitude < visDist_ && angle < visAngle_)
-        {
-            if (bot_.CanSeeTarget(target_))
-                anim_.SetBool("visibleTarget",true);
-            else
-                anim_.SetBool("visibleTarget",false);
-        }    
-        else   
-            anim_.SetBool("visibleTarget",false);    */
-
         
     }
     public GameObject GetTarget()
     {
+        if (target_ == null)
+            target_ = GameObject.FindGameObjectWithTag("Player"); ///etiqueta del jugador, que será el objetivo por devecto de la AI, en caso de no
+            //haberle asignado una.
+
         return target_;
         
     }
@@ -121,6 +115,13 @@ public class AIController : MonoBehaviour
     public void StartFiring()
     {
         InvokeRepeating("Fire", 0.5f, 0.5f);
+    }
+        /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
+    /// </summary>
+    void OnDestroy()
+    {
+        Debug.Log("destruido objeto AIController");
     }
 
 }

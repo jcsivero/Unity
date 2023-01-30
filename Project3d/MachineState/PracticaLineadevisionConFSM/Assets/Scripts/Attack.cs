@@ -5,6 +5,10 @@ using UnityEngine;
 public class Attack : NPCBaseFSM
 {
 
+   void Awake()
+    {
+        Debug.Log("creada instancia attack");
+    }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,7 +22,7 @@ public class Attack : NPCBaseFSM
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        UpdateState();
+        //UpdateState();
         npcComponentAIController_.UpdateCurrentsSpeeds();
         if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
         {
@@ -34,6 +38,9 @@ public class Attack : NPCBaseFSM
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         npcComponentAIController_.StopFiring();
+       // if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
+         //   npcComponentAIController_.bot_.Pursue();
+
     }
 
 
