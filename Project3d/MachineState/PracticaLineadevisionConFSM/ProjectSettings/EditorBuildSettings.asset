@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/HUD_InitialOptions.unity
+    guid: d127b2d422311794dac5d2f72c717d6a
+  - enabled: 1
+    path: Assets/Scenes/RobotGuard.unity
+    guid: e043ff36ebad94dc48ce2b8572d1ea37
   m_configObjects: {}

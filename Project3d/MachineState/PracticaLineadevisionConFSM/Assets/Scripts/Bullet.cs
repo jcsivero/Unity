@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour {
 	void OnCollisionEnter(Collision col)
     {
     	GameObject e = Instantiate(explosion, this.transform.position, Quaternion.identity);
-    	Destroy(e,1.5f);
+    	Destroy(e,1.5f);		
     	Destroy(this.gameObject);
     }
 

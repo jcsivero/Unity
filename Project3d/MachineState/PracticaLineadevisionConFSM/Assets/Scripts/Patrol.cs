@@ -16,23 +16,14 @@ public class Patrol : NPCBaseFSM
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);             
-        npcComponentAIController_.currentWP_ = 0;
-        Debug.Log("desde patrol " + animator.name + " " + animator.gameObject.name);
-        //UpdateState();
+        npcComponentAIController_.currentWP_ = 0;        
+        UpdateState();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //UpdateState();
-        
-      
-
-
-/*
-
-
-
+        UpdateState();
         npcComponentAIController_.UpdateCurrentsSpeeds();
 
         if (npcComponentAIController_.waypoints_ == null) 
@@ -43,13 +34,13 @@ public class Patrol : NPCBaseFSM
             if (npcComponentAIController_.waypoints_.Length == 0)             
             {
                     npcComponentAIController_.bot_.Wander();
-                    //Debug.Log("Modo Wander");
+                    Debug.Log("Modo Wander");
             }   
             
             
             else 
             {
-                if (Vector3.Distance(npcComponentAIController_.waypoints_[npcComponentAIController_.currentWP_].transform.position, npc_.transform.position) < npcComponentAIController_.accuracy_)
+                if (Vector3.Distance(npcComponentAIController_.waypoints_[npcComponentAIController_.currentWP_].transform.position, npc_.transform.position) < npcComponentAIController_.accuracyToWayPoints_)
                 {
                     npcComponentAIController_.currentWP_++;
                     if (npcComponentAIController_.currentWP_ >= npcComponentAIController_.waypoints_.Length)
@@ -83,7 +74,7 @@ public class Patrol : NPCBaseFSM
 
 
             }
-        }*/
+        }
         
     }
 

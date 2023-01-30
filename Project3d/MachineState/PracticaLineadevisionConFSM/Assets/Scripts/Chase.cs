@@ -20,7 +20,7 @@ public class Chase : NPCBaseFSM
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //UpdateState();        
+        UpdateState();        
         npcComponentAIController_.UpdateCurrentsSpeeds();
         
         if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))

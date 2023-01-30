@@ -35,10 +35,7 @@ public class NPCBaseFSM : StateMachineBehaviour
             target_ = npcComponentAIController_.GetTarget();            
             animator_ = animator;
             stateInfo_ = stateInfo;   
-            Debug.Log("desde onstateenter:"+target_.name);
-            Debug.Log("desde onstateenter:"+npc_.name);
-
-            //UpdateState();
+            UpdateState();
         
     }
 

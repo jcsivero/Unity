@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //using UnityEditor.Animations;
 
 
@@ -26,50 +27,68 @@ public class AIController : MonoBehaviour
     public float rotationSpeed_ = 2.0f;
     public float speed_ = 2.0f;
 
-    public float accuracy_ = 1.0f;
+    public float accuracyToWayPoints_ = 1.0f;
     public float visDist_ = 20.0f;
     public float visAngle_ = 30.0f;
     public float visDistToAttack_ = 10.0f;
-    
 
+    public int healthNpc_ = 100;
+    [SerializeField] public TextMesh  textHealthNpc_;
+    
+    private const string EVENT_UPDATE_HUD_VALUES = "EVENT_UPDATE_HUD_VALUES";
+    private const string EVENT_UPDATE_STATUS_WORLD = "EVENT_UPDATE_STATUS_WORLD";    
+    //bool eventsUpdateStatusWorldSuscribed = false;
 
     void Awake()
     {
         Debug.Log("creada instancia AIController");
         bot_ = new Bot(this);
         anim_ = this.GetComponent<Animator>();
-        
-        GetTarget();
+                
 
         if (agent_ == null)
             agent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-        if (waypoints_ == null)
-            waypoints_ = GameObject.FindGameObjectsWithTag("waypoint");
         
+    }
+     void OnEnable()
+    {
+                        
+        //eventsUpdateStatusWorldSuscribed = GameManagerMyEvents.StartListening(this.gameObject,EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld); //por si se ejecuta este OnEnable antes que el awake de la clase GameManagerEvents        
         
+    }
+
+    
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    void OnDisable()
+    {
+
     }
     ///
     // Use this for initialization
     void Start()
     {
         Debug.Log("ejecutando start AIController");
-        UpdateCurrentsSpeeds();
 
-    }
+        if (waypoints_ == null)
+            waypoints_ = GameObject.FindGameObjectsWithTag("waypoint");
 
-
-    // Update is called once per frame
-    void Update()
-    {   
-        
-        
-    }
-    public GameObject GetTarget()
-    {
-        if (target_ == null)
+         if (target_ == null)
             target_ = GameObject.FindGameObjectWithTag("Player"); ///etiqueta del jugador, que será el objetivo por devecto de la AI, en caso de no
             //haberle asignado una.
+
+        UpdateCurrentsSpeeds();
+
+        GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_STATUS_WORLD,EventData.Create(EVENT_UPDATE_STATUS_WORLD).
+        Set<int>("addOrSubEnemy",1));
+
+
+    }
+
+    public GameObject GetTarget()
+    {
 
         return target_;
         
@@ -121,7 +140,35 @@ public class AIController : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
+        OnDisable();
         Debug.Log("destruido objeto AIController");
     }
 
+    /// <summary>
+    /// OnCollisionEnter is called when this collider/rigidbody has begun
+    /// touching another rigidbody/collider.
+    /// </summary>
+    /// <param name="other">The Collision data associated with this collision.</param>
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "bullet")
+            UpdateHealth();
+                       
+        
+    }
+
+    void UpdateHealth()
+    {
+        healthNpc_ -= 10;
+        if (healthNpc_ <=0)    
+        {
+            GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_STATUS_WORLD,EventData.Create(EVENT_UPDATE_STATUS_WORLD).
+            Set<int>("addOrSubEnemy",-1));   
+            GameManagerMyEvents.TriggerEvent(EVENT_UPDATE_HUD_VALUES);
+            Destroy(this.gameObject);
+        }
+        else
+             textHealthNpc_.text = healthNpc_.ToString();
+
+    }
 }

@@ -40,12 +40,17 @@
      <Compile Include="Assets\Scripts\Drive.cs" />
      <Compile Include="Assets\Scripts\AIController.cs" />
      <Compile Include="Assets\Scripts\Chase.cs" />
-     <Compile Include="Assets\Scripts\TankAI.cs" />
      <Compile Include="Assets\Scripts\NPCBaseFSM.cs" />
      <Compile Include="Assets\Scripts\Bot.cs" />
      <Compile Include="Assets\Scripts\Attack.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Patrol.cs" />
+     <Compile Include="Assets\Scripts\GameManagerMyEvents.cs" />
+     <Compile Include="Assets\Scripts\MyEvents.cs" />
+     <Compile Include="Assets\Scripts\EventData.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\HUD_InitialOptions.cs" />
+     <Compile Include="Assets\Scripts\HUD_GamePlay.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
