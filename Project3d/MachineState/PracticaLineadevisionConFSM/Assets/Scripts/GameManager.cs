@@ -14,14 +14,14 @@ public class GameManager : MonoBehaviour
     private bool suscribeToEventUpdateStatusNpc = false;
     private bool suscribeToEventUpdateStatusPlayer = false;
     private bool suscribeToEventUpdateStatusWorld = false;
-    private bool suscribeToEventUpdateStatusHud = false;
+//    private bool suscribeToEventUpdateStatusHud = false;
 
     private const string EVENT_UPDATE_STATUS_WORLD = "EVENT_UPDATE_STATUS_WORLD";
     private const string EVENT_UPDATE_STATUS_NPC = "EVENT_UPDATE_STATUS_NPC";
     private const string EVENT_UPDATE_STATUS_PLAYER = "EVENT_UPDATE_STATUS_PLAYER";
-    private const string EVENT_UPDATE_STATUS_HUD = "EVENT_UPDATE_STATUS_HUD";
+    //private const string EVENT_UPDATE_STATUS_HUD = "EVENT_UPDATE_STATUS_HUD";
     
-    private const string EVENT_UPDATE_HUD_VALUES = "EVENT_UPDATE_HUD_VALUES";
+    private const string EVENT_UPDATE_HUD_ONSCREEN = "EVENT_UPDATE_HUD_ONSCREEN";
     // Start is called before the first frame update
     /// <summary>
     /// This function is called when the object becomes enabled and active.
@@ -29,13 +29,13 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         if (!suscribeToEventUpdateStatusNpc) 
-            suscribeToEventUpdateStatusNpc = GameManagerMyEvents.StartListening<EventData>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
+            suscribeToEventUpdateStatusNpc = GameManagerMyEvents.StartListening<StatusNpc>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
         if (!suscribeToEventUpdateStatusPlayer) 
-            suscribeToEventUpdateStatusPlayer = GameManagerMyEvents.StartListening<EventData>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
+            suscribeToEventUpdateStatusPlayer = GameManagerMyEvents.StartListening<StatusPlayer>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
         if (!suscribeToEventUpdateStatusWorld) 
-            suscribeToEventUpdateStatusWorld = GameManagerMyEvents.StartListening<EventData>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
-        if (!suscribeToEventUpdateStatusHud) 
-            suscribeToEventUpdateStatusHud = GameManagerMyEvents.StartListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);            
+            suscribeToEventUpdateStatusWorld = GameManagerMyEvents.StartListening<Status>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
+        //if (!suscribeToEventUpdateStatusHud) 
+         //   suscribeToEventUpdateStatusHud = GameManagerMyEvents.StartListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);            
     }
         /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
       Debug.Log("Unsuscribe Trigger");
-      GameManagerMyEvents.StopListening<EventData>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
+      GameManagerMyEvents.StopListening<Status>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
       suscribeToEventUpdateStatusWorld = false;
-      GameManagerMyEvents.StopListening<EventData>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
+      GameManagerMyEvents.StopListening<StatusNpc>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
       suscribeToEventUpdateStatusNpc = false;
-      GameManagerMyEvents.StopListening<EventData>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
+      GameManagerMyEvents.StopListening<StatusPlayer>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
       suscribeToEventUpdateStatusPlayer = false;
-      GameManagerMyEvents.StopListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);
-      suscribeToEventUpdateStatusHud = false;
+//      GameManagerMyEvents.StopListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);
+ //     suscribeToEventUpdateStatusHud = false;
       
     }
        /// <summary>
@@ -66,14 +66,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        statusHud_ = new StatusHud();
+        //statusHud_ = new StatusHud();
         statusHud_.SetOrigin(this.gameObject);  
         
-        statusWorld_ = new StatusWorld();
+        //statusWorld_ = new StatusWorld();
         statusWorld_.SetOrigin(this.gameObject);  
         
         statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
         statusWorld_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
+
         if (gameManager_!= null && gameManager_ != this)
             Destroy(gameObject);
         else
@@ -90,12 +91,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        if ((!suscribeToEventUpdateStatusNpc) || (!suscribeToEventUpdateStatusPlayer)  || (!suscribeToEventUpdateStatusWorld) || (!suscribeToEventUpdateStatusHud))
+        if ((!suscribeToEventUpdateStatusNpc) || (!suscribeToEventUpdateStatusPlayer)  || (!suscribeToEventUpdateStatusWorld) )
             OnEnable(); 
 
     //aquí ya estoy seguro de que están todas las suscricipones a eventos hechas.            
     
-    GameManagerMyEvents.TriggerEvent(EVENT_UPDATE_STATUS_HUD);
+    //GameManagerMyEvents.TriggerEvent(EVENT_UPDATE_STATUS_HUD);
+    UpdateStatusHud();
 
     }    
       public void LoadNextLevel()
@@ -116,32 +118,36 @@ public class GameManager : MonoBehaviour
   bool  UpdateStatusHud()
     {                  
         ///Actualizo solo las variables que son mostradas en el HUD.        
-        statusHud_.SetHealth(statusWorld_.health_);  
-        Debug.Log(statusWorld_.health_);
-        GameManagerMyEvents.TriggerEvent<StatusHud>(EVENT_UPDATE_HUD_VALUES,statusHud_);
+        statusHud_.SetHealth(statusWorld_.health_);          
+        GameManagerMyEvents.TriggerEvent<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,statusHud_);
         return true;      
     }
-    void  UpdateStatusWorld(EventData status, EventDataReturned valueToReturn)
+    void  UpdateStatusWorld(Status status, EventDataReturned valueToReturn)
     {       
         ///Analizo objeto Status
+        if (status.GetName() == "StatusPlayer")
+            UpdateStatusPlayer((StatusPlayer) status, valueToReturn);
 
+        if (status.GetName() == "StatusNpc")
+            UpdateStatusNpc((StatusNpc) status,valueToReturn);
+
+        if (status.GetUpdateHud())
+            UpdateStatusHud();
+        
     }
-    void  UpdateStatusPlayer(EventData status, EventDataReturned valueToReturn)
+    void  UpdateStatusPlayer(StatusPlayer statusPlayer,EventDataReturned valueToReturn)
     {
        
         ///Analizo objeto Status
 
     }
           
-    void  UpdateStatusNpc(EventData status, EventDataReturned valueToReturn)
+    void  UpdateStatusNpc(StatusNpc statusNpc,EventDataReturned valueToReturn)
     {
        
         ///Analizo objeto Status
 
-        if (status.name_ == "StatusNpc")
-        {
-
-        }
+    
 
   
 

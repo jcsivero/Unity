@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class HUD_GamePlay : MonoBehaviour
 {
-    private bool suscribeToEventUpdateHudValues = false;
+    private bool suscribeToEventUpdateHudOnScreen = false;
     
     [SerializeField] public Text  textHealthPlayer_;
        
 
-    private const string EVENT_UPDATE_HUD_VALUES = "EVENT_UPDATE_HUD_VALUES";
+    private const string EVENT_UPDATE_HUD_ONSCREEN = "EVENT_UPDATE_HUD_ONSCREEN";
     // Start is called before the first frame update
     /// <summary>
     /// This function is called when the object becomes enabled and active.
     /// </summary>
     void OnEnable()
     {
-        suscribeToEventUpdateHudValues = GameManagerMyEvents.StartListening<StatusHud>(EVENT_UPDATE_HUD_VALUES,UpdateHudValues);
+        suscribeToEventUpdateHudOnScreen = GameManagerMyEvents.StartListening<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,UpdateHudOnScreen);
     }
     /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
@@ -25,8 +25,8 @@ public class HUD_GamePlay : MonoBehaviour
     void OnDisable()
     {
       Debug.Log("Unsuscribe Trigger");
-      GameManagerMyEvents.StopListening<StatusHud>(EVENT_UPDATE_HUD_VALUES,UpdateHudValues);
-      suscribeToEventUpdateHudValues = false;
+      GameManagerMyEvents.StopListening<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,UpdateHudOnScreen);
+      suscribeToEventUpdateHudOnScreen = false;
       
     }
     /// <summary>
@@ -42,7 +42,7 @@ public class HUD_GamePlay : MonoBehaviour
     /// </summary>
     void Start()
     {
-         if (!suscribeToEventUpdateHudValues)
+         if (!suscribeToEventUpdateHudOnScreen)
             OnEnable(); 
             
         
@@ -57,7 +57,7 @@ public class HUD_GamePlay : MonoBehaviour
         OnDisable();
     }
 
-    void UpdateHudValues(StatusHud status, EventDataReturned valueToReturn)
+    void UpdateHudOnScreen(StatusHud status, EventDataReturned valueToReturn)
     {
       textHealthPlayer_.text = status.GetHealth().ToString();
       

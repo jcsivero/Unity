@@ -7,7 +7,11 @@ public class StatusHud : Status
     public string name_ = "StatusHud";
     public int lifes_;
     public float health_;
-
+    public override bool ExecutionTasks()
+    {
+        tasks_.Exec(this);
+        return true;
+    }
     public override string GetName()
     {
         return name_;
@@ -20,7 +24,6 @@ public class StatusHud : Status
     {
         return lifes_;
     }    
-
 
 
     

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public  abstract class  Status
+public  abstract class  Status :  MonoBehaviour
 {
     public GameObject origin_;
     public bool updateHud_;
+
+    public Tasks tasks_;
 
      public abstract string GetName();
      public abstract int GetLifes();
@@ -16,6 +18,7 @@ public  abstract class  Status
     public abstract void SetHealth(float draft);
     public abstract void SetLifes(int draft);
 
+    public abstract bool ExecutionTasks();
     virtual public void  SetOrigin(GameObject draft)
     {
         origin_ = draft;

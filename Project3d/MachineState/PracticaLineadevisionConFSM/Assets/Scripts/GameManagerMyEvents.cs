@@ -235,7 +235,7 @@ public class GameManagerMyEvents : MonoBehaviour
     void OnDestroy()
     {
         foreach(var targetEvents in gameManagerMyEvents_.events_.Values)
-            foreach (MyEvents e in targetEvents.Values)           
+            foreach (MyEventsBase e in targetEvents.Values)           
                 e.RemoveAllListeners();
                             
     }

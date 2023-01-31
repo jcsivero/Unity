@@ -9,6 +9,11 @@ public class StatusNpc : Status
     public float health_;
     public bool delete_;
 
+    public override bool ExecutionTasks()
+    {
+        tasks_.Exec(this);
+        return true;
+    }
     public override string GetName()
     {
         return name_;

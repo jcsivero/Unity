@@ -1,13 +1,13 @@
 public abstract class MyEventsBase
 {
-    public delegate bool Delegate_();
-    public delegate void DelegateOneParam_(T data, EventDataReturned valueToReturn);
-    public abstract void RemoveListener(Delegate_ d);
+    
+    public abstract void RemoveAllListeners();
+    
 }
 public class MyEvents : MyEventsBase
 {    
     
-    
+    public delegate bool Delegate_();
     public event Delegate_ delegate_;
     
     public void AddListener(Delegate_ d)
@@ -15,12 +15,12 @@ public class MyEvents : MyEventsBase
         delegate_ += d;
     }
     
-    public override void RemoveListener(Delegate_ d)
+    public  void RemoveListener(Delegate_ d)
     {
         delegate_ -= d;
     }
 
-    public void RemoveAllListeners()
+    public override void RemoveAllListeners()
     {
         delegate_ = null;        
     } 
@@ -38,7 +38,7 @@ public class MyEvents : MyEventsBase
 public class MyEvents<T> : MyEventsBase
 {    
     
-
+    public delegate void Delegate_(T data, EventDataReturned valueToReturn);
     public event Delegate_ delegate_;
     
     public void AddListener(Delegate_ d)
@@ -51,7 +51,7 @@ public class MyEvents<T> : MyEventsBase
         delegate_ -= d;
     }
 
-    public void RemoveAllListeners()
+    public override void RemoveAllListeners()
     {
         delegate_ = null;        
     } 

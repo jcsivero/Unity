@@ -14,6 +14,11 @@ public class StatusWorld : Status
     public int totalPoints_ = 0;
     public int  levelPoints_ = 0;
 
+    public override bool ExecutionTasks()
+    {
+        tasks_.Exec(this);
+        return true;
+    }
     public override string GetName()
     {
         return name_;

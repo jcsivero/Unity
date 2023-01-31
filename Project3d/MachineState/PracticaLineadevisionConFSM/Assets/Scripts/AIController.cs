@@ -12,6 +12,7 @@ public class AIController : MonoBehaviour
     public GameObject bullet_;
     public GameObject originOfFire_;
 
+    Tasks taskAddEnemy_;
     public Bot bot_;
 
     public GameObject[] waypoints_;
@@ -33,7 +34,7 @@ public class AIController : MonoBehaviour
     public float visDistToAttack_ = 10.0f;
 
     public StatusNpc statusNpc_;
-    public EventData eventData_;
+    
     
     [SerializeField] public TextMesh  textHealthNpc_;
     
@@ -44,14 +45,9 @@ public class AIController : MonoBehaviour
     void Awake()
     {
         Debug.Log("creada instancia AIController");
-        bot_ = new Bot(this);
-        statusNpc_ = new StatusNpc();
+        bot_ = new Bot(this);        
         
         statusNpc_.SetOrigin(this.gameObject);
-
-        eventData_ =  EventData.Create("EventStatusNpc").Set<Status>("StatusNpc", statusNpc_);
-
-
 
         anim_ = this.GetComponent<Animator>();
                 
@@ -89,9 +85,8 @@ public class AIController : MonoBehaviour
             //haberle asignado una.
 
         UpdateCurrentsSpeeds();
-
-        eventData_.Set<int>("addOrSubEnemy",1); ///indico que hay un nuevo NPC.
-        GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_STATUS_WORLD,eventData_);
+        taskAddEnemy_.Exec(GameManager.gameManager_.statusWorld_);
+        GameManagerMyEvents.TriggerEvent<Status>(EVENT_UPDATE_STATUS_WORLD,eventData_);
 
 
     }
@@ -148,11 +143,11 @@ public class AIController : MonoBehaviour
     /// This function is called when the MonoBehaviour will be destroyed.
     /// </summary>
     void OnDestroy()
-    {
-        eventData_.Set<int>("addOrSubEnemy",-1);
+    {        
+        
         statusNpc_.SetUpdateHud(true);
         statusNpc_.SetDelete(true);
-        GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_STATUS_WORLD,eventData_);               
+        GameManagerMyEvents.TriggerEvent<Status>(EVENT_UPDATE_STATUS_WORLD,statusNpc_);               
             
         OnDisable();        
         Debug.Log("destruido objeto AIController");
