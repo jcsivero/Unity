@@ -32,17 +32,27 @@ public class AIController : MonoBehaviour
     public float visAngle_ = 30.0f;
     public float visDistToAttack_ = 10.0f;
 
-    public int healthNpc_ = 100;
+    public StatusNpc statusNpc_;
+    public EventData eventData_;
+    
     [SerializeField] public TextMesh  textHealthNpc_;
     
     private const string EVENT_UPDATE_HUD_VALUES = "EVENT_UPDATE_HUD_VALUES";
     private const string EVENT_UPDATE_STATUS_WORLD = "EVENT_UPDATE_STATUS_WORLD";    
-    //bool eventsUpdateStatusWorldSuscribed = false;
+    
 
     void Awake()
     {
         Debug.Log("creada instancia AIController");
         bot_ = new Bot(this);
+        statusNpc_ = new StatusNpc();
+        
+        statusNpc_.SetOrigin(this.gameObject);
+
+        eventData_ =  EventData.Create("EventStatusNpc").Set<Status>("StatusNpc", statusNpc_);
+
+
+
         anim_ = this.GetComponent<Animator>();
                 
 
@@ -53,8 +63,7 @@ public class AIController : MonoBehaviour
     }
      void OnEnable()
     {
-                        
-        //eventsUpdateStatusWorldSuscribed = GameManagerMyEvents.StartListening(this.gameObject,EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld); //por si se ejecuta este OnEnable antes que el awake de la clase GameManagerEvents        
+                                
         
     }
 
@@ -81,12 +90,12 @@ public class AIController : MonoBehaviour
 
         UpdateCurrentsSpeeds();
 
-        GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_STATUS_WORLD,EventData.Create(EVENT_UPDATE_STATUS_WORLD).
-        Set<int>("addOrSubEnemy",1));
+        eventData_.Set<int>("addOrSubEnemy",1); ///indico que hay un nuevo NPC.
+        GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_STATUS_WORLD,eventData_);
 
 
     }
-
+    
     public GameObject GetTarget()
     {
 
@@ -140,7 +149,12 @@ public class AIController : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        OnDisable();
+        eventData_.Set<int>("addOrSubEnemy",-1);
+        statusNpc_.SetUpdateHud(true);
+        statusNpc_.SetDelete(true);
+        GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_STATUS_WORLD,eventData_);               
+            
+        OnDisable();        
         Debug.Log("destruido objeto AIController");
     }
 
@@ -152,23 +166,16 @@ public class AIController : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "bullet")
-            UpdateHealth();
+        {
+            statusNpc_.SetHealth(statusNpc_.GetHealth()-10);
+        
+            if (statusNpc_.GetHealth() <=0)    
+                Destroy(this.gameObject);
+        }
+        else
+             textHealthNpc_.text = statusNpc_.GetHealth().ToString() + "%";
                        
         
     }
 
-    void UpdateHealth()
-    {
-        healthNpc_ -= 10;
-        if (healthNpc_ <=0)    
-        {
-            GameManagerMyEvents.TriggerEvent<EventData>(EVENT_UPDATE_STATUS_WORLD,EventData.Create(EVENT_UPDATE_STATUS_WORLD).
-            Set<int>("addOrSubEnemy",-1));   
-            GameManagerMyEvents.TriggerEvent(EVENT_UPDATE_HUD_VALUES);
-            Destroy(this.gameObject);
-        }
-        else
-             textHealthNpc_.text = healthNpc_.ToString();
-
-    }
 }

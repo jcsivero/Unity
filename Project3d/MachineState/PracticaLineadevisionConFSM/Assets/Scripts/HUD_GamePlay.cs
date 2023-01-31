@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class HUD_GamePlay : MonoBehaviour
 {
-    private bool suscribeToEvents = false;
+    private bool suscribeToEventUpdateHudValues = false;
     
     [SerializeField] public Text  textHealthPlayer_;
+       
 
     private const string EVENT_UPDATE_HUD_VALUES = "EVENT_UPDATE_HUD_VALUES";
     // Start is called before the first frame update
@@ -16,22 +17,7 @@ public class HUD_GamePlay : MonoBehaviour
     /// </summary>
     void OnEnable()
     {
-        suscribeToEvents = GameManagerMyEvents.StartListening(this.gameObject,EVENT_UPDATE_HUD_VALUES,UpdateHudValues);
-    }
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
-    void Start()
-    {
-         if (!suscribeToEvents)
-            OnEnable(); 
-        GameObject draft = GameObject.Find("MyLife");
-        textHealthPlayer_ = draft.GetComponent<Text>();
-        
-        UpdateHudValues();
-
+        suscribeToEventUpdateHudValues = GameManagerMyEvents.StartListening<StatusHud>(EVENT_UPDATE_HUD_VALUES,UpdateHudValues);
     }
     /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
@@ -39,9 +25,30 @@ public class HUD_GamePlay : MonoBehaviour
     void OnDisable()
     {
       Debug.Log("Unsuscribe Trigger");
-      GameManagerMyEvents.StopListening(EVENT_UPDATE_HUD_VALUES,UpdateHudValues);
+      GameManagerMyEvents.StopListening<StatusHud>(EVENT_UPDATE_HUD_VALUES,UpdateHudValues);
+      suscribeToEventUpdateHudValues = false;
       
     }
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+
+    }
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+         if (!suscribeToEventUpdateHudValues)
+            OnEnable(); 
+            
+        
+
+    }
+
     /// <summary>
     /// This function is called when the MonoBehaviour will be destroyed.
     /// </summary>
@@ -50,10 +57,10 @@ public class HUD_GamePlay : MonoBehaviour
         OnDisable();
     }
 
-    bool UpdateHudValues()
+    void UpdateHudValues(StatusHud status, EventDataReturned valueToReturn)
     {
-      textHealthPlayer_.text = GameManager.gameManager_.healthPlayer_.ToString();
-      return true;
+      textHealthPlayer_.text = status.GetHealth().ToString();
+      
     }
 
 

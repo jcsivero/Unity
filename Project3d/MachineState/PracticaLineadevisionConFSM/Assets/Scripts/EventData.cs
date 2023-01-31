@@ -11,7 +11,7 @@ public class EventData
         public string name_;        
         private Dictionary<string,object> data_;
 
-        EventData(string name)
+        public EventData(string name)
         {
             data_ =  new Dictionary<string,object>();
             name_ = name;                

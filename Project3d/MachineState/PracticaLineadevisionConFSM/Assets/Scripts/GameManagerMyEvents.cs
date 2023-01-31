@@ -237,8 +237,7 @@ public class GameManagerMyEvents : MonoBehaviour
         foreach(var targetEvents in gameManagerMyEvents_.events_.Values)
             foreach (MyEvents e in targetEvents.Values)           
                 e.RemoveAllListeners();
-                
-            
+                            
     }
 
   

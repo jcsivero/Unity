@@ -9,8 +9,8 @@ public class HUD_InitialOptions : MonoBehaviour
     // Start is called before the first frame update
     public void OnPlay()
     {
-        GameManager.gameManager_.activeLevel_ = 1;
-        SceneManager.LoadScene(GameManager.gameManager_.activeLevel_);
+        GameManager.gameManager_.statusWorld_.activeLevel_ = 1;
+        SceneManager.LoadScene(GameManager.gameManager_.statusWorld_.activeLevel_);
     }
 
     public void ContinueGame()

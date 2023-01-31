@@ -8,23 +8,34 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager_;
 
-    public int  numberOfLevels_;
-    public int countEnemies_;    
-    public int activeLevel_; //por defecto comienza en la escena 1. La 0 es el menú principal
-    public int totalPoints_ = 0;
-    public int  levelPoints_ = 0;
-    public int lifes_ = 3;
+    public StatusWorld statusWorld_;
+    public StatusHud statusHud_;
+   
+    private bool suscribeToEventUpdateStatusNpc = false;
+    private bool suscribeToEventUpdateStatusPlayer = false;
+    private bool suscribeToEventUpdateStatusWorld = false;
+    private bool suscribeToEventUpdateStatusHud = false;
 
-    public int healthPlayer_ = 100;    
-    private bool suscribeToEvents = false;
     private const string EVENT_UPDATE_STATUS_WORLD = "EVENT_UPDATE_STATUS_WORLD";
+    private const string EVENT_UPDATE_STATUS_NPC = "EVENT_UPDATE_STATUS_NPC";
+    private const string EVENT_UPDATE_STATUS_PLAYER = "EVENT_UPDATE_STATUS_PLAYER";
+    private const string EVENT_UPDATE_STATUS_HUD = "EVENT_UPDATE_STATUS_HUD";
+    
+    private const string EVENT_UPDATE_HUD_VALUES = "EVENT_UPDATE_HUD_VALUES";
     // Start is called before the first frame update
     /// <summary>
     /// This function is called when the object becomes enabled and active.
     /// </summary>
     void OnEnable()
     {
-        suscribeToEvents = GameManagerMyEvents.StartListening<EventData>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
+        if (!suscribeToEventUpdateStatusNpc) 
+            suscribeToEventUpdateStatusNpc = GameManagerMyEvents.StartListening<EventData>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
+        if (!suscribeToEventUpdateStatusPlayer) 
+            suscribeToEventUpdateStatusPlayer = GameManagerMyEvents.StartListening<EventData>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
+        if (!suscribeToEventUpdateStatusWorld) 
+            suscribeToEventUpdateStatusWorld = GameManagerMyEvents.StartListening<EventData>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
+        if (!suscribeToEventUpdateStatusHud) 
+            suscribeToEventUpdateStatusHud = GameManagerMyEvents.StartListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);            
     }
         /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
@@ -33,6 +44,13 @@ public class GameManager : MonoBehaviour
     {
       Debug.Log("Unsuscribe Trigger");
       GameManagerMyEvents.StopListening<EventData>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
+      suscribeToEventUpdateStatusWorld = false;
+      GameManagerMyEvents.StopListening<EventData>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
+      suscribeToEventUpdateStatusNpc = false;
+      GameManagerMyEvents.StopListening<EventData>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
+      suscribeToEventUpdateStatusPlayer = false;
+      GameManagerMyEvents.StopListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);
+      suscribeToEventUpdateStatusHud = false;
       
     }
        /// <summary>
@@ -48,55 +66,89 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
-        activeLevel_ =SceneManager.GetActiveScene().buildIndex;
+        statusHud_ = new StatusHud();
+        statusHud_.SetOrigin(this.gameObject);  
+        
+        statusWorld_ = new StatusWorld();
+        statusWorld_.SetOrigin(this.gameObject);  
+        
+        statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
+        statusWorld_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
         if (gameManager_!= null && gameManager_ != this)
             Destroy(gameObject);
         else
             gameManager_ = this;
             Object.DontDestroyOnLoad(gameObject);
+  
+
 
     }
 
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        if ((!suscribeToEventUpdateStatusNpc) || (!suscribeToEventUpdateStatusPlayer)  || (!suscribeToEventUpdateStatusWorld) || (!suscribeToEventUpdateStatusHud))
+            OnEnable(); 
+
+    //aquí ya estoy seguro de que están todas las suscricipones a eventos hechas.            
     
+    GameManagerMyEvents.TriggerEvent(EVENT_UPDATE_STATUS_HUD);
+
+    }    
       public void LoadNextLevel()
     {
-        if (activeLevel_ < numberOfLevels_)    
-            activeLevel_ ++;
+        if (statusWorld_.activeLevel_ < statusWorld_.numberOfLevels_)    
+            statusWorld_.activeLevel_ ++;
         else 
-            activeLevel_ = 1;
+            statusWorld_.activeLevel_ = 1;
         
-        SceneManager.LoadScene(activeLevel_);
+        SceneManager.LoadScene(statusWorld_.activeLevel_);
 
     }
     public void ResetLevel()
     {
-        SceneManager.LoadScene(activeLevel_);
+        SceneManager.LoadScene(statusWorld_.activeLevel_);
     }
 
+  bool  UpdateStatusHud()
+    {                  
+        ///Actualizo solo las variables que son mostradas en el HUD.        
+        statusHud_.SetHealth(statusWorld_.health_);  
+        Debug.Log(statusWorld_.health_);
+        GameManagerMyEvents.TriggerEvent<StatusHud>(EVENT_UPDATE_HUD_VALUES,statusHud_);
+        return true;      
+    }
+    void  UpdateStatusWorld(EventData status, EventDataReturned valueToReturn)
+    {       
+        ///Analizo objeto Status
 
-    void  UpdateStatusWorld(EventData data, EventDataReturned valueToReturn)
+    }
+    void  UpdateStatusPlayer(EventData status, EventDataReturned valueToReturn)
     {
-        int draft = data.Get<int>("addPoints");
-        if (draft != 0)
+       
+        ///Analizo objeto Status
+
+    }
+          
+    void  UpdateStatusNpc(EventData status, EventDataReturned valueToReturn)
+    {
+       
+        ///Analizo objeto Status
+
+        if (status.name_ == "StatusNpc")
         {
-          levelPoints_ += draft;
-          totalPoints_ += levelPoints_;
 
         }
-        
-        draft = data.Get<int>("addLifes");
-        if ((draft !=0) && (GameManager.gameManager_.lifes_ <= 5))
-          lifes_ +=  draft;
 
+  
 
-        draft = data.Get<int>("addOrSubEnemy");  
-        if (draft != 0)
-        countEnemies_ +=  draft;
 
          /// condiciones de fin de partida, reinicio de nivel...
 
-        if (countEnemies_ == 0)
+   /*     if (countEnemies_ == 0)
         {
             levelPoints_ = 0;            
             countEnemies_ = 0;
@@ -104,7 +156,7 @@ public class GameManager : MonoBehaviour
         }
         
 
-        if (lifes_ == 0) 
+/*        if (lifes_ == 0) 
         {
           //TO DO gameover
         }
@@ -114,8 +166,9 @@ public class GameManager : MonoBehaviour
             levelPoints_ = 0;            
             countEnemies_ = 0;                                         
             ResetLevel();
-        }
+        }*/
     }
           
 
 }
+
