@@ -7,7 +7,7 @@ public  abstract class  Status :  MonoBehaviour
     public GameObject origin_;
     public bool updateHud_;
 
-    public Tasks tasks_;
+    public Command tasks_;
 
      public abstract string GetName();
      public abstract int GetLifes();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaskAddEnemy : Tasks
+public class CommandAddEnemy : Command
 {
     public override bool Exec(StatusWorld obj, EventData data = null)
     {        

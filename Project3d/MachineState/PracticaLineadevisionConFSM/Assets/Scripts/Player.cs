@@ -12,9 +12,13 @@ public class Player : MonoBehaviour
     public int healthPlayer_ = 100; 
 
     // Start is called before the first frame update
+  public Player()
+  {
+            //var draft = World.Instance;
+  }
     void Start()
     {
-        
+//        var draft = World.Instance;
     }
 
     // Update is called once per frame

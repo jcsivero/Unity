@@ -12,7 +12,7 @@ public class AIController : MonoBehaviour
     public GameObject bullet_;
     public GameObject originOfFire_;
 
-    Tasks taskAddEnemy_;
+    Command taskAddEnemy_;
     public Bot bot_;
 
     public GameObject[] waypoints_;
@@ -86,7 +86,7 @@ public class AIController : MonoBehaviour
 
         UpdateCurrentsSpeeds();
         taskAddEnemy_.Exec(GameManager.gameManager_.statusWorld_);
-        GameManagerMyEvents.TriggerEvent<Status>(EVENT_UPDATE_STATUS_WORLD,eventData_);
+        //GameManagerMyEvents.TriggerEvent<Status>(EVENT_UPDATE_STATUS_WORLD,eventData_);
 
 
     }

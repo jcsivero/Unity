@@ -11,7 +11,7 @@ public class StatusNpc : Status
 
     public override bool ExecutionTasks()
     {
-        tasks_.Exec(this);
+        //tasks_.Exec(this);
         return true;
     }
     public override string GetName()

@@ -399,10 +399,12 @@ MonoBehaviour:
   agent_: {fileID: 0}
   rotationSpeed_: 2
   speed_: 2
-  accuracy_: 1
+  accuracyToWayPoints_: 1
   visDist_: 20
   visAngle_: 30
-  shootDist_: 5
+  visDistToAttack_: 10
+  statusNpc_: {fileID: 0}
+  textHealthNpc_: {fileID: 0}
 --- !u!195 &5220501717742342613
 NavMeshAgent:
   m_ObjectHideFlags: 0

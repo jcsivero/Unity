@@ -9,7 +9,7 @@ public class StatusHud : Status
     public float health_;
     public override bool ExecutionTasks()
     {
-        tasks_.Exec(this);
+        //tasks_.Exec(this);
         return true;
     }
     public override string GetName()
