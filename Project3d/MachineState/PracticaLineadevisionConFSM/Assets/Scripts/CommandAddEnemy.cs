@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandAddEnemy : Command
+public class CommandAddOrSubEnemy : Command
 {
-    public override bool Exec(StatusWorld obj, EventData data = null)
+        private int amount_;
+    public override bool Exec()
     {        
-        obj.countEnemies_  += 1; 
+        GetStatusWorld().countEnemies_ +=  amount_;
+        
         return true;
+    }
+    public void Set(int amount)  ///cantidad enemigos a sumar o restar en el mundo
+    {
+        
+        amount_ = amount;
     }
 }

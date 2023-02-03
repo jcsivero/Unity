@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
-{
-    public static GameManager gameManager_;
+[RequireComponent(typeof (StatusWorld))]
+[RequireComponent(typeof (StatusHud))]
 
+public class GameManager :BaseMono
+{
+    public static  GameManager instance_ ;
+        
     public StatusWorld statusWorld_;
     public StatusHud statusHud_;
    
@@ -22,20 +25,27 @@ public class GameManager : MonoBehaviour
     //private const string EVENT_UPDATE_STATUS_HUD = "EVENT_UPDATE_STATUS_HUD";
     
     private const string EVENT_UPDATE_HUD_ONSCREEN = "EVENT_UPDATE_HUD_ONSCREEN";
+
+
+     public static GameManager Instance()  /// llamar solo desde después de los Awake, para asegurarse que la instancia está creada. O sea, se puede llamar desde OnEnable() o Start()
+    {
+         return instance_;
+    }
+
     // Start is called before the first frame update
     /// <summary>
     /// This function is called when the object becomes enabled and active.
     /// </summary>
-    void OnEnable()
+    void OnEnable()   
     {
         if (!suscribeToEventUpdateStatusNpc) 
-            suscribeToEventUpdateStatusNpc = GameManagerMyEvents.StartListening<StatusNpc>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
+            suscribeToEventUpdateStatusNpc = GetManagerMyEvents().StartListening<StatusNpc>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
         if (!suscribeToEventUpdateStatusPlayer) 
-            suscribeToEventUpdateStatusPlayer = GameManagerMyEvents.StartListening<StatusPlayer>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
+            suscribeToEventUpdateStatusPlayer = GetManagerMyEvents().StartListening<StatusPlayer>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
         if (!suscribeToEventUpdateStatusWorld) 
-            suscribeToEventUpdateStatusWorld = GameManagerMyEvents.StartListening<Status>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
+            suscribeToEventUpdateStatusWorld = GetManagerMyEvents().StartListening<Status>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
         //if (!suscribeToEventUpdateStatusHud) 
-         //   suscribeToEventUpdateStatusHud = GameManagerMyEvents.StartListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);            
+         //   suscribeToEventUpdateStatusHud = GetManagerMyEvents().StartListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);            
     }
         /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
@@ -43,13 +53,13 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
       Debug.Log("Unsuscribe Trigger");
-      GameManagerMyEvents.StopListening<Status>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
+      GetManagerMyEvents().StopListening<Status>(EVENT_UPDATE_STATUS_WORLD,UpdateStatusWorld);
       suscribeToEventUpdateStatusWorld = false;
-      GameManagerMyEvents.StopListening<StatusNpc>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
+      GetManagerMyEvents().StopListening<StatusNpc>(EVENT_UPDATE_STATUS_NPC,UpdateStatusNpc);
       suscribeToEventUpdateStatusNpc = false;
-      GameManagerMyEvents.StopListening<StatusPlayer>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
+      GetManagerMyEvents().StopListening<StatusPlayer>(EVENT_UPDATE_STATUS_PLAYER,UpdateStatusPlayer);
       suscribeToEventUpdateStatusPlayer = false;
-//      GameManagerMyEvents.StopListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);
+//      GetManagerMyEvents().StopListening(EVENT_UPDATE_STATUS_HUD,UpdateStatusHud);
  //     suscribeToEventUpdateStatusHud = false;
       
     }
@@ -66,22 +76,23 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        //statusHud_ = new StatusHud();
-        statusHud_.SetOrigin(this.gameObject);  
-        
-        //statusWorld_ = new StatusWorld();
+        Debug.Log("Iniciado instancia GameManager desde Awake");
+        statusWorld_ = GetComponent<StatusWorld>();
+        statusHud_ = GetComponent<StatusHud>();
+ 
+        statusHud_.SetOrigin(this.gameObject);              
         statusWorld_.SetOrigin(this.gameObject);  
         
         statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
         statusWorld_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
 
-        if (gameManager_!= null && gameManager_ != this)
+        if (instance_!= null && instance_ != this)
             Destroy(gameObject);
         else
-            gameManager_ = this;
-            Object.DontDestroyOnLoad(gameObject);
-  
+            instance_ = this;
 
+        Object.DontDestroyOnLoad(gameObject);
+  
 
     }
 
@@ -91,12 +102,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Start()
     {
+        
+        Debug.Log("Iniciado instancia GameManager desde contructor --------- " + GetInstanceID().ToString());
         if ((!suscribeToEventUpdateStatusNpc) || (!suscribeToEventUpdateStatusPlayer)  || (!suscribeToEventUpdateStatusWorld) )
-            OnEnable(); 
+           OnEnable(); 
 
     //aquí ya estoy seguro de que están todas las suscricipones a eventos hechas.            
     
-    //GameManagerMyEvents.TriggerEvent(EVENT_UPDATE_STATUS_HUD);
+    //GetManagerMyEvents().TriggerEvent(EVENT_UPDATE_STATUS_HUD);
     UpdateStatusHud();
 
     }    
@@ -119,7 +132,7 @@ public class GameManager : MonoBehaviour
     {                  
         ///Actualizo solo las variables que son mostradas en el HUD.        
         statusHud_.SetHealth(statusWorld_.health_);          
-        GameManagerMyEvents.TriggerEvent<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,statusHud_);
+        GetManagerMyEvents().TriggerEvent<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,statusHud_);
         return true;      
     }
     void  UpdateStatusWorld(Status status, EventDataReturned valueToReturn)
@@ -145,36 +158,11 @@ public class GameManager : MonoBehaviour
     void  UpdateStatusNpc(StatusNpc statusNpc,EventDataReturned valueToReturn)
     {
        
-        ///Analizo objeto Status
-
-    
-
-  
-
-
-         /// condiciones de fin de partida, reinicio de nivel...
-
-   /*     if (countEnemies_ == 0)
-        {
-            levelPoints_ = 0;            
-            countEnemies_ = 0;
-            LoadNextLevel();            
-        }
-        
-
-/*        if (lifes_ == 0) 
-        {
-          //TO DO gameover
-        }
-
-        if (data.Get<bool>("lost"))
-        {
-            levelPoints_ = 0;            
-            countEnemies_ = 0;                                         
-            ResetLevel();
-        }*/
+ 
     }
           
 
 }
+
+
 

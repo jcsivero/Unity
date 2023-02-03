@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public  abstract class  Status :  MonoBehaviour
+public  abstract class  Status :  BaseMono
 {
     public GameObject origin_;
     public bool updateHud_;

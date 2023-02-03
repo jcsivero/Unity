@@ -5,15 +5,16 @@ using UnityEngine.UI;
 //using UnityEditor.Animations;
 
 
-public class AIController : MonoBehaviour
+[RequireComponent (typeof(StatusNpc))]
+
+public class AIController : BaseMono
 {
 
     public GameObject target_;
     public GameObject bullet_;
     public GameObject originOfFire_;
 
-    Command taskAddEnemy_;
-    public Bot bot_;
+     public Bot bot_;
 
     public GameObject[] waypoints_;
     public int currentWP_;
@@ -46,7 +47,7 @@ public class AIController : MonoBehaviour
     {
         Debug.Log("creada instancia AIController");
         bot_ = new Bot(this);        
-        
+        statusNpc_ = GetComponent<StatusNpc>();
         statusNpc_.SetOrigin(this.gameObject);
 
         anim_ = this.GetComponent<Animator>();
@@ -85,7 +86,7 @@ public class AIController : MonoBehaviour
             //haberle asignado una.
 
         UpdateCurrentsSpeeds();
-        taskAddEnemy_.Exec(GameManager.gameManager_.statusWorld_);
+        //taskAddEnemy_.Exec(GameManager.gameManager_.statusWorld_);
         //GameManagerMyEvents.TriggerEvent<Status>(EVENT_UPDATE_STATUS_WORLD,eventData_);
 
 
@@ -147,7 +148,7 @@ public class AIController : MonoBehaviour
         
         statusNpc_.SetUpdateHud(true);
         statusNpc_.SetDelete(true);
-        GameManagerMyEvents.TriggerEvent<Status>(EVENT_UPDATE_STATUS_WORLD,statusNpc_);               
+        GetManagerMyEvents().TriggerEvent<Status>(EVENT_UPDATE_STATUS_WORLD,statusNpc_);               
             
         OnDisable();        
         Debug.Log("destruido objeto AIController");
@@ -162,13 +163,14 @@ public class AIController : MonoBehaviour
     {
         if (other.gameObject.tag == "bullet")
         {
-            statusNpc_.SetHealth(statusNpc_.GetHealth()-10);
+            statusNpc_.SetHealth(statusNpc_.GetHealth()-10);            
         
             if (statusNpc_.GetHealth() <=0)    
                 Destroy(this.gameObject);
+                
+            textHealthNpc_.text = statusNpc_.GetHealth().ToString() + "%";
         }
-        else
-             textHealthNpc_.text = statusNpc_.GetHealth().ToString() + "%";
+                     
                        
         
     }

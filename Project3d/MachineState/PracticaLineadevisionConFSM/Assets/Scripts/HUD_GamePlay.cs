@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUD_GamePlay : MonoBehaviour
+public class HUD_GamePlay : BaseMono
 {
     private bool suscribeToEventUpdateHudOnScreen = false;
     
@@ -17,7 +17,7 @@ public class HUD_GamePlay : MonoBehaviour
     /// </summary>
     void OnEnable()
     {
-        suscribeToEventUpdateHudOnScreen = GameManagerMyEvents.StartListening<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,UpdateHudOnScreen);
+        suscribeToEventUpdateHudOnScreen = GetManagerMyEvents().StartListening<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,UpdateHudOnScreen);
     }
     /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
@@ -25,7 +25,7 @@ public class HUD_GamePlay : MonoBehaviour
     void OnDisable()
     {
       Debug.Log("Unsuscribe Trigger");
-      GameManagerMyEvents.StopListening<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,UpdateHudOnScreen);
+      GetManagerMyEvents().StopListening<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,UpdateHudOnScreen);
       suscribeToEventUpdateHudOnScreen = false;
       
     }
@@ -34,7 +34,7 @@ public class HUD_GamePlay : MonoBehaviour
     /// </summary>
     void Awake()
     {
-
+  
     }
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
