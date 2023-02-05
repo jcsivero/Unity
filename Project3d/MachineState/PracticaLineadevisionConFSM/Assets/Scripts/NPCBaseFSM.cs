@@ -6,7 +6,7 @@ public class NPCBaseFSM : StateMachineBehaviour
 {
 
     public GameObject npc_;
-    public AIController npcComponentAIController_;
+    public Status npcComponentAIController_;
         
     public Animator animator_; 
     public AnimatorStateInfo stateInfo_;
@@ -31,7 +31,8 @@ public class NPCBaseFSM : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {        
             npc_ = animator.gameObject;
-            npcComponentAIController_ = npc_.GetComponent<AIController>();
+            npcComponentAIController_ = npc_.GetComponent<Status>();
+            //target_ = npcComponentAIController_.GetTarget();            
             target_ = npcComponentAIController_.GetTarget();            
             animator_ = animator;
             stateInfo_ = stateInfo;   

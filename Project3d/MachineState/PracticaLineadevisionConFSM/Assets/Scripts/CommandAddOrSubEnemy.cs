@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class CommandAddOrSubEnemy : Command
 {
-        private int amount_;
+    private int amount_;
+
+    public CommandAddOrSubEnemy()
+    {
+        
+    }
+    public CommandAddOrSubEnemy(int amount)
+    {
+        amount_ = amount;
+    }
     public override bool Exec()
     {        
         GetStatusWorld().countEnemies_ +=  amount_;

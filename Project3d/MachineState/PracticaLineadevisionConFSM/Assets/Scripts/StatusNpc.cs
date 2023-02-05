@@ -2,53 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof(Animator))]
+[RequireComponent (typeof(UnityEngine.AI.NavMeshAgent))]
 public class StatusNpc : Status
 {
     public string name_ = "StatusNpc";
-    public int lifes_;
-    public float health_;
-    public bool delete_;
+    public bool useNavMeshAI_ = true;
+    public bool useNavMeshTarget_ = true;    
+    public Animator anim_;
+    public UnityEngine.AI.NavMeshAgent agentNavMesh_;
 
-    public override bool ExecutionTasks()
-    {
-        //tasks_.Exec(this);
-        return true;
-    }
+    public CommandAddOrSubEnemy commandAddOrSubEnemy_;
+    
+   
+    public float rotationSpeed_ = 2.0f;
+    public float speed_ = 2.0f;
+    public float accuracyToWayPoints_ = 1.0f;
+    public float visDist_ = 20.0f;
+    public float visAngle_ = 30.0f;
+    public float visDistToAttack_ = 10.0f;
+     
+    public int currentWP_;
+    public float currentSpeedAI_;
+    public float currentSpeedTarget_;    
     public override string GetName()
     {
         return name_;
     }
-    public override float GetHealth()
+    public override UnityEngine.AI.NavMeshAgent GetAgentNavMesh()
     {
-        return health_;
-    }    
-    public override int GetLifes()
+        return agentNavMesh_;
+    }
+    public override void InstaciateCommands()
     {
-        return lifes_;
-    }    
+        InstaciateCommands();
+        commandAddOrSubEnemy_ = new CommandAddOrSubEnemy();
 
-     public override bool GetDelete()
+
+    }
+        /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    public override void Awake()
     {
-        return delete_;
+        base.Awake();
+        InstaciateCommands();       
+
         
-    }
-    
-    public override void SetName(string draft)
-    {
-        name_ = draft;
-    }
-    public override void SetHealth(float draft)
-    {
-        health_ = draft;
-    }    
-    public override void SetLifes(int draft)
-    {
-        lifes_ = draft;
-    }    
+        anim_ = gameObject.GetComponent<Animator>();                        
+        agentNavMesh_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-        public override void SetDelete(bool draft)
+
+    }
+   public override void Start()
     {
-        delete_ = draft;
+       SetTarget(GetStatusWorld().GetTarget());
         
     }
 }

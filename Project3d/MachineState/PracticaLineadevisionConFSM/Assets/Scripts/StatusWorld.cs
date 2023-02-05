@@ -5,25 +5,35 @@ using UnityEngine;
 public class StatusWorld : Status
 {
     public string name_ = "StatusWorld";
-    public int lifes_;
-    public float health_=810;
-    
     public int  numberOfLevels_;
     public int countEnemies_;    
     public int activeLevel_; //por defecto comienza en la escena 1. La 0 es el menú principal
     public int totalPoints_ = 0;
     public int  levelPoints_ = 0;
 
-    public override bool ExecutionTasks()
-    {
-        //tasks_.Exec(this);
-        return true;
-    }
+    public GameObject[] wayPointsNpcRobots_;
+    public GameObject[] wayPointsNpcZombies_;
+
+
+ 
     public override string GetName()
     {
         return name_;
     }
-    public override float GetHealth()
+
+    override public void InstaciateCommands()
+    {
+        base.InstaciateCommands();
+
+    }
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        InstaciateCommands();        
+    }    
+/*    public override float GetHealth()
     {
         return health_;
     }    
@@ -47,5 +57,5 @@ public class StatusWorld : Status
         lifes_ = draft;
     }    
 
-
+*/
 }

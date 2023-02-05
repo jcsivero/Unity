@@ -5,18 +5,12 @@ using UnityEngine;
 public class StatusHud : Status
 {
     public string name_ = "StatusHud";
-    public int lifes_;
-    public float health_;
-    public override bool ExecutionTasks()
-    {
-        //tasks_.Exec(this);
-        return true;
-    }
+
     public override string GetName()
     {
         return name_;
     }
-    public override float GetHealth()
+    /*public override float GetHealth()
     {
         return health_;
     }    
@@ -39,7 +33,7 @@ public class StatusHud : Status
     {
         lifes_ = draft;
     }    
-
+*/
 
 
 }

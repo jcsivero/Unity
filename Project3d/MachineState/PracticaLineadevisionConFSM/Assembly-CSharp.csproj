@@ -49,18 +49,22 @@
      <Compile Include="Assets\Scripts\Chase.cs" />
      <Compile Include="Assets\Scripts\HUD_InitialOptions.cs" />
      <Compile Include="Assets\Scripts\StatusNpc.cs" />
+     <Compile Include="Assets\Scripts\BaseMono.cs" />
      <Compile Include="Assets\Scripts\NPCBaseFSM.cs" />
-     <Compile Include="Assets\Scripts\CommandAddEnemy.cs" />
+     <Compile Include="Assets\Scripts\CommandAddOrSubEnemy.cs" />
      <Compile Include="Assets\Scripts\MyEvents.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />
      <Compile Include="Assets\Scripts\StatusHud.cs" />
-     <Compile Include="Assets\Scripts\Bot.cs" />
      <Compile Include="Assets\Scripts\Attack.cs" />
      <Compile Include="Assets\Scripts\StatusWorld.cs" />
      <Compile Include="Assets\Scripts\Command.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Patrol.cs" />
-     <Compile Include="Assets\Scripts\BaseMono.cs" />
+     <Compile Include="Assets\Scripts\Commands.cs" />
+     <Compile Include="Assets\Scripts\StatusNpcRobot.cs" />
+     <Compile Include="Assets\Scripts\CommandAddOrSubHealth.cs" />
+     <Compile Include="Assets\Scripts\CommandAddOrSubLifes.cs" />
+     <Compile Include="Assets\Scripts\CommandUpdateWayPoints.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

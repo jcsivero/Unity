@@ -6,14 +6,23 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof (StatusWorld))]
 [RequireComponent(typeof (StatusHud))]
+[RequireComponent(typeof (Commands))]
+[RequireComponent(typeof (AIController))]
+
 
 public class GameManager :BaseMono
 {
+    
     public static  GameManager instance_ ;
         
     public StatusWorld statusWorld_;
     public StatusHud statusHud_;
-   
+
+    public AIController aiController_;
+    public Commands commands_;
+    
+    
+
     private bool suscribeToEventUpdateStatusNpc = false;
     private bool suscribeToEventUpdateStatusPlayer = false;
     private bool suscribeToEventUpdateStatusWorld = false;
@@ -71,28 +80,34 @@ public class GameManager :BaseMono
         OnDisable();
     }
 
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     void Awake()
     {
         Debug.Log("Iniciado instancia GameManager desde Awake");
+        
+        if (instance_!= null && instance_ != this)
+            Destroy(gameObject);
+  
+        instance_ = this;
+
+        Object.DontDestroyOnLoad(gameObject);
+
+        GetManagerMyEvents(); //Creo instancia de gestión de eventos.
+        //commands_ = new Commands(); //inicio el administrador de comandos.
+        commands_ = GetComponent<Commands>();
         statusWorld_ = GetComponent<StatusWorld>();
         statusHud_ = GetComponent<StatusHud>();
- 
-        statusHud_.SetOrigin(this.gameObject);              
-        statusWorld_.SetOrigin(this.gameObject);  
-        
+        aiController_ = GetComponent<AIController>();
+
+        if (statusWorld_.GetTarget()== null)
+            statusWorld_.SetTarget(GameObject.FindGameObjectWithTag("Player"));
+
         statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
         statusWorld_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
 
-        if (instance_!= null && instance_ != this)
-            Destroy(gameObject);
-        else
-            instance_ = this;
-
-        Object.DontDestroyOnLoad(gameObject);
-  
 
     }
 
@@ -131,21 +146,23 @@ public class GameManager :BaseMono
   bool  UpdateStatusHud()
     {                  
         ///Actualizo solo las variables que son mostradas en el HUD.        
-        statusHud_.SetHealth(statusWorld_.health_);          
+        //statusHud_.SetHealth(statusWorld_.health_);        
+          
         GetManagerMyEvents().TriggerEvent<StatusHud>(EVENT_UPDATE_HUD_ONSCREEN,statusHud_);
         return true;      
     }
+    
     void  UpdateStatusWorld(Status status, EventDataReturned valueToReturn)
     {       
         ///Analizo objeto Status
-        if (status.GetName() == "StatusPlayer")
+       /* if (status.GetName() == "StatusPlayer")
             UpdateStatusPlayer((StatusPlayer) status, valueToReturn);
 
         if (status.GetName() == "StatusNpc")
             UpdateStatusNpc((StatusNpc) status,valueToReturn);
 
         if (status.GetUpdateHud())
-            UpdateStatusHud();
+            UpdateStatusHud();*/
         
     }
     void  UpdateStatusPlayer(StatusPlayer statusPlayer,EventDataReturned valueToReturn)
@@ -163,6 +180,7 @@ public class GameManager :BaseMono
           
 
 }
+
 
 
 

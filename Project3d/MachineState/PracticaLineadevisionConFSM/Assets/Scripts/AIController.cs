@@ -5,40 +5,9 @@ using UnityEngine.UI;
 //using UnityEditor.Animations;
 
 
-[RequireComponent (typeof(StatusNpc))]
-
 public class AIController : BaseMono
 {
-
-    public GameObject target_;
-    public GameObject bullet_;
-    public GameObject originOfFire_;
-
-     public Bot bot_;
-
-    public GameObject[] waypoints_;
-    public int currentWP_;
-
-    public bool useNavMeshAI_ = true;
-    public bool useNavMeshTarget_ = true;    
-    public float currentSpeedAI_;
-    public float currentSpeedTarget_;
-
-    public Animator anim_;
-    public UnityEngine.AI.NavMeshAgent agent_;
-    public float rotationSpeed_ = 2.0f;
-    public float speed_ = 2.0f;
-
-    public float accuracyToWayPoints_ = 1.0f;
-    public float visDist_ = 20.0f;
-    public float visAngle_ = 30.0f;
-    public float visDistToAttack_ = 10.0f;
-
-    public StatusNpc statusNpc_;
-    
-    
-    [SerializeField] public TextMesh  textHealthNpc_;
-    
+             
     private const string EVENT_UPDATE_HUD_VALUES = "EVENT_UPDATE_HUD_VALUES";
     private const string EVENT_UPDATE_STATUS_WORLD = "EVENT_UPDATE_STATUS_WORLD";    
     
@@ -46,16 +15,6 @@ public class AIController : BaseMono
     void Awake()
     {
         Debug.Log("creada instancia AIController");
-        bot_ = new Bot(this);        
-        statusNpc_ = GetComponent<StatusNpc>();
-        statusNpc_.SetOrigin(this.gameObject);
-
-        anim_ = this.GetComponent<Animator>();
-                
-
-        if (agent_ == null)
-            agent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
-
         
     }
      void OnEnable()
@@ -78,21 +37,131 @@ public class AIController : BaseMono
     {
         Debug.Log("ejecutando start AIController");
 
-        if (waypoints_ == null)
-            waypoints_ = GameObject.FindGameObjectsWithTag("waypoint");
+        AppendCommand(new CommandUpdateWayPoints());
 
-         if (target_ == null)
-            target_ = GameObject.FindGameObjectWithTag("Player"); ///etiqueta del jugador, que será el objetivo por devecto de la AI, en caso de no
             //haberle asignado una.
 
-        UpdateCurrentsSpeeds();
+        //UpdateCurrentsSpeeds();
         //taskAddEnemy_.Exec(GameManager.gameManager_.statusWorld_);
         //GameManagerMyEvents.TriggerEvent<Status>(EVENT_UPDATE_STATUS_WORLD,eventData_);
 
 
     }
+
+
+    public void Seek(Status draft,Vector3 location)
+    {
+        draft.GetAgentNavMesh().SetDestination(location);
+        
+    }
+
+    public void Flee(Status draft,Vector3 location)
+    {
+        Vector3 fleeVector = location - draft.origin_.transform.position;
+        draft.GetAgentNavMesh().SetDestination(draft.origin_.transform.position - fleeVector);
+    }
+
+    public void Pursue(Status draft)
+    {
+        Vector3 targetDir = draft.target_.transform.position - draft.origin_.transform.position;
+/*
+        float lookAhead = targetDir.magnitude * ai_.GetCurrentSpeedTarget() / ai_.GetCurrentSpeedAI();
+        Debug.DrawRay(ai_.target_.transform.position, ai_.target_.transform.forward * lookAhead,Color.red);
+        Seek(ai_.target_.transform.position + ai_.target_.transform.forward * lookAhead);*/
+    }
+
+    Vector3 wanderTarget = Vector3.zero;
+    public void Wander(Status draft)
+    {
+        float wanderRadius = 10;
+        float wanderDistance = 10;
+        float wanderJitter = 1;
+
+        wanderTarget += new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitter,
+                                        0,
+                                        Random.Range(-1.0f, 1.0f) * wanderJitter);
+        wanderTarget.Normalize();
+        wanderTarget *= wanderRadius;
+
+        Vector3 targetLocal = wanderTarget + new Vector3(0, 0, wanderDistance);
+        Vector3 targetWorld = draft.origin_.transform.InverseTransformVector(targetLocal);
+
+        Seek(draft,targetWorld);
+    }
+
+    public void Hide(Status draft)
+    {
+        float dist = Mathf.Infinity;
+        Vector3 chosenSpot = Vector3.zero;
+
+        for (int i = 0; i < World.Instance.GetHidingSpots().Length; i++)
+        {
+            Vector3 hideDir = World.Instance.GetHidingSpots()[i].transform.position - draft.target_.transform.position;
+            Vector3 hidePos = World.Instance.GetHidingSpots()[i].transform.position + hideDir.normalized * 10;
+
+            if (Vector3.Distance(draft.origin_.transform.position, hidePos) < dist)
+            {
+                chosenSpot = hidePos;
+                dist = Vector3.Distance(draft.origin_.transform.position, hidePos);
+            }
+        }
+
+        Seek(draft, chosenSpot);
+
+    }
+    public void CleverHide(Status draft)
+    {
+        float dist = Mathf.Infinity;
+        Vector3 chosenSpot = Vector3.zero;
+        Vector3 chosenDir = Vector3.zero;
+        GameObject chosenGO = World.Instance.GetHidingSpots()[0];
+
+        for (int i = 0; i < World.Instance.GetHidingSpots().Length; i++)
+        {
+            Vector3 hideDir = World.Instance.GetHidingSpots()[i].transform.position - ai_.target_.transform.position;
+            hideDir.y = 0.0f;
+            Vector3 hidePos = World.Instance.GetHidingSpots()[i].transform.position + hideDir.normalized * 100;
+            
+
+            if (Vector3.Distance(draft.origin_.transform.position, hidePos) < dist)
+            {
+                chosenSpot = hidePos;
+                chosenDir = hideDir;
+                chosenGO = World.Instance.GetHidingSpots()[i];
+                dist = Vector3.Distance(draft.origin_.transform.position, hidePos);
+            }
+        }
+
+        Collider hideCol = chosenGO.GetComponent<Collider>();
+        Ray backRay = new Ray(chosenSpot, -chosenDir.normalized);
+        RaycastHit info;
+        float distance = 250.0f;
+        hideCol.Raycast(backRay, out info, distance);
+        Debug.DrawRay(chosenSpot, -chosenDir.normalized * distance, Color.red);
+
+        Seek(draft,info.point + chosenDir.normalized);
+        //Seek(info.point);
+    }
+
+    public bool CanSeeTarget(Status draft,GameObject target)
+    {
+        RaycastHit raycastInfo;
+        Vector3 rayToTarget = target.transform.position - draft.origin_.transform.position;
+        Debug.DrawRay(draft.origin_.transform.position, target.transform.position - draft.origin_.transform.position ,Color.red);
+
+        if (Physics.Raycast(draft.origin_.transform.position, rayToTarget, out raycastInfo))
+        {            
+            //Debug.Log("etiqueta" + raycastInfo.transform.tag);
+            //Debug.Log("nombre: " +raycastInfo.transform.gameObject.name);
+            //if (raycastInfo.transform.gameObject.tag == "Player")
+                if (raycastInfo.transform.gameObject == target)
+                    return true;
+        }
+        return false;
+    }
+
     
-    public GameObject GetTarget()
+    /*public GameObject GetTarget()
     {
 
         return target_;
@@ -173,6 +242,6 @@ public class AIController : BaseMono
                      
                        
         
-    }
+    }*/
 
 }
