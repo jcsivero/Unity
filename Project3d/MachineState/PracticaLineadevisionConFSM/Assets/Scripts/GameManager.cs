@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof (StatusWorld))]
 [RequireComponent(typeof (StatusHud))]
-[RequireComponent(typeof (Commands))]
 [RequireComponent(typeof (AIController))]
 
 
@@ -21,7 +20,7 @@ public class GameManager :BaseMono
     public AIController aiController_;
     public Commands commands_;
     
-    private const string TRIGGER_ON_UPDATE_ALL_STATUS = "ON_UPDATE_ALL_STATUS";
+    private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";
     public bool ok_ = false; //será true, cuando se haya ejecutado el Update de GameManager el primero, asegurando así que puedo establecer
     ///unas condiciones de inicio antes de que comiencen los update del resto de componentes. Si se necesitara actualizar recursos, se puede invocar el evento
     ///al que se adjuntan los scripts.
@@ -50,7 +49,7 @@ public class GameManager :BaseMono
     /// </summary>
     void OnDestroy()
     {
-        OnDisable();
+        GetManagerMyEvents().OnDestroy();
     }
 
 
@@ -69,11 +68,12 @@ public class GameManager :BaseMono
         Object.DontDestroyOnLoad(gameObject);
 
         GetManagerMyEvents(); //Creo instancia de gestión de eventos.
-        
-        commands_ = GetComponent<Commands>();
+                
         statusWorld_ = GetComponent<StatusWorld>();
         statusHud_ = GetComponent<StatusHud>();
         aiController_ = GetComponent<AIController>();
+
+        commands_ = new Commands();
 
 
         //statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
@@ -99,7 +99,8 @@ public class GameManager :BaseMono
     {
         if (!ok_)
         {
-            GetManagerMyEvents().TriggerEvent(TRIGGER_ON_UPDATE_ALL_STATUS) ; ///actualizo todos los objectos.
+            GetManagerMyEvents().TriggerEvent(TRIGGER_ON_UPDATE_ALL_STATUS_NPC) ; ///actualizo todos los objectos.
+            ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
             ok_ = true;
         }
             

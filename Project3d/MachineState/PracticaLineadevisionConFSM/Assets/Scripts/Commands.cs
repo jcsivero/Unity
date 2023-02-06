@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Commands : MonoBehaviour
+public class Commands 
 {
     public Queue<Command> commands_; // cola de comandos pendientes de  ejecutar.
        
     public Commands ()
     {
+        Debug.Log("+++++++++++++++++++ Creada instancia Commands");
         commands_ = new Queue<Command>();
         
     }

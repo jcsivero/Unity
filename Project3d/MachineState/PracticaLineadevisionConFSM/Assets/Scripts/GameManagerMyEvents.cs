@@ -8,10 +8,14 @@ public class ManagerMyEvents
     private Dictionary<object, Dictionary<string,object>> events_;
     public static  ManagerMyEvents instance_;
 
-        ~ManagerMyEvents()  
+    ~ManagerMyEvents()  
     {
         Debug.Log("Destruida instancia ManagerMyEvents desde destructor");
-        
+        Debug.Log("///////////////// destruyendo  todos los eventos ////////////////");
+        foreach(var targetEvents in events_.Values)
+            foreach (MyEventsBase e in targetEvents.Values)           
+                e.RemoveAllListeners();
+                            
     
     } 
 
@@ -38,7 +42,7 @@ public class ManagerMyEvents
 
     public  bool StartListening(object target,string eventName,MyEvents.Delegate_ listener)
     {
-        
+        Debug.Log("Suscribed on  ++++++++++++++++++++ " + eventName );
         MyEvents e = null;
         
         if (target == null)
@@ -77,6 +81,7 @@ public class ManagerMyEvents
     }
     public  void StopListening(object target, string eventName, MyEvents.Delegate_ listener)
     {
+        Debug.Log("Unsuscribe on ------------------------ " + eventName );
         MyEvents e = null;
         Dictionary<string, object> targetEvents;
         
@@ -93,7 +98,7 @@ public class ManagerMyEvents
     }
     public  bool TriggerEvent(string eventName)
     {   
-        
+        Debug.Log("Trigger **************** " + eventName );
         MyEvents e = null;
         Dictionary<string, object> targetEvents;
         bool success = false;        
@@ -115,6 +120,7 @@ public class ManagerMyEvents
     }
     public  bool TriggerEvent(object target,  string eventName)
     {
+        Debug.Log("Trigger **************** " + eventName );
         MyEvents e = null;
         Dictionary<string, object> targetEvents;
         bool success = false;
@@ -140,6 +146,7 @@ public class ManagerMyEvents
     }
     public  bool StartListening<T>(object target,string eventName,MyEvents<T>.Delegate_ listener)
     { 
+        Debug.Log("Suscribed on +++++++++++++++++++++ " + eventName );
         MyEvents<T> e = null;
         
         if (target == null)
@@ -177,6 +184,7 @@ public class ManagerMyEvents
     }
     public  void StopListening<T>(object target, string eventName, MyEvents<T>.Delegate_ listener)
     {
+        Debug.Log("Unsuscribe on ------------------- " + eventName );
         MyEvents<T> e = null;
         Dictionary<string, object> targetEvents;
         
@@ -198,6 +206,7 @@ public class ManagerMyEvents
     }
     public  EventDataReturned TriggerEvent<T>(object target,  string eventName, T data)
     {
+        Debug.Log("Trigger **************** " + eventName );
         MyEvents<T> e = null;
         EventDataReturned valueToReturn = new EventDataReturned();
 
@@ -224,9 +233,9 @@ public class ManagerMyEvents
     /// <summary>
     /// This function is called when the MonoBehaviour will be destroyed.
     /// </summary>
-    void OnDestroy()
+    public void OnDestroy() ///para simular el destructor de Unity, aunque es invocado desde GameManager.
     {
-        Debug.Log("destruyendo  todos los eventos-----------------");
+        Debug.Log("///////////////// destruyendo  todos los eventos ////////////////");
         foreach(var targetEvents in events_.Values)
             foreach (MyEventsBase e in targetEvents.Values)           
                 e.RemoveAllListeners();

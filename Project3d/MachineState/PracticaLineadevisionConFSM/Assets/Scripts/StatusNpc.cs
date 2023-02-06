@@ -52,7 +52,7 @@ public class StatusNpc : Status
         /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public override void Awake()
+    public new void Awake()
     {
         base.Awake();
         InstaciateCommands();       
@@ -60,13 +60,13 @@ public class StatusNpc : Status
         
         anim_ = gameObject.GetComponent<Animator>();                        
         agentNavMesh_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
-
+        Debug.Log("|||||||||||||| Awake StatusNpc||||||||||||||||");
 
     }
-    public override void Start()
+    public new void Start()
     {
         base.Start();
-
+        Debug.Log("|||||||||||||| Start StatusNpc||||||||||||||||");
         if (!suscribeToOnUpdateAllStatusNpc_)
             OnEnable(); 
        
@@ -78,10 +78,8 @@ public class StatusNpc : Status
     /// <summary>
     /// This function is called when the object becomes enabled and active.
     /// </summary>
-    public override void OnEnable()   
-    {
-        base.OnEnable();
-
+    public void OnEnable()   
+    {        
         if (!suscribeToOnUpdateAllStatusNpc_) 
             suscribeToOnUpdateAllStatusNpc_ = GetManagerMyEvents().StartListening(ON_UPDATE_ALL_STATUS_NPC,OnUpdateStatusNpc); ///creo evento para actualizar  todos los StatusNpcRobots.
         ///Este evento es lanzado por GameManager,cuando ha actualizado todas las variables iniciales del estado del mundo.
@@ -95,10 +93,8 @@ public class StatusNpc : Status
         /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
     /// </summary>
-    public override void OnDisable()
-    {
-      base.OnDisable();
-      Debug.Log("Unsuscribe Trigger " +ON_UPDATE_ALL_STATUS_NPC );
+    public void OnDisable()
+    {      
       GetManagerMyEvents().StopListening(ON_UPDATE_ALL_STATUS_NPC,OnUpdateStatusNpc);
       suscribeToOnUpdateAllStatusNpc_ = false;
       
@@ -108,7 +104,8 @@ public class StatusNpc : Status
     /// </summary>
     void OnDestroy()
     {
-        OnDisable();
+        
+           Debug.Log("------------- destruido objeto StatusNpc--------------- ");
     }
     bool OnUpdateStatusNpc()
     {
@@ -128,7 +125,7 @@ public class StatusNpc : Status
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public override void InstaciateCommands()
+    private void InstaciateCommands()
     {
         
         commandAddOrSubEnemy_ = new CommandAddOrSubEnemy();

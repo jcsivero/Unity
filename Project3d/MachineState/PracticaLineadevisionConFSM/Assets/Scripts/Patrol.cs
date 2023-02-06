@@ -5,12 +5,7 @@ using UnityEngine;
 public class Patrol : NPCBaseFSM
 {
 
-    void Awake()
-    {
-       
-        Debug.Log("creada instancia PATROL" + this.name + " " );
-        
-    }
+
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -26,7 +21,7 @@ public class Patrol : NPCBaseFSM
         UpdateState();
         npc_.UpdateCurrentsSpeeds();
 
-        if (npc_.GetStatusWorld().wayPointsNpcRobots_ == null) 
+        if (npc_.GetStatusWorld().wayPointsNpcRobots_.Length == 0) 
             aiController_.Wander((npc_));
 
         else

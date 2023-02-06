@@ -13,20 +13,19 @@ public class NPCBaseFSM : StateMachineBehaviour
     
     public GameObject target_;
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void Awake()
     {
-        Debug.Log("creada instancia NFCBASEFSM");
+       
+        Debug.Log("+++++++ Creada instancia " + this.name + " +++++++++++++++++" );
+        
     }
-    /// <summary>
+        /// <summary>
     /// This function is called when the MonoBehaviour will be destroyed.
     /// </summary>
     void OnDestroy()
     {
-        Debug.Log("destruido objeto");
+        Debug.Log("----------- Destruida instancia " + this.name + " ----------------" );
+        
     }
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {        

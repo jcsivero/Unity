@@ -33,26 +33,28 @@ public class StatusWorld : Status
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public override void Awake()
+    public new void Awake()
     {
         base.Awake();
         InstaciateCommands();  
-        SetName("StatusWorld");
+        SetName("StatusWorld");        
+        Debug.Log("|||||||||||||| Awake StatusWorld||||||||||||||||");
 
     }    
 
-    public override void Start()
+    public new void Start()
     {
+        Debug.Log("|||||||||||||| Start StatusWorld||||||||||||||||");
         if (GetTarget()== null)
             SetTarget(GameObject.FindGameObjectWithTag("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
-
+        
         AppendCommand(commandUpdateWayPoints_);
-        ExecuteCommands();
+  
 
     }
 
 
-    override public void InstaciateCommands()
+    private void InstaciateCommands()
     {
              commandUpdateWayPoints_ = new CommandUpdateWayPoints();
 
@@ -60,29 +62,5 @@ public class StatusWorld : Status
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
-/*    public override float GetHealth()
-    {
-        return health_;
-    }    
-    public override int GetLifes()
-    {
-        return lifes_;
-    }    
 
-
-    
-    public override void SetName(string draft)
-    {
-        name_ = draft;
-    }
-    public override void SetHealth(float draft)
-    {
-        health_ = draft;
-    }    
-    public override void SetLifes(int draft)
-    {
-        lifes_ = draft;
-    }    
-
-*/
 }

@@ -31,25 +31,26 @@ public class StatusHud : Status
         /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public override void Awake()
+    public new void Awake()
     {
         base.Awake();
         InstaciateCommands();     
-        SetName("StatusHud");
-
+        SetName("StatusHud");        
+        Debug.Log("|||||||||||||| Awake StatusHud||||||||||||||||");
 
     }
-   public override void Start()
+   public new void Start()
     {
+        Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
         if (GetTarget()== null)
-            SetTarget(GameObject.FindGameObjectWithTag("Hud")); ///si no se ha establecido un objeto destino, por defecto para el
+            SetTarget(GameObject.Find("Hud")); ///si no se ha establecido un objeto destino, por defecto para el
             ///gameobject que contendrá el HUD sera el gameobject con etiqueta "Hud"
-        
+        AppendCommand(commandUpdateAllHud_); ///se ejecutará en el primer Update() de GameManager
     }    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-    public override void InstaciateCommands()
+    private void InstaciateCommands()
     {
         
         commandUpdateAllHud_ = new CommandUpdateAllHud();
@@ -63,33 +64,10 @@ public class StatusHud : Status
     }
     public void SetHudHealthPlayer(float drat)
     {
-        hudTextHealthPlayer_.text = drat.ToString();
+        hudTextHealthPlayer_.text = drat.ToString() + " %";
     }
 
-    /*public override float GetHealth()
-    {
-        return health_;
-    }    
-    public override int GetLifes()
-    {
-        return lifes_;
-    }    
 
-
-    
-    public override void SetName(string draft)
-    {
-        name_ = draft;
-    }
-    public override void SetHealth(float draft)
-    {
-        health_ = draft;
-    }    
-    public override void SetLifes(int draft)
-    {
-        lifes_ = draft;
-    }    
-*/
 
 
 }

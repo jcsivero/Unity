@@ -34,24 +34,29 @@ public class StatusNpcRobot : StatusNpc
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    override public void Awake()
+    
+    public new void Awake()
     {        
         base.Awake();        
         InstaciateCommands(); 
-        SetName("StatusNpcRobot");
+        SetName("StatusNpcRobot");        
+        
+
+        Debug.Log("|||||||||||||| Awake StatusNpcRobot||||||||||||||||");
 
     }
-    public override void Start()
+    public new void Start()
     {
         base.Start();
-       
+       Debug.Log("|||||||||||||| Start StatusNpcRobot||||||||||||||||");
         if (!suscribeToOnUpdateAllStatusNpcRobot_)
             OnEnable(); 
-               
+        AppendCommand(commandUpdateHudStatusNpcRobot_); ///se ejecutará en el primer Update() de GameManager.
         
     }
-    public override void OnEnable()   
+    public new void OnEnable()   
     {
+        base.OnEnable();
         if (!suscribeToOnUpdateAllStatusNpcRobot_) 
             suscribeToOnUpdateAllStatusNpcRobot_ = GetManagerMyEvents().StartListening(ON_UPDATE_ALL_STATUS_NPC_ROBOT,OnUpdateStatusNpcRobot); ///creo evento para actualizar  todos los StatusNpcRobots.
         ///Este evento es lanzado por GameManager,cuando ha actualizado todas las variables iniciales del estado del mundo.
@@ -65,10 +70,9 @@ public class StatusNpcRobot : StatusNpc
         /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
     /// </summary>
-    public override void OnDisable()
+    public new void OnDisable()
     {
-      base.OnDisable();
-      Debug.Log("Unsuscribe Trigger " +ON_UPDATE_ALL_STATUS_NPC_ROBOT );
+      base.OnDisable();      
       GetManagerMyEvents().StopListening(ON_UPDATE_ALL_STATUS_NPC_ROBOT,OnUpdateStatusNpcRobot);
       suscribeToOnUpdateAllStatusNpcRobot_ = false;
       
@@ -77,9 +81,8 @@ public class StatusNpcRobot : StatusNpc
     /// This function is called when the MonoBehaviour will be destroyed.
     /// </summary>
     void OnDestroy()
-    {
-        OnDisable();
-        Debug.Log("destruido objeto AIController " + ON_UPDATE_ALL_STATUS_NPC_ROBOT);
+    {        
+        Debug.Log("----------------destruido objeto StatusNpcRobot-------------------- ");
 
     }
 
@@ -92,12 +95,13 @@ public class StatusNpcRobot : StatusNpc
     {
         if (other.gameObject.tag == "bullet")
         {
+            Debug.Log("colision detectada daño en robot " + GetHealth().ToString());
             commandAddOrSubHealth_.Set(-10);
-            AppendCommand(commandAddOrSubHealth_);
+            AppendCommand(commandAddOrSubHealth_);            
             AppendCommand(commandUpdateHudStatusNpcRobot_);
             ExecuteCommands();
             
-            if (GetHealth() <=0)    
+            if (GetHealth() <=0.0f)    
                 Destroy(this.gameObject);
                             
         }
@@ -121,14 +125,18 @@ public class StatusNpcRobot : StatusNpc
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public override void InstaciateCommands()
+private void InstaciateCommands()
 {        
     commandUpdateHudStatusNpcRobot_ = new CommandUpdateHudStatusNpcRobot(this);
 }
 
-public void SetHudHealth()
+public TextMesh GetHudHealth()
 {
-    textHealthNpc_.text = GetHealth().ToString() + " %";
+    return textHealthNpc_;
+}
+public void SetHudHealth(float draft)
+{
+    textHealthNpc_.text = draft.ToString() + " %";
 }
 public void Fire()
     {

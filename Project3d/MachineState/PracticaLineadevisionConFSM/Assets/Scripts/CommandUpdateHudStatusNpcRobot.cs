@@ -12,7 +12,10 @@ public class CommandUpdateHudStatusNpcRobot : Command
 
     public override bool Exec()
     {        
-        status_.SetHudHealth();
+        
+        status_.SetHudHealth(status_.GetHealth());        
+        status_.GetHudHealth().transform.LookAt(status_.GetTarget().transform);
+                
                         
         return true;
     }

@@ -12,6 +12,7 @@ public class CommandAddOrSubHealth : Command
     }
     public CommandAddOrSubHealth(Status status,int amount)
     {
+         status_ =  status;
         amount_ = amount;
     }
     public override bool Exec()
