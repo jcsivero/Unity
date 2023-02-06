@@ -54,13 +54,13 @@ public class ManagerMyEvents
         if (targetEvents.ContainsKey(eventName))
         {
             e = (MyEvents) targetEvents[eventName];
-            Debug.Log("agrego trigguer actualizo");
+            //Debug.Log("agrego trigguer actualizo");
             e.AddListener(listener);
             
         } 
         else
         {
-            Debug.Log("agrego trigguer nuevo");
+            //Debug.Log("agrego trigguer nuevo");
             e = new MyEvents();
             e.AddListener(listener);
             targetEvents.Add(eventName,e);

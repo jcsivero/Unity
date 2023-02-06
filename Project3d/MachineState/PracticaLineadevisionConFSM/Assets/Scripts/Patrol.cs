@@ -34,7 +34,7 @@ public class Patrol : NPCBaseFSM
             if (npc_.GetStatusWorld().wayPointsNpcRobots_.Length == 0)             
             {
                     aiController_.Wander(npc_);
-                    Debug.Log("Modo Wander");
+                    //Debug.Log("Modo Wander");
             }   
             
             

@@ -10,7 +10,7 @@ public class AIController : BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     void Awake()
     {
-        Debug.Log("creada instancia AIController");
+        Debug.Log("creada instancia AIController awake");
         
     }
      void OnEnable()

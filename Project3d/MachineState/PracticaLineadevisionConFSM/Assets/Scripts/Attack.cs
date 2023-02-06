@@ -27,7 +27,7 @@ public class Attack : NPCBaseFSM
         if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
         {
             npc_.GetAgentNavMesh().ResetPath();
-            Debug.Log("desactivando navmesh");
+            //Debug.Log("desactivando path navmesh");
         }
             
         
