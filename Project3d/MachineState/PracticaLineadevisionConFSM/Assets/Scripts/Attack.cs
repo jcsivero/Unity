@@ -15,7 +15,7 @@ public class Attack : NPCBaseFSM
         
         base.OnStateEnter(animator, stateInfo, layerIndex);
         
-        npcComponentAIController_.StartFiring();
+        npc_.StartFiring();
     
     }
 
@@ -23,10 +23,10 @@ public class Attack : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();
-        npcComponentAIController_.UpdateCurrentsSpeeds();
-        if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
+        npc_.UpdateCurrentsSpeeds();
+        if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
         {
-            npcComponentAIController_.agent_.ResetPath();
+            npc_.GetAgentNavMesh().ResetPath();
             Debug.Log("desactivando navmesh");
         }
             
@@ -37,9 +37,9 @@ public class Attack : NPCBaseFSM
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        npcComponentAIController_.StopFiring();
-       // if ((npcComponentAIController_.useNavMeshAI_) && (npcComponentAIController_.agent_ != null))
-         //   npcComponentAIController_.bot_.Pursue();
+        npc_.StopFiring();
+       // if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
+         //   npc_.bot_.Pursue();
 
     }
 

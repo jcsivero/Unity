@@ -1426,7 +1426,6 @@ GameObject:
   m_Component:
   - component: {fileID: 60580799232077680}
   - component: {fileID: 60580797552666515}
-  - component: {fileID: 60580797552666514}
   - component: {fileID: 60580797552666512}
   m_Layer: 0
   m_Name: robot
@@ -1474,35 +1473,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &60580797552666514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 60580799231587152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90e83ea39c2bb5c4092fe6555a899fe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target_: {fileID: 0}
-  bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
-  originOfFire_: {fileID: 2750371824739572234}
-  waypoints_: []
-  currentWP_: 0
-  useNavMeshAI_: 0
-  useNavMeshTarget_: 0
-  currentSpeedAI_: 0
-  currentSpeedTarget_: 0
-  anim_: {fileID: 0}
-  agent_: {fileID: 0}
-  rotationSpeed_: 2
-  speed_: 2
-  accuracyToWayPoints_: 1
-  visDist_: 20
-  visAngle_: 30
-  visDistToAttack_: 10
 --- !u!195 &60580797552666512
 NavMeshAgent:
   m_ObjectHideFlags: 0

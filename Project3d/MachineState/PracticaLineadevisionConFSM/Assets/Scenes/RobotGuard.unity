@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1105,7 +1105,6 @@ GameObject:
   - component: {fileID: 890178901}
   - component: {fileID: 890178900}
   - component: {fileID: 890178899}
-  - component: {fileID: 890178904}
   m_Layer: 5
   m_Name: Hud_GamePlay
   m_TagString: Untagged
@@ -1221,19 +1220,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &890178904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890178898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9adf75523a20e864cbca36bc709b6ec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textHealthPlayer_: {fileID: 287398757}
 --- !u!1 &896527210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,7 +1420,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1532783481}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &976279971
+--- !u!114 &976279969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1448,7 +1434,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusWorld_: {fileID: 0}
   statusHud_: {fileID: 0}
-  tasks_: {fileID: 0}
+  aiController_: {fileID: 0}
+  commands_: {fileID: 0}
+  ok_: 0
+--- !u!114 &976279970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976279968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e83ea39c2bb5c4092fe6555a899fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &976279971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976279968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd79eb8623080e54598f23b41a6203f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &976279972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1461,11 +1473,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33a3c1da82931d4d9ca3bb806924c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name_: Status
   origin_: {fileID: 0}
+  target_: {fileID: 0}
   updateHud_: 0
-  name_: StatusHud
   lifes_: 0
   health_: 0
+  hudTextHealthPlayer_: {fileID: 287398757}
 --- !u!114 &976279973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,16 +1492,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a12c25b3e9818e43a8f040e660e0238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name_: Status
   origin_: {fileID: 0}
+  target_: {fileID: 0}
   updateHud_: 0
-  name_: StatusWorld
   lifes_: 0
-  health_: 810
+  health_: 0
   numberOfLevels_: 0
   countEnemies_: 0
   activeLevel_: 0
   totalPoints_: 0
   levelPoints_: 0
+  wayPointsNpcRobots_: []
+  wayPointsNpcZombies_: []
 --- !u!1 &1002658991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 60580799231587152, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
@@ -1862,7 +1879,7 @@ CapsuleCollider:
   m_Height: 3.83205
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1476200566
+--- !u!114 &1476200561
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1871,46 +1888,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1002658991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90e83ea39c2bb5c4092fe6555a899fe4, type: 3}
+  m_Script: {fileID: 11500000, guid: cc455794a0ed61f47a0df384ef80afdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target_: {fileID: 0}
-  bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
-  originOfFire_: {fileID: 493029078}
-  waypoints_: []
-  currentWP_: 0
+  name_: Status
+  origin_: {fileID: 0}
+  target_: {fileID: 448894334}
+  updateHud_: 0
+  lifes_: 0
+  health_: 0
   useNavMeshAI_: 1
   useNavMeshTarget_: 1
-  currentSpeedAI_: 0
-  currentSpeedTarget_: 0
   anim_: {fileID: 0}
-  agent_: {fileID: 0}
+  agentNavMesh_: {fileID: 0}
   rotationSpeed_: 2
   speed_: 2
   accuracyToWayPoints_: 1
   visDist_: 20
   visAngle_: 30
   visDistToAttack_: 10
-  statusNpc_: {fileID: 0}
+  currentWP_: 0
+  currentSpeedAI_: 0
+  currentSpeedTarget_: 0
+  bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
+  originOfFire_: {fileID: 493029078}
   textHealthNpc_: {fileID: 31112130}
---- !u!114 &1476200567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1002658991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ecf8b88752af04f9c640e9eea6653d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  origin_: {fileID: 0}
-  updateHud_: 0
-  name_: StatusNpc
-  lifes_: 0
-  health_: 50
-  delete_: 0
 --- !u!1001 &1532783481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2385,21 +2387,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 60580797552666514, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
-        type: 3}
-      propertyPath: target_
-      value: 
-      objectReference: {fileID: 448894334}
-    - target: {fileID: 60580797552666514, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
-        type: 3}
-      propertyPath: useNavMeshAI_
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 60580797552666514, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
-        type: 3}
-      propertyPath: textHealthNpc_
-      value: 
-      objectReference: {fileID: 31112130}
     - target: {fileID: 60580798912210643, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
       propertyPath: m_Color.rgba
@@ -2480,9 +2467,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 60580797552666514, guid: 305e0b6d51d7a3b4e8ad955af8f30525, type: 3}
-    - {fileID: 4003308111929339313, guid: 305e0b6d51d7a3b4e8ad955af8f30525, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 305e0b6d51d7a3b4e8ad955af8f30525, type: 3}
 --- !u!224 &1791036844356631468 stripped
 RectTransform:

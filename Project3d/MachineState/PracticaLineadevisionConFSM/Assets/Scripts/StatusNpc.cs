@@ -6,40 +6,49 @@ using UnityEngine;
 [RequireComponent (typeof(UnityEngine.AI.NavMeshAgent))]
 public class StatusNpc : Status
 {
-    public string name_ = "StatusNpc";
-    public bool useNavMeshAI_ = true;
-    public bool useNavMeshTarget_ = true;    
-    public Animator anim_;
-    public UnityEngine.AI.NavMeshAgent agentNavMesh_;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Variables públicas propias de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public CommandAddOrSubEnemy commandAddOrSubEnemy_;
-    
-   
-    public float rotationSpeed_ = 2.0f;
-    public float speed_ = 2.0f;
-    public float accuracyToWayPoints_ = 1.0f;
-    public float visDist_ = 20.0f;
-    public float visAngle_ = 30.0f;
-    public float visDistToAttack_ = 10.0f;
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Variables privadas propias de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+    [SerializeField] public  bool useNavMeshAI_ = true;
+    [SerializeField] public  bool useNavMeshTarget_ = true;    
+    [SerializeField] public  Animator anim_;
+    [SerializeField] public  UnityEngine.AI.NavMeshAgent agentNavMesh_;   
+    [SerializeField] public  float rotationSpeed_ = 2.0f;
+    [SerializeField] public  float speed_ = 2.0f;
+    [SerializeField] public  float accuracyToWayPoints_ = 1.0f;
+    [SerializeField] public  float visDist_ = 20.0f;
+    [SerializeField] public  float visAngle_ = 30.0f;
+    [SerializeField] public  float visDistToAttack_ = 10.0f;
      
-    public int currentWP_;
-    public float currentSpeedAI_;
-    public float currentSpeedTarget_;    
-    public override string GetName()
-    {
-        return name_;
-    }
+    [SerializeField] public  int currentWP_;
+    [SerializeField] public  float currentSpeedAI_;
+    [SerializeField] public  float currentSpeedTarget_;    
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Variables de trigger o suscriber a eventos
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    private const string ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";
+     private bool suscribeToOnUpdateAllStatusNpc_ = false;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Métodos Sobreescritos
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+  
+
     public override UnityEngine.AI.NavMeshAgent GetAgentNavMesh()
     {
         return agentNavMesh_;
-    }
-    public override void InstaciateCommands()
-    {
-        InstaciateCommands();
-        commandAddOrSubEnemy_ = new CommandAddOrSubEnemy();
+    }    
 
 
-    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Eventos  de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -47,16 +56,111 @@ public class StatusNpc : Status
     {
         base.Awake();
         InstaciateCommands();       
-
+        SetName("StatusNpc");
         
         anim_ = gameObject.GetComponent<Animator>();                        
         agentNavMesh_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
 
     }
-   public override void Start()
+    public override void Start()
     {
-       SetTarget(GetStatusWorld().GetTarget());
+        base.Start();
+
+        if (!suscribeToOnUpdateAllStatusNpc_)
+            OnEnable(); 
+       
+        
         
     }
+
+       // Start is called before the first frame update
+    /// <summary>
+    /// This function is called when the object becomes enabled and active.
+    /// </summary>
+    public override void OnEnable()   
+    {
+        base.OnEnable();
+
+        if (!suscribeToOnUpdateAllStatusNpc_) 
+            suscribeToOnUpdateAllStatusNpc_ = GetManagerMyEvents().StartListening(ON_UPDATE_ALL_STATUS_NPC,OnUpdateStatusNpc); ///creo evento para actualizar  todos los StatusNpcRobots.
+        ///Este evento es lanzado por GameManager,cuando ha actualizado todas las variables iniciales del estado del mundo.
+        ///Después se puede utilizar para informar a todos los objetos a la vez y que se actualizen.
+        ///Esto no lo hago directamente en el Start() porque no sabemos en que orden son ejecutados,y podría haber Start() que se ejecutan antes que el 
+        ///Start() del GameManager, o del StatusWorld, , y entonces no tener todo actualizado, como target_ u otras variables.
+
+
+        
+    }
+        /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    public override void OnDisable()
+    {
+      base.OnDisable();
+      Debug.Log("Unsuscribe Trigger " +ON_UPDATE_ALL_STATUS_NPC );
+      GetManagerMyEvents().StopListening(ON_UPDATE_ALL_STATUS_NPC,OnUpdateStatusNpc);
+      suscribeToOnUpdateAllStatusNpc_ = false;
+      
+    }
+       /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
+    /// </summary>
+    void OnDestroy()
+    {
+        OnDisable();
+    }
+    bool OnUpdateStatusNpc()
+    {
+        SetTarget(GetStatusWorld().GetTarget());
+        return true;
+    }
+
+
+    void Update()
+    {
+        if (GetGameManager().ok_)
+        {
+            
+        }
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Funciones exclusivas  de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public override void InstaciateCommands()
+    {
+        
+        commandAddOrSubEnemy_ = new CommandAddOrSubEnemy();
+
+
+    }
+    public void UpdateCurrentsSpeeds()
+    {                
+        ///Actualizo velocidad actual a la que se mueve el target.
+        if (GetTarget().GetComponent<CharacterController>() != null)
+                currentSpeedTarget_ = GetTarget().GetComponent<CharacterController>().velocity.magnitude;
+
+        ///Actualizo veclocidad actual de movimiento del NPC.
+        if ((useNavMeshAI_) && (agentNavMesh_ != null))
+        {
+            agentNavMesh_.speed = speed_;    
+            currentSpeedAI_ =  agentNavMesh_.velocity.magnitude;
+        }            
+        else 
+            currentSpeedAI_ = Time.deltaTime * speed_;
+
+    }
+    public float GetCurrentSpeedTarget()
+    {        
+        return currentSpeedTarget_;
+        
+    }
+
+    public float GetCurrentSpeedAI()
+    {
+
+        return currentSpeedAI_;
+    }
+
 }

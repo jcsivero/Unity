@@ -4,35 +4,62 @@ using UnityEngine;
 
 public class StatusWorld : Status
 {
-    public string name_ = "StatusWorld";
-    public int  numberOfLevels_;
-    public int countEnemies_;    
-    public int activeLevel_; //por defecto comienza en la escena 1. La 0 es el menú principal
-    public int totalPoints_ = 0;
-    public int  levelPoints_ = 0;
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Variables públicas propias de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    public CommandUpdateWayPoints commandUpdateWayPoints_;
 
-    public GameObject[] wayPointsNpcRobots_;
-    public GameObject[] wayPointsNpcZombies_;
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Variables privadas propias de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
+    [SerializeField] public int  numberOfLevels_;
+    [SerializeField] public int countEnemies_;    
+    [SerializeField] public int activeLevel_; //por defecto comienza en la escena 1. La 0 es el menú principal
+    [SerializeField] public int totalPoints_ = 0;
+    [SerializeField] public int  levelPoints_ = 0;
 
-
+    [SerializeField] public GameObject[] wayPointsNpcRobots_;
+    [SerializeField] public GameObject[] wayPointsNpcZombies_;
  
-    public override string GetName()
-    {
-        return name_;
-    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Métodos Sobreescritos
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+ 
 
-    override public void InstaciateCommands()
-    {
-        base.InstaciateCommands();
 
-    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Eventos  de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    void Awake()
+    public override void Awake()
     {
-        InstaciateCommands();        
+        base.Awake();
+        InstaciateCommands();  
+        SetName("StatusWorld");
+
     }    
+
+    public override void Start()
+    {
+        if (GetTarget()== null)
+            SetTarget(GameObject.FindGameObjectWithTag("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
+
+        AppendCommand(commandUpdateWayPoints_);
+        ExecuteCommands();
+
+    }
+
+
+    override public void InstaciateCommands()
+    {
+             commandUpdateWayPoints_ = new CommandUpdateWayPoints();
+
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Funciones exclusivas  de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 /*    public override float GetHealth()
     {
         return health_;

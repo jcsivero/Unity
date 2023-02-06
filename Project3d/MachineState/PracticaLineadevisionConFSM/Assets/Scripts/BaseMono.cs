@@ -49,7 +49,7 @@ public class BaseMono : MonoBehaviour
         GetGameManager().commands_.AppendCommand(draft);
         
     }
-    virtual public void ExecuteCommands(Command draft)
+    virtual public void ExecuteCommands()
     {
         GetGameManager().commands_.ExecuteCommands();
         

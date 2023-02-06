@@ -17,7 +17,7 @@ public class CommandAddOrSubLifes : Command
     }
     public override bool Exec()
     {        
-        status_.lifes_ += amount_;
+        status_.SetLifes(status_.GetLifes()+ amount_);
                 
         return true;
     }

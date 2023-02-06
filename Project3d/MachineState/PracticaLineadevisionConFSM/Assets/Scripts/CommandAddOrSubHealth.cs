@@ -16,7 +16,7 @@ public class CommandAddOrSubHealth : Command
     }
     public override bool Exec()
     {        
-        status_.health_ += amount_;
+        status_.SetHealth(status_.GetHealth()+ amount_);
                 
         return true;
     }
