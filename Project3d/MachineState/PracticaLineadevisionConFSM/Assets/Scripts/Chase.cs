@@ -5,13 +5,14 @@ using UnityEngine;
 public class Chase : NPCBaseFSM
 {
 
-
+    private float speed_;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        npc_.SetSpeedMax(npc_.GetSpeedInitial()*2);        
+        speed_ = npc_.GetSpeedMax();
+        npc_.SetSpeedMax(speed_*2);        
 
     }
 
@@ -24,7 +25,7 @@ public class Chase : NPCBaseFSM
         {
             npc_.GetAgentNavMesh().speed = npc_.speedMax_ * 2; 
             
-            //aiController_.Seek(npc_,target_.transform.position);                       
+            aiController_.Seek(npc_,target_.transform.position);                       
             aiController_.Pursue(npc_);
         }
             
@@ -44,6 +45,7 @@ public class Chase : NPCBaseFSM
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        npc_.SetSpeedMax(speed_);        
         //if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
           //  npc_.bot_.Pursue();
         

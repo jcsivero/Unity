@@ -14,15 +14,15 @@ public class StatusNpc : Status
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-    [SerializeField] public  bool useNavMeshAI_ = true;
-    [SerializeField] public  bool useNavMeshTarget_ = true;    
-    [SerializeField] public  Animator anim_;
-    [SerializeField] public  UnityEngine.AI.NavMeshAgent agentNavMesh_;   
+    [SerializeField] public  bool useNavMeshAI_ = true;      
     [SerializeField] public  float accuracyToWayPoints_ = 1.0f;
     [SerializeField] public  float visDist_ = 20.0f;
     [SerializeField] public  float visAngle_ = 30.0f;
     [SerializeField] public  float visDistToAttack_ = 10.0f;    
     [SerializeField] public  int currentWP_;
+    [SerializeField] private  Animator anim_;
+    [SerializeField] private  UnityEngine.AI.NavMeshAgent agentNavMesh_;   
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables de trigger o suscriber a eventos
@@ -131,10 +131,11 @@ public class StatusNpc : Status
 override public void SetSpeedMax(float speed)
 {
     base.SetSpeedMax(speed);
+    
     //if (GetComponent<CharacterController>() != null)
      //       currentSpeed_ = GetComponent<CharacterController>().velocity.magnitude;
     
-    if ((useNavMeshAI_) && (agentNavMesh_ != null))
+    if (agentNavMesh_ != null)
         agentNavMesh_.speed = speedMax_;        
 }
 virtual public void Fire()

@@ -12,7 +12,7 @@ public class Patrol : NPCBaseFSM
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);             
         npc_.currentWP_ = 0;        
-        npc_.SetSpeedMax(npc_.GetSpeedInitial());
+        //npc_.SetSpeedMax(npc_.GetSpeedInitial());
         UpdateState();
     }
 

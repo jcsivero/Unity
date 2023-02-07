@@ -84,7 +84,7 @@ public class AIController : BaseMono
 
         float lookAhead = 0;
         if (status.GetCurrentSpeed() != 0.0f)
-             lookAhead = targetDir.magnitude * status.GetTargetStatus().GetCurrentSpeed() / status.GetCurrentSpeed();        
+             lookAhead = targetDir.magnitude * status.GetTargetStatus().GetCurrentSpeed()  / status.GetCurrentSpeed();        
 
         Debug.DrawRay(status.GetTarget().transform.position, status.GetTarget().transform.forward * lookAhead,Color.red);
         Seek(status,status.GetTarget().transform.position + status.GetTarget().transform.forward * lookAhead,navmesh);

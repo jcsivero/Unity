@@ -68,7 +68,7 @@ public class StatusPlayer : Status
             
             if (GetHealth() <= 0)  
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
     }

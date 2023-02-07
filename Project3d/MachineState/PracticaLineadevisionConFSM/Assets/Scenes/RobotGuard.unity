@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -421,7 +421,13 @@ CapsuleCollider:
   m_Height: 3.349674
   m_Direction: 1
   m_Center: {x: -0.03, y: 0.27700424, z: 0.07}
---- !u!114 &448894352
+--- !u!4 &448894357 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 3}
+  m_PrefabInstance: {fileID: 846830006}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &448894362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,27 +436,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 448894334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95f30f4698388a744afe04d0d63af476, type: 3}
+  m_Script: {fileID: 11500000, guid: 5145ec74930d7c4438cd69ad2ce2273f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   name_: Status
   rotationSpeed_: 2
-  speedInitial_: 2
   speedMax_: 2
   currentSpeed_: 0
   origin_: {fileID: 0}
   target_: {fileID: 0}
-  updateHud_: 0
   lifes_: 0
-  health_: 200
-  positionPreviousFrame_: {x: 0, y: 0, z: 0}
-  bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
---- !u!4 &448894357 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0,
-    type: 3}
-  m_PrefabInstance: {fileID: 846830006}
-  m_PrefabAsset: {fileID: 0}
+  health_: 0
+  bullet_: {fileID: 0}
 --- !u!1 &493029078 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2750371824739572234, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
@@ -1477,15 +1474,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name_: Status
   rotationSpeed_: 2
-  speedInitial_: 2
   speedMax_: 2
   currentSpeed_: 0
   origin_: {fileID: 0}
   target_: {fileID: 0}
-  updateHud_: 0
   lifes_: 0
   health_: 0
-  positionPreviousFrame_: {x: 0, y: 0, z: 0}
   hudTextHealthPlayer_: {fileID: 287398757}
 --- !u!114 &976279973
 MonoBehaviour:
@@ -1501,15 +1495,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name_: Status
   rotationSpeed_: 2
-  speedInitial_: 2
   speedMax_: 2
   currentSpeed_: 0
   origin_: {fileID: 0}
   target_: {fileID: 0}
-  updateHud_: 0
   lifes_: 0
   health_: 200
-  positionPreviousFrame_: {x: 0, y: 0, z: 0}
   numberOfLevels_: 0
   countEnemies_: 0
   activeLevel_: 0
@@ -1905,24 +1896,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name_: Status
   rotationSpeed_: 2
-  speedInitial_: 2
   speedMax_: 2
   currentSpeed_: 0
   origin_: {fileID: 0}
   target_: {fileID: 448894334}
-  updateHud_: 0
   lifes_: 0
   health_: 100
-  positionPreviousFrame_: {x: 0, y: 0, z: 0}
   useNavMeshAI_: 1
-  useNavMeshTarget_: 1
-  anim_: {fileID: 0}
-  agentNavMesh_: {fileID: 0}
   accuracyToWayPoints_: 1
   visDist_: 20
-  visAngle_: 30
-  visDistToAttack_: 10
+  visAngle_: 120
+  visDistToAttack_: 8
   currentWP_: 0
+  anim_: {fileID: 0}
+  agentNavMesh_: {fileID: 0}
   bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
   originOfFire_: {fileID: 493029078}
   textHealthNpc_: {fileID: 31112130}
