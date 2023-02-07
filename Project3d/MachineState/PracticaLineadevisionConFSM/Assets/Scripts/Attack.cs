@@ -20,11 +20,10 @@ public class Attack : NPCBaseFSM
     {
         UpdateState();
         
-        if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-        {
-            npc_.GetAgentNavMesh().ResetPath();            
-        }
-            
+        if  (npc_.GetAgentNavMesh() != null) ///solo asigno nueva ruta en caso de que no tenga. Esto lo hago solo con los waypoints, puesto que son fijos.
+            ///es para ahorrar recursos, ya que con NavMesh, el mismo complemento se encarga de llevar al NPC hasta el destino.                
+            if (npc_.GetAgentNavMesh().hasPath)
+                npc_.GetAgentNavMesh().ResetPath();            
         
         npc_.transform.LookAt(target_.transform.position);
     }

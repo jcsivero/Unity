@@ -54,7 +54,7 @@ public  abstract class  Status :  BaseMono
 
      public Status GetTargetStatus()
      {
-        return this;
+        return GetTarget().GetComponent<Status>();
      }
      public  int  GetLifes()
      {
@@ -98,18 +98,9 @@ public  abstract class  Status :  BaseMono
 
 
   
-    void UpdateCurrentSpeed()
-    {
-                ////Metodo propio, es una sola variable de velocidad independiente de Navmesh, CharacterController o cualqueir otro método.
-        ///Se basa en la magnitud de la diferencia de posición  en la pantalla en valor absoluto, dividido entre el tiempo de cada frame.
-
-        currentSpeed_  = Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime);  
-        
-        positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad
-
-    }
     public float GetCurrentSpeed()
     {
+                
         return currentSpeed_; ///si se usa cálculos de movimiento, recuerda que el verdadero valor es multiplicado por Time.deltaTime, sino es un valor
         ///muy grande
     }
@@ -156,8 +147,15 @@ public  abstract class  Status :  BaseMono
     {
         if (GetGameManager().ok_)
         {
-            UpdateCurrentSpeed();
-                        
+            ///solo a modo de depuración, se pierde rendimiento pero estos métodos actualizan variables modificadas desde el inspector
+            ///para realizar depuración y pruebas en ejecución. En producto final se pueden quitar.            
+            SetSpeedMax(GetSpeedMax());
+            
+        ////Metodo propio, es una sola variable de velocidad independiente de Navmesh, CharacterController o cualqueir otro método.
+        ///Se basa en la magnitud de la diferencia de posición  en la pantalla en valor absoluto, dividido entre el tiempo de cada frame.
+
+            currentSpeed_  = Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime);  
+            positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad            
             
         }
         

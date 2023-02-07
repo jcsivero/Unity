@@ -60,7 +60,7 @@ public class AIController : BaseMono
         }
         else
         {
-             status.transform.rotation = Quaternion.Slerp(status.transform.rotation, Quaternion.LookRotation(location), status.rotationSpeed_ * Time.deltaTime);                    
+            status.transform.rotation = Quaternion.Slerp(status.transform.rotation, Quaternion.LookRotation(location-status.transform.position), status.rotationSpeed_ * Time.deltaTime);                    
             status.transform.Translate(0, 0, status.MovementValue());
 
             Debug.Log("Movimiento manual");
@@ -79,16 +79,16 @@ public class AIController : BaseMono
 
     public void Pursue(Status status,bool navmesh = true)
     {
-         Debug.Log("=========================================Modo busqueda");
+        //Debug.Log("=========================================Modo busqueda");
         Vector3 targetDir = status.GetTarget().transform.position - status.GetOrigin().transform.position;
 
         float lookAhead = 0;
-        if (status.GetCurrentSpeed() != 0.0f)
-             lookAhead = targetDir.magnitude * status.GetTargetStatus().GetCurrentSpeed()  / status.GetCurrentSpeed();        
-
+        if (status.GetCurrentSpeed() > 0.0f)
+            lookAhead = targetDir.magnitude * status.GetTargetStatus().GetCurrentSpeed() * Time.deltaTime * 5 / status.GetCurrentSpeed();        
+        
         Debug.DrawRay(status.GetTarget().transform.position, status.GetTarget().transform.forward * lookAhead,Color.red);
         Seek(status,status.GetTarget().transform.position + status.GetTarget().transform.forward * lookAhead,navmesh);
-
+    
     }    
 
     Vector3 wanderTarget = Vector3.zero;
@@ -165,13 +165,13 @@ public class AIController : BaseMono
         //Seek(info.point);
     }
 */
-    public bool CanSeeTarget(Status draft,GameObject target)
+    public bool CanSeeTarget(Status status,GameObject target)
     {
         RaycastHit raycastInfo;
-        Vector3 rayToTarget = target.transform.position - draft.GetOrigin().transform.position;
-        Debug.DrawRay(draft.GetOrigin().transform.position, target.transform.position - draft.GetOrigin().transform.position ,Color.red);
+        Vector3 rayToTarget = target.transform.position - status.GetOrigin().transform.position;
+        Debug.DrawRay(status.GetOrigin().transform.position, rayToTarget ,Color.blue);
 
-        if (Physics.Raycast(draft.GetOrigin().transform.position, rayToTarget, out raycastInfo))
+        if (Physics.Raycast(status.GetOrigin().transform.position, rayToTarget, out raycastInfo))
         {            
             //Debug.Log("etiqueta" + raycastInfo.transform.tag);
             //Debug.Log("nombre: " +raycastInfo.transform.gameObject.name);
