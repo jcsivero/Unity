@@ -19,11 +19,10 @@ public class Attack : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();
-        npc_.UpdateCurrentsSpeeds();
+        
         if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
         {
-            npc_.GetAgentNavMesh().ResetPath();
-            //Debug.Log("desactivando path navmesh");
+            npc_.GetAgentNavMesh().ResetPath();            
         }
             
         
@@ -34,8 +33,6 @@ public class Attack : NPCBaseFSM
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         npc_.StopFiring();
-       // if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-         //   npc_.bot_.Pursue();
 
     }
 

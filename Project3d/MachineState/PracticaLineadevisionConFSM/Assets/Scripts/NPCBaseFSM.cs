@@ -5,7 +5,8 @@ using UnityEngine;
 public class NPCBaseFSM : StateMachineBehaviour
 {
 
-    public StatusNpcRobot npc_;
+    public StatusNpc npc_;
+
     public AIController aiController_;
         
     public Animator animator_; 
@@ -29,9 +30,8 @@ public class NPCBaseFSM : StateMachineBehaviour
     }
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {        
-            npc_ = animator.gameObject.GetComponent<StatusNpcRobot>();
-            aiController_ = npc_.GetAIController();
-            //target_ = npcComponentAIController_.GetTarget();            
+            npc_ = animator.gameObject.GetComponent<StatusNpc>();            
+            aiController_ = npc_.GetAIController();            
             target_ = npc_.GetTarget();            
             animator_ = animator;
             stateInfo_ = stateInfo;   
@@ -41,6 +41,7 @@ public class NPCBaseFSM : StateMachineBehaviour
 
      public  void UpdateState()
     {     
+        //animator_.SetFloat("animationVelocity",npc_.GetCurrentSpeedAI());
         Vector3 direction =  target_.transform.position - npc_.transform.position;                
         //direction.z = 0; //solo me interesa el ángulo en x
         direction.y = 0; //solo me interesa el ángulo en x

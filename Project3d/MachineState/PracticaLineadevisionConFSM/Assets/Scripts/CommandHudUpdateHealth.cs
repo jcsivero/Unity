@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandUpdateHealthHud : Command
+public class CommandHudUpdateHealth : Command
 {
-    public CommandUpdateHealthHud()
+    public CommandHudUpdateHealth()
     {
         
     }

@@ -51,34 +51,54 @@ public class AIController : BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-    public void Seek(Status draft,Vector3 location)
+    public void Seek(Status status,Vector3 location, bool navmesh = true)
     {
-        draft.GetAgentNavMesh().SetDestination(location);
+        if (navmesh)
+        {
+            status.GetAgentNavMesh().SetDestination(location);
+            Debug.Log("Movimiento navmesh");
+        }
+        else
+        {
+             status.transform.rotation = Quaternion.Slerp(status.transform.rotation, Quaternion.LookRotation(location), status.rotationSpeed_ * Time.deltaTime);                    
+            status.transform.Translate(0, 0, status.MovementValue());
+
+            Debug.Log("Movimiento manual");
+            
+        }
+
         
     }
 
-    public void Flee(Status draft,Vector3 location)
+    public void Flee(Status status,Vector3 location,bool navmesh = true)
     {
-        Vector3 fleeVector = location - draft.GetOrigin().transform.position;
-        draft.GetAgentNavMesh().SetDestination(draft.GetOrigin().transform.position - fleeVector);
+        Vector3 fleeVector = location - status.GetOrigin().transform.position;
+        Seek(status, status.GetOrigin().transform.position - fleeVector, navmesh);
+             
     }
 
-    public void Pursue(StatusNpc draft)
+    public void Pursue(Status status,bool navmesh = true)
     {
-        Vector3 targetDir = draft.GetTarget().transform.position - draft.GetOrigin().transform.position;
+         Debug.Log("=========================================Modo busqueda");
+        Vector3 targetDir = status.GetTarget().transform.position - status.GetOrigin().transform.position;
 
-        float lookAhead = targetDir.magnitude * draft.GetCurrentSpeedTarget() / draft.GetCurrentSpeedAI();
-        Debug.DrawRay(draft.GetTarget().transform.position, draft.GetTarget().transform.forward * lookAhead,Color.red);
-        Seek((Status)draft,draft.GetTarget().transform.position + draft.GetTarget().transform.forward * lookAhead);
-    }
+        float lookAhead = 0;
+        if (status.GetCurrentSpeed() != 0.0f)
+             lookAhead = targetDir.magnitude * status.GetTargetStatus().GetCurrentSpeed() / status.GetCurrentSpeed();        
+
+        Debug.DrawRay(status.GetTarget().transform.position, status.GetTarget().transform.forward * lookAhead,Color.red);
+        Seek(status,status.GetTarget().transform.position + status.GetTarget().transform.forward * lookAhead,navmesh);
+
+    }    
 
     Vector3 wanderTarget = Vector3.zero;
-    public void Wander(Status draft)
+    public void Wander(Status status,bool navmesh = true)
     {
+        Debug.Log("=========================================Modo Wander");
         float wanderRadius = 10;
         float wanderDistance = 10;
         float wanderJitter = 1;
-
+        
         wanderTarget += new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitter,
                                         0,
                                         Random.Range(-1.0f, 1.0f) * wanderJitter);
@@ -86,9 +106,9 @@ public class AIController : BaseMono
         wanderTarget *= wanderRadius;
 
         Vector3 targetLocal = wanderTarget + new Vector3(0, 0, wanderDistance);
-        Vector3 targetWorld = draft.GetOrigin().transform.InverseTransformVector(targetLocal);
+        Vector3 targetWorld = status.GetOrigin().transform.InverseTransformVector(targetLocal);
 
-        Seek(draft,targetWorld);
+        Seek(status,targetWorld,navmesh);
     }
 
     /*public void Hide(Status draft)

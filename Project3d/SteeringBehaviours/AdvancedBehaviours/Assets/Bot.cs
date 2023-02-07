@@ -126,9 +126,9 @@ public class Bot : MonoBehaviour
     {
         //if (CanSeeTarget())
             ///CleverHide();
-            Hide();
+            //Hide();
           //Wander();
-          //Pursue();
+          Pursue();
     }
 
 }

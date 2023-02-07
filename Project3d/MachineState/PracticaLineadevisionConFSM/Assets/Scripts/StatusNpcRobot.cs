@@ -9,7 +9,7 @@ public class StatusNpcRobot : StatusNpc
 ////Variables públicas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
- public CommandUpdateHudStatusNpcRobot commandUpdateHudStatusNpcRobot_;
+ public CommandHudUpdateStatusNpcRobot commandHudUpdateStatusNpcRobot_;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
@@ -27,7 +27,7 @@ public class StatusNpcRobot : StatusNpc
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
- 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Eventos  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ public class StatusNpcRobot : StatusNpc
        Debug.Log("|||||||||||||| Start StatusNpcRobot||||||||||||||||");
         if (!suscribeToOnUpdateAllStatusNpcRobot_)
             OnEnable(); 
-        AppendCommand(commandUpdateHudStatusNpcRobot_); ///se ejecutará en el primer Update() de GameManager.
+        AppendCommand(commandHudUpdateStatusNpcRobot_); ///se ejecutará en el primer Update() de GameManager.
         
     }
     public new void OnEnable()   
@@ -97,8 +97,7 @@ public class StatusNpcRobot : StatusNpc
         {
             Debug.Log("colision detectada daño en robot " + GetHealth().ToString());
             commandAddOrSubHealth_.Set(-10);
-            AppendCommand(commandAddOrSubHealth_);            
-            AppendCommand(commandUpdateHudStatusNpcRobot_);
+            AppendCommand(commandAddOrSubHealth_);                        
             ExecuteCommands();
             
             if (GetHealth() <=0.0f)    
@@ -115,11 +114,13 @@ public class StatusNpcRobot : StatusNpc
         SetTarget(GetStatusWorld().GetTarget());
         return true;
     }
-    void Update()
+    protected new void Update()
     {
+        base.Update();
         if (GetGameManager().ok_)
         {
-            
+            AppendCommand(commandHudUpdateStatusNpcRobot_);
+            ExecuteCommands();
         }
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,7 +128,7 @@ public class StatusNpcRobot : StatusNpc
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 private void InstaciateCommands()
 {        
-    commandUpdateHudStatusNpcRobot_ = new CommandUpdateHudStatusNpcRobot(this);
+    commandHudUpdateStatusNpcRobot_ = new CommandHudUpdateStatusNpcRobot(this);
 }
 
 public TextMesh GetHudHealth()
@@ -138,16 +139,16 @@ public void SetHudHealth(float draft)
 {
     textHealthNpc_.text = draft.ToString() + " %";
 }
-public void Fire()
+override public void Fire()
     {
         GameObject b = Instantiate(bullet_, originOfFire_.transform.position, originOfFire_.transform.rotation);
         b.GetComponent<Rigidbody>().AddForce(originOfFire_.transform.forward * 500);
     }
-public void StopFiring()
+override public void StopFiring()
 {
     CancelInvoke("Fire");
 }
-public void StartFiring()
+override public void StartFiring()
 {
     InvokeRepeating("Fire", 0.5f, 0.5f);
 }    

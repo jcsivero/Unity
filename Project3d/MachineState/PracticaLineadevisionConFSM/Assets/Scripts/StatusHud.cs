@@ -9,8 +9,8 @@ public class StatusHud : Status
 ////Variables públicas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    public CommandUpdateAllHud commandUpdateAllHud_; ///comandos comunes
-    public CommandUpdateHealthHud commandUpdateHealthHud_; ///comandos comunes
+    public CommandHudUpdateAll commandHudUpdateAll_; ///comandos comunes    
+    public CommandHudUpdateHealth commandHudUpdateHealth_; ///comandos comunes
     
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,6 +24,7 @@ public class StatusHud : Status
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Eventos  de esta clase
@@ -45,7 +46,7 @@ public class StatusHud : Status
         if (GetTarget()== null)
             SetTarget(GameObject.Find("Hud")); ///si no se ha establecido un objeto destino, por defecto para el
             ///gameobject que contendrá el HUD sera el gameobject con etiqueta "Hud"
-        AppendCommand(commandUpdateAllHud_); ///se ejecutará en el primer Update() de GameManager
+        AppendCommand(commandHudUpdateAll_); ///se ejecutará en el primer Update() de GameManager
     }    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
@@ -53,8 +54,8 @@ public class StatusHud : Status
     private void InstaciateCommands()
     {
         
-        commandUpdateAllHud_ = new CommandUpdateAllHud();
-        commandUpdateHealthHud_ = new CommandUpdateHealthHud();
+        commandHudUpdateAll_ = new CommandHudUpdateAll();
+        commandHudUpdateHealth_ = new CommandHudUpdateHealth();
     
 
     }    

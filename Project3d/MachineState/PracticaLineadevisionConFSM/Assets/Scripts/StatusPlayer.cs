@@ -7,7 +7,7 @@ public class StatusPlayer : Status
 {
 
     public GameObject bullet_;    
-    public CommandUpdateHudStatusPlayer commandUpdateHudStatusPlayer_;
+    public CommandHudUpdateStatusPlayer commandHudUpdateStatusPlayer_;
     
     public new void Awake()
     {
@@ -20,11 +20,12 @@ public class StatusPlayer : Status
     new void  Start()
     {
                 
-        AppendCommand(commandUpdateHudStatusPlayer_);
+        AppendCommand(commandHudUpdateStatusPlayer_);
     }
 
-    void Update()
+    protected new void Update()
     {
+        base.Update();
         if (GetGameManager().ok_)
         {
         if (Input.GetMouseButtonDown(0))
@@ -36,7 +37,7 @@ public class StatusPlayer : Status
     private void InstaciateCommands()
     {
         
-        commandUpdateHudStatusPlayer_ = new CommandUpdateHudStatusPlayer(this);
+        commandHudUpdateStatusPlayer_ = new CommandHudUpdateStatusPlayer(this);
         
     
 
@@ -62,7 +63,7 @@ public class StatusPlayer : Status
         {
             commandAddOrSubHealth_.Set(-10);
             AppendCommand(commandAddOrSubHealth_);
-            AppendCommand(commandUpdateHudStatusPlayer_);                                    
+            AppendCommand(commandHudUpdateStatusPlayer_);                                    
             ExecuteCommands();
             
             if (GetHealth() <= 0)  

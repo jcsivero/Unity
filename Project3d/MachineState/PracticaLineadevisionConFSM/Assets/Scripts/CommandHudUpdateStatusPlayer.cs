@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandUpdateHudStatusPlayer : Command
+public class CommandHudUpdateStatusPlayer : Command
 {
     private StatusPlayer status_;
-    public CommandUpdateHudStatusPlayer(StatusPlayer status)
+    public CommandHudUpdateStatusPlayer(StatusPlayer status)
     {
         status_ =  status;
     }
@@ -13,7 +13,7 @@ public class CommandUpdateHudStatusPlayer : Command
     public override bool Exec()
     {        
         GetStatusWorld().SetHealth(status_.GetHealth());
-        GetStatusHud().commandUpdateHealthHud_.Exec();
+        GetStatusHud().commandHudUpdateHealth_.Exec();
                         
         return true;
     }

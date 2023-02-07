@@ -18,16 +18,11 @@ public class StatusNpc : Status
     [SerializeField] public  bool useNavMeshTarget_ = true;    
     [SerializeField] public  Animator anim_;
     [SerializeField] public  UnityEngine.AI.NavMeshAgent agentNavMesh_;   
-    [SerializeField] public  float rotationSpeed_ = 2.0f;
-    [SerializeField] public  float speed_ = 2.0f;
     [SerializeField] public  float accuracyToWayPoints_ = 1.0f;
     [SerializeField] public  float visDist_ = 20.0f;
     [SerializeField] public  float visAngle_ = 30.0f;
-    [SerializeField] public  float visDistToAttack_ = 10.0f;
-     
+    [SerializeField] public  float visDistToAttack_ = 10.0f;    
     [SerializeField] public  int currentWP_;
-    [SerializeField] public  float currentSpeedAI_;
-    [SerializeField] public  float currentSpeedTarget_;    
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables de trigger o suscriber a eventos
@@ -44,7 +39,6 @@ public class StatusNpc : Status
     {
         return agentNavMesh_;
     }    
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Eventos  de esta clase
@@ -114,8 +108,9 @@ public class StatusNpc : Status
     }
 
 
-    void Update()
-    {
+    protected new void Update()
+    {  
+        base.Update();
         if (GetGameManager().ok_)
         {
             
@@ -132,32 +127,27 @@ public class StatusNpc : Status
 
 
     }
-    public void UpdateCurrentsSpeeds()
-    {                
-        ///Actualizo velocidad actual a la que se mueve el target.
-        if (GetTarget().GetComponent<CharacterController>() != null)
-                currentSpeedTarget_ = GetTarget().GetComponent<CharacterController>().velocity.magnitude;
 
-        ///Actualizo veclocidad actual de movimiento del NPC.
-        if ((useNavMeshAI_) && (agentNavMesh_ != null))
-        {
-            agentNavMesh_.speed = speed_;    
-            currentSpeedAI_ =  agentNavMesh_.velocity.magnitude;
-        }            
-        else 
-            currentSpeedAI_ = Time.deltaTime * speed_;
-
-    }
-    public float GetCurrentSpeedTarget()
-    {        
-        return currentSpeedTarget_;
-        
-    }
-
-    public float GetCurrentSpeedAI()
+override public void SetSpeedMax(float speed)
+{
+    base.SetSpeedMax(speed);
+    //if (GetComponent<CharacterController>() != null)
+     //       currentSpeed_ = GetComponent<CharacterController>().velocity.magnitude;
+    
+    if ((useNavMeshAI_) && (agentNavMesh_ != null))
+        agentNavMesh_.speed = speedMax_;        
+}
+virtual public void Fire()
     {
-
-        return currentSpeedAI_;
     }
+virtual public void StopFiring()
+{
+ 
+}
+virtual public void StartFiring()
+{
+ 
+}    
+
 
 }

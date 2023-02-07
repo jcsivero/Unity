@@ -12,63 +12,52 @@ public class Patrol : NPCBaseFSM
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);             
         npc_.currentWP_ = 0;        
+        npc_.SetSpeedMax(npc_.GetSpeedInitial());
         UpdateState();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        UpdateState();
-        npc_.UpdateCurrentsSpeeds();
+        UpdateState();        
 
-        if (npc_.GetStatusWorld().wayPointsNpcRobots_.Length == 0) 
-            aiController_.Wander((npc_));
-
-        else
+        if (npc_.GetStatusWorld().wayPointsNpcRobots_.Length == 0)             
         {
-            if (npc_.GetStatusWorld().wayPointsNpcRobots_.Length == 0)             
+                aiController_.Wander(npc_);
+                
+        }   
+                
+        else 
+        {
+            if (Vector3.Distance(npc_.GetStatusWorld().wayPointsNpcRobots_[npc_.currentWP_].transform.position, npc_.transform.position) < npc_.accuracyToWayPoints_)
             {
-                    aiController_.Wander(npc_);
-                    //Debug.Log("Modo Wander");
-            }   
-            
-            
-            else 
-            {
-                if (Vector3.Distance(npc_.GetStatusWorld().wayPointsNpcRobots_[npc_.currentWP_].transform.position, npc_.transform.position) < npc_.accuracyToWayPoints_)
-                {
-                    npc_.currentWP_++;
-                    if (npc_.currentWP_ >= npc_.GetStatusWorld().wayPointsNpcRobots_.Length)
-                        npc_.currentWP_ = 0;
-
-                }
-                if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-                {
-                    if  (!npc_.GetAgentNavMesh().hasPath)
-                    {
-                        
-                        Debug.Log("asignando nuevo path");                        
-                        npc_.GetAgentNavMesh().SetDestination(npc_.GetStatusWorld().wayPointsNpcRobots_[npc_.currentWP_].transform.position);
-                        //npc_.bot_.Seek(npc_.waypoints_[npc_.currentWP_].transform.position);
-                    }
-                        
-                    
-                        Debug.Log("Movimiento navmesh");
-                }
-                    
-                else
-                {
-                    npc_.GetAgentNavMesh().ResetPath();
-                    var direction = npc_.GetStatusWorld().wayPointsNpcRobots_[npc_.currentWP_].transform.position - npc_.transform.position;
-                    npc_.transform.rotation = Quaternion.Slerp(npc_.transform.rotation, Quaternion.LookRotation(direction), npc_.rotationSpeed_ * Time.deltaTime);                    
-                    npc_.transform.Translate(0, 0, npc_.GetCurrentSpeedAI());
-
-                    Debug.Log("Movimiento manual");
-            
-                }
-
+                npc_.currentWP_++;
+                if (npc_.currentWP_ >= npc_.GetStatusWorld().wayPointsNpcRobots_.Length)
+                    npc_.currentWP_ = 0;
 
             }
+            if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
+            {
+                if  (!npc_.GetAgentNavMesh().hasPath) ///solo asigno nueva ruta en caso de que no tenga. Esto lo hago solo con los waypoints, puesto que son fijos.
+                ///es para ahorrar recursos, ya que con NavMesh, el mismo complemento se encarga de llevar al NPC hasta el destino.                
+                {
+                    
+                    Debug.Log("asignando nuevo path");                        
+                    //npc_.GetAgentNavMesh().SetDestination(npc_.GetStatusWorld().wayPointsNpcRobots_[npc_.currentWP_].transform.position);
+                    aiController_.Seek(npc_,npc_.GetStatusWorld().wayPointsNpcRobots_[npc_.currentWP_].transform.position);
+                    
+                }                                    
+                    
+            }
+                
+            else
+            {
+                npc_.GetAgentNavMesh().ResetPath();                
+                aiController_.Seek(npc_, npc_.GetStatusWorld().wayPointsNpcRobots_[npc_.currentWP_].transform.position,false);
+
+            }
+
+
         }
         
     }

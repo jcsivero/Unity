@@ -11,28 +11,30 @@ public class Chase : NPCBaseFSM
     {
         
         base.OnStateEnter(animator, stateInfo, layerIndex);
+        npc_.SetSpeedMax(npc_.GetSpeedInitial()*2);        
 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        UpdateState();        
-        npc_.UpdateCurrentsSpeeds();
+        UpdateState();                                
         
         if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
         {
-            npc_.GetAgentNavMesh().speed = npc_.speed_ * 2; 
-            npc_.GetAgentNavMesh().SetDestination(target_.transform.position);
-            //npc_.bot_.Pursue();
+            npc_.GetAgentNavMesh().speed = npc_.speedMax_ * 2; 
+            
+            //aiController_.Seek(npc_,target_.transform.position);                       
+            aiController_.Pursue(npc_);
         }
             
         else
         {
-            npc_.GetAgentNavMesh().ResetPath();
-            var direction = target_.transform.position - npc_.transform.position;
+            npc_.GetAgentNavMesh().ResetPath();            
+            aiController_.Pursue(npc_,false);
+            /*var direction = target_.transform.position - npc_.transform.position;
             npc_.transform.rotation = Quaternion.Slerp(npc_.transform.rotation, Quaternion.LookRotation(direction), npc_.rotationSpeed_ * Time.deltaTime);             
-            npc_.transform.Translate(0, 0, npc_.GetCurrentSpeedAI()*2); ///puesto que voy corriendo
+            npc_.transform.Translate(0, 0, npc_.GetCurrentSpeedAI()*2); ///puesto que voy corriendo*/
     
         }
 

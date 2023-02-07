@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandUpdateAllHud : Command
+public class CommandHudUpdateAll : Command
 {
     
-    public CommandUpdateAllHud()
+    public CommandHudUpdateAll()
     {
         
     }
@@ -15,7 +15,7 @@ public class CommandUpdateAllHud : Command
         
         ///Actualizo vida del Player
 
-        GetStatusHud().commandUpdateHealthHud_.Exec();
+        GetStatusHud().commandHudUpdateHealth_.Exec();
         
         ///Actualizo número de vidas.
         return true;
