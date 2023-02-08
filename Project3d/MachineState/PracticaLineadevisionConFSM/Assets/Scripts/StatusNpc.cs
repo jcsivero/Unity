@@ -12,8 +12,8 @@ public class StatusNpc : Status
 
     public CommandAddOrSubEnemy commandAddOrSubEnemy_;
     
-    public string[] tagsForHidePlace_;
-    public string tagWayPointsThisNpc_;  
+    public string[] tagsHidePointThisNpc_;
+    public string tagWayPointThisNpc_=null;  
     public int[] wayPointToGoOrder_; ///indica el orden de los WayPoints a visitar, en caso de tenerlos. Si su tamaño es cero, se visitarán
     ///todos los WayPoints detectados con la etiqueta que use este NPC. La indicada por tagWayPointsForThisNpc_;
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

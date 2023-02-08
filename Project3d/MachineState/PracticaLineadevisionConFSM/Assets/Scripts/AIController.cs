@@ -111,6 +111,10 @@ public class AIController : BaseMono
         Seek(status,targetWorld,navmesh);
     }
 
+    public void PatrolMode(Status status,bool navmesh = true)
+    {
+        //if (npc_.GetStatusWorld().wayPoints_.ContainsKey(npc_.tagWayPointsThisNpc_))
+    }
     /*public void Hide(Status draft)
     {
         float dist = Mathf.Infinity;

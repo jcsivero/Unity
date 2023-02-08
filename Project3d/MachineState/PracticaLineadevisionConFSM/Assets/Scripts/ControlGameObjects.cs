@@ -8,10 +8,10 @@ public class ControlGameObjects : BaseMono
     public string[] tagsForWayPoints_;    
     public int numberOfOrderThisWayPoint_;
     
-    public bool isHidePlace = false;
+    public bool isHidePoint = false;
     public string[] tagsForHidePoints_;
 
-    public string[] tags_; //para poder establecer varias etiquetas a un objeto. Simulando Unreal, puesto que Unity solo permite una etiqueta por
+    public string[] tagsGeneral_; //para poder establecer varias etiquetas a un objeto. Simulando Unreal, puesto que Unity solo permite una etiqueta por
     //objeto
     
     
@@ -30,10 +30,10 @@ public class ControlGameObjects : BaseMono
             tagsForHidePoints_[0] = "HidePoints";
             
         }
-        if (tags_.Length == 0)
+        if (tagsGeneral_.Length == 0)
         {
-            tags_  = new string[1];
-            tags_[0] = "Untagged";            
+            tagsGeneral_  = new string[1];
+            tagsGeneral_[0] = "Untagged";            
         }
 
     }

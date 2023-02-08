@@ -19,13 +19,21 @@ public class Patrol : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();        
+        bool useNaveMesh = false;
 
+        if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
+            useNaveMesh = true;
+        else 
+            useNaveMesh = false;
+
+        if(npc_.tagWayPointThisNpc_ == null)            
+            aiController_.Wander(npc_,useNaveMesh);
+        else
+            aiController_.PatrolMode(npc_,useNaveMesh);
+                        
+     /*   
         if (npc_.GetStatusWorld().wayPointsNpcRobots_.Length == 0)             
         {
-                if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-                    aiController_.Wander(npc_);
-                else 
-                    aiController_.Wander(npc_,false);
         }   
                 
         else 
@@ -63,7 +71,7 @@ public class Patrol : NPCBaseFSM
             }
 
 
-        }
+        }*/
 
         
     }
