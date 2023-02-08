@@ -18,8 +18,13 @@ public class StatusWorld : Status
     [SerializeField] public int totalPoints_ = 0;
     [SerializeField] public int  levelPoints_ = 0;
 
-    [SerializeField] public GameObject[] wayPointsNpcRobots_;
-    [SerializeField] public GameObject[] wayPointsNpcZombies_;
+    //[SerializeField] public List<Dictionary<>> wayPoints_;
+    public GameObject[] wayPointsNpcRobots_;
+    public Dictionary<string,List<GameObject>> wayPoints_;
+    public Dictionary<string,List<GameObject>> hidePoints_;
+    public Dictionary<string,List<GameObject>> allGameObjects_;
+    
+    
  
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
@@ -38,18 +43,35 @@ public class StatusWorld : Status
         base.Awake();
         InstaciateCommands();  
         SetName("StatusWorld");        
-        Debug.Log("|||||||||||||| Awake StatusWorld||||||||||||||||");
+        
+        ///Inicializo variables de control de objecots.        
+        wayPoints_= new Dictionary<string,List<GameObject>>();
+        hidePoints_ = new Dictionary<string,List<GameObject>>();
+        allGameObjects_ = new Dictionary<string,List<GameObject>>();
 
+        
+        
+        Debug.Log("|||||||||||||| Awake StatusWorld||||||||||||||||");
+        
     }    
 
+    void GetInformation()
+    {
+        ///Obtengo y clasifico la información de los GameObjects ya cargados.
+        GameObject[] draft = GameManager.FindObjectsOfType<GameObject>();
+        for (int i=0; i<draft.Length;i++)
+        {
+
+        }
+    }
     public new void Start()
     {
         Debug.Log("|||||||||||||| Start StatusWorld||||||||||||||||");
         if (GetTarget()== null)
             SetTarget(GameObject.FindGameObjectWithTag("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
         
-        AppendCommand(commandUpdateWayPoints_);
-  
+        //AppendCommand(commandUpdateWayPoints_);
+
 
     }
 

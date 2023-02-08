@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\EventData.cs" />
      <Compile Include="Assets\Scripts\CommandHudUpdateHealth.cs" />
+     <Compile Include="Assets\Scripts\StatusPlayer.cs" />
      <Compile Include="Assets\Scripts\GameManagerMyEvents.cs" />
      <Compile Include="Assets\Scripts\Base.cs" />
      <Compile Include="Assets\Scripts\CommandHudUpdateStatusPlayer.cs" />
@@ -45,7 +46,6 @@
      <Compile Include="Assets\Scripts\CommandAddOrSubHealth.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\AIController.cs" />
-     <Compile Include="Assets\Scripts\StatusPlayer.cs" />
      <Compile Include="Assets\Scripts\CommandAddOrSubLifes.cs" />
      <Compile Include="Assets\Scripts\CommandHudUpdateAll.cs" />
      <Compile Include="Assets\Scripts\Chase.cs" />
@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Patrol.cs" />
      <Compile Include="Assets\Scripts\Commands.cs" />
+     <Compile Include="Assets\Scripts\ControlGameObjects.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

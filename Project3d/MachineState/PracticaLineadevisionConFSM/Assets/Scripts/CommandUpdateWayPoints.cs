@@ -10,9 +10,10 @@ public class CommandUpdateWayPoints : Command
     }
     public override bool Exec()
     {        
-        
-        GetStatusWorld().wayPointsNpcRobots_ = GameObject.FindGameObjectsWithTag("WayPointsRobots");        
-        GetStatusWorld().wayPointsNpcZombies_ = GameObject.FindGameObjectsWithTag("WayPointsZombies");        
+        //GetStatusWorld().wayPoints_.Clear() ///primero vacío la lista para 
+        //GetStatusWorld().wayPoints_.Add = new List<GameObject>(GameObject.FindGameObjectsWithTag("WayPointsRobots"));        
+        //GetStatusWorld().wayPointsNpcZombies_ = GameObject.FindGameObjectsWithTag("WayPointsZombies");        
+//                GetStatusWorld();
                 
         return true;
     }
