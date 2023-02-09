@@ -97,8 +97,7 @@ public class StatusNpcRobot : StatusNpc
         {
             Debug.Log("colision detectada daño en robot " + GetHealth().ToString());
             commandAddOrSubHealth_.Set(-10);
-            AppendCommand(commandAddOrSubHealth_);                        
-            ExecuteCommands();
+            AppendCommand(commandAddOrSubHealth_);                                    
             
             if (GetHealth() <=0.0f)    
                 Destroy(this.gameObject);
@@ -135,7 +134,7 @@ public TextMesh GetHudHealth()
 {
     return textHealthNpc_;
 }
-public void SetHudHealth(float draft)
+public void SetHudHealth(int draft)
 {
     textHealthNpc_.text = draft.ToString() + " %";
 }
@@ -152,4 +151,18 @@ override public void StartFiring()
 {
     InvokeRepeating("Fire", 0.5f, 0.5f);
 }    
+
+override public void HealthRecovery()
+{
+    commandAddOrSubHealth_.Set(10);
+    AppendCommand(commandAddOrSubHealth_);    
+}
+override public void StartHealthRecovery()
+{
+    InvokeRepeating("HealthRecovery", 0.5f, 2.0f);
+}
+override public void StopHealthRecovery()
+{
+    CancelInvoke("HealthRecovery");
+}
 }

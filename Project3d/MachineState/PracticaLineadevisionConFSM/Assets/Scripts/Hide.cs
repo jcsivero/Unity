@@ -9,8 +9,8 @@ public class Hide : NPCBaseFSM
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
-        base.OnStateEnter(animator, stateInfo, layerIndex);
-                
+        base.OnStateEnter(animator, stateInfo, layerIndex);        
+        npc_.StartHealthRecovery();
     
     }
 
@@ -18,16 +18,9 @@ public class Hide : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();
-
-        bool useNavMesh = false;
-
-        if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-            useNavMesh = true;
-        else 
-            useNavMesh = false;        
-
-        aiController_.ErasePathNavMesh(npc_);         
-        aiController_.Hide(npc_,useNavMesh);
+              
+        aiController_.CleverHide(npc_);
+        
                         
        
     }
@@ -35,7 +28,7 @@ public class Hide : NPCBaseFSM
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        npc_.StopHealthRecovery();
 
     }
 

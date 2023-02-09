@@ -27,7 +27,7 @@ public class StatusNpc : Status
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-    [SerializeField] public  bool useNavMeshAI_ = true;      
+    [SerializeField] public  bool useNavMesh_ = true;      
     
     [SerializeField] public  float visDist_ = 20.0f;
     [SerializeField] public  float visAngle_ = 30.0f;
@@ -126,7 +126,7 @@ public class StatusNpc : Status
         base.Update();
         if (GetGameManager().ok_)
         {
-            
+            SetUseNavMesh(useNavMesh_); ///para actualizar en modo debug. O sea, si cambio en el inspector el valor se actualice inmediatamente.
         }
     }
 
@@ -140,6 +140,49 @@ public class StatusNpc : Status
 
 
     }
+
+public void ErasePathNavMesh()
+{
+ /*   if  (GetAgentNavMesh() != null) ///borro un posible path que ya tuviera asignado el navmes.
+    {
+           GetAgentNavMesh().SetDestination(transform.local);
+           GetAgentNavMesh().ResetPath(); 
+        if (GetAgentNavMesh().hasPath)
+        {            
+            //GetAgentNavMesh().isStopped = true;
+            //GetAgentNavMesh().isStopped = false;
+            GetAgentNavMesh().enabled = false;
+            GetAgentNavMesh().ResetPath(); 
+            GetAgentNavMesh().enabled = true;
+            
+        }
+        GetAgentNavMesh().destination = transform.localPosition;
+        GetAgentNavMesh().SetDestination(transform.localPosition);
+        GetAgentNavMesh().isStopped = true;
+
+        Debug.Log("Desactivando navmeshhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    }*/
+}
+override public bool GetUseNavMesh()
+{
+    return useNavMesh_;
+}
+override public bool SetUseNavMesh(bool navmesh) 
+{
+    if (navmesh)
+        if (GetAgentNavMesh() != null)
+            useNavMesh_ = true;
+        else
+            return false; ///devuelvo con error porque se intento activar NavMesh y no está el complemento aplicado al objeto.
+    else
+    {
+        useNavMesh_ = false;
+        if  (GetAgentNavMesh() != null) ///borro un posible path que ya tuviera asignado el navmes.
+            if (GetAgentNavMesh().hasPath)
+                GetAgentNavMesh().ResetPath(); 
+    } 
+    return true;  
+}
 
 public int GetCurrentWayPoint()
 {
@@ -183,8 +226,8 @@ override public void SetSpeedMax(float speed)
     //if (GetComponent<CharacterController>() != null)
      //       currentSpeed_ = GetComponent<CharacterController>().velocity.magnitude;
     
-    if (agentNavMesh_ != null)
-        agentNavMesh_.speed = speedMax_;        
+    if (GetAgentNavMesh() != null)
+         agentNavMesh_.speed = speedMax_;        
 }
 virtual public void Fire()
     {
@@ -198,5 +241,16 @@ virtual public void StartFiring()
  
 }    
 
+virtual public void HealthRecovery()
+{
 
+}
+virtual public void StartHealthRecovery()
+{
+
+}
+virtual public void StopHealthRecovery()
+{
+
+}
 }

@@ -11,23 +11,17 @@ public class Patrol : NPCBaseFSM
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);                     
-        UpdateState();
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();        
-        bool useNavMesh = false;
 
-        if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-            useNavMesh = true;
-        else 
-            useNavMesh = false;
 
-        aiController_.PatrolMode(npc_,useNavMesh);
-                        
-    
+        aiController_.PatrolMode(npc_);
+        
         
     }
 

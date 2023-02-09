@@ -26,7 +26,7 @@ public  abstract class  Status :  BaseMono
     [SerializeField] private GameObject origin_;
      [SerializeField] private GameObject target_;     
     [SerializeField] private int lifes_;
-    [SerializeField] private float health_;
+    [SerializeField] private int health_;
     private Vector3 positionPreviousFrame_;
 
 
@@ -47,7 +47,7 @@ public  abstract class  Status :  BaseMono
         return target_;
      }  
 
-     public  float GetHealth()
+     public  int GetHealth()
      {
         return health_;
      }    
@@ -75,7 +75,7 @@ public  abstract class  Status :  BaseMono
     {
         origin_ = draft;
     }
-    public void  SetHealth(float draft)
+    public void  SetHealth(int draft)
     {
         health_ = draft;
     }
@@ -91,13 +91,20 @@ public  abstract class  Status :  BaseMono
 
     }
  
-    public virtual UnityEngine.AI.NavMeshAgent GetAgentNavMesh()
+    virtual public UnityEngine.AI.NavMeshAgent GetAgentNavMesh()
     {
         return null;
     }    
 
-
-  
+    virtual public bool SetUseNavMesh(bool navmesh) 
+    {
+        return false;
+    }
+    
+    virtual public bool GetUseNavMesh()
+    {
+        return false;
+    }
     public float GetCurrentSpeed()
     {
                 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommandAddOrSubHealth : Command
 {
-    private float amount_;
+    private int amount_;
     private Status status_;
     public CommandAddOrSubHealth(Status status)
     {
@@ -21,7 +21,7 @@ public class CommandAddOrSubHealth : Command
                 
         return true;
     }
-    public void Set(float amount)  ///cantidad enemigos a sumar o restar en el mundo
+    public void Set(int amount)  ///cantidad enemigos a sumar o restar en el mundo
     {        
         amount_ = amount;
     }

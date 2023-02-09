@@ -9,8 +9,10 @@ public class Attack : NPCBaseFSM
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
-        base.OnStateEnter(animator, stateInfo, layerIndex);
-        
+        base.OnStateEnter(animator, stateInfo, layerIndex);        
+        //npc_.GetAgentNavMesh()..isStopped = true;
+        //npc_.GetAgentNavMesh().ResetPath();
+
         npc_.StartFiring();
     
     }
@@ -18,8 +20,7 @@ public class Attack : NPCBaseFSM
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        UpdateState();
-         aiController_.ErasePathNavMesh(npc_);         
+        UpdateState();          
         npc_.transform.LookAt(target_.transform.position);
     }
 
@@ -27,6 +28,7 @@ public class Attack : NPCBaseFSM
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         npc_.StopFiring();
+        npc_.GetAgentNavMesh().isStopped = false;
 
     }
 

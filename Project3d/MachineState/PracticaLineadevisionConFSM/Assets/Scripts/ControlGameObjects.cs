@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ControlGameObjects : BaseMono
 {
-    public bool isWaypoints_= false;
+    //public bool isWaypoints_= false;
     public string[] tagsForWayPoints_;    
-    public int indexThisWayPoint_;
+    public int indexWayPoint_;
     
-    public bool isHidePoint = false;
+    //public bool isHidePoint = false;
     public string[] tagsForHidePoints_;
 
     public string[] tagsGeneral_; //para poder establecer varias etiquetas a un objeto. Simulando Unreal, puesto que Unity solo permite una etiqueta por
@@ -17,7 +17,7 @@ public class ControlGameObjects : BaseMono
     
     void Awake()
     {
-        if (tagsForWayPoints_.Length == 0)
+        /*if (tagsForWayPoints_.Length == 0)
         {
             tagsForWayPoints_ = new string[1]; ///si no se han indicado etiquetas, creo una etiqueta llamada WayPoints
             tagsForWayPoints_[0] = "WayPoints";
@@ -34,7 +34,7 @@ public class ControlGameObjects : BaseMono
         {
             tagsGeneral_  = new string[1];
             tagsGeneral_[0] = "Untagged";            
-        }
+        }*/
 
     }
 

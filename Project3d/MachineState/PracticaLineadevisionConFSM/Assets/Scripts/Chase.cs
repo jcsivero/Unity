@@ -14,30 +14,24 @@ public class Chase : NPCBaseFSM
         speedPrevious_ = npc_.GetSpeedMax();
         npc_.SetSpeedMax(speedPrevious_*2);        
 
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        UpdateState();                                
-
-        bool useNavMesh = false;
-
-        if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-            useNavMesh = true;
-        else 
-            useNavMesh = false;
-
-        aiController_.ErasePathNavMesh(npc_);
-        aiController_.Pursue(npc_,useNavMesh);
-
+                       
+        aiController_.Pursue(npc_);
+        UpdateState();             
+        
 
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        npc_.SetSpeedMax(speedPrevious_);        
+        npc_.SetSpeedMax(speedPrevious_);     
+
 
         
     }

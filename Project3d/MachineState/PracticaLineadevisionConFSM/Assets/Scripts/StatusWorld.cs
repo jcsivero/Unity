@@ -21,8 +21,7 @@ public class StatusWorld : Status
     public Dictionary<string,List<GameObject>> wayPoints_;
     public Dictionary<string,List<GameObject>> hidePoints_;
     public Dictionary<string,List<GameObject>> gameObjectsByName_;
-    public List<GameObject> allGameObjects_;
-    public GameObject[] miswaypoints_;
+    public List<GameObject> allGameObjects_;    
     
     
  
@@ -95,7 +94,8 @@ public class StatusWorld : Status
                 Debug.Log("...................Falta componente ControlGameObjects en objeto con nombre: " + nameGameObject);
             else
             {
-                if (controlGameObjects.isWaypoints_)
+                //if (controlGameObjects.isWaypoints_)
+                if (controlGameObjects.tagsForWayPoints_.Length > 0)
                 {
                     for (int j=0; j < controlGameObjects.tagsForWayPoints_.Length;j++)
                     {
@@ -104,12 +104,13 @@ public class StatusWorld : Status
                                 wayPoints_.Add(tag, new List<GameObject>());
                         
                         refToGameObjets = wayPoints_[tag];
-                        refToGameObjets.Insert(controlGameObjects.indexThisWayPoint_,refObject[i]);                        
+                        refToGameObjets.Insert(controlGameObjects.indexWayPoint_,refObject[i]);                        
                     }
                 }
             ////Ahora actualizo los puntos de ocultación.
             
-                if (controlGameObjects.isHidePoint)
+                //if (controlGameObjects.isHidePoint)
+                if (controlGameObjects.tagsForHidePoints_.Length > 0)
                 {
                     for (int j=0; j < controlGameObjects.tagsForHidePoints_.Length;j++)
                     {
@@ -128,7 +129,7 @@ public class StatusWorld : Status
             
 
         }
-        miswaypoints_ = wayPoints_["Robots"].ToArray();
+        
     }
     public new void Start()
     {

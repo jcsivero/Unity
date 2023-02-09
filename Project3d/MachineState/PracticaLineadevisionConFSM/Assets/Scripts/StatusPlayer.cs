@@ -49,7 +49,7 @@ public class StatusPlayer : Status
         //position.z *=2;
         //position.x *=2;        
         GameObject b = Instantiate(bullet_,transform.position + position, transform.rotation);
-        b.GetComponent<Rigidbody>().AddForce(b.transform.forward * 1000);
+        b.GetComponent<Rigidbody>().AddForce(b.transform.forward * 2000);
     }
 
     /// <summary>

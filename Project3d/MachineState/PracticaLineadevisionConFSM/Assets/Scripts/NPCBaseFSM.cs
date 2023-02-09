@@ -35,7 +35,7 @@ public class NPCBaseFSM : StateMachineBehaviour
             target_ = npc_.GetTarget();            
             animator_ = animator;
             stateInfo_ = stateInfo;   
-            UpdateState();
+            //UpdateState();
         
     }
 
@@ -50,6 +50,7 @@ public class NPCBaseFSM : StateMachineBehaviour
         npcDirection.y = 0;
         animator_.SetFloat("angle",Vector3.Angle(direction, npcDirection));        
         animator_.SetFloat("distance", Vector3.Distance(npc_.transform.position, target_.transform.position));   
+        animator_.SetInteger("health",npc_.GetHealth());
 
         if (animator_.GetFloat("distance") < npc_.visDist_)
             animator_.SetBool("targetClose",true);
