@@ -6,7 +6,7 @@ public class ControlGameObjects : BaseMono
 {
     public bool isWaypoints_= false;
     public string[] tagsForWayPoints_;    
-    public int numberOfOrderThisWayPoint_;
+    public int indexThisWayPoint_;
     
     public bool isHidePoint = false;
     public string[] tagsForHidePoints_;

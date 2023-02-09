@@ -111,31 +111,108 @@ public class AIController : BaseMono
         Seek(status,targetWorld,navmesh);
     }
 
-    public void PatrolMode(Status status,bool navmesh = true)
+    public void ErasePathNavMesh(StatusNpc status) ///borro un posible path que ya tuviera asignado el navmes.
     {
-        //if (npc_.GetStatusWorld().wayPoints_.ContainsKey(npc_.tagWayPointsThisNpc_))
+        if  (status.GetAgentNavMesh() != null) 
+                if (status.GetAgentNavMesh().hasPath)
+                    status.GetAgentNavMesh().ResetPath();               
     }
-    /*public void Hide(Status draft)
+    public void PatrolMode(StatusNpc status,bool navmesh = true)
     {
-        float dist = Mathf.Infinity;
-        Vector3 chosenSpot = Vector3.zero;
-
-        for (int i = 0; i <  World.Instance.GetHidingSpots().Length; i++)
+        if(status.tagWayPoint_.Length == 0)                
         {
-            Vector3 hideDir = World.Instance.GetHidingSpots()[i].transform.position - draft.GetTarget().transform.position;
-            Vector3 hidePos = World.Instance.GetHidingSpots()[i].transform.position + hideDir.normalized * 10;
-
-            if (Vector3.Distance(draft.GetOrigin().transform.position, hidePos) < dist)
-            {
-                chosenSpot = hidePos;
-                dist = Vector3.Distance(draft.GetOrigin().transform.position, hidePos);
-            }
+            Debug.Log("////////////////////////No hay waypoints para este NPC. pasando a modo Wander.//////////"+ status.gameObject.name);
+            Wander(status,navmesh); ///si no se definió etiqueta para waypoints, se pasa a modo Wander
         }
+            
+        else
+        {
+            if (!GetStatusWorld().wayPoints_.ContainsKey(status.tagWayPoint_))
+            {
+                Debug.Log("///////////////////// Etiqueta para waypoint no econtrada/////////////////////" + status.gameObject.name);
+                status.tagWayPoint_ = "Tag No founded";            
+            }
+            else
+            {
+                ///Primero obtengo todos los waypoint asignados a esta etiqueta, o sea, la del NPC
+                List<GameObject> draft = GetStatusWorld().wayPoints_[status.tagWayPoint_];
+                ///                
+                if (Vector3.Distance(draft[status.GetCurrentWayPoint()].transform.position, status.transform.position) < status.accuracyToWayPoints_)      
+                {
+                    Debug.Log("+++++++++++++++++++++++++++++distancia hasta el waypoints : " + Vector3.Distance(draft[status.GetCurrentWayPoint()].transform.position, status.transform.position));
+                    status.NextWayPoint(draft.Capacity);
+                    ErasePathNavMesh(status);
 
-        Seek(draft, chosenSpot);
+
+                }          
+                    
+
+                if (navmesh)
+                {
+                    if (!status.GetAgentNavMesh().hasPath)///solo asigno nueva ruta en caso de que no tenga. Esto lo hago solo con los waypoints, puesto que son fijos.
+                    ///es para ahorrar recursos, ya que con NavMesh, el mismo complemento se encarga de llevar al NPC hasta el destino.                
+                    {                    
+                        Debug.Log("asignando nuevo path");                                            
+                        Seek(status,draft[status.GetCurrentWayPoint()].transform.position,navmesh);                    
+                    }                                    
+
+                }
+                else
+                {
+                    ///borro un  posible path que tuviera asignado, esto es porque en todo momento un NPC puede pasar de movimiento mediante el complemento
+                    ///navmesh a un movimiento típico con su transform.
+                    ErasePathNavMesh(status);
+
+                    Seek(status,draft[status.GetCurrentWayPoint()].transform.position,navmesh);                    
+                }
+                
+                
+            }
+
+
+        }
+    }
+public void Hide(StatusNpc status,bool navmesh = true)
+    {
+        
+    if(status.tagHidePoint_.Length == 0)                
+    {
+        Debug.Log("////////////////////////No se definió etiqueta para Hidepoints para este NPC. "+ status.gameObject.name);        
+    }
+    else
+    {
+        if (!GetStatusWorld().hidePoints_.ContainsKey(status.tagHidePoint_))
+        {
+            Debug.Log("///////////////////// Etiqueta para HidePoint no econtrada/////////////////////" + status.gameObject.name);
+            status.tagHidePoint_ = "Tag No founded";            
+        }
+        else
+        {
+            float dist = Mathf.Infinity;
+            Vector3 chosenSpot = Vector3.zero;
+
+            ///Primero obtengo todos los Hidepoint asignados a esta etiqueta, o sea, la del NPC
+            List<GameObject> draft = GetStatusWorld().hidePoints_[status.tagHidePoint_];
+            for (int i = 0; i <  draft.Capacity; i++)
+            {
+                Vector3 hideDir = draft[i].transform.position - status.GetTarget().transform.position;
+                Vector3 hidePos = draft[i].transform.position + hideDir.normalized * 10;
+
+                if (Vector3.Distance(status.GetOrigin().transform.position, hidePos) < dist)
+                {
+                    chosenSpot = hidePos;
+                    dist = Vector3.Distance(status.GetOrigin().transform.position, hidePos);
+                }
+            }
+
+            Seek(status, chosenSpot);
+                
+            }
 
     }
-    public void CleverHide(Status draft)
+
+    }
+  /*  public void CleverHide(Status draft)
     {
         float dist = Mathf.Infinity;
         Vector3 chosenSpot = Vector3.zero;
@@ -167,25 +244,23 @@ public class AIController : BaseMono
 
         Seek(draft,info.point + chosenDir.normalized);
         //Seek(info.point);
+    }*/
+
+public bool CanSeeTarget(Status status,GameObject target)
+{
+    RaycastHit raycastInfo;
+    Vector3 rayToTarget = target.transform.position - status.GetOrigin().transform.position;
+    Debug.DrawRay(status.GetOrigin().transform.position, rayToTarget ,Color.blue);
+
+    if (Physics.Raycast(status.GetOrigin().transform.position, rayToTarget, out raycastInfo))
+    {            
+        //Debug.Log("etiqueta" + raycastInfo.transform.tag);
+        //Debug.Log("nombre: " +raycastInfo.transform.gameObject.name);
+        //if (raycastInfo.transform.gameObject.tag == "Player")
+            if (raycastInfo.transform.gameObject == target)
+                return true;
     }
-*/
-    public bool CanSeeTarget(Status status,GameObject target)
-    {
-        RaycastHit raycastInfo;
-        Vector3 rayToTarget = target.transform.position - status.GetOrigin().transform.position;
-        Debug.DrawRay(status.GetOrigin().transform.position, rayToTarget ,Color.blue);
-
-        if (Physics.Raycast(status.GetOrigin().transform.position, rayToTarget, out raycastInfo))
-        {            
-            //Debug.Log("etiqueta" + raycastInfo.transform.tag);
-            //Debug.Log("nombre: " +raycastInfo.transform.gameObject.name);
-            //if (raycastInfo.transform.gameObject.tag == "Player")
-                if (raycastInfo.transform.gameObject == target)
-                    return true;
-        }
-        return false;
-    }
-
-
+    return false;
+}
   
 }

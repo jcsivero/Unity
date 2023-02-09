@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -254,7 +254,7 @@ MonoBehaviour:
   isWaypoints_: 1
   tagsForWayPoints_:
   - Robots
-  numberOfOrderThisWayPoint_: 0
+  indexThisWayPoint_: 0
   isHidePoint: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -359,17 +359,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 448894334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5145ec74930d7c4438cd69ad2ce2273f, type: 3}
+  m_Script: {fileID: 11500000, guid: 95f30f4698388a744afe04d0d63af476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   name_: Status
-  rotationSpeed_: 4
+  rotationSpeed_: 2
   speedMax_: 2
   currentSpeed_: 0
   origin_: {fileID: 0}
   target_: {fileID: 0}
-  lifes_: 3
-  health_: 250
+  lifes_: 0
+  health_: 0
   bullet_: {fileID: 1831834044265188, guid: d794ad188c63d7c4d9b5c65b1218ab58, type: 3}
 --- !u!1 &493029078 stripped
 GameObject:
@@ -558,7 +558,7 @@ MonoBehaviour:
   isWaypoints_: 1
   tagsForWayPoints_:
   - Robots
-  numberOfOrderThisWayPoint_: 1
+  indexThisWayPoint_: 1
   isHidePoint: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -786,15 +786,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.275513
+      value: 9.681168
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.035
+      value: -0.0029029846
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.477459
+      value: 45.76203
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1190,7 +1190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWaypoints_: 0
   tagsForWayPoints_: []
-  numberOfOrderThisWayPoint_: 0
+  indexThisWayPoint_: 0
   isHidePoint: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -1307,7 +1307,7 @@ MonoBehaviour:
   isWaypoints_: 1
   tagsForWayPoints_:
   - Robots
-  numberOfOrderThisWayPoint_: 2
+  indexThisWayPoint_: 2
   isHidePoint: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -1391,8 +1391,8 @@ MonoBehaviour:
   activeLevel_: 0
   totalPoints_: 0
   levelPoints_: 0
-  wayPointsNpcRobots_: []
   allGameObjects_: []
+  miswaypoints_: []
 --- !u!1 &1002658991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 60580799231587152, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
@@ -1417,6 +1417,7 @@ GameObject:
   - component: {fileID: 1114785602}
   - component: {fileID: 1114785601}
   - component: {fileID: 1114785600}
+  - component: {fileID: 1114785604}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -1495,13 +1496,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114785599}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.025856, y: 3.6188319, z: -1.5415915}
+  m_LocalPosition: {x: -27.025856, y: 3.6188319, z: 48.9}
   m_LocalScale: {x: 4.6255107, y: 7.243464, z: 5.055062}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1114785604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114785599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWaypoints_: 0
+  tagsForWayPoints_: []
+  indexThisWayPoint_: 0
+  isHidePoint: 1
+  tagsForHidePoints_:
+  - Robots
+  tagsGeneral_: []
 --- !u!1001 &1216494171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1562,7 +1582,7 @@ PrefabInstance:
     - target: {fileID: 60580799231587152, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 60580799232077680, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
@@ -1674,15 +1694,16 @@ MonoBehaviour:
   target_: {fileID: 448894334}
   lifes_: 0
   health_: 100
-  tagsHidePointThisNpc_: []
-  tagWayPointThisNpc_: 
+  tagHidePoint_: 
+  tagWayPoint_: 
   wayPointToGoOrder_: 0200000003000000
-  useNavMeshAI_: 1
   accuracyToWayPoints_: 1
+  currentWayPoint_: 0
+  indexWayPoint_: 0
+  useNavMeshAI_: 1
   visDist_: 40
   visAngle_: 120
   visDistToAttack_: 8
-  currentWP_: 0
   anim_: {fileID: 0}
   agentNavMesh_: {fileID: 0}
   bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
@@ -1814,7 +1835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWaypoints_: 0
   tagsForWayPoints_: []
-  numberOfOrderThisWayPoint_: 0
+  indexThisWayPoint_: 0
   isHidePoint: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -2146,15 +2167,16 @@ MonoBehaviour:
   target_: {fileID: 448894334}
   lifes_: 0
   health_: 100
-  tagsHidePointThisNpc_: []
-  tagWayPointThisNpc_: 
+  tagHidePoint_: 
+  tagWayPoint_: 
   wayPointToGoOrder_: 0200000000000000
-  useNavMeshAI_: 1
   accuracyToWayPoints_: 1
+  currentWayPoint_: 0
+  indexWayPoint_: 0
+  useNavMeshAI_: 1
   visDist_: 40
   visAngle_: 120
   visDistToAttack_: 8
-  currentWP_: 0
   anim_: {fileID: 0}
   agentNavMesh_: {fileID: 0}
   bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
@@ -2347,7 +2369,7 @@ MonoBehaviour:
   isWaypoints_: 1
   tagsForWayPoints_:
   - Robots
-  numberOfOrderThisWayPoint_: 3
+  indexThisWayPoint_: 3
   isHidePoint: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -2377,15 +2399,16 @@ MonoBehaviour:
   target_: {fileID: 448894334}
   lifes_: 0
   health_: 100
-  tagsHidePointThisNpc_: []
-  tagWayPointThisNpc_: 
+  tagHidePoint_: Robots
+  tagWayPoint_: Robots
   wayPointToGoOrder_: 
-  useNavMeshAI_: 1
   accuracyToWayPoints_: 1
+  currentWayPoint_: 0
+  indexWayPoint_: 0
+  useNavMeshAI_: 1
   visDist_: 40
   visAngle_: 120
   visDistToAttack_: 8
-  currentWP_: 0
   anim_: {fileID: 0}
   agentNavMesh_: {fileID: 0}
   bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
@@ -2465,7 +2488,7 @@ PrefabInstance:
     - target: {fileID: 60580799231587152, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 60580799232077680, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
@@ -2577,15 +2600,16 @@ MonoBehaviour:
   target_: {fileID: 448894334}
   lifes_: 0
   health_: 100
-  tagsHidePointThisNpc_: []
-  tagWayPointThisNpc_: 
+  tagHidePoint_: 
+  tagWayPoint_: 
   wayPointToGoOrder_: 0000000001000000
+  accuracyToWayPoints_: 5
+  currentWayPoint_: 0
+  indexWayPoint_: 0
   useNavMeshAI_: 1
-  accuracyToWayPoints_: 1
   visDist_: 40
   visAngle_: 120
   visDistToAttack_: 8
-  currentWP_: 0
   anim_: {fileID: 0}
   agentNavMesh_: {fileID: 0}
   bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}
@@ -2717,7 +2741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWaypoints_: 0
   tagsForWayPoints_: []
-  numberOfOrderThisWayPoint_: 0
+  indexThisWayPoint_: 0
   isHidePoint: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -2781,7 +2805,7 @@ PrefabInstance:
     - target: {fileID: 60580799231587152, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 60580799232077680, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
@@ -2896,7 +2920,7 @@ PrefabInstance:
     - target: {fileID: 5617387501894180495, guid: 79a351794279e0c43b0fa040ab3d4eac,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5617387501894180495, guid: 79a351794279e0c43b0fa040ab3d4eac,
         type: 3}
@@ -2906,7 +2930,7 @@ PrefabInstance:
     - target: {fileID: 5617387501894180495, guid: 79a351794279e0c43b0fa040ab3d4eac,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5617387501894180495, guid: 79a351794279e0c43b0fa040ab3d4eac,
         type: 3}

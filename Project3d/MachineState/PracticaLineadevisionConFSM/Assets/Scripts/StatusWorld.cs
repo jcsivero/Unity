@@ -18,12 +18,11 @@ public class StatusWorld : Status
     [SerializeField] public int totalPoints_ = 0;
     [SerializeField] public int  levelPoints_ = 0;
 
-    //[SerializeField] public List<Dictionary<>> wayPoints_;
-    public GameObject[] wayPointsNpcRobots_;
     public Dictionary<string,List<GameObject>> wayPoints_;
     public Dictionary<string,List<GameObject>> hidePoints_;
     public Dictionary<string,List<GameObject>> gameObjectsByName_;
     public List<GameObject> allGameObjects_;
+    public GameObject[] miswaypoints_;
     
     
  
@@ -105,8 +104,7 @@ public class StatusWorld : Status
                                 wayPoints_.Add(tag, new List<GameObject>());
                         
                         refToGameObjets = wayPoints_[tag];
-                        refToGameObjets.Add(refObject[i]);                                                
-
+                        refToGameObjets.Insert(controlGameObjects.indexThisWayPoint_,refObject[i]);                        
                     }
                 }
             ////Ahora actualizo los puntos de ocultación.
@@ -130,6 +128,7 @@ public class StatusWorld : Status
             
 
         }
+        miswaypoints_ = wayPoints_["Robots"].ToArray();
     }
     public new void Start()
     {

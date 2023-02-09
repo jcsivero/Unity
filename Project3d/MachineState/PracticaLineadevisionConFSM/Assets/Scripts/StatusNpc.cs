@@ -12,19 +12,27 @@ public class StatusNpc : Status
 
     public CommandAddOrSubEnemy commandAddOrSubEnemy_;
     
-    public string[] tagsHidePointThisNpc_;
-    public string tagWayPointThisNpc_=null;  
+    public string tagHidePoint_;
+    public string tagWayPoint_;  
     public int[] wayPointToGoOrder_; ///indica el orden de los WayPoints a visitar, en caso de tenerlos. Si su tamaño es cero, se visitarán
     ///todos los WayPoints detectados con la etiqueta que use este NPC. La indicada por tagWayPointsForThisNpc_;
+     public  float accuracyToWayPoints_;    
+[SerializeField] private int currentWayPoint_;
+[SerializeField] private int indexWayPoint_ = 0 ; ///indice dentro de la lista de waypoints. Solo será el mismo valor que currentWayPoints_ cuando
+///no se ha definido un camino propio para este NPC asignado waypoints en concreto a la varaible wayPointToGoOrder_.  En caso de haberse definido
+///esa variable, indexWayPoint_ contendrá la posición del array de la variable wayPointToGoOrder_ en la que se encuentra actualmente.
+///O sea, indexWayPoint_ tiene la posición dentro de wayPointToGoOrder_ en caso de haberse definido, o la posición dentro de la lista de waypoints
+//asociados a la etiqueta.
+
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     [SerializeField] public  bool useNavMeshAI_ = true;      
-    [SerializeField] public  float accuracyToWayPoints_ = 1.0f;
+    
     [SerializeField] public  float visDist_ = 20.0f;
     [SerializeField] public  float visAngle_ = 30.0f;
     [SerializeField] public  float visDistToAttack_ = 10.0f;    
-    [SerializeField] public  int currentWP_;
+    
     [SerializeField] private  Animator anim_;
     [SerializeField] private  UnityEngine.AI.NavMeshAgent agentNavMesh_;   
 
@@ -56,7 +64,7 @@ public class StatusNpc : Status
         base.Awake();
         InstaciateCommands();       
         SetName("StatusNpc");
-        
+        NextWayPoint(0); ///inicialzo la variable currentWayPoint_ con el valor que corresponda.
         anim_ = gameObject.GetComponent<Animator>();                        
         agentNavMesh_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
         Debug.Log("|||||||||||||| Awake StatusNpc||||||||||||||||");
@@ -133,6 +141,41 @@ public class StatusNpc : Status
 
     }
 
+public int GetCurrentWayPoint()
+{
+    return currentWayPoint_;
+}
+
+////Devuelve el número del próximo waypoints a visitar. Se le pasa la capacidad de la lista de Waypoints para reiniciar en caso de llegar al último
+public void NextWayPoint(int capacity)
+{
+        
+        if (wayPointToGoOrder_.Length == 0)
+        {
+            ////Recorro todos los waypoints asignados a esta etiqueta
+            SetCurrentWayPoint(indexWayPoint_);            
+            indexWayPoint_++;
+
+            if (indexWayPoint_ >= capacity)
+                indexWayPoint_ = 0;
+            
+        }
+        else
+        {   
+            SetCurrentWayPoint(wayPointToGoOrder_[indexWayPoint_]);
+            indexWayPoint_++;
+            
+            if (indexWayPoint_ >= wayPointToGoOrder_.Length)
+                indexWayPoint_ = 0;
+                                                     
+        }
+        
+}
+
+public void SetCurrentWayPoint(int draft)
+{
+    currentWayPoint_ = draft;
+}
 override public void SetSpeedMax(float speed)
 {
     base.SetSpeedMax(speed);

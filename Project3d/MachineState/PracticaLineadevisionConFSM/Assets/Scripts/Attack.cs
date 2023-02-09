@@ -19,12 +19,7 @@ public class Attack : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();
-        
-        if  (npc_.GetAgentNavMesh() != null) ///solo asigno nueva ruta en caso de que no tenga. Esto lo hago solo con los waypoints, puesto que son fijos.
-            ///es para ahorrar recursos, ya que con NavMesh, el mismo complemento se encarga de llevar al NPC hasta el destino.                
-            if (npc_.GetAgentNavMesh().hasPath)
-                npc_.GetAgentNavMesh().ResetPath();            
-        
+         aiController_.ErasePathNavMesh(npc_);         
         npc_.transform.LookAt(target_.transform.position);
     }
 

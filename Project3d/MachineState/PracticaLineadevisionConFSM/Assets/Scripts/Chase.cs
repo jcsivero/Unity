@@ -20,26 +20,16 @@ public class Chase : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();                                
-        
-        if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-        {
-            npc_.GetAgentNavMesh().speed = npc_.GetSpeedMax(); 
-            
-            //aiController_.Seek(npc_,target_.transform.position);                       
-            aiController_.Pursue(npc_);
-        }
-            
-        else
-        {
-            if  (npc_.GetAgentNavMesh() != null) ///solo asigno nueva ruta en caso de que no tenga. Esto lo hago solo con los waypoints, puesto que son fijos.
-            ///es para ahorrar recursos, ya que con NavMesh, el mismo complemento se encarga de llevar al NPC hasta el destino.                
-                if (npc_.GetAgentNavMesh().hasPath)
-                    npc_.GetAgentNavMesh().ResetPath();     
-            
-            aiController_.Pursue(npc_,false);
 
-    
-        }
+        bool useNavMesh = false;
+
+        if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
+            useNavMesh = true;
+        else 
+            useNavMesh = false;
+
+        aiController_.ErasePathNavMesh(npc_);
+        aiController_.Pursue(npc_,useNavMesh);
 
 
     }
@@ -48,8 +38,7 @@ public class Chase : NPCBaseFSM
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         npc_.SetSpeedMax(speedPrevious_);        
-        //if ((npc_.useNavMeshAI_) && (npc_.GetAgentNavMesh() != null))
-          //  npc_.bot_.Pursue();
+
         
     }
 
