@@ -10,9 +10,7 @@ public class Attack : NPCBaseFSM
     {
         
         base.OnStateEnter(animator, stateInfo, layerIndex);        
-        //npc_.GetAgentNavMesh()..isStopped = true;
-        //npc_.GetAgentNavMesh().ResetPath();
-
+        npc_.ErasePathNavMesh();
         npc_.StartFiring();
     
     }
@@ -21,14 +19,14 @@ public class Attack : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();          
+        npc_.ErasePathNavMesh();        
         npc_.transform.LookAt(target_.transform.position);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        npc_.StopFiring();
-        npc_.GetAgentNavMesh().isStopped = false;
+        npc_.StopFiring();        
 
     }
 

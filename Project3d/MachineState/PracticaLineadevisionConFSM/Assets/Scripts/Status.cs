@@ -91,21 +91,60 @@ public  abstract class  Status :  BaseMono
 
     }
  
-    virtual public UnityEngine.AI.NavMeshAgent GetAgentNavMesh()
+    virtual public UnityEngine.AI.NavMeshAgent GetNavMeshAgent()
     {
         return null;
     }    
 
-    virtual public bool SetUseNavMesh(bool navmesh) 
+    virtual public bool SetNavMeshUse(bool navmesh) 
     {
         return false;
     }
     
-    virtual public bool GetUseNavMesh()
+    virtual public bool GetNavMeshUse()
     {
         return false;
     }
-    public float GetCurrentSpeed()
+    virtual public UnityEngine.AI.NavMeshPath GetNavMeshPath()
+    {
+        return null;
+    }
+     virtual public int GetNavMeshPathCurrentIndex()
+    {
+        return 0;
+    }
+    virtual public void  SetNavMeshPathCurrentIndex(int index)
+    {
+        
+    }
+virtual public float GetNavMeshBrakingDistance()
+{
+    return 0.0f;
+}
+virtual public  void SetNavMeshBrakingDistance(float distance)
+{
+    
+}
+virtual public void SetNavMeshTargetPosition(Vector3 pos)
+{
+
+}
+virtual public Vector3 GetNavMeshTargetPosition()
+{
+    return Vector3.zero;
+}
+
+virtual public float GetNavMeshTargetMarginPosition()
+{
+    return 0.0f;
+}
+virtual public void ErasePathNavMesh()
+{
+
+}
+
+
+    public float GetSpeedCurrent()
     {
                 
         return currentSpeed_; ///si se usa cálculos de movimiento, recuerda que el verdadero valor es multiplicado por Time.deltaTime, sino es un valor
@@ -123,7 +162,6 @@ public  abstract class  Status :  BaseMono
         speedMax_ = speed;        
 
     }
-
 
     virtual public float MovementValue()
     {
