@@ -20,8 +20,7 @@ public class Hide : NPCBaseFSM
         UpdateState();
               
         aiController_.CleverHide(npc_);
-        
-                        
+                                
        
     }
 

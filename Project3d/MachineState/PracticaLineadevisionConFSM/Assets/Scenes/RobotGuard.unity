@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -251,8 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagsForWayPoints_:
-  - Robots
+  tagsForWayPoints_: []
   indexWayPoint_: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -357,7 +356,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 448894334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95f30f4698388a744afe04d0d63af476, type: 3}
+  m_Script: {fileID: 11500000, guid: 5145ec74930d7c4438cd69ad2ce2273f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   name_: Status
@@ -553,8 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagsForWayPoints_:
-  - Robots
+  tagsForWayPoints_: []
   indexWayPoint_: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -1606,8 +1604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagsForWayPoints_:
-  - Robots
+  tagsForWayPoints_: []
   indexWayPoint_: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -2264,7 +2261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagsForWayPoints_: []
+  tagsForWayPoints_:
+  - Robots
   indexWayPoint_: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -2276,7 +2274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254587129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.872555, y: 2.55, z: 61.178593}
+  m_LocalPosition: {x: -41.32916, y: -0.00289917, z: 29.53204}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2298,7 +2296,7 @@ PrefabInstance:
     - target: {fileID: 60580797552666512, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
       propertyPath: m_Acceleration
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 60580797552666512, guid: 305e0b6d51d7a3b4e8ad955af8f30525,
         type: 3}
@@ -2916,8 +2914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagsForWayPoints_:
-  - Robots
+  tagsForWayPoints_: []
   indexWayPoint_: 0
   tagsForHidePoints_: []
   tagsGeneral_: []
@@ -2948,7 +2945,7 @@ MonoBehaviour:
   lifes_: 0
   health_: 120
   hidePointTag_: 
-  wayPointTag_: 
+  wayPointTag_: Robots
   wayPointToGoOrder_: 
   wayPointsAccuracy_: 0
   wayPointCurrent_: 0
@@ -2960,7 +2957,7 @@ MonoBehaviour:
   navMeshPathCurrentIndex_: 0
   navMeshTargetPosition_: {x: 0, y: 0, z: 0}
   navMeshTargetMarginPosition_: 1
-  navMeshBrakingDistance_: 3
+  navMeshBrakingDistance_: 0
   navMeshAgent_: {fileID: 0}
   anim_: {fileID: 0}
   bullet_: {fileID: 1831834044265188, guid: c34f146615d88f743925e02dbcacac45, type: 3}

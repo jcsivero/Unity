@@ -93,8 +93,7 @@ public class StatusWorld : Status
             if (controlGameObjects == null)
                 Debug.Log("...................Falta componente ControlGameObjects en objeto con nombre: " + nameGameObject);
             else
-            {
-                //if (controlGameObjects.isWaypoints_)
+            {                
                 if (controlGameObjects.tagsForWayPoints_.Length > 0)
                 {
                     for (int j=0; j < controlGameObjects.tagsForWayPoints_.Length;j++)
@@ -108,8 +107,7 @@ public class StatusWorld : Status
                     }
                 }
             ////Ahora actualizo los puntos de ocultación.
-            
-                //if (controlGameObjects.isHidePoint)
+                            
                 if (controlGameObjects.tagsForHidePoints_.Length > 0)
                 {
                     for (int j=0; j < controlGameObjects.tagsForHidePoints_.Length;j++)
@@ -137,9 +135,7 @@ public class StatusWorld : Status
         if (GetTarget()== null)
             SetTarget(GameObject.FindGameObjectWithTag("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
         
-        GetInitialInformation();
-        //AppendCommand(commandUpdateWayPoints_);
-
+        GetInitialInformation();        
 
     }
 

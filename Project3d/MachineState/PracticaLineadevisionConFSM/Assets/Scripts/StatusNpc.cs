@@ -222,7 +222,7 @@ override public void ErasePathNavMesh()
 
     }
 
-public int GetCurrentWayPoint()
+public int GetWayPointCurrent()
 {
     return wayPointCurrent_;
 }
@@ -234,7 +234,7 @@ public void NextWayPoint(int count)
         if (wayPointToGoOrder_.Length == 0)
         {
             ////Recorro todos los waypoints asignados a esta etiqueta
-            SetCurrentWayPoint(wayPointIndex_);            
+            SetWayPointCurrent(wayPointIndex_);            
             wayPointIndex_++;
 
             if (wayPointIndex_ >= count)
@@ -243,7 +243,7 @@ public void NextWayPoint(int count)
         }
         else
         {   
-            SetCurrentWayPoint(wayPointToGoOrder_[wayPointIndex_]);
+            SetWayPointCurrent(wayPointToGoOrder_[wayPointIndex_]);
             wayPointIndex_++;
             
             if (wayPointIndex_ >= wayPointToGoOrder_.Length)
@@ -253,7 +253,7 @@ public void NextWayPoint(int count)
         
 }
 
-public void SetCurrentWayPoint(int draft)
+public void SetWayPointCurrent(int draft)
 {
     wayPointCurrent_ = draft;
 }
