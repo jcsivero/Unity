@@ -58,12 +58,6 @@ private bool movementApply(Status status,Vector3 location)
     float distance;
     float braking;
 
-    /*if (status.GetNavMeshUse())
-        finalPos =  new Vector3(status.GetNavMeshTargetPosition().x,0,status.GetNavMeshTargetPosition().z);
-        
-    else
-        finalPos =  new Vector3(location.x,0,location.z);
-*/
     finalPos =  new Vector3(location.x,0,location.z);
     myPos =  new Vector3(status.transform.position.x,0,status.transform.position.z);
     distance = (finalPos -myPos).magnitude;                
@@ -127,8 +121,7 @@ public bool Seek(Status status,Vector3 location,bool myOwnMethod=true) ///devolv
                 if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
                 {
                     Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
-                    recalculatePath(status,location);
-                    return false;
+                    recalculatePath(status,location);                    
                 }
                     
                 
@@ -138,18 +131,16 @@ public bool Seek(Status status,Vector3 location,bool myOwnMethod=true) ///devolv
                 if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
                 {
                     Debug.Log("asignando nuevo path");
-                    recalculatePath(status,location);
-                    return false;
+                    recalculatePath(status,location);                    
                 }
                 else
                 {
-                    Debug.Log("se llegó al destino final.........................................................................");
-                    return true; ///significa que llegúe al final del path, o sea, al destino
+                    Debug.Log("se llegó al destino final.........................................................................");                    
                 }        
                     
                   
             }
-               return false; 
+               
         }
         else
         {
@@ -165,10 +156,21 @@ public bool Seek(Status status,Vector3 location,bool myOwnMethod=true) ///devolv
                 {
                     Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
                     recalculatePath(status,location);
-                    movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]);  
+                    //movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]);  
                 }
                 else
-                {                                        
+                {                         
+                    if (movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]))
+                    {
+                        Debug.Log("llego  al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
+                        status.SetNavMeshPathCurrentIndex(status.GetNavMeshPathCurrentIndex() +1);
+                         if (status.GetNavMeshPathCurrentIndex() >= status.GetNavMeshPath().corners.Length-1)
+                         {
+                            Debug.Log("llego  al final del path por primera vez: ");
+                            status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
+                            return true;
+                         }
+                    }
                  /*   Vector3 pos =  new Vector3(status.transform.position.x,0,status.transform.position.z);
                     Vector3 corner =  new Vector3(status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1].x,0,status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1].z);
                     float distance = (corner-pos).magnitude;
@@ -199,7 +201,7 @@ public bool Seek(Status status,Vector3 location,bool myOwnMethod=true) ///devolv
                             }
                                 
                                 
-                        }      */             
+                        }             
                         
                                          
 
@@ -209,18 +211,23 @@ public bool Seek(Status status,Vector3 location,bool myOwnMethod=true) ///devolv
                         Debug.Log("no he llegado al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
                         return movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]); 
                         
-                    }
+                    }*/
                 }
     
             }
             else
             {
-             if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
+                if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
                 {
-                    Debug.Log("asignando nuevo path");
-                    recalculatePath(status, location);   
-                    return movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]);          
-              }
+                        Debug.Log("asignando nuevo path");
+                        recalculatePath(status, location);   
+                        //return movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]);          
+                }
+                else
+                {
+                    Debug.Log("ESTOY EN EL FINAL: ");
+                return true;
+                }
             }
         }
     else
@@ -289,15 +296,10 @@ public void PatrolMode(StatusNpc status)
         {
             ///Primero obtengo todos los waypoint asignados a esta etiqueta, o sea, la del NPC
             List<GameObject> draft = GetStatusWorld().wayPoints_[status.wayPointTag_];
-            ///                
-            if (Vector3.Distance(draft[status.GetCurrentWayPoint()].transform.position, status.transform.position) < status.wayPointsAccuracy_)  
-            {
-                status.NextWayPoint(draft.Count);                  
-             
-            }    
-                Seek(status,draft[status.GetCurrentWayPoint()].transform.position);                    
-            
-            
+            /// 
+            if (Seek(status,draft[status.GetCurrentWayPoint()].transform.position) || Vector3.Distance(draft[status.GetCurrentWayPoint()].transform.position, status.transform.position) < status.wayPointsAccuracy_) 
+            //si llegué al final del path o hasta el punto de precisión de los waypointts
+                status.NextWayPoint(draft.Count);                                          
         }
 
 
