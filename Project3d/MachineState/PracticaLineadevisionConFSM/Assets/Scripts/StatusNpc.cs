@@ -40,7 +40,7 @@ public class StatusNpc : Status
 
     public Vector3 navMeshTargetPosition_; ///posición  final del path del navmesh.
     public float navMeshTargetMarginPosition_=1.0f; /// Margen de movimiento de la posición de destiono de un navmesh. Si ha cambiado más de este este margen, se recalculará un nuevo path.
-    public float navMeshBrakingDistance_=1.0f; ///distancia de parado antes de llegar a los diferentes corners.
+    public float brakingDistance_=1.0f; ///distancia de parado antes de llegar a los diferentes corners.
     [SerializeField] private  UnityEngine.AI.NavMeshAgent navMeshAgent_;   
     [SerializeField] private  Animator anim_;
 
@@ -104,13 +104,13 @@ override public void SetSpeedMax(float speed)
     if (GetNavMeshAgent() != null)
          navMeshAgent_.speed = speedMax_;        
 }
-override public float GetNavMeshBrakingDistance()
+override public float GetBrakingDistance()
 {
-    return navMeshBrakingDistance_;
+    return brakingDistance_;
 }
-override public void SetNavMeshBrakingDistance(float distance)
+override public void SetBrakingDistance(float distance)
 {
-    navMeshBrakingDistance_ = distance;
+    brakingDistance_ = distance;
 }
 override public void SetNavMeshTargetPosition(Vector3 pos)
 {
@@ -148,6 +148,7 @@ override public void ErasePathNavMesh()
         anim_ = gameObject.GetComponent<Animator>();                        
         navMeshAgent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
         navMeshPath_ = new UnityEngine.AI.NavMeshPath();
+        navMeshTargetPosition_ = new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity);
         Debug.Log("|||||||||||||| Awake StatusNpc||||||||||||||||");
 
     }
@@ -222,7 +223,7 @@ override public void ErasePathNavMesh()
 
     }
 
-public int GetWayPointCurrent()
+public int GetCurrentWayPoint()
 {
     return wayPointCurrent_;
 }
@@ -234,7 +235,7 @@ public void NextWayPoint(int count)
         if (wayPointToGoOrder_.Length == 0)
         {
             ////Recorro todos los waypoints asignados a esta etiqueta
-            SetWayPointCurrent(wayPointIndex_);            
+            SetCurrentWayPoint(wayPointIndex_);            
             wayPointIndex_++;
 
             if (wayPointIndex_ >= count)
@@ -243,7 +244,7 @@ public void NextWayPoint(int count)
         }
         else
         {   
-            SetWayPointCurrent(wayPointToGoOrder_[wayPointIndex_]);
+            SetCurrentWayPoint(wayPointToGoOrder_[wayPointIndex_]);
             wayPointIndex_++;
             
             if (wayPointIndex_ >= wayPointToGoOrder_.Length)
@@ -253,7 +254,7 @@ public void NextWayPoint(int count)
         
 }
 
-public void SetWayPointCurrent(int draft)
+public void SetCurrentWayPoint(int draft)
 {
     wayPointCurrent_ = draft;
 }

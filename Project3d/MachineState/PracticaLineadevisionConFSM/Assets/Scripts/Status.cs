@@ -117,11 +117,11 @@ public  abstract class  Status :  BaseMono
     {
         
     }
-virtual public float GetNavMeshBrakingDistance()
+virtual public float GetBrakingDistance()
 {
     return 0.0f;
 }
-virtual public  void SetNavMeshBrakingDistance(float distance)
+virtual public  void SetBrakingDistance(float distance)
 {
     
 }

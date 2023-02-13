@@ -10,7 +10,7 @@ public class Hide : NPCBaseFSM
     {
         
         base.OnStateEnter(animator, stateInfo, layerIndex);        
-        npc_.StartHealthRecovery();
+        
     
     }
 
@@ -19,8 +19,10 @@ public class Hide : NPCBaseFSM
     {
         UpdateState();
               
-        aiController_.CleverHide(npc_);
-                                
+        if (aiController_.CleverHide(npc_))
+            npc_.StartHealthRecovery();
+        
+                        
        
     }
 
@@ -32,4 +34,4 @@ public class Hide : NPCBaseFSM
     }
 
 
-}
+}   

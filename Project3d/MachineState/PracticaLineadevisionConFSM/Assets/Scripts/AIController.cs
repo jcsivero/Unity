@@ -51,106 +51,182 @@ public class AIController : BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-private void movementApply(Status status,Vector3 location)
+private bool movementApply(Status status,Vector3 location)
 {
-            status.transform.rotation = Quaternion.Slerp(status.transform.rotation, Quaternion.LookRotation(location-status.transform.position), status.rotationSpeed_ * Time.deltaTime);                    
-            status.transform.Translate(0, 0, status.MovementValue());
+    Vector3 finalPos;
+    Vector3 myPos;
+    float distance;
+    float braking;
+
+    /*if (status.GetNavMeshUse())
+        finalPos =  new Vector3(status.GetNavMeshTargetPosition().x,0,status.GetNavMeshTargetPosition().z);
+        
+    else
+        finalPos =  new Vector3(location.x,0,location.z);
+*/
+    finalPos =  new Vector3(location.x,0,location.z);
+    myPos =  new Vector3(status.transform.position.x,0,status.transform.position.z);
+    distance = (finalPos -myPos).magnitude;                
+    braking = status.MovementValue() + status.GetBrakingDistance(); ///distancia de frenado 
+
+    if  (distance > braking)
+    {
+        status.transform.rotation = Quaternion.Slerp(status.transform.rotation, Quaternion.LookRotation(location-status.transform.position), status.rotationSpeed_ * Time.deltaTime);                    
+        status.transform.Translate(0, 0, status.MovementValue());
+        return false;
+
+    }
+    else
+    {
+        Debug.Log("se llegó al destino final.........................................................................");
+        return true;
+    }
+        
+
 }
 
-private void recalculatePath(Status status, Vector3 location)
+private void recalculatePath(Status status, Vector3 location,bool myOwnMethod=true)
 {
     Debug.Log("-----------------------------------------------------------------------------------------------------Recalculando path");
-/*        status.GetNavMeshAgent().SetDestination(location);
+    if (!myOwnMethod)
+    {
+        status.GetNavMeshAgent().SetDestination(location);
         if (status.GetNavMeshAgent().path.status == UnityEngine.AI.NavMeshPathStatus.PathComplete)
             status.SetNavMeshTargetPosition(status.GetNavMeshAgent().path.corners[status.GetNavMeshAgent().path.corners.Length-1]); ///igualo a posicion final del path.            
-*/
-///////
-//Versión manual todavía en beta
-//////    
-    status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
-    if (status.GetNavMeshAgent().CalculatePath(location,status.GetNavMeshPath())) ///si se encontró un path correcto
-    {
-        status.SetNavMeshPathCurrentIndex(0);
-        status.SetNavMeshTargetPosition(status.GetNavMeshPath().corners[status.GetNavMeshPath().corners.Length -1]); ///posición target destino es la última del NavMeshPath en caso de haber sido un 
-        //path correcto.
+
     }
     else
-        Debug.Log("Path no encontrado......................... Puede que ya esté en el lugar adecuado.");
-            
-
-}
-public void Seek(Status status,Vector3 location)
-{
-    /*if (status.GetNavMeshUse())
     {
-        if (status.GetNavMeshAgent().hasPath)
+    ///////
+    //Versión manual todavía en beta
+    //////    
+        status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
+        if (status.GetNavMeshAgent().CalculatePath(location,status.GetNavMeshPath())) ///si se encontró un path correcto
         {
-            if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
-            {
-                Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
-                recalculatePath(status,location);
-            }
-                
-                
-        }
-        else 
-            recalculatePath(status,location);
-    }
-    else
-        movementApply(status, location);             */   
-    
-    /////////////
-    //Versión manual en beta todavía
-    /////////////
-    if (status.GetNavMeshUse())
-    {
-        
-        if (status.GetNavMeshPath().corners.Length > 1) //como mínimo siempre hay dos cornes, el de la posición inicial y la de  la siguiente posición .
-        {
-            Debug.Log("tiene path");
-            Vector3 corner = new Vector3(status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1].x,0,status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1].z);
-            Vector3 pos = new Vector3(status.transform.position.x,0,status.transform.position.z);             
-            float distance = Vector3.Distance(corner,pos);
-            //float braking = status.GetNavMeshBrakingDistance() + status.GetSpeedMax() * Time.deltaTime; ///distancia de frenado 
-            float braking = status.GetSpeedMax() * Time.deltaTime; ///distancia de frenado 
-            Debug.Log("Vector robot " + status.transform.position.ToString() + " vector destino " + status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1].ToString()+ " distancia " + distance.ToString() + " distancia de frenado "+ braking.ToString());
-            
-            if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
-            {
-                Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
-                recalculatePath(status,location);
-            }
-
-            if (distance < braking) //si llegué al primer destino
-            {
-                
-                 Debug.Log("llego  al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
-                status.SetNavMeshPathCurrentIndex(status.GetNavMeshPathCurrentIndex() +1);
-
-                if (status.GetNavMeshPathCurrentIndex() >= status.GetNavMeshPath().corners.Length-1)
-                {
-                    Debug.Log("llego  al final del path: ");
-                    ///si llegué al destino                    
-                    recalculatePath(status,location);
-                }                                    
-
-            }
-            else
-            {
-                Debug.Log("no he llegado al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
-                movementApply(status,location);     
-            }
+            status.SetNavMeshPathCurrentIndex(0);
+            status.SetNavMeshTargetPosition(status.GetNavMeshPath().corners[status.GetNavMeshPath().corners.Length -1]); ///posición target destino es la última del NavMeshPath en caso de haber sido un 
+            //path correcto.
         }
         else
         {
-            recalculatePath(status, location);            
+        Debug.Log("error asignando nuevo path.................................");
         }
-            
-    location = status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1];
-    }
-    else
-         movementApply(status,location);           
+    }      
 
+
+    
+
+}
+public bool Seek(Status status,Vector3 location,bool myOwnMethod=true) ///devolverá true si llegó al destino.
+{
+    if (status.GetNavMeshUse())
+        if (!myOwnMethod)
+        {
+            if (status.GetNavMeshAgent().hasPath)
+            {
+                if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
+                {
+                    Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
+                    recalculatePath(status,location);
+                    return false;
+                }
+                    
+                
+            }
+            else 
+            {
+                if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
+                {
+                    Debug.Log("asignando nuevo path");
+                    recalculatePath(status,location);
+                    return false;
+                }
+                else
+                {
+                    Debug.Log("se llegó al destino final.........................................................................");
+                    return true; ///significa que llegúe al final del path, o sea, al destino
+                }        
+                    
+                  
+            }
+               return false; 
+        }
+        else
+        {
+        /////////////
+        //Versión manual en beta todavía
+        /////////////
+    
+            if (status.GetNavMeshPath().corners.Length > 1) //como mínimo siempre hay dos cornes, el de la posición inicial y la de  la siguiente posición .
+            {
+                Debug.Log("tiene path");
+
+                if  (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
+                {
+                    Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
+                    recalculatePath(status,location);
+                    movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]);  
+                }
+                else
+                {                                        
+                 /*   Vector3 pos =  new Vector3(status.transform.position.x,0,status.transform.position.z);
+                    Vector3 corner =  new Vector3(status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1].x,0,status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1].z);
+                    float distance = (corner-pos).magnitude;
+                    float braking = status.MovementValue() + status.GetBrakingDistance(); ///distancia de frenado 
+                    Debug.Log("Vector robot " + status.transform.position.ToString() + " vector destino " + status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1].ToString()+ " distancia " + distance.ToString() + " distancia de frenado "+ braking.ToString());
+                    
+                    if (distance < braking) //si llegué al primer destino
+                    {
+                        
+                        Debug.Log("llego  al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
+                        status.SetNavMeshPathCurrentIndex(status.GetNavMeshPathCurrentIndex() +1);
+
+                        if (status.GetNavMeshPathCurrentIndex() >= status.GetNavMeshPath().corners.Length-1)
+                        {
+                            Debug.Log("llego  al final del path: ");
+                            ///si llegué al destino                    
+                          if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
+                          {
+                             recalculatePath(status,location);
+                             return movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]);
+                          }
+                               
+                            else  ///si llegué al final del path y no tengo ninguno nuevo, limpio.
+                            {
+                                status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
+                                Debug.Log("Estoy en el final: ");
+                                return movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]);
+                            }
+                                
+                                
+                        }      */             
+                        
+                                         
+
+                    }
+                    else
+                    {
+                        Debug.Log("no he llegado al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
+                        return movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]); 
+                        
+                    }
+                }
+    
+            }
+            else
+            {
+             if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetNavMeshTargetMarginPosition())
+                {
+                    Debug.Log("asignando nuevo path");
+                    recalculatePath(status, location);   
+                    return movementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1]);          
+              }
+            }
+        }
+    else
+     return   movementApply(status, location);              
+                 
+ return false;
 }
 
 public void Flee(Status status,Vector3 location)
@@ -167,7 +243,7 @@ public void Pursue(Status status)
 
     float lookAhead = 0;
     if (status.GetSpeedCurrent() > 0.0f)
-        lookAhead = targetDir.magnitude * status.GetTargetStatus().GetSpeedCurrent() * Time.deltaTime  / status.GetSpeedCurrent();        
+        lookAhead = targetDir.magnitude * status.GetTargetStatus().GetSpeedCurrent() * Time.deltaTime * 5 / status.GetSpeedCurrent();        
     
     Debug.DrawRay(status.GetTarget().transform.position, status.GetTarget().transform.forward * lookAhead,Color.red);
     Seek(status,status.GetTarget().transform.position + status.GetTarget().transform.forward * lookAhead);
@@ -214,12 +290,12 @@ public void PatrolMode(StatusNpc status)
             ///Primero obtengo todos los waypoint asignados a esta etiqueta, o sea, la del NPC
             List<GameObject> draft = GetStatusWorld().wayPoints_[status.wayPointTag_];
             ///                
-            if (Vector3.Distance(draft[status.GetWayPointCurrent()].transform.position, status.transform.position) < status.wayPointsAccuracy_)  
+            if (Vector3.Distance(draft[status.GetCurrentWayPoint()].transform.position, status.transform.position) < status.wayPointsAccuracy_)  
             {
                 status.NextWayPoint(draft.Count);                  
              
             }    
-                Seek(status,draft[status.GetWayPointCurrent()].transform.position);                    
+                Seek(status,draft[status.GetCurrentWayPoint()].transform.position);                    
             
             
         }
@@ -270,7 +346,7 @@ else
 }
 
     }
-public void CleverHide(StatusNpc status)
+  public bool CleverHide(StatusNpc status)
 {
 
     if(status.hidePointTag_.Length == 0)                
@@ -314,10 +390,10 @@ public void CleverHide(StatusNpc status)
     hideCol.Raycast(backRay, out info, distance);
     Debug.DrawRay(chosenSpot, -chosenDir.normalized * distance, Color.green);
 
-    Seek(status,info.point + chosenDir.normalized);  
+    return Seek(status,info.point + chosenDir.normalized );  
     }
 
-  
+  return false;
 
 }
 

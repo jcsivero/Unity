@@ -99,6 +99,8 @@ public class StatusNpcRobot : StatusNpc
             commandAddOrSubHealth_.Set(-10);
             AppendCommand(commandAddOrSubHealth_);                                    
             
+            transform.LookAt(GetTarget().transform.position); //me giro hacia el jugador que me ha disparado.
+            
             if (GetHealth() <=0.0f)    
                 Destroy(this.gameObject);
                             
