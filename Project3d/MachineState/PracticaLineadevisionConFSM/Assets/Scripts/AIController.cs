@@ -101,8 +101,8 @@ private void recalculatePath(Status status, Vector3 location)
     ///////
     //Versión manual todavía en beta
     //////    
-        
-        if (status.GetNavMeshAgent().CalculatePath(location,status.GetNavMeshPath())) ///si se encontró un path correcto
+        status.GetNavMeshAgent().CalculatePath(location,status.GetNavMeshPath());
+        if (status.GetNavMeshPath().status == UnityEngine.AI.NavMeshPathStatus.PathComplete) ///si se encontró un path correcto
         {
             status.SetNavMeshPathCurrentIndex(0);
             status.SetNavMeshTargetPosition(status.GetNavMeshPath().corners[status.GetNavMeshPath().corners.Length -1]); ///posición target destino es la última del NavMeshPath en caso de haber sido un 
@@ -303,23 +303,26 @@ else
     {
         float dist = Mathf.Infinity;
         Vector3 chosenSpot = Vector3.zero;
-
-        ///Primero obtengo todos los Hidepoint asignados a esta etiqueta, o sea, la del NPC
-        List<GameObject> draft = GetStatusWorld().hidePoints_[status.hidePointTag_];            
+        
+        List<GameObject> draft = GetStatusWorld().hidePoints_[status.hidePointTag_];   
+        GameObject chosenGO = null;
         for (int i = 0; i <  draft.Count; i++)
         {
             
-            Vector3 hideDir = draft[i].transform.position - status.GetTarget().transform.position;
-            hideDir.y = 0.0f;
+            Vector3 hideDir = draft[i].transform.position - status.GetTarget().transform.position;            
+            hideDir.y = status.transform.position.y; ///altura igual a la del npc
             Vector3 hidePos = draft[i].transform.position + hideDir.normalized * 10;
 
             if (Vector3.Distance(status.GetOrigin().transform.position, hidePos) < dist)
             {
                 chosenSpot = hidePos;
+                chosenGO = draft[i];
                 dist = Vector3.Distance(status.GetOrigin().transform.position, hidePos);
             }
         }
         
+        chosenSpot.y = chosenGO.GetComponent<Collider>().bounds.min.y; ///emito el rayo desde la base de la figura, puesto que el punto de pivote podría estar demasiado alto si la figura es muy
+    ///alta y tiene el pivote centrado, dándome un punto que normalmente sea inaccesible para el navmesh navigation.
         Seek(status, chosenSpot,withPosY);
         Debug.DrawRay(status.GetOrigin().transform.position,chosenSpot- status.GetOrigin().transform.position ,Color.yellow);
             
@@ -353,7 +356,7 @@ public bool CleverHide(StatusNpc status,bool withPosY=false)
 
         for (int i = 0; i <  draft.Count; i++)
         {
-            Vector3 hideDir = draft[i].transform.position - status.GetTarget().transform.position;
+            Vector3 hideDir = draft[i].transform.position - status.GetTarget().transform.position;            
             hideDir.y = 0.0f;
             Vector3 hidePos = draft[i].transform.position + hideDir.normalized * 100;
             if (Vector3.Distance(status.GetOrigin().transform.position, hidePos) < dist)
@@ -366,12 +369,16 @@ public bool CleverHide(StatusNpc status,bool withPosY=false)
         }
     
     Collider hideCol = chosenGO.GetComponent<Collider>();
+    
+    chosenSpot.y = hideCol.bounds.min.y; ///emito el rayo desde la base de la figura, puesto que el punto de pivote podría estar demasiado alto si la figura es muy
+    ///alta y tiene el pivote centrado, dándome un punto que normalmente sea inaccesible para el navmesh navigation.
     Ray backRay = new Ray(chosenSpot, -chosenDir.normalized);
     RaycastHit info;
     float distance = 250.0f;
     hideCol.Raycast(backRay, out info, distance);
-    Debug.DrawRay(chosenSpot, -chosenDir.normalized * distance, Color.black);
-    Debug.Log("punto de ocultación : " + (info.point + chosenDir.normalized).ToString());
+    Debug.DrawRay(chosenSpot, -chosenDir.normalized * distance, Color.red);
+    
+    Debug.Log("punto de ocultación : " + (info.point + chosenDir.normalized).ToString() + " tamaño y" + hideCol.bounds.min.ToString());
 
     return Seek(status,info.point + chosenDir.normalized,withPosY);  
     }
@@ -387,11 +394,12 @@ public bool CanSeeTarget(Status status,GameObject target)
     Debug.DrawRay(status.GetOrigin().transform.position, rayToTarget ,Color.blue);
 
     if (Physics.Raycast(status.GetOrigin().transform.position, rayToTarget, out raycastInfo))
-    {            
+    {
+        Debug.Log("raycast + " + raycastInfo.transform.gameObject.tag + " " +raycastInfo.transform.gameObject.name) ;
         //Debug.Log("etiqueta" + raycastInfo.transform.tag);
         //Debug.Log("nombre: " +raycastInfo.transform.gameObject.name);
         //if (raycastInfo.transform.gameObject.tag == "Player")
-            if (raycastInfo.transform.gameObject == target)
+            if (raycastInfo.transform.gameObject.tag == "Player")
                 return true;
     }
     return false;

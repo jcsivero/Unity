@@ -35,7 +35,7 @@ public class NPCBaseFSM : StateMachineBehaviour
             target_ = npc_.GetTarget();            
             animator_ = animator;
             stateInfo_ = stateInfo;   
-            //UpdateState();
+            UpdateState();
         
     }
 
@@ -72,7 +72,10 @@ public class NPCBaseFSM : StateMachineBehaviour
         ///para comprobar si es visible el objetivo.
         {
             if (aiController_.CanSeeTarget(npc_,npc_.GetTarget()))
-                animator_.SetBool("visibleTarget",true);
+                {
+                    Debug.Log("activando visibleTarget");
+                    animator_.SetBool("visibleTarget",true);
+                }
             else
                 animator_.SetBool("visibleTarget",false);
         }            

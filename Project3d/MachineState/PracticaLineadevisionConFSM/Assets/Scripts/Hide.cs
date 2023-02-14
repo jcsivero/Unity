@@ -22,7 +22,11 @@ public class Hide : NPCBaseFSM
         UpdateState();        
 
         if (aiController_.CleverHide(npc_) && (!isHealthRecovery_))
+        {
             npc_.StartHealthRecovery();
+            isHealthRecovery_ = true;
+        }
+            
         
                         
        

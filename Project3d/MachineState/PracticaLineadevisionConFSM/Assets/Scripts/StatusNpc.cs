@@ -66,7 +66,7 @@ public class StatusNpc : Status
     
     private int navMeshPathCurrentIndex_;
         
-    [SerializeField]private Vector3 navMeshTargetPosition_; ///posición  final del path del navmesh.    
+    private Vector3 navMeshTargetPosition_; ///posición  final del path del navmesh.    
 
     private  UnityEngine.AI.NavMeshAgent navMeshAgent_;   
     private  Animator anim_;
