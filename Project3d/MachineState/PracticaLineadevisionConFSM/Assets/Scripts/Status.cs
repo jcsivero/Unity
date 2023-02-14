@@ -7,29 +7,21 @@ public  abstract class  Status :  BaseMono
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables públicas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-    public string name_ = "Status";
-    public CommandAddOrSubHealth commandAddOrSubHealth_; ///comandos comunes
-    public CommandAddOrSubLifes commandAddOrSubLifes_; ///comandos comunes
-
-
-    [SerializeField] public  float rotationSpeed_ = 2.0f;
-
-    
-    [SerializeField] public  float speedMax_ = 2.0f;
-
-    [SerializeField] public  float currentSpeed_;    
-       
-
+    [Header("=============== Status")]
+    [Space(5)]               
+    [Tooltip("Para depuración. A True, en los Update() se actualizarán las variables que se hayan modificado en el inspector en tiempo de ejecución, o que  interese visualizar su valor en todo momento como la velocidad actual.... ")]
+    public bool debugMode_ = true; ///
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+    [Header("Links to GameObjects")]
     [SerializeField] private GameObject origin_;
-     [SerializeField] private GameObject target_;     
-    [SerializeField] private int lifes_;
-    [SerializeField] private int health_;
+    [SerializeField] private GameObject target_;     
     private Vector3 positionPreviousFrame_;
 
-
+    [HideInInspector] public CommandAddOrSubHealth commandAddOrSubHealth_; ///comandos comunes
+    [HideInInspector] public CommandAddOrSubLifes commandAddOrSubLifes_; ///comandos comunes
+    private string name_ = "Status";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables de trigger o suscriber a eventos
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
@@ -47,18 +39,18 @@ public  abstract class  Status :  BaseMono
         return target_;
      }  
 
-     public  int GetHealth()
+     virtual public  int GetHealth()
      {
-        return health_;
+        return 0;
      }    
 
      public Status GetTargetStatus()
      {
         return GetTarget().GetComponent<Status>();
      }
-     public  int  GetLifes()
+     virtual public  int  GetLifes()
      {
-        return lifes_;
+        return 0;
      }  
 
      public  void SetName(string draft)
@@ -75,13 +67,11 @@ public  abstract class  Status :  BaseMono
     {
         origin_ = draft;
     }
-    public void  SetHealth(int draft)
-    {
-        health_ = draft;
+    virtual public void  SetHealth(int draft)
+    {        
     }
-    public void  SetLifes(int draft)
-    {
-        lifes_ = draft;
+    virtual public void  SetLifes(int draft)
+    {        
     }
     private void InstaciateCommands()
     {
@@ -100,11 +90,21 @@ public  abstract class  Status :  BaseMono
     {
         return false;
     }
-    
     virtual public bool GetNavMeshUse()
     {
         return false;
     }
+virtual public void SetNavMeshUseSetDestination(bool value)
+{
+
+}
+    virtual public bool GetNavMeshUseSetDestination()
+{
+    return false;
+}
+    
+  
+
     virtual public UnityEngine.AI.NavMeshPath GetNavMeshPath()
     {
         return null;
@@ -134,7 +134,7 @@ virtual public Vector3 GetNavMeshTargetPosition()
     return Vector3.zero;
 }
 
-virtual public float GetNavMeshTargetMarginPosition()
+virtual public float GetTargetMarginPosition()
 {
     return 0.0f;
 }
@@ -144,53 +144,97 @@ virtual public void ErasePathNavMesh()
 }
 
 
-    public float GetSpeedCurrent()
+virtual public float GetSpeedCurrent()
+{
+            
+    return 0;
+}
+
+virtual public void SetSpeedCurrent(float speed)
+{
+    
+}
+virtual public float GetSpeedMax()
+{
+    return 0;  
+
+}
+
+virtual public void SetSpeedMax(float speed)
+{        
+    
+
+}
+
+virtual public void SetSpeedRotation(float speed)
+{        
+    
+}
+
+virtual public float  GetSpeedRotation()
+{        
+    return 0;    
+
+}
+
+virtual public float  GetVisDistance()
+{        
+    return 0;    
+
+}
+virtual public float  GetVisAngle()
+{        
+    return 0;    
+
+}
+virtual public float  GetVisDistanceToAttack()
+{        
+    return 0;    
+
+}
+virtual public void SetVisDistance(float distance)
+{        
+    
+}
+virtual public void SetVisAngle(float  angle)
+{        
+    
+}
+virtual public void SetVisDistanceToAttack(float distance)
+{        
+    
+}
+virtual public float MovementValue()
+{
+    return 0;
+    
+}
+public  void Awake()
+{
+    InstaciateCommands();
+    origin_ = gameObject;
+    Debug.Log("|||||||||||||| Awake Status||||||||||||||||");
+
+}
+
+
+public void Start()
+{
+    Debug.Log("|||||||||||||| Start Status||||||||||||||||");
+    positionPreviousFrame_ = transform.position;
+    SetSpeedMax(GetSpeedMax());
+    
+    
+}
+
+/// <summary>
+/// Update is called every frame, if the MonoBehaviour is enabled.
+/// </summary>
+protected void Update()
+{
+    if (GetGameManager().ok_)
     {
-                
-        return currentSpeed_; ///si se usa cálculos de movimiento, recuerda que el verdadero valor es multiplicado por Time.deltaTime, sino es un valor
-        ///muy grande
-    }
-
-    virtual public float GetSpeedMax()
-    {
-        return speedMax_;        
-
-    }
-
-    virtual public void SetSpeedMax(float speed)
-    {        
-        speedMax_ = speed;        
-
-    }
-
-    virtual public float MovementValue()
-    {
-        return speedMax_ * Time.deltaTime; ////puedo poner también por valor de movimiento del ratón, ejes...
-    }
-    public  void Awake()
-    {
-        InstaciateCommands();
-        origin_ = gameObject;
-        Debug.Log("|||||||||||||| Awake Status||||||||||||||||");
-
-    }
-
-   
-    public void Start()
-    {
-        Debug.Log("|||||||||||||| Start Status||||||||||||||||");
-        positionPreviousFrame_ = transform.position;
-        SetSpeedMax(GetSpeedMax());
-      
-        
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    protected void Update()
-    {
-        if (GetGameManager().ok_)
+        if (debugMode_)
         {
             ///solo a modo de depuración, se pierde rendimiento pero estos métodos actualizan variables modificadas desde el inspector
             ///para realizar depuración y pruebas en ejecución. En producto final se pueden quitar.            
@@ -199,12 +243,16 @@ virtual public void ErasePathNavMesh()
         ////Metodo propio, es una sola variable de velocidad independiente de Navmesh, CharacterController o cualqueir otro método.
         ///Se basa en la magnitud de la diferencia de posición  en la pantalla en valor absoluto, dividido entre el tiempo de cada frame.
 
-            currentSpeed_  = Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime);  
-            positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad            
             
+            SetSpeedCurrent(Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime));        
+            positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad            
+            SetNavMeshUse(GetNavMeshUse()); ///para actualizar en modo debug. O sea, si cambio en el inspector el valor se actualice inmediatamente.
+            SetNavMeshUseSetDestination(GetNavMeshUseSetDestination());
         }
         
     }
+    
+}
 
 
 }

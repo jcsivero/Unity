@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1009,6 +1009,7 @@ GameObject:
   - component: {fileID: 356564138}
   - component: {fileID: 356564137}
   - component: {fileID: 356564136}
+  - component: {fileID: 356564139}
   m_Layer: 0
   m_Name: Cube (19)
   m_TagString: Untagged
@@ -1024,7 +1025,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 356564134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.0955765, y: 0, z: -2.4125707}
+  m_LocalPosition: {x: -3.0955765, y: 0.142, z: -2.4125707}
   m_LocalScale: {x: 0.2729138, y: 0.2729137, z: 0.2729137}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1094,6 +1095,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 356564134}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &356564139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356564134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsForWayPoints_: []
+  indexWayPoint_: 0
+  tagsForHidePoints_:
+  - Robots
+  tagsGeneral_: []
 --- !u!1001 &357862868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1384,7 +1402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &390067162
 Transform:
   m_ObjectHideFlags: 0
@@ -1393,7 +1411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390067161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -90.28, y: 4.05, z: -47.66}
+  m_LocalPosition: {x: -90.28, y: 4.02, z: -46.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1411,8 +1429,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.51, y: 0.48, z: 8.69}
-  m_Center: {x: 0.3226688, y: 0.19026959, z: -2}
+  m_Size: {x: 8.51, y: 2.79, z: 8.69}
+  m_Center: {x: 0.3226688, y: 0.4, z: -2}
 --- !u!114 &390067164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,17 +1543,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 448894334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5145ec74930d7c4438cd69ad2ce2273f, type: 3}
+  m_Script: {fileID: 11500000, guid: 95f30f4698388a744afe04d0d63af476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name_: Status
-  rotationSpeed_: 2
-  speedMax_: 2
-  currentSpeed_: 0
+  debugMode_: 1
   origin_: {fileID: 0}
   target_: {fileID: 0}
-  lifes_: 0
-  health_: 0
   bullet_: {fileID: 1831834044265188, guid: d794ad188c63d7c4d9b5c65b1218ab58, type: 3}
 --- !u!1 &534909246
 GameObject:
@@ -3622,14 +3635,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33a3c1da82931d4d9ca3bb806924c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name_: Status
-  rotationSpeed_: 2
-  speedMax_: 2
-  currentSpeed_: 0
+  debugMode_: 1
   origin_: {fileID: 0}
   target_: {fileID: 0}
-  lifes_: 0
-  health_: 0
   hudTextHealthPlayer_: {fileID: 287398757}
 --- !u!114 &976279973
 MonoBehaviour:
@@ -3643,14 +3651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a12c25b3e9818e43a8f040e660e0238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name_: Status
-  rotationSpeed_: 2
-  speedMax_: 2
-  currentSpeed_: 0
+  debugMode_: 1
   origin_: {fileID: 0}
   target_: {fileID: 0}
-  lifes_: 0
-  health_: 0
   numberOfLevels_: 0
   countEnemies_: 0
   activeLevel_: 0
@@ -4717,7 +4720,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362359839}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -66.6, y: 0.65, z: -56.7}
+  m_LocalPosition: {x: -66.6, y: 0, z: -56.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5907,7 +5910,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672670652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.33143, y: 4.43, z: -52.23858}
+  m_LocalPosition: {x: 60.33143, y: 2, z: -52.23858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6976,7 +6979,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008712481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -67.6, y: 0.71, z: -35.6}
+  m_LocalPosition: {x: -66.45696, y: 0, z: -35.1328}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7420,13 +7423,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6320495729263836453, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
+      propertyPath: health_
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320495729263836453, guid: 3224f8a1b274a3e47997ef974e213266,
+        type: 3}
       propertyPath: target_
       value: 
       objectReference: {fileID: 448894334}
     - target: {fileID: 6320495729263836453, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
+      propertyPath: navMeshUse_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320495729263836453, guid: 3224f8a1b274a3e47997ef974e213266,
+        type: 3}
       propertyPath: wayPointTag_
       value: Robots
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320495729263836453, guid: 3224f8a1b274a3e47997ef974e213266,
+        type: 3}
+      propertyPath: brakingDistance_
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6320495729263836453, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
@@ -7437,6 +7455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: navMeshBrakingDistance_
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320495729263836453, guid: 3224f8a1b274a3e47997ef974e213266,
+        type: 3}
+      propertyPath: navMeshUseSetDestination_
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6320495729263836453, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}

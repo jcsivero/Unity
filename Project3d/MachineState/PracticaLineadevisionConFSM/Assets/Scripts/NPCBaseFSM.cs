@@ -52,18 +52,18 @@ public class NPCBaseFSM : StateMachineBehaviour
         animator_.SetFloat("distance", Vector3.Distance(npc_.transform.position, target_.transform.position));   
         animator_.SetInteger("health",npc_.GetHealth());
 
-        if (animator_.GetFloat("distance") < npc_.visDist_)
+        if (animator_.GetFloat("distance") < npc_.GetVisDistance())
             animator_.SetBool("targetClose",true);
         else
             animator_.SetBool("targetClose",false);
 
-        if (animator_.GetFloat("distance") < npc_.visDistToAttack_)
+        if (animator_.GetFloat("distance") < npc_.GetVisDistanceToAttack())
             animator_.SetBool("attackMode",true);
         else
             animator_.SetBool("attackMode",false);               
 
         
-        if (animator_.GetFloat("angle") < npc_.visAngle_)
+        if (animator_.GetFloat("angle") < npc_.GetVisAngle())
             animator_.SetBool("angleValid", true);
         else 
             animator_.SetBool("angleValid", false);

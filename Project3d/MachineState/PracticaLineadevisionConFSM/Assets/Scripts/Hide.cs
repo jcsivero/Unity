@@ -5,6 +5,8 @@ using UnityEngine;
 public class Hide : NPCBaseFSM
 {
 
+    private bool isHealthRecovery_ = false;              
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,9 +19,9 @@ public class Hide : NPCBaseFSM
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        UpdateState();
-              
-        if (aiController_.CleverHide(npc_))
+        UpdateState();        
+
+        if (aiController_.CleverHide(npc_) && (!isHealthRecovery_))
             npc_.StartHealthRecovery();
         
                         
@@ -30,6 +32,7 @@ public class Hide : NPCBaseFSM
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         npc_.StopHealthRecovery();
+        isHealthRecovery_ = false;
 
     }
 

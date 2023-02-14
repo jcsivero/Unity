@@ -14,6 +14,10 @@ public class StatusNpcRobot : StatusNpc
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+[Header("=============== StatusNpcRobot")]
+[Space(5)]      
+[Header("Links to GameObjects")]
 [SerializeField] private GameObject bullet_;
 [SerializeField] private GameObject originOfFire_;
 [SerializeField] private TextMesh  textHealthNpc_;       
@@ -40,7 +44,7 @@ public class StatusNpcRobot : StatusNpc
         base.Awake();        
         InstaciateCommands(); 
         SetName("StatusNpcRobot");        
-        
+        healthMax_ = GetHealth();
 
         Debug.Log("|||||||||||||| Awake StatusNpcRobot||||||||||||||||");
 
@@ -156,8 +160,12 @@ override public void StartFiring()
 
 override public void HealthRecovery()
 {
-    commandAddOrSubHealth_.Set(10);
-    AppendCommand(commandAddOrSubHealth_);    
+    if (GetHealth() < healthMax_) ///para no sobrepasar la recarga de vida máxima
+    {
+        commandAddOrSubHealth_.Set(10);
+        AppendCommand(commandAddOrSubHealth_);    
+
+    }
 }
 override public void StartHealthRecovery()
 {
