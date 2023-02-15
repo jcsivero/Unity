@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\EventData.cs" />
      <Compile Include="Assets\Scripts\CommandHudUpdateHealth.cs" />
+     <Compile Include="Assets\Scripts\StatusPlayer.cs" />
      <Compile Include="Assets\Scripts\GameManagerMyEvents.cs" />
      <Compile Include="Assets\Scripts\Base.cs" />
      <Compile Include="Assets\Scripts\CommandHudUpdateStatusPlayer.cs" />
@@ -47,7 +48,6 @@
      <Compile Include="Assets\Scripts\ControlGameObjects.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\AIController.cs" />
-     <Compile Include="Assets\Scripts\StatusPlayer.cs" />
      <Compile Include="Assets\Scripts\CommandAddOrSubLifes.cs" />
      <Compile Include="Assets\Scripts\CommandHudUpdateAll.cs" />
      <Compile Include="Assets\Scripts\Chase.cs" />

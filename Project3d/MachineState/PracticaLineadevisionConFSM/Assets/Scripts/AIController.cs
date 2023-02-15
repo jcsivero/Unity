@@ -51,12 +51,12 @@ public class AIController : BaseMono
 private float CalculateDistance(Vector3 v1,Vector3 v2, bool withPosY=false)
 {
 
-    if (!withPosY)
+/*    if (!withPosY)
     {  ///si no quiero tener en cuenta la altura para el cálculo de la distancia, pongo sus valores Y a cero.
         v1.y = 0;
         v2.y = 0;
     }
-
+*/
     return (v1-v2).magnitude; 
 }
 private bool MovementApply(Status status,Vector3 location,bool withPosY=false)
@@ -125,7 +125,7 @@ private void recalculatePath(Status status, Vector3 location)
 }
 public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolverá true si llegó al destino.
 {
-    bool optimizar= true;
+    bool optimizar= false;
 
     if (status.GetNavMeshUse())
         if (status.GetNavMeshUseSetDestination())

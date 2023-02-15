@@ -21,7 +21,7 @@ public class Chase : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();  
-        npc_.ErasePathNavMesh();               
+        //npc_.ErasePathNavMesh();               
         aiController_.Pursue(npc_);
                    
         

@@ -10,7 +10,7 @@ public class Attack : NPCBaseFSM
     {
         
         base.OnStateEnter(animator, stateInfo, layerIndex);        
-        npc_.ErasePathNavMesh();
+        //npc_.ErasePathNavMesh();
         npc_.StartFiring();
     
     }
@@ -19,7 +19,7 @@ public class Attack : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();          
-        npc_.ErasePathNavMesh();        
+        //npc_.ErasePathNavMesh();        
         npc_.transform.LookAt(target_.transform.position);
     }
 
