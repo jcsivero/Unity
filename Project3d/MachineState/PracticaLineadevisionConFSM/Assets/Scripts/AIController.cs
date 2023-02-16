@@ -48,15 +48,19 @@ public class AIController : BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-private float CalculateDistance(Vector3 v1,Vector3 v2, bool withPosY=false)
+
+///Calcula la distancia para el pequeño desplazamiento del objeto, o sea, el desplazamiento menor que se puede hacer, no es la distancia hacia el objetivo final.
+private float CalculateDistanceStep(Vector3 v1,Vector3 v2, bool withPosY=false)
 {
 
-/*    if (!withPosY)
+    if (!withPosY)
     {  ///si no quiero tener en cuenta la altura para el cálculo de la distancia, pongo sus valores Y a cero.
+        ///Si se tiene cuenta la altura y se utilizar NavMesh  hay que tener cuidado con poner los destinos, waypoints, hidepoint etc en zonas donde el
+        ///navmesh pueda llegar, para evitar errores calculando el path.
         v1.y = 0;
         v2.y = 0;
     }
-*/
+
     return (v1-v2).magnitude; 
 }
 private bool MovementApply(Status status,Vector3 location,bool withPosY=false)
@@ -64,9 +68,12 @@ private bool MovementApply(Status status,Vector3 location,bool withPosY=false)
 
     float braking = status.MovementValue() + status.GetBrakingDistance(); ///distancia de frenado 
 
-    if  (CalculateDistance(location,status.transform.position,withPosY) > braking)
+    if  (CalculateDistanceStep(location,status.transform.position,withPosY) > braking)
     {
-        status.transform.rotation = Quaternion.Slerp(status.transform.rotation, Quaternion.LookRotation(location-status.transform.position), status.GetSpeedRotation() * Time.deltaTime);                    
+        Quaternion rot =  Quaternion.LookRotation(location-status.transform.position);
+        rot.z = 0; /// solo quiero rotar en el eje Y.
+        rot.x = 0; /// 
+        status.transform.rotation = Quaternion.Slerp(status.transform.rotation,rot, status.GetSpeedRotation() * Time.deltaTime);                    
         status.transform.Translate(0, 0, status.MovementValue());
         return false;
 
@@ -90,8 +97,9 @@ private void recalculatePath(Status status, Vector3 location)
             status.SetNavMeshTargetPosition(status.GetNavMeshAgent().path.corners[status.GetNavMeshAgent().path.corners.Length-1]); ///igualo a posicion final del path.            
         else        
         {
-            status.SetNavMeshTargetPosition(new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity));
-            status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.  
+            status.ErasePathNavMesh();
+            //status.SetNavMeshTargetPosition(status.navMeshTargetPositionInfinity_);
+            //status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.  
             Debug.Log("error asignando nuevo path rutina NavMesh SetDestination.................................");
         }
             
@@ -110,9 +118,10 @@ private void recalculatePath(Status status, Vector3 location)
         }
         else        
         {
-            status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.        
-            status.SetNavMeshTargetPosition(new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity));
-            status.SetNavMeshPathCurrentIndex(0);
+            status.ErasePathNavMesh();
+            //status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.        
+            //status.SetNavMeshTargetPosition(new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity));
+            //status.SetNavMeshPathCurrentIndex(0);
             Debug.Log("error asignando nuevo path.................................");
         }
             
@@ -125,40 +134,40 @@ private void recalculatePath(Status status, Vector3 location)
 }
 public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolverá true si llegó al destino.
 {
-    bool optimizar= false;
+    bool optimizar= true;
 
     if (status.GetNavMeshUse())
         if (status.GetNavMeshUseSetDestination())
         {
-           if (optimizar)
-            if (status.GetNavMeshAgent().hasPath)
-            {
-                if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+            if (optimizar)
+                if (status.GetNavMeshAgent().hasPath)
                 {
-                    Debug.Log("objetivo posicion cambiada rutina NavMesh SetDestination. : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
-                    recalculatePath(status,location);                    
-                }                    
-                
-            }
-            else 
-            {
-                if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
-                {
-                    Debug.Log("asignando nuevo path rutina NavMesh SetDestination.");
-                    recalculatePath(status,location);                    
+                    if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+                    {
+                        Debug.Log("objetivo posicion cambiada rutina NavMesh SetDestination. : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
+                        recalculatePath(status,location);                    
+                    }                    
+                    
                 }
-                else           
+                else 
                 {
-                    Debug.Log("se llegó al destino final con rutina NavMesh SetDestination.......................................................................");                                         
-                    return true;
-                }     
+                    if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+                    {
+                        Debug.Log("asignando nuevo path rutina NavMesh SetDestination.");
+                        recalculatePath(status,location);                    
+                    }
+                    else           
+                    {
+                        Debug.Log("se llegó al destino final con rutina NavMesh SetDestination.......................................................................");                                         
+                        return true;
+                    }     
+                        
+                        
                     
-                    
-                  
-            }
+                }
             else
                 ///la siguiente línea se activa solo para comprobar diferncia de rendimiento
-                status.GetNavMeshAgent().SetDestination(location);///solo para comprobar sin optimizar los desplazamientos y cálculos de path, como mejora
+                status.GetNavMeshAgent().SetDestination(location);///solo para comprobar sin optimizar los desplazamientos y cálculos de path, como mejora                
                 ///los frames por segundos.
                
         }
@@ -254,6 +263,7 @@ public void Wander(Status status)
     Seek(status,targetWorld,false);
 }
 
+
 public void PatrolMode(StatusNpc status,bool withPosY = false)
 {
     if(status.wayPointTag_.Length == 0)                
@@ -274,8 +284,11 @@ public void PatrolMode(StatusNpc status,bool withPosY = false)
             ///Primero obtengo todos los waypoint asignados a esta etiqueta, o sea, la del NPC
             List<GameObject> draft = GetStatusWorld().wayPoints_[status.wayPointTag_];
             /// 
+
             
-            if ((Seek(status,draft[status.GetCurrentWayPoint()].transform.position,withPosY)) || (CalculateDistance(draft[status.GetCurrentWayPoint()].transform.position,status.transform.position,withPosY) < status.wayPointsAccuracy_)) 
+            Vector3 pos = CalculatePointTarget(status.GetOrigin(),draft[status.GetCurrentWayPoint()],false);
+            //if ((Seek(status,draft[status.GetCurrentWayPoint()].transform.position,withPosY)) || (CalculateDistanceStep(draft[status.GetCurrentWayPoint()].transform.position,status.transform.position,withPosY) < status.wayPointsAccuracy_)) 
+            if (Seek(status,pos,withPosY) || (CalculateDistanceStep(pos,status.transform.position,withPosY) < status.wayPointsAccuracy_))
             //si llegué al final del path o hasta el punto de precisión de los waypointts
                 status.NextWayPoint(draft.Count);    
 
@@ -353,38 +366,88 @@ public bool CleverHide(StatusNpc status,bool withPosY=false)
         ///Primero obtengo todos los Hidepoint asignados a esta etiqueta, o sea, la del NPC
         List<GameObject> draft = GetStatusWorld().hidePoints_[status.hidePointTag_];            
         GameObject chosenGO = draft[0];
+        Collider hideCol = chosenGO.GetComponent<Collider>();
 
         for (int i = 0; i <  draft.Count; i++)
         {
-            Vector3 hideDir = draft[i].transform.position - status.GetTarget().transform.position;            
-            hideDir.y = 0.0f;
-            Vector3 hidePos = draft[i].transform.position + hideDir.normalized * 100;
-            if (Vector3.Distance(status.GetOrigin().transform.position, hidePos) < dist)
+            Vector3 hidePoint = draft[i].transform.position;
+            hideCol = draft[i].GetComponent<Collider>();            
+            hidePoint.y = hideCol.bounds.min.y; ///compruebo la distancia con la posición mínima de la altura del collider, para evitar calculos erróneos cuando
+            ///los pivotes se encuentran en el centro de objetos demasiado altos, en los que daría una distancia  mayor de la que realmente están.             
+//            Vector3 hideDir = hidePoint - status.GetTarget().transform.position;            
+  //          hideDir.y = 0.0f;       
+    //        hideDir = hideDir.normalized;     
+
+      //      Vector3 hidePos = hidePoint + hideDir * 100;
+            if (Vector3.Distance(status.GetOrigin().transform.position,hidePoint) < dist)
             {
-                chosenSpot = hidePos;
-                chosenDir = hideDir;
+                //chosenSpot = hidePos;
+                //chosenDir = hideDir;
                 chosenGO = draft[i];
-                dist = Vector3.Distance(status.GetOrigin().transform.position, hidePos);
+                dist = Vector3.Distance(status.GetOrigin().transform.position, hidePoint);
             }
         }
     
-    Collider hideCol = chosenGO.GetComponent<Collider>();
-    
-    chosenSpot.y = hideCol.bounds.min.y; ///emito el rayo desde la base de la figura, puesto que el punto de pivote podría estar demasiado alto si la figura es muy
-    ///alta y tiene el pivote centrado, dándome un punto que normalmente sea inaccesible para el navmesh navigation.
-    Ray backRay = new Ray(chosenSpot, -chosenDir.normalized);
+    Vector3 point = CalculatePointTarget(status.GetTarget(),chosenGO,true);
+    /*
+    Ray backRay = new Ray(chosenSpot, -chosenDir);
     RaycastHit info;
     float distance = 250.0f;
+    hideCol = chosenGO.GetComponent<Collider>();
     hideCol.Raycast(backRay, out info, distance);
-    Debug.DrawRay(chosenSpot, -chosenDir.normalized * distance, Color.red);
-    
-    Debug.Log("punto de ocultación : " + (info.point + chosenDir.normalized).ToString() + " tamaño y" + hideCol.bounds.min.ToString());
+    Debug.DrawRay(chosenSpot, -chosenDir * distance, Color.red);
+    */
+    Debug.Log("punto de ocultación : " + point.ToString() );
 
-    return Seek(status,info.point + chosenDir.normalized,withPosY);  
+    return Seek(status,point,withPosY);  
     }
 
   return false;
 
+}
+///Calcula el punto de destino desde la posición actual hacia el Gameobject final. Lo calcula con respecto a la mínima posicion del collider del objeto destino con el
+///que impactará un RayCast. Así puedo trabajar a varias altura y no verme afectado por la altura de los objetos con pivote en el centro de la maya.
+private Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool inverse = false)
+{
+
+    Vector3 point = target.transform.position;
+    Collider pointCol = target.GetComponent<Collider>();            
+    point.y = pointCol.bounds.min.y;///compruebo la distancia con la posición mínima de la altura del collider, para evitar calculos erróneos cuando
+    ///los pivotes se encuentran en el centro de objetos demasiado altos, en los que daría una distancia  mayor de la que realmente están.             
+
+    Vector3 dirPoint = point - origin.transform.position;            
+    dirPoint.y = 0.0f;       
+    dirPoint = dirPoint.normalized;
+    Vector3 rayPos = point;
+    Ray ray = new Ray();
+    
+    RaycastHit info;
+    float distance = 100.0f;    
+
+    if (inverse) ///si quiero obtener la posición justo en el lado contrario del objeto con respecto al origin. Esto es útil para establecer puntos de ocultación+
+    ///como el algoritmo Hide, o ClerverHide.
+    {
+        rayPos = rayPos + dirPoint * 100;
+        ray.origin = rayPos;
+        ray.direction = -dirPoint;
+        pointCol.Raycast(ray, out info, distance);
+        //info.point += dirPoint;
+        Debug.DrawRay(rayPos, -dirPoint * distance, Color.red);
+    }
+    else
+    {
+        rayPos = rayPos - dirPoint * 100;
+        ray.origin = rayPos;
+        ray.direction = dirPoint;        
+        pointCol.Raycast(ray, out info, distance);
+        //info.point -= dirPoint; 
+        Debug.DrawRay(rayPos, dirPoint * distance, Color.red);
+    }
+
+        Debug.Log("punto de llegada : " + info.point.ToString() );
+    return info.point;
+    
+    
 }
 
 public bool CanSeeTarget(Status status,GameObject target)
@@ -404,5 +467,6 @@ public bool CanSeeTarget(Status status,GameObject target)
     }
     return false;
 }
+
 
 }

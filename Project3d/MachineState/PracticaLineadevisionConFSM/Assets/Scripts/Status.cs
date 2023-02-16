@@ -17,10 +17,18 @@ public  abstract class  Status :  BaseMono
     [Header("Links to GameObjects")]
     [SerializeField] private GameObject origin_;
     [SerializeField] private GameObject target_;     
+    [SerializeField] private Vector3 minPos_; ///Posición del valor mínimo del collider. del Npc. Utilizado para obtener posiciones a ras de suelo mucho más fiables para 
+    ///no fallar en los Navmesh. La función CalculatePointTarget() de AIController realiza algo parecedolo mismo pero consumiendo más recursos.,
+    //En los StatusNpc se calcula desde el inicio.
     private Vector3 positionPreviousFrame_;
+
 
     [HideInInspector] public CommandAddOrSubHealth commandAddOrSubHealth_; ///comandos comunes
     [HideInInspector] public CommandAddOrSubLifes commandAddOrSubLifes_; ///comandos comunes
+    [HideInInspector ]public Vector3 navMeshTargetPositionInfinity_; ///posición  infinita para cuando se quiere recalcular un path, así obligamos a que siempre haya una diferencia entre la
+    ///posición del objeto y la del detino mayor que targetMarginPosition, obligando así a recalcular, eso si se utiliza NavMesh.
+
+
     private string name_ = "Status";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables de trigger o suscriber a eventos
@@ -209,10 +217,24 @@ virtual public float MovementValue()
     return 0;
     
 }
+public Vector3 GetMinPos_()
+{   
+    return minPos_;
+}
+public void SetMinPos_()
+{
+    if (GetOrigin().GetComponent<Collider>() != null)
+    {
+            minPos_ = transform.position;
+            minPos_.y = GetOrigin().GetComponent<Collider>().bounds.min.y;
+    }
+        
+}
 public  void Awake()
 {
     InstaciateCommands();
-    origin_ = gameObject;
+    SetOrigin(gameObject);
+    SetMinPos_();
     Debug.Log("|||||||||||||| Awake Status||||||||||||||||");
 
 }

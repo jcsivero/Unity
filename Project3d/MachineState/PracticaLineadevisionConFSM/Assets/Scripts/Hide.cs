@@ -23,6 +23,7 @@ public class Hide : NPCBaseFSM
 
         if (aiController_.CleverHide(npc_) && (!isHealthRecovery_))
         {
+            Debug.Log("Recuperando energia");
             npc_.StartHealthRecovery();
             isHealthRecovery_ = true;
         }

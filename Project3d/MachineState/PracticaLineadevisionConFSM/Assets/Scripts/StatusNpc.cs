@@ -33,6 +33,7 @@ public class StatusNpc : Status
      [SerializeField] private int lifes_;
     [SerializeField] private int health_;
 
+
     [Header("Movement")]    
     [Tooltip("Utilizar Complemento NavMesh, movimiento directo hacia objetivo, sin calcular rutas. Si está desactivado también se desactivará navMeshUseSetDestination_")]
     public  bool navMeshUse_ = true;     
@@ -117,8 +118,10 @@ override public void SetNavMeshUseSetDestination(bool value)
 {
     if (value)
     {
-        SetNavMeshUse(true); ///tengo que habilitar primero el uso de NavMesh
+       if (SetNavMeshUse(true)) ///tengo que habilitar primero el uso de NavMesh
         navMeshUseSetDestination_ = true;
+       else
+        navMeshUseSetDestination_ =false; //si no se pudo activar, seguramente fue porque no está el complemento NavMesh agregado al GameObject.
     }
     else
         navMeshUseSetDestination_ = false;
@@ -175,9 +178,15 @@ override public float GetTargetMarginPosition()
 }
 override public void ErasePathNavMesh()
 {
-    if  (GetNavMeshAgent() != null) ///borro un posible path que ya tuviera asignado el navmes.
-       if (GetNavMeshAgent().hasPath)           
+    if (GetNavMeshUseSetDestination())
+       if (GetNavMeshAgent().hasPath) 
+       {
            GetNavMeshAgent().ResetPath(); 
+           GetNavMeshPath().ClearCorners(); ///comprobar si con uno solo basta.
+           SetNavMeshPathCurrentIndex(0);
+           SetNavMeshTargetPosition(navMeshTargetPositionInfinity_);
+       }          
+        
 }
 
 override public float GetSpeedCurrent()
@@ -269,7 +278,8 @@ override public float MovementValue()
         anim_ = gameObject.GetComponent<Animator>();                        
         navMeshAgent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
         navMeshPath_ = new UnityEngine.AI.NavMeshPath();
-        navMeshTargetPosition_ = new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity);
+        navMeshTargetPositionInfinity_ = new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity); 
+        SetNavMeshTargetPosition(navMeshTargetPositionInfinity_);        
         Debug.Log("|||||||||||||| Awake StatusNpc||||||||||||||||");
 
     }

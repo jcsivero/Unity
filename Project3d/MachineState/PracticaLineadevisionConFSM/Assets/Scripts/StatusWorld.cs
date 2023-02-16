@@ -141,7 +141,7 @@ public class StatusWorld : Status
             SetTarget(GameObject.FindGameObjectWithTag("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
         
         GetInitialInformation();
-        //AppendCommand(commandUpdateWayPoints_);
+        
 
 
     }
