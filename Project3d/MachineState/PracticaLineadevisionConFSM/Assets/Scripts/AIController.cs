@@ -132,6 +132,14 @@ private void recalculatePath(Status status, Vector3 location)
     
 
 }
+public bool TargetIsMoving(Status status,Vector3 location)
+{
+    if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+        return true;
+    else
+        return false;
+
+}
 public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolverá true si llegó al destino.
 {
     bool optimizar= true;
@@ -142,7 +150,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
             if (optimizar)
                 if (status.GetNavMeshAgent().hasPath)
                 {
-                    if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+                    if (TargetIsMoving(status,location))
                     {
                         Debug.Log("objetivo posicion cambiada rutina NavMesh SetDestination. : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
                         recalculatePath(status,location);                    
@@ -265,38 +273,12 @@ public void Wander(Status status)
 
 
 public void PatrolMode(StatusNpc status,bool withPosY = false)
-{
-    if(status.wayPointTag_.Length == 0)                
-    {
-        Debug.Log("////////////////////////No hay waypoints para este NPC. pasando a modo Wander.//////////"+ status.gameObject.name);
-        Wander(status); ///si no se definió etiqueta para waypoints, se pasa a modo Wander
-    }
-        
-    else
-    {
-        if (!GetStatusWorld().wayPoints_.ContainsKey(status.wayPointTag_))
-        {
-            Debug.Log("///////////////////// Etiqueta para waypoint no econtrada/////////////////////" + status.gameObject.name);
-            status.wayPointTag_ = "Tag No founded";            
-        }
-        else
-        {
-            ///Primero obtengo todos los waypoint asignados a esta etiqueta, o sea, la del NPC
-            List<GameObject> draft = GetStatusWorld().wayPoints_[status.wayPointTag_];
-            /// 
+{        
+    if (status.GetWayPointCurrentPos(true)== Vector3.zero)
+               status.NextWayPoint();     ///inicializo los waytpoints si la posición devuelta es cero. 
 
-            
-            Vector3 pos = CalculatePointTarget(status.GetOrigin(),draft[status.GetCurrentWayPoint()],false);
-            //if ((Seek(status,draft[status.GetCurrentWayPoint()].transform.position,withPosY)) || (CalculateDistanceStep(draft[status.GetCurrentWayPoint()].transform.position,status.transform.position,withPosY) < status.wayPointsAccuracy_)) 
-            if (Seek(status,pos,withPosY) || (CalculateDistanceStep(pos,status.transform.position,withPosY) < status.wayPointsAccuracy_))
-            //si llegué al final del path o hasta el punto de precisión de los waypointts
-                status.NextWayPoint(draft.Count);    
-
-
-        }
-
-
-    }
+    if ((Seek(status,status.GetWayPointCurrentPos(true),withPosY)) || (CalculateDistanceStep(status.GetWayPointCurrentPos(true),status.GetOrigin().transform.position,withPosY) < status.wayPointsAccuracy_)) 
+               status.NextWayPoint();    
 }
 public void Hide(StatusNpc status,bool withPosY=false)
 {
@@ -344,7 +326,8 @@ else
 }
 
     }
-public bool CleverHide(StatusNpc status,bool withPosY=false)
+///obtinene el punto del hidepoint más cercano, en base a su punto mínimo del collider y en la dirección contraria al target
+public Vector3 CleverHide(StatusNpc status,bool withPosY=false)
 {
 
     if(status.hidePointTag_.Length == 0)                
@@ -374,40 +357,37 @@ public bool CleverHide(StatusNpc status,bool withPosY=false)
             hideCol = draft[i].GetComponent<Collider>();            
             hidePoint.y = hideCol.bounds.min.y; ///compruebo la distancia con la posición mínima de la altura del collider, para evitar calculos erróneos cuando
             ///los pivotes se encuentran en el centro de objetos demasiado altos, en los que daría una distancia  mayor de la que realmente están.             
-//            Vector3 hideDir = hidePoint - status.GetTarget().transform.position;            
-  //          hideDir.y = 0.0f;       
-    //        hideDir = hideDir.normalized;     
 
-      //      Vector3 hidePos = hidePoint + hideDir * 100;
             if (Vector3.Distance(status.GetOrigin().transform.position,hidePoint) < dist)
             {
-                //chosenSpot = hidePos;
-                //chosenDir = hideDir;
                 chosenGO = draft[i];
                 dist = Vector3.Distance(status.GetOrigin().transform.position, hidePoint);
             }
         }
     
     Vector3 point = CalculatePointTarget(status.GetTarget(),chosenGO,true);
-    /*
-    Ray backRay = new Ray(chosenSpot, -chosenDir);
-    RaycastHit info;
-    float distance = 250.0f;
-    hideCol = chosenGO.GetComponent<Collider>();
-    hideCol.Raycast(backRay, out info, distance);
-    Debug.DrawRay(chosenSpot, -chosenDir * distance, Color.red);
-    */
     Debug.Log("punto de ocultación : " + point.ToString() );
 
-    return Seek(status,point,withPosY);  
+    return point;
+    
     }
 
-  return false;
+  return Vector3.zero; ///significa que hubo error
 
+}
+private bool GoToCleverHide(Status status, Vector3 location,bool withPosY = false,bool follow=false)
+{
+    if (follow)
+        if (TargetIsMoving(status,location))
+        {
+            
+        }
+
+    return Seek(status,location,withPosY);
 }
 ///Calcula el punto de destino desde la posición actual hacia el Gameobject final. Lo calcula con respecto a la mínima posicion del collider del objeto destino con el
 ///que impactará un RayCast. Así puedo trabajar a varias altura y no verme afectado por la altura de los objetos con pivote en el centro de la maya.
-private Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool inverse = false)
+public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool inverse = false)
 {
 
     Vector3 point = target.transform.position;

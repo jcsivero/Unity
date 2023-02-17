@@ -25,6 +25,9 @@ public class StatusNpc : Status
     ///todos los WayPoints detectados con la etiqueta que use este NPC. La indicada por tagWayPointsForThisNpc_;
     public  float wayPointsAccuracy_;    
 
+    public Vector3  wayPointsPos_; ///posición actual de su transforn del waypoint actual.
+    public Vector3  wayPointsPosBase_; ///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo.
+
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
@@ -61,8 +64,7 @@ public class StatusNpc : Status
     private  float speedMax_ = 2.0f;
     [SerializeField]
     private  float speedCurrent_;       
-    protected int healthMax_; //se almacenará la variable health inicial para poder conocer en un momento dado, la vida máxima.
-    
+    protected int healthMax_; //se almacenará la variable health inicial para poder conocer en un momento dado, la vida máxima.    
     [HideInInspector] public CommandAddOrSubEnemy commandAddOrSubEnemy_;
     
     private int navMeshPathCurrentIndex_;
@@ -274,7 +276,10 @@ override public float MovementValue()
         base.Awake();
         InstaciateCommands();       
         SetName("StatusNpc");
-        NextWayPoint(0); ///inicialzo la variable currentWayPoint_ con el valor que corresponda.
+        wayPointsPos_ = Vector3.zero;
+        wayPointsPosBase_ = Vector3.zero;
+                
+        
         anim_ = gameObject.GetComponent<Animator>();                        
         navMeshAgent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
         navMeshPath_ = new UnityEngine.AI.NavMeshPath();
@@ -285,8 +290,10 @@ override public float MovementValue()
     }
     public new void Start()
     {
-        base.Start();
+        base.Start();        
         Debug.Log("|||||||||||||| Start StatusNpc||||||||||||||||");
+        
+
         if (!suscribeToOnUpdateAllStatusNpc_)
             OnEnable(); 
        
@@ -354,38 +361,76 @@ override public float MovementValue()
 
     }
 
-public int GetCurrentWayPoint()
+
+public GameObject GetWayPointGameObjectCurrent()
 {
-    return wayPointCurrent_;
+    return GetStatusWorld().wayPoints_[wayPointTag_][GetWayPointCurrent()];
+ ////devuelve el GameObject del waypoints actual
 }
-
-////Devuelve el número del próximo waypoints a visitar. Se le pasa la capacidad de la lista de Waypoints para reiniciar en caso de llegar al último
-public void NextWayPoint(int count)
+public int  GetWayPointCurrent()
 {
-        
-        if (wayPointToGoOrder_.Length == 0)
-        {
-            ////Recorro todos los waypoints asignados a esta etiqueta
-            SetCurrentWayPoint(wayPointIndex_);            
-            wayPointIndex_++;
+    return wayPointCurrent_; ///devuelvo el número de waypoints actual, su posición en la lista.
+}
+public Vector3  GetWayPointCurrentPos(bool pointToTarget = true)
+{
+        ///devuelve la posición del waypoint actual normal u ajustada a la base del collider y en el punto de intersección con el target.
+                ///o sea, la posición devuelta por el método CalculatePointTarget() de AIcontroller.
+    if (pointToTarget)
+        return wayPointsPosBase_;
+    else
+        return  wayPointsPosBase_;
 
-            if (wayPointIndex_ >= count)
-                wayPointIndex_ = 0;
-            
+}
+////Devuelve el número del próximo waypoints a visitar. 
+///Aquí también se comprueba que haya waypoints, y se ajusta la posición del siguiente waypoints igual que su posición calculad con CaclculatePointTarget() de AIController()
+//Así no consumo tantos recursos, puesto que solo se recalcula en cada cambio de waypoints.
+public bool NextWayPoint()
+{
+     if(wayPointTag_.Length == 0)                
+    {
+        Debug.Log("////////////////////////No hay waypoints para este NPC. pasando a modo Wander.//////////"+ gameObject.name);
+        return false; ///esto indica que no hay waypoints para este NPC o que no se encontró objectos con la etiqueta indicada..        
+    }
+        
+    else
+    {
+        if (!GetStatusWorld().wayPoints_.ContainsKey(wayPointTag_))
+        {
+            Debug.Log("///////////////////// Etiqueta para waypoint no econtrada/////////////////////" + gameObject.name);
+            wayPointTag_ = "Tag No founded";            
+            return false; ///esto indica que no hay waypoints para este NPC o que no se encontró objectos con la etiqueta indicada.
         }
         else
-        {   
-            SetCurrentWayPoint(wayPointToGoOrder_[wayPointIndex_]);
-            wayPointIndex_++;
-            
-            if (wayPointIndex_ >= wayPointToGoOrder_.Length)
-                wayPointIndex_ = 0;
-                                                     
+        {            
+            if (wayPointToGoOrder_.Length == 0)
+            {
+                ////Recorro todos los waypoints asignados a esta etiqueta
+                SetWayPointCurrent(wayPointIndex_);                            
+                wayPointIndex_++;
+
+                if (wayPointIndex_ >= GetStatusWorld().wayPoints_[wayPointTag_].Count)
+                    wayPointIndex_ = 0;                                
+                
+            }
+            else
+            {   
+                SetWayPointCurrent(wayPointToGoOrder_[wayPointIndex_]);
+                wayPointIndex_++;
+                
+                if (wayPointIndex_ >= wayPointToGoOrder_.Length)
+                    wayPointIndex_ = 0;                            
+                                                        
+            }
+            wayPointsPos_ = GetWayPointGameObjectCurrent().transform.position;
+            wayPointsPosBase_ =  GetAIController().CalculatePointTarget(GetOrigin(),GetWayPointGameObjectCurrent());
         }
-        
+
+    }   
+    return true;
 }
 
-public void SetCurrentWayPoint(int draft)
+
+public void SetWayPointCurrent(int draft)
 {
     wayPointCurrent_ = draft;
 }

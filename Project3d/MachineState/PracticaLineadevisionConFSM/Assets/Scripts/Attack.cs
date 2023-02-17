@@ -20,7 +20,9 @@ public class Attack : NPCBaseFSM
     {
         UpdateState();          
         //npc_.ErasePathNavMesh();        
-        npc_.transform.LookAt(target_.transform.position);
+        Vector3 look = target_.transform.position;
+        look.y = npc_.transform.position.y;
+        npc_.transform.LookAt(look);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
