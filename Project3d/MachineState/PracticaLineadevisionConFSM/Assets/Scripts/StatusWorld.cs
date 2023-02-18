@@ -19,6 +19,7 @@ public class StatusWorld : Status
     [SerializeField] public int  levelPoints_ = 0;
 
     public Dictionary<string,List<GameObject>> wayPoints_;
+    public List<GameObject> waypoints2;
     public Dictionary<string,List<GameObject>> hidePoints_;
     public Dictionary<string,List<GameObject>> gameObjectsByName_;
     public List<GameObject> allGameObjects_;    
@@ -45,6 +46,7 @@ public class StatusWorld : Status
         
         ///Inicializo variables de control de objecots.        
         wayPoints_= new Dictionary<string,List<GameObject>>();
+        
         hidePoints_ = new Dictionary<string,List<GameObject>>();
         gameObjectsByName_ = new Dictionary<string,List<GameObject>>();
         allGameObjects_ = new List<GameObject>();
@@ -60,6 +62,8 @@ public class StatusWorld : Status
 
         ControlGameObjects controlGameObjects;
         List<GameObject> refToGameObjets;
+        Dictionary<string,List<GameObject>> wayPointsDraft;
+
         string tag;
         string nameGameObject;
 
@@ -69,7 +73,7 @@ public class StatusWorld : Status
         hidePoints_.Clear();
         gameObjectsByName_.Clear();
         allGameObjects_.Clear();   
-                 
+        wayPointsDraft = new Dictionary<string,List<GameObject>>();
 
         GameObject[] refObject = GameManager.FindObjectsOfType<GameObject>();
 
@@ -94,7 +98,6 @@ public class StatusWorld : Status
                 Debug.Log("...................Falta componente ControlGameObjects en objeto con nombre: " + nameGameObject);
             else
             {
-                //if (controlGameObjects.isWaypoints_)
                 if (controlGameObjects.tagsForWayPoints_.Length > 0)
                 {
                     for (int j=0; j < controlGameObjects.tagsForWayPoints_.Length;j++)
@@ -104,16 +107,15 @@ public class StatusWorld : Status
                                 wayPoints_.Add(tag, new List<GameObject>());
                         
                         refToGameObjets = wayPoints_[tag];
-                        if (refToGameObjets.Count == 0)
-                            refToGameObjets.Add(refObject[i]);     ///si es el primer objeto de la lista lo agrego, no puedo insertar hasta que haya por lo menos un objeto.                   
-                        else
-                            refToGameObjets.Insert(controlGameObjects.indexWayPoint_,refObject[i]);  
-                                                  
+                        if (refToGameObjets.Count< controlGameObjects.indexWayPoint_+1)
+                            for (int k=refToGameObjets.Count; k < controlGameObjects.indexWayPoint_+1;k++)
+                                refToGameObjets.Add(null); ///relleno huecos en caso de que haya waypoints con 
+                                ///numero mayor de los elementos en la lista. Después ya se iran rellenando.
+                        refToGameObjets[controlGameObjects.indexWayPoint_] = refObject[i];
                     }
                 }
             ////Ahora actualizo los puntos de ocultación.
             
-                //if (controlGameObjects.isHidePoint)
                 if (controlGameObjects.tagsForHidePoints_.Length > 0)
                 {
                     for (int j=0; j < controlGameObjects.tagsForHidePoints_.Length;j++)
@@ -133,8 +135,9 @@ public class StatusWorld : Status
             
 
         }
-        
-    }
+
+        waypoints2 = wayPoints_["Robots"];
+}
     public new void Start()
     {
         Debug.Log("|||||||||||||| Start StatusWorld||||||||||||||||");

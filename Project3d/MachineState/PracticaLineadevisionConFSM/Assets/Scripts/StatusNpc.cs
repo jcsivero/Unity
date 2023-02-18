@@ -20,11 +20,11 @@ public class StatusNpc : Status
     [Header("Way And Hide Points")]
     [Space(5)]
     public string hidePointTag_;
-    public Vector3 hidePointPosBase_;///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo mediante CalculatePointToTarget desde AIController
+    private Vector3 hidePointPosBase_;///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo mediante CalculatePointToTarget desde AIController
     public string wayPointTag_;  
     public int[] wayPointToGoOrder_; ///indica el orden de los WayPoints a visitar, en caso de tenerlos. Si su tamaño es cero, se visitarán
     ///todos los WayPoints detectados con la etiqueta que use este NPC. La indicada por tagWayPointsForThisNpc_;
-    public  float wayPointsAccuracy_;    
+    public  float wayPointsAccuracy_=1;    
 
     private Vector3  wayPointsPos_; ///posición actual de su transforn del waypoint actual.
     private Vector3  wayPointsPosBase_; ///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo, obtenido mediante la funcion de AIController llamda
@@ -34,10 +34,6 @@ public class StatusNpc : Status
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-    [Header("Attributtes")]
-     [SerializeField] private int lifes_;
-    [SerializeField] private int health_;
-
 
     [Header("Movement")]    
     [Tooltip("Utilizar Complemento NavMesh, movimiento directo hacia objetivo, sin calcular rutas. Si está desactivado también se desactivará navMeshUseSetDestination_")]
@@ -47,6 +43,9 @@ public class StatusNpc : Status
     [Tooltip ("Distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado")]
     public float brakingDistance_=1.0f; ///distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado
     ///utilizar NavMesh.
+    [Tooltip("Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de utilizar NavMesh.")]
+    public float targetMarginPosition_=1.0f; /// Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de 
+   
     [SerializeField] 
     [Tooltip("Distancia hacia el objetivo que se puede utilizar como disparador en el Animator o cualquier otro sitio para indicar que el objetivo se encuentra a esa distancia o menos.")]
     private  float visDistance_ = 20.0f;
@@ -64,7 +63,6 @@ public class StatusNpc : Status
     private  float speedMax_ = 2.0f;
     [SerializeField]
     private  float speedCurrent_;       
-    protected int healthMax_; //se almacenará la variable health inicial para poder conocer en un momento dado, la vida máxima.    
     [HideInInspector] public CommandAddOrSubEnemy commandAddOrSubEnemy_;
     
     private int navMeshPathCurrentIndex_;
@@ -92,7 +90,10 @@ public class StatusNpc : Status
 ////Métodos Sobreescritos
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
   
-
+override public float GetTargetMarginPosition()
+{
+    return targetMarginPosition_;
+}
 override public UnityEngine.AI.NavMeshAgent GetNavMeshAgent()
 {    
     return navMeshAgent_;
@@ -100,6 +101,14 @@ override public UnityEngine.AI.NavMeshAgent GetNavMeshAgent()
 override public bool GetNavMeshUse()
 {
     return navMeshUse_;
+}
+public Vector3 GetHidePointPosBase()
+{
+    return hidePointPosBase_;
+}
+public void SetHidePointPosBase(Vector3 value)
+{
+    hidePointPosBase_ = value;
 }
 override public bool SetNavMeshUse(bool navmesh) 
 {
@@ -206,7 +215,6 @@ override public float GetSpeedMax()
 }
 
 
-
 override public void SetSpeedRotation(float speed)
 {        
     speedRotation_ = speed;
@@ -248,14 +256,6 @@ override public void SetVisDistanceToAttack(float distance)
     visDistanceToAttack_ = distance;
 }
 
-override public void  SetHealth(int health)
-{        
-    health_ = health;
-}
-override public int  GetHealth()
-{        
-    return health_;
-}
 override public float MovementValue()
 {
     return speedMax_ * Time.deltaTime; ////puedo poner también por valor de movimiento del ratón, ejes...

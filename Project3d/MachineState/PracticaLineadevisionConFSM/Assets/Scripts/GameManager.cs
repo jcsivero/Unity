@@ -21,7 +21,7 @@ public class GameManager :BaseMono
     public Commands commands_;
     
     private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";
-    public bool ok_ = false; //será true, cuando se haya ejecutado el Update de GameManager el primero, asegurando así que puedo establecer
+    [HideInInspector ]public bool ok_ = false; //será true, cuando se haya ejecutado el Update de GameManager el primero, asegurando así que puedo establecer
     ///unas condiciones de inicio antes de que comiencen los update del resto de componentes. Si se necesitara actualizar recursos, se puede invocar el evento
     ///al que se adjuntan los scripts.
     

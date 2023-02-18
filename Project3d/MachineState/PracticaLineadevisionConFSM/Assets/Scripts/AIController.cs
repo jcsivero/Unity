@@ -130,7 +130,7 @@ private void recalculatePath(Status status, Vector3 location)
     
 
 }
-public bool TargetIsMoving(Status status,Vector3 location)
+public bool TargetIsMoved(Status status,Vector3 location)
 {
     if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
         return true;
@@ -150,7 +150,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
             if (optimizar)
                 if (status.GetNavMeshAgent().hasPath)
                 {
-                    if (TargetIsMoving(status,location))
+                    if (TargetIsMoved(status,location))
                     {
                         Debug.Log("objetivo posicion cambiada rutina NavMesh SetDestination. : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
                         recalculatePath(status,location);                    
@@ -159,7 +159,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
                 }
                 else 
                 {
-                    if (TargetIsMoving(status,location))
+                    if (TargetIsMoved(status,location))
                     {
                         Debug.Log("asignando nuevo path rutina NavMesh SetDestination.");
                         recalculatePath(status,location);                    
@@ -189,7 +189,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
             {
                 Debug.Log("tiene path");
 
-                if  (TargetIsMoving(status,location))
+                if  (TargetIsMoved(status,location))
                 {
                     Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
                     recalculatePath(status,location);                    
@@ -212,7 +212,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
             }
             else
             {
-                if (TargetIsMoving(status,location))
+                if (TargetIsMoved(status,location))
                 {
                         Debug.Log("asignando nuevo path");
                         recalculatePath(status, location);                           
@@ -273,12 +273,19 @@ public void Wander(Status status)
 
 
 public void PatrolMode(StatusNpc status,bool withPosY = false)
-{        
+{  
+    bool patrol=true;     
     if (status.GetWayPointCurrentPos(true)== Vector3.zero)
-               status.NextWayPoint();     ///inicializo los waytpoints si la posición devuelta es cero. 
+        patrol = status.NextWayPoint();     ///inicializo los waytpoints si la posición devuelta es cero.
 
-    if ((Seek(status,status.GetWayPointCurrentPos(true),withPosY)) || (CalculateDistanceStep(status.GetWayPointCurrentPos(true),status.GetOrigin().transform.position,withPosY) < status.wayPointsAccuracy_)) 
-               status.NextWayPoint();    
+    if (patrol)
+    {
+        if ((Seek(status,status.GetWayPointCurrentPos(true),withPosY)) || (CalculateDistanceStep(status.GetWayPointCurrentPos(true),status.GetOrigin().transform.position,withPosY) < status.wayPointsAccuracy_)) 
+            status.NextWayPoint();    
+
+    }
+    else
+       Wander(status);
 }
 public void Hide(StatusNpc status,bool withPosY=false)
 {
@@ -366,10 +373,10 @@ public Vector3 CleverHide(StatusNpc status,bool withPosY=false)
         }
     
     
-    status.hidePointPosBase_ = CalculatePointTarget(status.GetTarget(),chosenGO,true);
-    Debug.Log("punto de ocultación : " + status.hidePointPosBase_.ToString());
+    status.SetHidePointPosBase(CalculatePointTarget(status.GetTarget(),chosenGO,true));
+    Debug.Log("punto de ocultación : " + status.GetHidePointPosBase().ToString());
 
-    return status.hidePointPosBase_ ;
+    return status.GetHidePointPosBase();
     }
 
   return Vector3.zero; ///significa que hubo error
@@ -388,7 +395,7 @@ public bool GoToCleverHide(StatusNpc status,bool withPosY = false,bool follow=fa
         }
             
     
-    return Seek(status,status.hidePointPosBase_,withPosY);    
+    return Seek(status,status.GetHidePointPosBase(),withPosY);    
 }
 ///Calcula el punto de destino desde la posición actual hacia el Gameobject final. Lo calcula con respecto a la mínima posicion del collider del objeto destino con el
 ///que impactará un RayCast. Así puedo trabajar a varias altura y no verme afectado por la altura de los objetos con pivote en el centro de la maya.
@@ -447,7 +454,7 @@ public bool CanSeeTarget(Status status,GameObject target)
         //Debug.Log("etiqueta" + raycastInfo.transform.tag);
         //Debug.Log("nombre: " +raycastInfo.transform.gameObject.name);
         //if (raycastInfo.transform.gameObject.tag == "Player")
-            if (raycastInfo.transform.gameObject.tag == "Player")
+            if (raycastInfo.transform.gameObject == target)
                 return true;
     }
     return false;

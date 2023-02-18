@@ -14,14 +14,15 @@ public  abstract class  Status :  BaseMono
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+    [Header("Attributtes")]
+    [SerializeField] private int lifes_;
+    [SerializeField] private int health_;
+    protected int healthMax_; //se almacenará la variable health inicial para poder conocer en un momento dado, la vida máxima.    
+
     [Header("Links to GameObjects")]
     [SerializeField] private GameObject origin_;
     [SerializeField] private GameObject target_;     
-
-    [Tooltip("Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de utilizar NavMesh.")]
-    public float targetMarginPosition_=1.0f; /// Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de 
-    
-     
+  
     protected Vector3 posReferenceFromChanged_; ///Guarda la posición de referencia contra la que se comprobará si el objeto ha variado su posición más alla del umbral establecidor.
 
     private Vector3 minPos_; ///Posición del valor mínimo del collider. del Npc. Utilizado para obtener posiciones a ras de suelo mucho más fiables para 
@@ -66,10 +67,15 @@ public  GameObject GetTarget()
 return target_;
 }  
 
-virtual public  int GetHealth()
-{
-return 0;
-}    
+virtual public void  SetHealth(int health)
+{        
+    health_ = health;
+}
+virtual public int  GetHealth()
+{        
+    return health_;
+}
+   
 
 public Status GetTargetStatus()
 {
@@ -94,9 +100,7 @@ public void  SetOrigin(GameObject draft)
 {
     origin_ = draft;
 }
-virtual public void  SetHealth(int draft)
-{        
-}
+
 virtual public void  SetLifes(int draft)
 {        
 }
@@ -132,18 +136,18 @@ virtual public void SetNavMeshUseSetDestination(bool value)
     
   
 
-    virtual public UnityEngine.AI.NavMeshPath GetNavMeshPath()
-    {
-        return null;
-    }
-     virtual public int GetNavMeshPathCurrentIndex()
-    {
-        return 0;
-    }
-    virtual public void  SetNavMeshPathCurrentIndex(int index)
-    {
-        
-    }
+virtual public UnityEngine.AI.NavMeshPath GetNavMeshPath()
+{
+    return null;
+}
+    virtual public int GetNavMeshPathCurrentIndex()
+{
+    return 0;
+}
+virtual public void  SetNavMeshPathCurrentIndex(int index)
+{
+    
+}
 virtual public float GetBrakingDistance()
 {
     return 0.0f;
@@ -162,9 +166,9 @@ virtual public Vector3 GetNavMeshTargetPosition()
 }
 
 
-public float GetTargetMarginPosition()
+virtual public float GetTargetMarginPosition()
 {
-    return targetMarginPosition_;
+    return 0;
 }
 
 virtual public void ErasePathNavMesh()
