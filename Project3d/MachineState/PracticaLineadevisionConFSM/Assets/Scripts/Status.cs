@@ -17,10 +17,17 @@ public  abstract class  Status :  BaseMono
     [Header("Links to GameObjects")]
     [SerializeField] private GameObject origin_;
     [SerializeField] private GameObject target_;     
-    [SerializeField] private Vector3 minPos_; ///Posición del valor mínimo del collider. del Npc. Utilizado para obtener posiciones a ras de suelo mucho más fiables para 
+
+    [Tooltip("Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de utilizar NavMesh.")]
+    public float targetMarginPosition_=1.0f; /// Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de 
+    
+     
+    protected Vector3 posReferenceFromChanged_; ///Guarda la posición de referencia contra la que se comprobará si el objeto ha variado su posición más alla del umbral establecidor.
+
+    private Vector3 minPos_; ///Posición del valor mínimo del collider. del Npc. Utilizado para obtener posiciones a ras de suelo mucho más fiables para 
     ///no fallar en los Navmesh. La función CalculatePointTarget() de AIController realiza algo parecedolo mismo pero consumiendo más recursos.,
     //En los StatusNpc se calcula desde el inicio.
-    private Vector3 positionPreviousFrame_;
+    protected Vector3 positionPreviousFrame_; ///utilizado para averiguar la velocidad entre cambios de frames.
 
 
     [HideInInspector] public CommandAddOrSubHealth commandAddOrSubHealth_; ///comandos comunes
@@ -33,75 +40,87 @@ public  abstract class  Status :  BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables de trigger o suscriber a eventos
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
-    public  string GetName()
-    {
-        return name_;
-    }
+public void PosIsChangedReset()
+{    
+    posReferenceFromChanged_ = transform.position;
+}
+public bool PosIsChanged() ///indica si el objeto ha cambiado su posición más alla del umbral de targetMarginPosition con respecto a la posición que tenía cuando se hizo ResetPosIsChanged()
+{
+    if (Vector3.Distance(transform.position,posReferenceFromChanged_) > GetTargetMarginPosition())
+        return true;
+    
+    return false;
+            
+}
+public  string GetName()
+{
+    return name_;
+}
 
-     public  GameObject GetOrigin()
-     {
-        return origin_;
-     }    
-     public  GameObject GetTarget()
-     {
-        return target_;
-     }  
+public  GameObject GetOrigin()
+{
+return origin_;
+}    
+public  GameObject GetTarget()
+{
+return target_;
+}  
 
-     virtual public  int GetHealth()
-     {
-        return 0;
-     }    
+virtual public  int GetHealth()
+{
+return 0;
+}    
 
-     public Status GetTargetStatus()
-     {
-        return GetTarget().GetComponent<Status>();
-     }
-     virtual public  int  GetLifes()
-     {
-        return 0;
-     }  
+public Status GetTargetStatus()
+{
+return GetTarget().GetComponent<Status>();
+}
+virtual public  int  GetLifes()
+{
+return 0;
+}  
 
-     public  void SetName(string draft)
-     {
-        name_ = draft;
-     }  
+public  void SetName(string draft)
+{
+name_ = draft;
+}  
 
-     public  void SetTarget(GameObject target)
-     {
-        target_ = target;
-     }  
+public  void SetTarget(GameObject target)
+{
+target_ = target;
+}  
 
-    public void  SetOrigin(GameObject draft)
-    {
-        origin_ = draft;
-    }
-    virtual public void  SetHealth(int draft)
-    {        
-    }
-    virtual public void  SetLifes(int draft)
-    {        
-    }
-    private void InstaciateCommands()
-    {
-                
-        commandAddOrSubHealth_ = new CommandAddOrSubHealth(this);
-        commandAddOrSubLifes_ = new CommandAddOrSubLifes(this);
+public void  SetOrigin(GameObject draft)
+{
+    origin_ = draft;
+}
+virtual public void  SetHealth(int draft)
+{        
+}
+virtual public void  SetLifes(int draft)
+{        
+}
+private void InstaciateCommands()
+{
+            
+    commandAddOrSubHealth_ = new CommandAddOrSubHealth(this);
+    commandAddOrSubLifes_ = new CommandAddOrSubLifes(this);
 
-    }
+}
  
-    virtual public UnityEngine.AI.NavMeshAgent GetNavMeshAgent()
-    {
-        return null;
-    }    
+virtual public UnityEngine.AI.NavMeshAgent GetNavMeshAgent()
+{
+    return null;
+}    
 
-    virtual public bool SetNavMeshUse(bool navmesh) 
-    {
-        return false;
-    }
-    virtual public bool GetNavMeshUse()
-    {
-        return false;
-    }
+virtual public bool SetNavMeshUse(bool navmesh) 
+{
+    return false;
+}
+virtual public bool GetNavMeshUse()
+{
+    return false;
+}
 virtual public void SetNavMeshUseSetDestination(bool value)
 {
 
@@ -142,10 +161,12 @@ virtual public Vector3 GetNavMeshTargetPosition()
     return Vector3.zero;
 }
 
-virtual public float GetTargetMarginPosition()
+
+public float GetTargetMarginPosition()
 {
-    return 0.0f;
+    return targetMarginPosition_;
 }
+
 virtual public void ErasePathNavMesh()
 {
 
@@ -266,11 +287,13 @@ protected void Update()
         ///Se basa en la magnitud de la diferencia de posición  en la pantalla en valor absoluto, dividido entre el tiempo de cada frame.
 
             
-            SetSpeedCurrent(Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime));        
-            positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad            
             SetNavMeshUse(GetNavMeshUse()); ///para actualizar en modo debug. O sea, si cambio en el inspector el valor se actualice inmediatamente.
             SetNavMeshUseSetDestination(GetNavMeshUseSetDestination());
         }
+
+
+        SetSpeedCurrent(Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime));        
+        positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad            
         
     }
     

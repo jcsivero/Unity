@@ -20,13 +20,15 @@ public class StatusNpc : Status
     [Header("Way And Hide Points")]
     [Space(5)]
     public string hidePointTag_;
+    public Vector3 hidePointPosBase_;///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo mediante CalculatePointToTarget desde AIController
     public string wayPointTag_;  
     public int[] wayPointToGoOrder_; ///indica el orden de los WayPoints a visitar, en caso de tenerlos. Si su tamaño es cero, se visitarán
     ///todos los WayPoints detectados con la etiqueta que use este NPC. La indicada por tagWayPointsForThisNpc_;
     public  float wayPointsAccuracy_;    
 
-    public Vector3  wayPointsPos_; ///posición actual de su transforn del waypoint actual.
-    public Vector3  wayPointsPosBase_; ///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo.
+    private Vector3  wayPointsPos_; ///posición actual de su transforn del waypoint actual.
+    private Vector3  wayPointsPosBase_; ///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo, obtenido mediante la funcion de AIController llamda
+    ///CalculatePointToTarget()
 
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,8 +46,6 @@ public class StatusNpc : Status
     public bool navMeshUseSetDestination_  = false;
     [Tooltip ("Distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado")]
     public float brakingDistance_=1.0f; ///distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado
-    [Tooltip("Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de utilizar NavMesh.")]
-    public float targetMarginPosition_=1.0f; /// Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de 
     ///utilizar NavMesh.
     [SerializeField] 
     [Tooltip("Distancia hacia el objetivo que se puede utilizar como disparador en el Animator o cualquier otro sitio para indicar que el objetivo se encuentra a esa distancia o menos.")]
@@ -172,11 +172,6 @@ override public void SetNavMeshTargetPosition(Vector3 pos)
 override public Vector3 GetNavMeshTargetPosition()
 {
     return navMeshTargetPosition_;
-}
-
-override public float GetTargetMarginPosition()
-{
-    return targetMarginPosition_;
 }
 override public void ErasePathNavMesh()
 {
@@ -346,7 +341,7 @@ override public float MovementValue()
         base.Update();
         if (GetGameManager().ok_)
         {
-
+             
         }
     }
 

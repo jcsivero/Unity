@@ -127,8 +127,6 @@ private void recalculatePath(Status status, Vector3 location)
             
         
     }      
-
-
     
 
 }
@@ -140,6 +138,8 @@ public bool TargetIsMoving(Status status,Vector3 location)
         return false;
 
 }
+
+
 public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolverá true si llegó al destino.
 {
     bool optimizar= true;
@@ -159,7 +159,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
                 }
                 else 
                 {
-                    if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+                    if (TargetIsMoving(status,location))
                     {
                         Debug.Log("asignando nuevo path rutina NavMesh SetDestination.");
                         recalculatePath(status,location);                    
@@ -189,7 +189,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
             {
                 Debug.Log("tiene path");
 
-                if  (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+                if  (TargetIsMoving(status,location))
                 {
                     Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
                     recalculatePath(status,location);                    
@@ -212,7 +212,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
             }
             else
             {
-                if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+                if (TargetIsMoving(status,location))
                 {
                         Debug.Log("asignando nuevo path");
                         recalculatePath(status, location);                           
@@ -365,25 +365,30 @@ public Vector3 CleverHide(StatusNpc status,bool withPosY=false)
             }
         }
     
-    Vector3 point = CalculatePointTarget(status.GetTarget(),chosenGO,true);
-    Debug.Log("punto de ocultación : " + point.ToString() );
-
-    return point;
     
+    status.hidePointPosBase_ = CalculatePointTarget(status.GetTarget(),chosenGO,true);
+    Debug.Log("punto de ocultación : " + status.hidePointPosBase_.ToString());
+
+    return status.hidePointPosBase_ ;
     }
 
   return Vector3.zero; ///significa que hubo error
 
 }
-private bool GoToCleverHide(Status status, Vector3 location,bool withPosY = false,bool follow=false)
+///dirige el objeto hacia el punto de ocultación previamente  calculado con CleverHide(). Si se quiere utilizar la función de actualización
+///del punto de ocultación en base al movimiento del objeto target, o sea, activar la variable follow, previmente debe de haberse ejecutado
+///la funcion PosIsChangedReset() para reiniciar el contador de detección de movimiento.
+public bool GoToCleverHide(StatusNpc status,bool withPosY = false,bool follow=false)
 {
     if (follow)
-        if (TargetIsMoving(status,location))
+        if (status.GetTargetStatus().PosIsChanged())
         {
-            
+            CleverHide(status,withPosY);
+            status.GetTargetStatus().PosIsChangedReset();         
         }
-
-    return Seek(status,location,withPosY);
+            
+    
+    return Seek(status,status.hidePointPosBase_,withPosY);    
 }
 ///Calcula el punto de destino desde la posición actual hacia el Gameobject final. Lo calcula con respecto a la mínima posicion del collider del objeto destino con el
 ///que impactará un RayCast. Así puedo trabajar a varias altura y no verme afectado por la altura de los objetos con pivote en el centro de la maya.

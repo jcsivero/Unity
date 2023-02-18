@@ -12,39 +12,25 @@ public class Hide : NPCBaseFSM
     {
         
         base.OnStateEnter(animator, stateInfo, layerIndex);        
+        aiController_.CleverHide(npc_,false);
         
     
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    private bool isHidding_ = false;
-    private Vector3 posHide_;
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         UpdateState();        
-
-        if (isHidding_)
-        {
-            if (aiController_.Seek(npc_,posHide_))
+        
+        if (aiController_.GoToCleverHide(npc_,false,true))        
+            if (!isHealthRecovery_) ///si llegó al punto de ocultación, comienzo la recarga de vida.
             {
-                if (!isHealthRecovery_)
-                {
-                    Debug.Log("Recuperando energia");
-                    npc_.StartHealthRecovery();
-                    isHealthRecovery_ = true;
-                }                
-            }
+                Debug.Log("Recuperando energia");
+                npc_.StartHealthRecovery();
+                isHealthRecovery_ = true;
+            }                
+            
 
-        }
-        else
-        {
-            posHide_ = aiController_.CleverHide(npc_);
-
-            ///si consiguió un punto de ocultación.
-            if (posHide_ != Vector3.zero)
-                isHidding_ = true;
-        }
-                        
        
     }
 
@@ -53,7 +39,7 @@ public class Hide : NPCBaseFSM
     {
         npc_.StopHealthRecovery();
         isHealthRecovery_ = false;
-        isHidding_ = false;
+        
 
     }
 

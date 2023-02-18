@@ -107,7 +107,8 @@ public class StatusWorld : Status
                         if (refToGameObjets.Count == 0)
                             refToGameObjets.Add(refObject[i]);     ///si es el primer objeto de la lista lo agrego, no puedo insertar hasta que haya por lo menos un objeto.                   
                         else
-                            refToGameObjets.Insert(controlGameObjects.indexWayPoint_,refObject[i]);                        
+                            refToGameObjets.Insert(controlGameObjects.indexWayPoint_,refObject[i]);  
+                                                  
                     }
                 }
             ////Ahora actualizo los puntos de ocultación.
