@@ -8,12 +8,30 @@ public class StatusPlayer : Status
 
     public GameObject bullet_;    
     public CommandHudUpdateStatusPlayer commandHudUpdateStatusPlayer_;
+    public CommandAddOrSubHealth commandAddOrSubHealth_;
+    [HideInInspector] public CommandAddOrSubLifes commandAddOrSubLifes_; ///comandos comunes
+
+    [Header("Attributtes")]
     
+    [SerializeField] private int healthPlayer_;
+
+override public void  SetHealth(int health)
+{     
+
+    healthPlayer_ = health;
+}
+override public int  GetHealth()
+{   
+         
+    return healthPlayer_;
+}
+   
     public new void Awake()
     {
         base.Awake();
         InstaciateCommands();     
-        SetName("StatusPlayer");        
+        SetName("StatusPlayer");  
+              
         Debug.Log("|||||||||||||| Awake StatusPlayer||||||||||||||||");
 
     }
@@ -38,6 +56,8 @@ public class StatusPlayer : Status
     {
         
         commandHudUpdateStatusPlayer_ = new CommandHudUpdateStatusPlayer(this);
+        commandAddOrSubHealth_ = new CommandAddOrSubHealth(this);
+        commandAddOrSubLifes_ = new CommandAddOrSubLifes(this);
         
     
 
@@ -49,7 +69,7 @@ public class StatusPlayer : Status
         //position.z *=2;
         //position.x *=2;        
         GameObject b = Instantiate(bullet_,transform.position + position, transform.rotation);
-        b.GetComponent<Rigidbody>().AddForce(b.transform.forward * 2000);
+        b.GetComponent<Rigidbody>().AddForce(b.transform.forward * 1000);
     }
 
     /// <summary>
@@ -68,7 +88,7 @@ public class StatusPlayer : Status
             
             if (GetHealth() <= 0)  
             {
-                //Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
     }

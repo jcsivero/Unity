@@ -6,20 +6,21 @@ public class StatusWorld : Status
 {
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables públicas propias de esta clase
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-    public CommandUpdateWayPoints commandUpdateWayPoints_;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
+    [Header("Attributtes")]
+    [SerializeField] private int lifesPlayer_;
+    //[SerializeField] private int healthPlayer_;
     [SerializeField] public int  numberOfLevels_;
     [SerializeField] public int countEnemies_;    
     [SerializeField] public int activeLevel_; //por defecto comienza en la escena 1. La 0 es el menú principal
     [SerializeField] public int totalPoints_ = 0;
     [SerializeField] public int  levelPoints_ = 0;
 
-    public Dictionary<string,List<GameObject>> wayPoints_;
-    public List<GameObject> waypoints2;
+    public Dictionary<string,List<GameObject>> wayPoints_;    
     public Dictionary<string,List<GameObject>> hidePoints_;
     public Dictionary<string,List<GameObject>> gameObjectsByName_;
     public List<GameObject> allGameObjects_;    
@@ -135,8 +136,7 @@ public class StatusWorld : Status
             
 
         }
-
-        waypoints2 = wayPoints_["Robots"];
+        
 }
     public new void Start()
     {
@@ -147,17 +147,40 @@ public class StatusWorld : Status
         GetInitialInformation();
         
 
-
     }
 
 
     private void InstaciateCommands()
     {
-             commandUpdateWayPoints_ = new CommandUpdateWayPoints();
+     
 
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+    public int GetCountEnemies()
+    {
+        return countEnemies_;
+    }
+    public void SetCountEnemies(int draft)
+    {
+        countEnemies_ += draft;
+    }
 
+    public int GetTotalPoints()
+    {
+        return totalPoints_;
+    }
+    public void SetTotalPoints(int draft)
+    {
+       totalPoints_ += draft;
+    }
+override public void  SetHealth(int health)
+{        
+    GetTarget().GetComponent<Status>().SetHealth(health);
+}
+override public int  GetHealth()
+{        
+    return GetTarget().GetComponent<Status>().GetHealth();
+}
 }

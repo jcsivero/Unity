@@ -17,6 +17,10 @@ public class StatusNpc : Status
 
     [Header("=============== StatusNpc")]
     [Space(5)]
+    [Header("Attributtes")]
+    [SerializeField] private int lifes_;
+    [SerializeField] private int health_;
+    protected int healthMax_; //se almacenará la variable health inicial para poder conocer en un momento dado, la vida máxima.    
     [Header("Way And Hide Points")]
     [Space(5)]
     public string hidePointTag_;
@@ -64,6 +68,8 @@ public class StatusNpc : Status
     [SerializeField]
     private  float speedCurrent_;       
     [HideInInspector] public CommandAddOrSubEnemy commandAddOrSubEnemy_;
+    public CommandAddOrSubHealth commandAddOrSubHealth_;
+    [HideInInspector] public CommandAddOrSubLifes commandAddOrSubLifes_; ///comandos comunes
     
     private int navMeshPathCurrentIndex_;
         
@@ -185,7 +191,7 @@ override public Vector3 GetNavMeshTargetPosition()
 override public void ErasePathNavMesh()
 {
     if (GetNavMeshUseSetDestination())
-       if (GetNavMeshAgent().hasPath) 
+       if (GetNavMeshAgent().pathPending) 
        {
            GetNavMeshAgent().ResetPath(); 
            GetNavMeshPath().ClearCorners(); ///comprobar si con uno solo basta.
@@ -255,7 +261,15 @@ override public void SetVisDistanceToAttack(float distance)
 {        
     visDistanceToAttack_ = distance;
 }
-
+override public void  SetHealth(int health)
+{        
+    health_ = health;
+}
+override public int  GetHealth()
+{        
+    return health_;
+}
+   
 override public float MovementValue()
 {
     return speedMax_ * Time.deltaTime; ////puedo poner también por valor de movimiento del ratón, ejes...
@@ -351,7 +365,10 @@ override public float MovementValue()
     private void InstaciateCommands()
     {
         
+    
         commandAddOrSubEnemy_ = new CommandAddOrSubEnemy();
+        commandAddOrSubHealth_ = new CommandAddOrSubHealth(this);
+        commandAddOrSubLifes_ = new CommandAddOrSubLifes(this);
 
 
     }

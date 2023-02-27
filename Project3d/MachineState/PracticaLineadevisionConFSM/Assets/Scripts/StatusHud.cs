@@ -11,12 +11,19 @@ public class StatusHud : Status
     
     public CommandHudUpdateAll commandHudUpdateAll_; ///comandos comunes    
     public CommandHudUpdateHealth commandHudUpdateHealth_; ///comandos comunes
-    
+
+   public CommandHudUpdateTotalPoints commandHudUpdateTotalPoints_; ///comandos comunes
+
+    public CommandHudUpdateCountEnemies commandHudUpdateCountEnemies_; ///comandos comunes
+
+
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
     [SerializeField] private Text  hudTextHealthPlayer_;
+    [SerializeField] private Text  hudTextCountEnemies_;
+    [SerializeField] private Text  hudTextTotalPoints_;
 
 
 
@@ -56,6 +63,8 @@ public class StatusHud : Status
         
         commandHudUpdateAll_ = new CommandHudUpdateAll();
         commandHudUpdateHealth_ = new CommandHudUpdateHealth();
+        commandHudUpdateCountEnemies_ = new CommandHudUpdateCountEnemies();
+        commandHudUpdateTotalPoints_ = new CommandHudUpdateTotalPoints();
     
 
     }    
@@ -68,6 +77,23 @@ public class StatusHud : Status
         hudTextHealthPlayer_.text = drat.ToString() + " %";
     }
 
+    public string GetHudCountEnemies()
+    {
+        return hudTextCountEnemies_.text;
+    }
+    public void SetHudCountEnemies(float drat)
+    {
+        hudTextCountEnemies_.text = "Enemigos Actuales : " + drat.ToString();
+    }
+
+    public string GetHudTotalPoints()
+    {
+        return hudTextTotalPoints_.text;
+    }
+    public void SetHudTotalPoints(float drat)
+    {
+        hudTextTotalPoints_.text = "Puntos " + drat.ToString() ;
+    }
 
 
 

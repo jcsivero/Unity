@@ -56,7 +56,9 @@ public class StatusNpcRobot : StatusNpc
         if (!suscribeToOnUpdateAllStatusNpcRobot_)
             OnEnable(); 
         AppendCommand(commandHudUpdateStatusNpcRobot_); ///se ejecutará en el primer Update() de GameManager.
-        
+        GetStatusWorld().SetCountEnemies(1);
+        AppendCommand(GetStatusHud().commandHudUpdateCountEnemies_);
+
     }
     public new void OnEnable()   
     {
@@ -100,13 +102,21 @@ public class StatusNpcRobot : StatusNpc
         if (other.gameObject.tag == "bullet")
         {
             Debug.Log("colision detectada daño en robot " + GetHealth().ToString());
-            commandAddOrSubHealth_.Set(-10);
+            commandAddOrSubHealth_.Set(-10);                        
             AppendCommand(commandAddOrSubHealth_);                                    
             
             transform.LookAt(GetTarget().transform.position); //me giro hacia el jugador que me ha disparado.
             
             if (GetHealth() <=0.0f)    
+            {
                 Destroy(this.gameObject);
+                GetStatusWorld().SetTotalPoints(5);
+                GetStatusWorld().SetCountEnemies(-1);
+                AppendCommand(GetStatusHud().commandHudUpdateCountEnemies_);
+                AppendCommand(GetStatusHud().commandHudUpdateTotalPoints_);
+
+            }
+                
                             
         }
                      
@@ -147,7 +157,7 @@ public void SetHudHealth(int draft)
 override public void Fire()
     {
         GameObject b = Instantiate(bullet_, originOfFire_.transform.position, originOfFire_.transform.rotation);
-        b.GetComponent<Rigidbody>().AddForce(originOfFire_.transform.forward * 500);
+        b.GetComponent<Rigidbody>().AddForce(originOfFire_.transform.forward * 700);
     }
 override public void StopFiring()
 {

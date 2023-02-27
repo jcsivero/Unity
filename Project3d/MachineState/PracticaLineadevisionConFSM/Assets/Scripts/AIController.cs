@@ -80,7 +80,8 @@ private bool MovementApply(Status status,Vector3 location,bool withPosY=false)
     }
     else
     {
-        Debug.Log("se llegó al destino final o siguiente cornter.........................................................................");
+        if (status.debugMode_)
+            Debug.Log("se llegó al destino final o siguiente cornter.........................................................................");
         return true;
     }
         
@@ -89,7 +90,9 @@ private bool MovementApply(Status status,Vector3 location,bool withPosY=false)
 
 private void recalculatePath(Status status, Vector3 location)
 {
-    Debug.Log("-----------------------------------------------------------------------------------------------------Recalculando path");
+    if (status.debugMode_)
+        Debug.Log("-----------------------------------------------------------------------------------------------------Recalculando path");
+
     if (status.GetNavMeshUseSetDestination())
     {
         status.GetNavMeshAgent().SetDestination(location);
@@ -98,9 +101,8 @@ private void recalculatePath(Status status, Vector3 location)
         else        
         {
             status.ErasePathNavMesh();
-            //status.SetNavMeshTargetPosition(status.navMeshTargetPositionInfinity_);
-            //status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.  
-            Debug.Log("error asignando nuevo path rutina NavMesh SetDestination.................................");
+            if (status.debugMode_)
+                Debug.Log("error asignando nuevo path rutina NavMesh SetDestination.................................");
         }
             
     }
@@ -119,10 +121,8 @@ private void recalculatePath(Status status, Vector3 location)
         else        
         {
             status.ErasePathNavMesh();
-            //status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.        
-            //status.SetNavMeshTargetPosition(new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity));
-            //status.SetNavMeshPathCurrentIndex(0);
-            Debug.Log("error asignando nuevo path.................................");
+            if (status.debugMode_)
+                Debug.Log("error asignando nuevo path.................................");
         }
             
         
@@ -142,7 +142,10 @@ public bool TargetIsMoved(Status status,Vector3 location)
 
 public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolverá true si llegó al destino.
 {
-    bool optimizar= true;
+    bool optimizar= true; ///para utilizar la versión SetDestination mía, en la que compruebo si ya el destino marcado no se ha cambiado y por lo tanto
+    ///evitar realizar otro setDestination. 
+    
+    bool atDestination = false; ///si he llegado al final del trayecto, esta variable será true 
 
     if (status.GetNavMeshUse())
         if (status.GetNavMeshUseSetDestination())
@@ -152,7 +155,8 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
                 {
                     if (TargetIsMoved(status,location))
                     {
-                        Debug.Log("objetivo posicion cambiada rutina NavMesh SetDestination. : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
+                        if (status.debugMode_)
+                            Debug.Log("objetivo posicion cambiada rutina NavMesh SetDestination. : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
                         recalculatePath(status,location);                    
                     }                    
                     
@@ -161,13 +165,15 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
                 {
                     if (TargetIsMoved(status,location))
                     {
-                        Debug.Log("asignando nuevo path rutina NavMesh SetDestination.");
+                        if (status.debugMode_)
+                            Debug.Log("asignando nuevo path rutina NavMesh SetDestination.");
                         recalculatePath(status,location);                    
                     }
                     else           
                     {
-                        Debug.Log("se llegó al destino final con rutina NavMesh SetDestination.......................................................................");                                         
-                        return true;
+                        if (status.debugMode_)                            
+                            Debug.Log("se llegó al destino final con rutina NavMesh SetDestination.......................................................................");                                         
+                        atDestination = true;                        
                     }     
                         
                         
@@ -187,26 +193,33 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
     
             if (status.GetNavMeshPath().corners.Length > 1) //como mínimo siempre hay dos cornes, el de la posición inicial y la de  la siguiente posición .
             {
-                Debug.Log("tiene path");
+                if (status.debugMode_)
+                    Debug.Log("tiene path");
 
                 if  (TargetIsMoved(status,location))
                 {
-                    Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
+                    if (status.debugMode_)
+                        Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
                     recalculatePath(status,location);                    
                 }
                 else
                 {                         
                     if (MovementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1],withPosY))
                     {
-                        Debug.Log("llego  al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
+                        if (status.debugMode_)
+                            Debug.Log("llego  al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
+
                         status.SetNavMeshPathCurrentIndex(status.GetNavMeshPathCurrentIndex() +1);
                          if (status.GetNavMeshPathCurrentIndex() >= status.GetNavMeshPath().corners.Length-1)
                          {
-                            Debug.Log("llego  al final del path por primera vez: ");
+                            if (status.debugMode_)
+                                Debug.Log("llego  al final del path por primera vez: ");
                             status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
-                            return true;
+                            atDestination = true;                            
                          }
+                                          
                     }
+                                      
                 }
     
             }
@@ -214,20 +227,24 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
             {
                 if (TargetIsMoved(status,location))
                 {
+                    if (status.debugMode_)
                         Debug.Log("asignando nuevo path");
-                        recalculatePath(status, location);                           
+
+                    recalculatePath(status, location);                                                              
                 }
                 else
                 {
-                    Debug.Log("ESTOY EN EL FINAL: ");
-                return true;
+                    if (status.debugMode_)
+                        Debug.Log("ESTOY EN EL FINAL: ");
+                    atDestination = true;                    
                 }
             }
         }
     else
-     return   MovementApply(status, location,withPosY);              
-                 
- return false;
+          status.atDestination_ = MovementApply(status, location,withPosY);              
+    
+status.atDestination_ = atDestination;
+return atDestination;
 }
 
 public void Flee(Status status,Vector3 location,bool withPosY=false)
@@ -254,7 +271,8 @@ public void Pursue(Status status,bool withPosY=false)
 Vector3 wanderTarget = Vector3.zero;
 public void Wander(Status status)
 {
-    Debug.Log("=========================================Modo Wander");
+    if (status.debugMode_)
+        Debug.Log("=========================================Modo Wander");
     float wanderRadius = 10;
     float wanderDistance = 10;
     float wanderJitter = 1;
@@ -291,8 +309,8 @@ public void Hide(StatusNpc status,bool withPosY=false)
 {
     
 if(status.hidePointTag_.Length == 0)                
-{
-    Debug.Log("////////////////////////No se definió etiqueta para Hidepoints para este NPC. "+ status.gameObject.name);        
+{    
+        Debug.Log("////////////////////////No se definió etiqueta para Hidepoints para este NPC. "+ status.gameObject.name);        
 }
 else
 {
@@ -374,7 +392,9 @@ public Vector3 CleverHide(StatusNpc status,bool withPosY=false)
     
     
     status.SetHidePointPosBase(CalculatePointTarget(status.GetTarget(),chosenGO,true));
-    Debug.Log("punto de ocultación : " + status.GetHidePointPosBase().ToString());
+    
+    if (status.debugMode_)
+        Debug.Log("punto de ocultación : " + status.GetHidePointPosBase().ToString());
 
     return status.GetHidePointPosBase();
     }
@@ -435,7 +455,7 @@ public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool in
         //info.point -= dirPoint; 
         Debug.DrawRay(rayPos, dirPoint * distance, Color.red);
     }
-
+       
         Debug.Log("punto de llegada : " + info.point.ToString() );
     return info.point;
     

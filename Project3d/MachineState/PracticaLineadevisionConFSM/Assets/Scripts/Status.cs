@@ -14,15 +14,12 @@ public  abstract class  Status :  BaseMono
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
-    [Header("Attributtes")]
-    [SerializeField] private int lifes_;
-    [SerializeField] private int health_;
-    protected int healthMax_; //se almacenará la variable health inicial para poder conocer en un momento dado, la vida máxima.    
+  
 
     [Header("Links to GameObjects")]
     [SerializeField] private GameObject origin_;
     [SerializeField] private GameObject target_;     
-  
+    public bool atDestination_= false; ///true si se encuentra en el destino fijado con la función seek de AIController
     protected Vector3 posReferenceFromChanged_; ///Guarda la posición de referencia contra la que se comprobará si el objeto ha variado su posición más alla del umbral establecidor.
 
     private Vector3 minPos_; ///Posición del valor mínimo del collider. del Npc. Utilizado para obtener posiciones a ras de suelo mucho más fiables para 
@@ -31,8 +28,6 @@ public  abstract class  Status :  BaseMono
     protected Vector3 positionPreviousFrame_; ///utilizado para averiguar la velocidad entre cambios de frames.
 
 
-    [HideInInspector] public CommandAddOrSubHealth commandAddOrSubHealth_; ///comandos comunes
-    [HideInInspector] public CommandAddOrSubLifes commandAddOrSubLifes_; ///comandos comunes
     [HideInInspector ]public Vector3 navMeshTargetPositionInfinity_; ///posición  infinita para cuando se quiere recalcular un path, así obligamos a que siempre haya una diferencia entre la
     ///posición del objeto y la del detino mayor que targetMarginPosition, obligando así a recalcular, eso si se utiliza NavMesh.
 
@@ -69,11 +64,11 @@ return target_;
 
 virtual public void  SetHealth(int health)
 {        
-    health_ = health;
+    
 }
 virtual public int  GetHealth()
 {        
-    return health_;
+    return 0;
 }
    
 
@@ -107,8 +102,7 @@ virtual public void  SetLifes(int draft)
 private void InstaciateCommands()
 {
             
-    commandAddOrSubHealth_ = new CommandAddOrSubHealth(this);
-    commandAddOrSubLifes_ = new CommandAddOrSubLifes(this);
+
 
 }
  

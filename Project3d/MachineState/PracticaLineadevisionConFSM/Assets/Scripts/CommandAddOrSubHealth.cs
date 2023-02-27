@@ -21,7 +21,7 @@ public class CommandAddOrSubHealth : Command
                 
         return true;
     }
-    public void Set(int amount)  ///cantidad enemigos a sumar o restar en el mundo
+    public void Set(int amount)  ///
     {        
         amount_ = amount;
     }

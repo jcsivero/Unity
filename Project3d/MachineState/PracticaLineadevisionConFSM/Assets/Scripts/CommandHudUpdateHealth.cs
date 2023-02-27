@@ -12,12 +12,7 @@ public class CommandHudUpdateHealth : Command
     public override bool Exec()
     {        
                 
-        if (GetStatusHud().GetHealth() != GetStatusWorld().GetHealth() )
-        {
-                GetStatusHud().SetHealth(GetStatusWorld().GetHealth());
-                GetStatusHud().SetHudHealthPlayer(GetStatusHud().GetHealth()); 
-                
-        }
+            GetStatusHud().SetHudHealthPlayer(GetStatusWorld().GetHealth()); 
         
         
         return true;
