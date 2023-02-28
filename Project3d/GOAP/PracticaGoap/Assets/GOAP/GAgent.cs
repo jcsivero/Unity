@@ -5,12 +5,12 @@ using System.Linq;
 
 public class SubGoal
 {
-    public Dictionary<string, int> sgoals;
+    public Dictionary<string, GenericData> sgoals;
     public bool remove;
 
-    public SubGoal(string s, int i, bool r)
+    public SubGoal(string s, GenericData i, bool r)
     {
-        sgoals = new Dictionary<string, int>();
+        sgoals = new Dictionary<string, GenericData>();
         sgoals.Add(s, i);
         remove = r;
     }
@@ -20,7 +20,7 @@ public class GAgent : MonoBehaviour
 {
     public List<GAction> actions = new List<GAction>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
-    public WorldStates beliefs = new WorldStates();
+    public GoapStates beliefs = new GoapStates();
     public GInventory inventory = new GInventory();
 
     GPlanner planner;
@@ -31,7 +31,7 @@ public class GAgent : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        GAction[] acts = this.GetComponents<GAction>();
+        GAction[] acts = this.GetComponents<GAction>();        
         foreach (GAction a in acts)
             actions.Add(a);
     }

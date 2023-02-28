@@ -6,35 +6,35 @@ public class Node
 
     public Node parent;
     public float cost;
-    public Dictionary<string, int> state;
+    public Dictionary<string, GenericData> state;
     public GAction action;
 
     // Constructor
-    public Node(Node parent, float cost, Dictionary<string, int> allStates, GAction action)
+    public Node(Node parent, float cost, Dictionary<string, GenericData> allStates, GAction action)
     {
 
         this.parent = parent;
         this.cost = cost;
-        this.state = new Dictionary<string, int>(allStates);
+        this.state = new Dictionary<string, GenericData>(allStates);
         this.action = action;
     }
-    public Node(Node parent, float cost, Dictionary<string, int> allStates, Dictionary<string, int> beliefstates, GAction action)
+    public Node(Node parent, float cost, Dictionary<string, GenericData> allStates, Dictionary<string, GenericData> beliefstates, GAction action)
     {
 
         this.parent = parent;
         this.cost = cost;
-        this.state = new Dictionary<string, int>(allStates);
-        foreach (KeyValuePair<string, int> b in beliefstates)
+        this.state = new Dictionary<string, GenericData>(allStates);
+        foreach (KeyValuePair<string, GenericData> b in beliefstates)
             if (!this.state.ContainsKey(b.Key))
                 this.state.Add(b.Key, b.Value);
         this.action = action;
     }
 }
 
-public class GPlanner
+public class GPlanner : Base
 {
 
-    public Queue<GAction> plan(List<GAction> actions, Dictionary<string, int> goal, WorldStates states)
+    public Queue<GAction> plan(List<GAction> actions, Dictionary<string, GenericData> goal, GoapStates beliefsStates)
     {
 
         List<GAction> usableActions = new List<GAction>();
@@ -48,7 +48,7 @@ public class GPlanner
         }
 
         List<Node> leaves = new List<Node>();
-        Node start = new Node(null, 0.0f, GWorld.Instance.GetWorld().GetStates(), states.GetStates(), null);
+        Node start = new Node(null, 0.0f, GetStatusWorld().GetGoapStates().GetStates(), beliefsStates.GetStates(), null);
 
         bool success = BuildGraph(start, leaves, usableActions, goal);
 
@@ -97,7 +97,7 @@ public class GPlanner
         return queue;
     }
 
-    private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usableActions, Dictionary<string, int> goal)
+    private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usableActions, Dictionary<string, GenericData> goal)
     {
 
         bool foundPath = false;
@@ -105,8 +105,8 @@ public class GPlanner
         {
             if (action.IsAchievableGiven(parent.state))
             {
-                Dictionary<string, int> currentState = new Dictionary<string, int>(parent.state);
-                foreach (KeyValuePair<string, int> eff in action.effects)
+                Dictionary<string, GenericData> currentState = new Dictionary<string, GenericData>(parent.state);
+                foreach (KeyValuePair<string, GenericData> eff in action.effects)
                 {
                     if (!currentState.ContainsKey(eff.Key))  
                         currentState.Add(eff.Key, eff.Value);
@@ -143,10 +143,10 @@ public class GPlanner
         return subset;
     }
 
-    private bool GoalAchieved(Dictionary<string, int> goal, Dictionary<string, int> state)
+    private bool GoalAchieved(Dictionary<string, GenericData> goal, Dictionary<string, GenericData> state)
     {
 
-        foreach (KeyValuePair<string, int> g in goal)
+        foreach (KeyValuePair<string, GenericData> g in goal)
         {
             if (!state.ContainsKey(g.Key))
                 return false;

@@ -24,6 +24,11 @@ public class StatusWorld : Status
     public Dictionary<string,List<GameObject>> hidePoints_;
     public Dictionary<string,List<GameObject>> gameObjectsByName_;
     public List<GameObject> allGameObjects_;    
+
+    
+    public GoapStates worldStates_;
+    //private static Queue<GameObject> patients;
+    //private static Queue<GameObject> cubicles;
     
     
  
@@ -41,18 +46,27 @@ public class StatusWorld : Status
     /// </summary>
     public new void Awake()
     {
+        //Time.timeScale = 5; ///escala de simulación, de velocidad del juego.
         base.Awake();
         InstaciateCommands();  
         SetName("StatusWorld");        
         
         ///Inicializo variables de control de objecots.        
-        wayPoints_= new Dictionary<string,List<GameObject>>();
-        
+        wayPoints_= new Dictionary<string,List<GameObject>>();        
         hidePoints_ = new Dictionary<string,List<GameObject>>();
         gameObjectsByName_ = new Dictionary<string,List<GameObject>>();
         allGameObjects_ = new List<GameObject>();
+        worldStates_ = new GoapStates();
         
-        
+        /*patients = new Queue<GameObject>();
+        cubicles = new Queue<GameObject>();
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag("Cubicle");
+        foreach (GameObject c in cubes)
+            cubicles.Enqueue(c);
+        if (cubes.Length > 0)
+            world.ModifyState("freeCubicle", cubes.Length);*/
+
+
         Debug.Log("|||||||||||||| Awake StatusWorld||||||||||||||||");
         
     }    
@@ -175,12 +189,35 @@ public class StatusWorld : Status
     {
        totalPoints_ += draft;
     }
-override public void  SetHealth(int health)
-{        
-    GetTarget().GetComponent<Status>().SetHealth(health);
-}
-override public int  GetHealth()
-{        
-    return GetTarget().GetComponent<Status>().GetHealth();
-}
+    override public void  SetHealth(int health)
+    {        
+        GetTarget().GetComponent<Status>().SetHealth(health);
+    }
+    override public int  GetHealth()
+    {        
+        return GetTarget().GetComponent<Status>().GetHealth();
+    }
+    public GoapStates GetGoapStates()
+    {
+        return worldStates_;
+    }    
+
+    /*public void AddPatient(GameObject p)
+    {
+        patients.Enqueue(p);
+    }
+    public GameObject RemovePatient()
+    {
+        if (patients.Count == 0) return null;
+        return patients.Dequeue();
+    }
+    public void AddCublicle(GameObject p)
+    {
+        cubicles.Enqueue(p);
+    }
+    public GameObject RemoveCubicle()
+    {
+        if (cubicles.Count == 0) return null;
+        return cubicles.Dequeue();
+    }    */
 }

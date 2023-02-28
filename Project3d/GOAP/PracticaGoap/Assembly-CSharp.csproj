@@ -45,10 +45,15 @@
      <Compile Include="Assets\Scripts\CommandHudUpdateStatusPlayer.cs" />
      <Compile Include="Assets\Scripts\CommandHudUpdateStatusNpcRobot.cs" />
      <Compile Include="Assets\Scripts\Hide.cs" />
+     <Compile Include="Assets\GOAP\GActions\GActionPatrolMode.cs" />
+     <Compile Include="Assets\GOAP\GInventory.cs" />
+     <Compile Include="Assets\Scripts\GenericData.cs" />
      <Compile Include="Assets\Scripts\CommandAddOrSubHealth.cs" />
      <Compile Include="Assets\Scripts\ControlGameObjects.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\GOAP\GAction.cs" />
      <Compile Include="Assets\Scripts\AIController.cs" />
+     <Compile Include="Assets\GOAP\GAgent.cs" />
      <Compile Include="Assets\Scripts\CommandAddOrSubLifes.cs" />
      <Compile Include="Assets\Scripts\CommandHudUpdateAll.cs" />
      <Compile Include="Assets\Scripts\Chase.cs" />
@@ -59,6 +64,9 @@
      <Compile Include="Assets\Scripts\CommandHudUpdateCountEnemies.cs" />
      <Compile Include="Assets\Scripts\NPCBaseFSM.cs" />
      <Compile Include="Assets\Scripts\CommandAddOrSubEnemy.cs" />
+     <Compile Include="Assets\GOAP\GPlanner.cs" />
+     <Compile Include="Assets\GOAP\GAgents\GAgentRobots.cs" />
+     <Compile Include="Assets\GOAP\GStates.cs" />
      <Compile Include="Assets\Scripts\MyEvents.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />
      <Compile Include="Assets\Scripts\StatusHud.cs" />
@@ -68,12 +76,6 @@
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Patrol.cs" />
      <Compile Include="Assets\Scripts\Commands.cs" />
-     <Compile Include="Assets\GOAP\GInventory.cs" />
-     <Compile Include="Assets\GOAP\GAgent.cs" />
-     <Compile Include="Assets\GOAP\GPlanner.cs" />
-     <Compile Include="Assets\GOAP\WorldStates.cs" />
-     <Compile Include="Assets\GOAP\GWorld.cs" />
-     <Compile Include="Assets\GOAP\GAction.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
