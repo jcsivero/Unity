@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5056,6 +5056,54 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.1, z: 1}
   m_Center: {x: 0, y: -0.6, z: 0}
+--- !u!1 &512415818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8926438751318007415, guid: 3224f8a1b274a3e47997ef974e213266,
+    type: 3}
+  m_PrefabInstance: {fileID: 8926438751309874546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &512415819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512415818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042bf2050e1fc7843b60d4fe928e74fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions_: []
+  currentAction: {fileID: 0}
+--- !u!114 &512415824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512415818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228a3738d2c36544d81796198bc552c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  preConditionsFloat_: []
+  preConditionsString_: []
+  preConditionsInt_: []
+  afterEffectsInt_: []
+  afterEffectsFloat_: []
+  afterEffectsString_:
+  - key: patrolMode
+    value: 
+  agent: {fileID: 0}
+  status_: {fileID: 0}
+  running_: 0
 --- !u!4 &520705765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3284104244634965739, guid: d57b18fb964435849991190dc0d99005,
@@ -8612,47 +8660,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &826122012 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8926438751318007415, guid: 3224f8a1b274a3e47997ef974e213266,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926438751309874546}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &826122017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826122012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 228a3738d2c36544d81796198bc552c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: PatrolMode
-  cost: 1
-  target: {fileID: 0}
-  targetTag: 
-  duration: 0
-  preConditionsInt: []
-  afterEffectsInt: []
-  agent: {fileID: 0}
-  running: 0
---- !u!114 &826122018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826122012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042bf2050e1fc7843b60d4fe928e74fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions: []
-  currentAction: {fileID: 0}
 --- !u!1 &831679296
 GameObject:
   m_ObjectHideFlags: 0

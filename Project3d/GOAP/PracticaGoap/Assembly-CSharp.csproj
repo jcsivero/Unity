@@ -36,46 +36,91 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CommandHudUpdateTotalPoints.cs" />
-     <Compile Include="Assets\Scripts\EventData.cs" />
-     <Compile Include="Assets\Scripts\CommandHudUpdateHealth.cs" />
-     <Compile Include="Assets\Scripts\StatusPlayer.cs" />
-     <Compile Include="Assets\Scripts\GameManagerMyEvents.cs" />
-     <Compile Include="Assets\Scripts\Base.cs" />
-     <Compile Include="Assets\Scripts\CommandHudUpdateStatusPlayer.cs" />
-     <Compile Include="Assets\Scripts\CommandHudUpdateStatusNpcRobot.cs" />
-     <Compile Include="Assets\Scripts\Hide.cs" />
-     <Compile Include="Assets\GOAP\GActions\GActionPatrolMode.cs" />
-     <Compile Include="Assets\GOAP\GInventory.cs" />
-     <Compile Include="Assets\Scripts\GenericData.cs" />
-     <Compile Include="Assets\Scripts\CommandAddOrSubHealth.cs" />
-     <Compile Include="Assets\Scripts\ControlGameObjects.cs" />
-     <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\GOAP\GAction.cs" />
-     <Compile Include="Assets\Scripts\AIController.cs" />
-     <Compile Include="Assets\GOAP\GAgent.cs" />
-     <Compile Include="Assets\Scripts\CommandAddOrSubLifes.cs" />
-     <Compile Include="Assets\Scripts\CommandHudUpdateAll.cs" />
-     <Compile Include="Assets\Scripts\Chase.cs" />
-     <Compile Include="Assets\Scripts\HUD_InitialOptions.cs" />
-     <Compile Include="Assets\Scripts\StatusNpcRobot.cs" />
-     <Compile Include="Assets\Scripts\StatusNpc.cs" />
-     <Compile Include="Assets\Scripts\BaseMono.cs" />
-     <Compile Include="Assets\Scripts\CommandHudUpdateCountEnemies.cs" />
-     <Compile Include="Assets\Scripts\NPCBaseFSM.cs" />
-     <Compile Include="Assets\Scripts\CommandAddOrSubEnemy.cs" />
-     <Compile Include="Assets\GOAP\GPlanner.cs" />
-     <Compile Include="Assets\GOAP\GAgents\GAgentRobots.cs" />
-     <Compile Include="Assets\GOAP\GStates.cs" />
-     <Compile Include="Assets\Scripts\MyEvents.cs" />
-     <Compile Include="Assets\Scripts\Status.cs" />
-     <Compile Include="Assets\Scripts\StatusHud.cs" />
-     <Compile Include="Assets\Scripts\Attack.cs" />
-     <Compile Include="Assets\Scripts\StatusWorld.cs" />
-     <Compile Include="Assets\Scripts\Command.cs" />
-     <Compile Include="Assets\Scripts\Bullet.cs" />
-     <Compile Include="Assets\Scripts\Patrol.cs" />
-     <Compile Include="Assets\Scripts\Commands.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateTotalPoints.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\EventData.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateHealth.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Status\StatusPlayer.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\GameManagerMyEvents.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\Base.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\DynamicShadowSettings.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateStatusPlayer.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateStatusNpcRobot.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\SimpleMouseRotator.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\LerpControlledBob.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\FSM\Hide.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\PlatformSpecificContent.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GActions\GActionPatrolMode.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GInventory.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Common\GenericData.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandAddOrSubHealth.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Status\ControlGameObjects.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\SmoothFollow.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\GameManager.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GAction.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\TimedObjectActivator.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\WaypointCircuit.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\CameraRefocus.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\TimedObjectDestructor.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\AIController.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GAgent.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\WaypointProgressTracker.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\DragRigidbody.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandAddOrSubLifes.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateAll.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\FSM\Chase.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\HUD\HUD_InitialOptions.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\CurveControlledBob.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\FollowTarget.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Status\StatusNpcRobot.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\ForcedReset.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\ObjectResetter.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Status\StatusNpc.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\BaseMono.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\AlphaButtonClickMask.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\AutoMoveAndRotate.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\FOVKick.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateCountEnemies.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\FSM\NPCBaseFSM.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandAddOrSubEnemy.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GPlanner.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\EventSystemChecker.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\ActivateTrigger.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GAgents\GAgentRobots.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GStates.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\MyEvents.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Status\Status.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\StatusHud.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\FSM\Attack.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\StatusWorld.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\Command.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Others\Bullet.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\FSM\Patrol.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GameManager\Commands.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\FPSCounter.cs" />
+     <Compile Include="Assets\MyFramework\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+     <None Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\MyFramework\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\MyFramework\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -720,10 +765,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{00d9af9d-c829-18c5-1b89-bf25acf8f9e8}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

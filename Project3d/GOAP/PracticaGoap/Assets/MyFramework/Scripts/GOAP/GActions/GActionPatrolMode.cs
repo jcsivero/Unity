@@ -19,7 +19,7 @@ public class GActionPatrolMode : GAction
         /*target = inventory.FindItemWithTag("Cubicle");
         if (target == null)
             return false;*/
-
+        status_.anim_.SetTrigger("Patrol");
         return true;
     }
 

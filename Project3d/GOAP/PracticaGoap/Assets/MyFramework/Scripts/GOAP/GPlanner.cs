@@ -6,7 +6,7 @@ public class Node
 
     public Node parent;
     public float cost;
-    public Dictionary<string, GenericData> state;
+    public Dictionary<string, GenericData> state_;
     public GAction action;
 
     // Constructor
@@ -15,7 +15,7 @@ public class Node
 
         this.parent = parent;
         this.cost = cost;
-        this.state = new Dictionary<string, GenericData>(allStates);
+        this.state_ = new Dictionary<string, GenericData>(allStates);
         this.action = action;
     }
     public Node(Node parent, float cost, Dictionary<string, GenericData> allStates, Dictionary<string, GenericData> beliefstates, GAction action)
@@ -23,10 +23,10 @@ public class Node
 
         this.parent = parent;
         this.cost = cost;
-        this.state = new Dictionary<string, GenericData>(allStates);
+        this.state_ = new Dictionary<string, GenericData>(allStates);
         foreach (KeyValuePair<string, GenericData> b in beliefstates)
-            if (!this.state.ContainsKey(b.Key))
-                this.state.Add(b.Key, b.Value);
+            if (!this.state_.ContainsKey(b.Key))
+                this.state_.Add(b.Key, b.Value);
         this.action = action;
     }
 }
@@ -34,7 +34,7 @@ public class Node
 public class GPlanner : Base
 {
 
-    public Queue<GAction> plan(List<GAction> actions, Dictionary<string, GenericData> goal, GoapStates beliefsStates)
+    public Queue<GAction> plan(List<GAction> actions, Dictionary<string, GenericData> goal, GoapStates npcStates)
     {
 
         List<GAction> usableActions = new List<GAction>();
@@ -48,7 +48,7 @@ public class GPlanner : Base
         }
 
         List<Node> leaves = new List<Node>();
-        Node start = new Node(null, 0.0f, GetStatusWorld().GetGoapStates().GetStates(), beliefsStates.GetStates(), null);
+        Node start = new Node(null, 0.0f, GetStatusWorld().GetGoapStates().GetStates(), npcStates.GetStates(), null);
 
         bool success = BuildGraph(start, leaves, usableActions, goal);
 
@@ -103,10 +103,10 @@ public class GPlanner : Base
         bool foundPath = false;
         foreach (GAction action in usableActions)
         {
-            if (action.IsAchievableGiven(parent.state))
+            if (action.IsAchievableGiven(parent.state_))
             {
-                Dictionary<string, GenericData> currentState = new Dictionary<string, GenericData>(parent.state);
-                foreach (KeyValuePair<string, GenericData> eff in action.effects)
+                Dictionary<string, GenericData> currentState = new Dictionary<string, GenericData>(parent.state_);
+                foreach (KeyValuePair<string, GenericData> eff in action.effects_.GetStates())
                 {
                     if (!currentState.ContainsKey(eff.Key))  
                         currentState.Add(eff.Key, eff.Value);

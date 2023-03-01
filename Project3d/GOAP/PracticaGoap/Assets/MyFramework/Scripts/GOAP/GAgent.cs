@@ -16,12 +16,14 @@ public class SubGoal
     }
 }
 
-public class GAgent : MonoBehaviour
+abstract public class GAgent : BaseMono
 {
-    public List<GAction> actions = new List<GAction>();
-    public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
-    public GoapStates beliefs = new GoapStates();
-    public GInventory inventory = new GInventory();
+    public List<GAction> actions_ = new List<GAction>();
+    public Dictionary<SubGoal, int> goals_ = new Dictionary<SubGoal, int>();
+    public GoapStates npcStates_ = new GoapStates();
+    public GInventory inventory_ = new GInventory();
+
+    private StatusNpc status_;
 
     GPlanner planner;
     Queue<GAction> actionQueue;
@@ -31,23 +33,34 @@ public class GAgent : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        GAction[] acts = this.GetComponents<GAction>();        
+        status_ = gameObject.GetComponent<StatusNpc>(); //para acceder al componente Status del Npc en caso de tenerlo agregado.
+        
+        
+        AddGoals(); ///agrego los objetivos de este NPC.
+
+        AddActions(); ///agrego acciones que no fueron agregadas como componenetes desde el inspector. Esto son acciones que tienen un tipo de datos que no es serializable.
+        
+        GAction[] acts = this.GetComponents<GAction>();         ////paso a una lista las acciones agregadas como componentes al GameObject del NPC desde el inspector.
+                ////estas acciones se agregarán a las acciones agregadas manualmente por la función AddActions()
         foreach (GAction a in acts)
-            actions.Add(a);
+            actions_.Add(a);
+        
+        
+        
     }
 
 
     bool invoked = false;
     void CompleteAction()
     {
-        currentAction.running = false;
+        currentAction.running_ = false;
         currentAction.PostPerform();
         invoked = false;
     }
 
     void LateUpdate()
     {
-        if (currentAction != null && currentAction.running)
+        if (currentAction != null && currentAction.running_)
         {
             // si el navmesh no está calculando bien el remaining distance, se puede
             //calcular la distancia a mano.
@@ -68,11 +81,11 @@ public class GAgent : MonoBehaviour
         {
             planner = new GPlanner();
 
-            var sortedGoals = from entry in goals orderby entry.Value descending select entry;
+            var sortedGoals = from entry in goals_ orderby entry.Value descending select entry;
 
             foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
             {
-                actionQueue = planner.plan(actions, sg.Key.sgoals, beliefs);
+                actionQueue = planner.plan(actions_, sg.Key.sgoals, npcStates_);
                 if (actionQueue != null)
                 {
                     currentGoal = sg.Key;
@@ -85,7 +98,7 @@ public class GAgent : MonoBehaviour
         {
             if (currentGoal.remove)
             {
-                goals.Remove(currentGoal);
+                goals_.Remove(currentGoal);
             }
             planner = null;
         }
@@ -100,7 +113,7 @@ public class GAgent : MonoBehaviour
 
                 if (currentAction.target != null)
                 {
-                    currentAction.running = true;
+                    currentAction.running_ = true;
                     currentAction.agent.SetDestination(currentAction.target.transform.position);
                 }
             }
@@ -112,4 +125,8 @@ public class GAgent : MonoBehaviour
         }
 
     }
+    
+    abstract public void AddActions();
+    
+    abstract public void AddGoals();
 }

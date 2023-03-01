@@ -12,14 +12,17 @@ public class GoapStateInt
 {
     public string key;
     public int value;
+    
 }
 
+[System.Serializable]
 public class GoapStateFloat
 {
     public string key;
     public float value;
 }
 
+[System.Serializable]
 public class GoapStateString
 {
     public string key;
@@ -33,6 +36,7 @@ public class GoapStates
     public GoapStates()
     {
         states_ = new Dictionary<string, GenericData>();
+        
     }
 
     public bool HasState(string key)

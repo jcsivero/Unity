@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 ////clase genérica de datos para almacenar cualquier tipo de valor. Después se puede heredar de esta clase y por polimorfismo realizar diferentes operaciones
 ///Además se podría hacer CASTING si se sabe el tipo que se quiere tratar y por lo tanto utilizar todos sus métodos propios.
 public class GenericData 
 {
+        [SerializeField]
         private object data_;
 
         private GenericData(object value)

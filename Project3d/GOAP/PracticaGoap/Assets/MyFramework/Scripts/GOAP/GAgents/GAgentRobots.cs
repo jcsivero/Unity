@@ -24,7 +24,20 @@ public class GAgentRobots : GAgent
 
         //beliefs.SetOrAddState("angle")
     }
+    
+    override public void AddActions()
+    {
+        ///agrego acction de patrullaje
+        //var gActionPatrolMode = gameObject.AddComponent<GActionPatrolMode>(); ///agregando así el componente, las precondiciones y efectos están vacios,así que los especificamos        
+        ///gActionPatrolMode.AddPreConditions("hola",GenericData.Create<int>(2));
+        //gActionPatrolMode.AddEffects("adios",GenericData.Create<int>(8));
 
-  
+    }
+    
+    override public void AddGoals()
+    {
+        SubGoal s1 = new SubGoal("patrolMode", GenericData.Create<int>(1), false);
+        goals_.Add(s1, 1);
+    }
     
 }
