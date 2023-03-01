@@ -118,6 +118,11 @@
      <Compile Include="Assets\MyFramework\Scripts\GameManager\Commands.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GActions\GActionIdleMode.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GActions\GActionAttackMode.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GActions\GActionHideMode.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GActions\GActionChaseMode.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandNpcStatesRobotUpdate.cs" />
      <None Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\MyFramework\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\MyFramework\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

@@ -10,6 +10,8 @@ public class StatusNpcRobot : StatusNpc
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  public CommandHudUpdateStatusNpcRobot commandHudUpdateStatusNpcRobot_;
+ public CommandNpcGoapStatesRobotUpdate commandNpcGoapStatesRobotUpdate_;
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
@@ -135,7 +137,10 @@ public class StatusNpcRobot : StatusNpc
         if (GetGameManager().ok_)
         {
             AppendCommand(commandHudUpdateStatusNpcRobot_);
+            AppendCommand(commandNpcGoapStatesRobotUpdate_);
             ExecuteCommands();
+
+
         }
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -144,6 +149,7 @@ public class StatusNpcRobot : StatusNpc
 private void InstaciateCommands()
 {        
     commandHudUpdateStatusNpcRobot_ = new CommandHudUpdateStatusNpcRobot(this);
+    commandNpcGoapStatesRobotUpdate_ = new CommandNpcGoapStatesRobotUpdate(this);
 }
 
 public TextMesh GetHudHealth()

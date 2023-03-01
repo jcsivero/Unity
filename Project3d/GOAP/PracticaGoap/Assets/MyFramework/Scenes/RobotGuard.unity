@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5062,7 +5062,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8926438751309874546}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &512415819
+--- !u!114 &512415830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5076,7 +5076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions_: []
   currentAction: {fileID: 0}
---- !u!114 &512415824
+--- !u!114 &512415831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5093,14 +5093,16 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 0
-  preConditionsFloat_: []
+  preConditionsFloat_:
+  - key: distance
+    value: 0
   preConditionsString_: []
   preConditionsInt_: []
-  afterEffectsInt_: []
+  afterEffectsInt_:
+  - key: PatrolMode
+    value: 0
   afterEffectsFloat_: []
-  afterEffectsString_:
-  - key: patrolMode
-    value: 
+  afterEffectsString_: []
   agent: {fileID: 0}
   status_: {fileID: 0}
   running_: 0

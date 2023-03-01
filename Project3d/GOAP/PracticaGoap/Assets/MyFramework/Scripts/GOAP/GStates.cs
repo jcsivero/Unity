@@ -39,6 +39,13 @@ public class GoapStates
         
     }
 
+    public GoapStates(GoapStates cpy)
+    {
+        states_ = new Dictionary<string, GenericData>(cpy.GetStates());
+        
+    }
+
+
     public bool HasState(string key)
     {
         return states_.ContainsKey(key);
@@ -47,7 +54,7 @@ public class GoapStates
     {
         return states_[key];
     }
-    public void SetOrAddState(string key, GenericData value)
+    public void SetOrAddState(string key, GenericData value) ///actualizo mis estados con un estado nuevo.
     {
         if (states_.ContainsKey(key))
             states_[key] = value;
@@ -55,7 +62,13 @@ public class GoapStates
             states_.Add(key, value);
     }
 
-    
+    public void SetOrAddStates(GoapStates states) ///actualizo mis estados con otro conjunto de estados.
+    {
+        foreach (KeyValuePair<string, GenericData> b in states.GetStates())
+            if (!states_.ContainsKey(b.Key))
+                states_.Add(b.Key, b.Value);        
+    }
+
     public void RemoveState(string key)
     {
         if (states_.ContainsKey(key))

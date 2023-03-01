@@ -79,7 +79,7 @@ public class StatusNpc : Status
     public  Animator anim_;
     private  UnityEngine.AI.NavMeshPath navMeshPath_;    
 
-    private GAgent gAgent_; ///acceso al componente Goap del agente en caso de tenerlo agregado al NPC
+    public GAgent gAgent_; ///acceso al componente Goap del agente en caso de tenerlo agregado al NPC
 
     private int wayPointCurrent_;
     private int wayPointIndex_ = 0 ; ///indice dentro de la lista de waypoints. Solo será el mismo valor que currentWayPoints_ cuando

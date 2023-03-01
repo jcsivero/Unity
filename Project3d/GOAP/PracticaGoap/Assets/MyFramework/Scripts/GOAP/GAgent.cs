@@ -20,7 +20,7 @@ abstract public class GAgent : BaseMono
 {
     public List<GAction> actions_ = new List<GAction>();
     public Dictionary<SubGoal, int> goals_ = new Dictionary<SubGoal, int>();
-    public GoapStates npcStates_ = new GoapStates();
+    public GoapStates npcGoapStates_ = new GoapStates();
     public GInventory inventory_ = new GInventory();
 
     private StatusNpc status_;
@@ -50,30 +50,55 @@ abstract public class GAgent : BaseMono
     }
 
 
-    bool invoked = false;
-    void CompleteAction()
+    bool completeActionByDurationInvoked = false;
+    void CompleteActionByDuration() ///termina la acción por tiempo. solo cuando la variable duración es mayor de 0.
     {
         currentAction.running_ = false;
-        currentAction.PostPerform();
-        invoked = false;
+        currentAction.PostPerform(true,false);
+        completeActionByDurationInvoked = false;
+    }
+
+    void CompleteAction() ///terminó la acción por algún cambio en el estado de las precondiciones o bien porque terminó devolviendo false la
+    //función OnPerform()
+    {
+        currentAction.running_ = false;
+        currentAction.PostPerform(false,false);        
+    }
+
+    void CompleteActionByConditions() ///terminó la acción por algún cambio en el estado de las precondiciones o bien porque terminó devolviendo false la
+    //función OnPerform()
+    {
+        currentAction.running_ = false;
+        currentAction.PostPerform(false,true);        
     }
 
     void LateUpdate()
     {
         if (currentAction != null && currentAction.running_)
         {
-            // si el navmesh no está calculando bien el remaining distance, se puede
-            //calcular la distancia a mano.
-            float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, this.transform.position);
-            //if (currentAction.agent.hasPath && distanceToTarget < 2f) //currentAction.agent.remainingDistance < 2f)
-            if (distanceToTarget < 2f) 
+            if (!completeActionByDurationInvoked)
             {
-                if (!invoked)
+                if (currentAction.CheckConditions())
                 {
-                    Invoke("CompleteAction", currentAction.duration);
-                    invoked = true;
+                    if (currentAction.OnPerform())
+                    {
+                        ///se completó la acción porque devuelve true OnPerform, o sea, se llegó al destino, se cumplió lo que se quería hacer....
+                        if ((!completeActionByDurationInvoked) && (currentAction.duration > 0)) ///si configuré duración posterior de la acción antes de llamar al PostPerform y
+                        //dar por terminada la acción.
+                        {
+                            Invoke("CompleteActionByDuration", currentAction.duration);
+                            completeActionByDurationInvoked = true;
+                        }
+                        else
+                            CompleteAction(); ///en caso contrario termino la acción haciendo lo que haya en PostPerform
+
+                    }                        
                 }
+                else
+                    CompleteActionByConditions();
+
             }
+
             return;
         }
 
@@ -85,7 +110,7 @@ abstract public class GAgent : BaseMono
 
             foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
             {
-                actionQueue = planner.plan(actions_, sg.Key.sgoals, npcStates_);
+                actionQueue = planner.plan(actions_, sg.Key.sgoals, npcGoapStates_);
                 if (actionQueue != null)
                 {
                     currentGoal = sg.Key;
@@ -106,7 +131,25 @@ abstract public class GAgent : BaseMono
         if (actionQueue != null && actionQueue.Count > 0)
         {
             currentAction = actionQueue.Dequeue();
-            if (currentAction.PrePerform())
+            ///se debe de cumplir todas las condiciones justo antes de ejecutar la acción, por si el estado del mundo o del npc han cambiado.
+            ///si es así, se dará por iniciada la acción. Sino, se creará un plan nuevo.
+            if (currentAction.CheckConditions())
+            {
+                Debug.Log("superado checkconditions");
+                if (currentAction.PrePerform())
+                {
+                    Debug.Log("superado preperform");
+                    currentAction.running_ = true;
+                }
+                    
+                else
+                    actionQueue = null;
+
+            }
+            else
+                    actionQueue = null;
+
+            /*if (currentAction.PrePerform())
             {
                 if (currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
@@ -120,7 +163,7 @@ abstract public class GAgent : BaseMono
             else
             {
                 actionQueue = null;
-            }
+            }*/
 
         }
 

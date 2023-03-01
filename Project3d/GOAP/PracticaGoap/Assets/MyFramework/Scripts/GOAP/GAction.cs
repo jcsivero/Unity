@@ -6,15 +6,24 @@ using UnityEngine.AI;
 
 public abstract class GAction : BaseMono
 {
+    [Header("=============== Common")]
+    [Space(5)]               
+
     public string actionName = "Action";
     public float cost = 1.0f;
     public GameObject target;
     public string targetTag;
     public float duration = 0;
 
+   [Header("=============== Preconditions")]
+    [Space(5)]               
     public GoapStateFloat[] preConditionsFloat_;
     public GoapStateString[] preConditionsString_;
     public GoapStateInt[] preConditionsInt_;
+
+   [Header("=============== Efectos")]
+    [Space(5)]               
+
     public GoapStateInt[] afterEffectsInt_;
     public GoapStateFloat[] afterEffectsFloat_;
     public GoapStateString[] afterEffectsString_;
@@ -24,7 +33,7 @@ public abstract class GAction : BaseMono
 
     public GoapStates preconditions_;
     public GoapStates effects_;
-    public GoapStates npcStates_;
+    public GoapStates npcGoapStates_;
     public GInventory inventory_;
     
 
@@ -38,6 +47,10 @@ public abstract class GAction : BaseMono
 
     public void Awake()
     {        
+        agent = this.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        inventory_ = this.GetComponent<GAgent>().inventory_;
+        npcGoapStates_ = this.GetComponent<GAgent>().npcGoapStates_;
+        status_ = gameObject.GetComponent<StatusNpc>(); //para acceder al componente Status del Npc en caso de tenerlo agregado.
 
         ///Agrego precondiciones y efectos de tipo entero agregadas en el inspector a la lista de  precondiciones y efectos globales.
 
@@ -80,10 +93,7 @@ public abstract class GAction : BaseMono
                 effects_.SetOrAddState(w.key, GenericData.Create<string>(w.value));
             }
 
-        agent = this.gameObject.GetComponent<NavMeshAgent>();
-        inventory_ = this.GetComponent<GAgent>().inventory_;
-        npcStates_ = this.GetComponent<GAgent>().npcStates_;
-        status_ = gameObject.GetComponent<StatusNpc>(); //para acceder al componente Status del Npc en caso de tenerlo agregado.
+
     }
 
     public void AddPreConditions(string key, GenericData value)
@@ -92,27 +102,60 @@ public abstract class GAction : BaseMono
     }
     public void AddEffects(string key, GenericData value)
     {
-        preconditions_.SetOrAddState(key, value);
+        effects_.SetOrAddState(key, value);
     }
-    public bool IsAchievableGiven(Dictionary<string, GenericData> conditions)
+    
+    ///comprueba si se sigue cumpliendo el filtrado de esta acción en concreto y si las precondiciones del estado del mundo y del npc siguen siendo válidas.
+    ///normalmente se comprueba antes de realizar la acción.
+    public bool CheckConditions()
     {
-        foreach (KeyValuePair<string, GenericData> p in preconditions_.GetStates())
-        {
-            if (!conditions.ContainsKey(p.Key))
-                return false;
-        }
-        ///si están todas las precondiciones en el estado del mundo y los estados del nps(del NPC) entonces paso a la función virtual en la que se puede
-        ///comprobar los valores de las precondiciones según se necesite.
-        ///Por defecto, solo con que aparezcan las precondiciones es suficiente para dar la acción por válida para agreagar a la cola.
-        ///Por lo que por rendimiento, siempre será preferible eliminar estados del mundo o del NPC si no que cumplen las condiciones y así evitar
-        //tener que entrar a la fucnión para comprobar sus valores, esto debería ser así siempre que sea posible naturalmente.
-        return IsAchievableGivenCustomize(conditions);
+        
+        if ((IsAchievable()) && (IsAchievableGiven(GetAllStates()))) ///si todas el filtrado y todas las precondiciones tando del mundo como del npc están disponibles y se cumplen,
+        ///se procede al PrePerform, el cuál todavía puede volver a filtrar y por consiguiente romper el plan creado, obligando a crear un nuevo plan.
+            return true;
+        else
+            return false;
     }
+    public GoapStates GetAllStates() ///devuelve los estados del mundo junto con los estados del NPC actual.
+    {
+        GoapStates allStates = new GoapStates(GetStatusWorld().GetGoapStates());
+        allStates.SetOrAddStates(npcGoapStates_);
+        return allStates;
+    }
+    ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
+    abstract public bool IsAchievable();  
+    ///ya con las acciones filtradas, compruebo todo el estado, primero compruebo simplemente que estén todas las condiciones presentes.
+    ///si es así, esta función llama a IsAchievableGivenCustomize, donde puedo ya manualmente introducir el código para comprobar los valores de cada estado concretamente.
+    abstract public bool IsAchievableGiven(GoapStates conditions); 
     
-    abstract public bool IsAchievableGivenCustomize(Dictionary<string, GenericData> conditions);
+    ///esta funciónes llamada por IsAchievableGiven y sirve para comprobar las condiciones con su valor correspondiente y deseado, no limitándose simplemetne a comprobar que la precondición
+    ///exista en el estado.
+    abstract protected bool IsAchievableGivenCustomize(GoapStates conditions);
 
-    abstract public bool IsAchievable();
+    ///se ejecuta justo antes de iniciar la acción. Se sabe en esta ejecución que el estado del mundo y del NPC se sigue cumpliendo, o sea, todas las precondiciones.
+    ///Aún así, si en el PrePerform se devuelve false, el plan entero se detendrá forzando la creación de uno nuevo. Por ejemplo en el PrePerform, se puede realizar
+    ///comprobaciones extras antes de iniciar la acción.
+    public abstract bool PrePerform(); 
     
-    public abstract bool PrePerform();
-    public abstract bool PostPerform();
+    ///esta función es llamada durante la duración de la acción, en cada frame y ya se ha comprobado justo antes de cada llamada, que las condiciones no han cambiado.
+    /// si esta función devuelve true, terminará el plan llamando al posperform, indicando que se completó la acción.
+    ///después se completará completamente dependiendo de si se estableción un tiempo de duración.
+    ///Para continuar la ejecución, esta función devolverá false indicando que no ha terminado su acción mientras siga teniendo cosas que hacer.
+
+    public abstract bool OnPerform();
+
+        
+    ///Esta función no debe ser llamada directamente, en su lugar, se llamará automáticamente si han cambiado las condiciones mientras se ejecuta la acción
+    /// o bien si ha terminado el tiempo asignado a la acción. Si se quiere provocar terminar la acción y así que se ejecute esta función, se deberá hacer cambiando
+    ///las condiciones para que la acción en ejecución deje de ser válida o bien devolver false en la función OnPerform.
+    ///En este último caso, hay que tener en cuenta que podría volver a generarse el mismo plan de acciones, puesto que las precondiciones seguirían siendo válidas.
+    //como valor por defecto, el posperform es llamado 
+    /// suponiendo que se terminó la acción puesto que cumplió su objetivo, esto es, llegar a algún punto en concreto, realizar varias tareas y cumplirlas...
+    ///Esta forma de terminar es cuando la funcion OnPerForm devuelve true.
+    ///el timeOut a true significa que se ejecuta el PostPerform después de que la tarea ha terminado y se llegó al final del tiempo establecido en sus propiedaes,
+    ///es como un tiempo de espera.
+    ///finishedByConditions, indica que se llegó al postperform por algún cambio en las condiciones, de forma que ya no se cumple
+
+    public abstract bool PostPerform(bool timeOut = false, bool finishedByConditions=false); 
+
 }

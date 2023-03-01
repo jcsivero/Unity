@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GActionPatrolMode : GAction
+public class GActionChaseMode : GAction
 {
   override public bool IsAchievableGiven(GoapStates conditions)
-    {            
+    {
         foreach (KeyValuePair<string, GenericData> p in preconditions_.GetStates())
         {
             if (!conditions.HasState(p.Key))
@@ -20,13 +20,7 @@ public class GActionPatrolMode : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-        ///comprubo manualmente las condiciones con los valores que me interesa
-        ///Aquí tengo la ventaja de que no necesito comprobar si existe un valor, puesto que IsArchievableGiven ya comprobó que existan todas.
-        
-        if (npcGoapStates_.GetState("distance").GetValue<float>()> status_.GetVisDistance())
-            return true; 
-        else
-            return false;
+        return true;
     }
 
     override public bool IsAchievable() ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
@@ -35,24 +29,23 @@ public class GActionPatrolMode : GAction
     }
 
     public override bool PrePerform()
-    {               
+    {
+        
+        
         /*target = inventory.FindItemWithTag("Cubicle");
         if (target == null)
             return false;*/
-        status_.anim_.SetTrigger("Patrol");
+        status_.anim_.SetTrigger("Chase");
         return true;
     }
 
     public override bool PostPerform(bool timeOut = false,bool finishedByConditions = false) 
     {
-                status_.anim_.SetTrigger("Idle");
-                return true;
 
+        return true;
     }
     override public  bool OnPerform()
     {
-        status_.GetAIController().PatrolMode(status_,false);
-        return false; ///devuevlo false puesto que en modo patrol esta acción no debe de terminar nunca a  no ser que cambien las condiciones.
-
+        return true;
     }
 }
