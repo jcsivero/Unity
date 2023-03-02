@@ -14,6 +14,11 @@ public abstract class GAction : BaseMono
     public GameObject target;
     public string targetTag;
     public float duration = 0;
+    public bool blockAction_ = true; ///si es false, se intenta crear un nuevo plan en cada frame y si se consigue uno  de mayor prioridad entonces se 
+    ///finaliza la acción y se pasa a ejecutar el siguiente plan.Esto es útil para cambiar de plan en base a los cambios en las condiciones de todos
+    ///los objetivos y no solo en los de la propia acción, osea, si es true este valor, solo se anulará la acción y creará un nuevo plan si cambian 
+    ///las condiciones de la propia acción o si ya ha terminado.
+    ///Tenga en cuenta que las acciones no bloqueantes pueden consumir muchos recursos.
 
    [Header("=============== Preconditions")]
     [Space(5)]               

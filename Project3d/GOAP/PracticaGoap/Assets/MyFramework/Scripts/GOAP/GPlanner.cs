@@ -101,7 +101,7 @@ public class GPlanner : Base
         bool foundPath = false;
         foreach (GAction action in usableActions)
         {
-            if (action.IsAchievableGiven(parent.state_))
+            if (action.IsAchievableGiven(parent.state_)) 
             {
                 GoapStates currentState = new GoapStates(parent.state_);
                 foreach (KeyValuePair<string, GenericData> eff in action.effects_.GetStates())
