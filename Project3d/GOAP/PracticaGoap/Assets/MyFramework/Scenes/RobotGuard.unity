@@ -5093,40 +5093,13 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 0
-  preConditionsFloat_:
-  - key: distance
-    value: 0
-  preConditionsString_: []
-  preConditionsInt_: []
-  afterEffectsInt_:
-  - key: isPatrol
-    value: 0
-  afterEffectsFloat_: []
-  afterEffectsString_: []
-  agent: {fileID: 0}
-  status_: {fileID: 0}
-  running_: 0
---- !u!114 &512415832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512415818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed1d7bac61c2a8a47a832ae92061014e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Action
-  cost: 1
-  target: {fileID: 0}
-  targetTag: 
-  duration: 0
+  blockAction_: 0
   preConditionsFloat_: []
   preConditionsString_: []
   preConditionsInt_: []
-  afterEffectsInt_: []
+  afterEffectsInt_:
+  - key: PatrolMode
+    value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
   agent: {fileID: 0}
@@ -5149,6 +5122,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 0
+  blockAction_: 1
   preConditionsFloat_: []
   preConditionsString_: []
   preConditionsInt_:
@@ -5156,13 +5130,17 @@ MonoBehaviour:
     value: 0
   - key: angle
     value: 0
-  afterEffectsInt_: []
+  - key: visibleTarget
+    value: 0
+  afterEffectsInt_:
+  - key: ChaseMode
+    value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
   agent: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
---- !u!114 &512415834
+--- !u!114 &512415839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5171,18 +5149,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 512415818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fefec24601dffa44f9ec1d22dc150545, type: 3}
+  m_Script: {fileID: 11500000, guid: ed1d7bac61c2a8a47a832ae92061014e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: Action
+  actionName: AttackMode
   cost: 1
   target: {fileID: 0}
   targetTag: 
   duration: 0
-  preConditionsFloat_: []
+  blockAction_: 1
+  preConditionsFloat_:
+  - key: distance
+    value: 0
+  - key: angle
+    value: 0
+  - key: visibleTarget
+    value: 0
   preConditionsString_: []
   preConditionsInt_: []
-  afterEffectsInt_: []
+  afterEffectsInt_:
+  - key: AttackMode
+    value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
   agent: {fileID: 0}
@@ -21052,7 +21039,7 @@ PrefabInstance:
     - target: {fileID: 8926438751308492215, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
       propertyPath: m_CullingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8926438751317574231, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}

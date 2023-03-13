@@ -23,6 +23,9 @@ public class CommandNpcGoapStatesRobotUpdate : Command
         status_.gAgent_.npcGoapStates_.SetOrAddState("distance",GenericData.Create<float>(direction.magnitude));
         status_.gAgent_.npcGoapStates_.SetOrAddState("health",GenericData.Create<int>(status_.GetHealth()));
         status_.gAgent_.npcGoapStates_.SetOrAddState("visibleTarget",GenericData.Create<bool>(GetAIController().CanSeeTarget(status_,status_.GetTarget())));            
+        Debug.Log("distance " + status_.gAgent_.npcGoapStates_.GetState("distance").GetValue<float>().ToString());
+        Debug.Log("angle " + status_.gAgent_.npcGoapStates_.GetState("angle").GetValue<float>().ToString());
+        Debug.Log("visibleTarget" + status_.gAgent_.npcGoapStates_.GetState("visibleTarget").GetValue<bool>().ToString());
 
         return true;
     }

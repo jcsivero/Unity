@@ -23,10 +23,11 @@ public class GActionPatrolMode : GAction
         ///comprubo manualmente las condiciones con los valores que me interesa
         ///Aquí tengo la ventaja de que no necesito comprobar si existe un valor, puesto que IsArchievableGiven ya comprobó que existan todas.
         
-        if (npcGoapStates_.GetState("distance").GetValue<float>()> status_.GetVisDistance())
+        /*if (npcGoapStates_.GetState("distance").GetValue<float>()> status_.GetVisDistance())
             return true; 
         else
-            return false;
+            return false;*/ ///no hace falta precondición, puesto que el modo patrol será el último de los objetivos posibles.
+        return true;
     }
 
     override public bool IsAchievable() ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración

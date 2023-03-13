@@ -20,7 +20,12 @@ public class GActionAttackMode : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-        return true;
+        if (npcGoapStates_.GetState("distance").GetValue<float>()< status_.GetVisDistanceToAttack())
+            if (npcGoapStates_.GetState("angle").GetValue<float>() < status_.GetVisAngle())
+                if (npcGoapStates_.GetState("visibleTarget").GetValue<bool>())  
+                 return true;
+
+        return false;
     }
 
     override public bool IsAchievable() ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
@@ -35,7 +40,8 @@ public class GActionAttackMode : GAction
         /*target = inventory.FindItemWithTag("Cubicle");
         if (target == null)
             return false;*/
-        status_.anim_.SetTrigger("Patrol");
+        status_.anim_.SetTrigger("Attack");
+        status_.StartFiring();
         return true;
     }
 
@@ -45,10 +51,15 @@ public class GActionAttackMode : GAction
         GWorld.Instance.AddCublicle(target);
         inventory.RemoveItem(target);
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
+        status_.StopFiring();
+        status_.anim_.SetTrigger("Idle");
         return true;
     }
     override public  bool OnPerform()
     {
-        return true;
+        Vector3 look = status_.GetTarget().transform.position;
+        look.y = status_.transform.position.y;
+        status_.transform.LookAt(look);
+        return false;
     }
 }

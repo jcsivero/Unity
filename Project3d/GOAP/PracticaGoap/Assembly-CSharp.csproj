@@ -62,6 +62,7 @@
      <Compile Include="Assets\MyFramework\Scripts\GameManager\GameManager.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\GAction.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\TimedObjectActivator.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandNpcGoapStatesRobotUpdate.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\WaypointCircuit.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\CameraRefocus.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
@@ -122,7 +123,6 @@
      <Compile Include="Assets\MyFramework\Scripts\GameManager\Commands.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\SimpleActivatorMenu.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandNpcGoapStatesRobotUpdate.cs" />
      <None Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\MyFramework\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\MyFramework\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

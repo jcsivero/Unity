@@ -23,10 +23,17 @@ public class GAgentRobots : GAgent
     
     override public void AddGoals()
     {
-        SubGoal s1 = new SubGoal("PatrolMode", GenericData.Create<int>(1), false);
-        goals_.Add(s1, 1);
 
-        SubGoal s2 = new SubGoal("HideMode", GenericData.Create<int>(1), false);
+        SubGoal s2 = new SubGoal("AttackMode", GenericData.Create<int>(1), false);
+        goals_.Add(s2, 2);
+
+        SubGoal s3 = new SubGoal("ChaseMode", GenericData.Create<int>(1), false);
+        goals_.Add(s3, 3);
+
+        SubGoal s10 = new SubGoal("PatrolMode", GenericData.Create<int>(1), false);
+        goals_.Add(s10, 10);
+
+        /*SubGoal s2 = new SubGoal("HideMode", GenericData.Create<int>(1), false);
         goals_.Add(s2, 1);
 
         SubGoal s3 = new SubGoal("ChaseMode", GenericData.Create<int>(1), false);
@@ -36,7 +43,7 @@ public class GAgentRobots : GAgent
         goals_.Add(s4, 1);
 
         SubGoal s5 = new SubGoal("ChaseMode", GenericData.Create<int>(1), false);
-        goals_.Add(s5, 1);
+        goals_.Add(s5, 1);*/
 
     }
     

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GActionChaseMode : GAction
 {
+      private float speedPrevious_;
   override public bool IsAchievableGiven(GoapStates conditions)
     {
         foreach (KeyValuePair<string, GenericData> p in preconditions_.GetStates())
@@ -20,7 +21,13 @@ public class GActionChaseMode : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-        return true;
+        if (npcGoapStates_.GetState("distance").GetValue<float>()< status_.GetVisDistance())
+            if (npcGoapStates_.GetState("angle").GetValue<float>() < status_.GetVisAngle())
+                if (npcGoapStates_.GetState("visibleTarget").GetValue<bool>())  
+                 return true;
+            
+                
+        return false;
     }
 
     override public bool IsAchievable() ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
@@ -36,16 +43,20 @@ public class GActionChaseMode : GAction
         if (target == null)
             return false;*/
         status_.anim_.SetTrigger("Chase");
+        speedPrevious_ = status_.GetSpeedMax();
+        status_.SetSpeedMax(speedPrevious_*2);             
         return true;
     }
 
     public override bool PostPerform(bool timeOut = false,bool finishedByConditions = false) 
     {
-
+        status_.SetSpeedMax(speedPrevious_);     
+        status_.anim_.SetTrigger("Idle");
         return true;
     }
     override public  bool OnPerform()
     {
-        return true;
+        status_.GetAIController().Pursue(status_);
+        return false;
     }
 }
