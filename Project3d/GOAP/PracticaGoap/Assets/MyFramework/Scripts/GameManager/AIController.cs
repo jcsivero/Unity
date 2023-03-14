@@ -279,28 +279,26 @@ public void Wander(Status status)
     {
         if (status.debugMode_)
             Debug.Log("=========================================Asignando nuevo Modo Wander");
-        float wanderRadius = 3;
-        float wanderDistance = 3;
+        float wanderRadius = 2;
+        float wanderDistance = 1f;
         float wanderJitter = 1;
         
+        wanderDistance += status.MovementValue() + status.GetBrakingDistance(); ///como mínimo el movimiento wander debe de avanzar lo que estipule su
+        ///velocidad más la distancia de frenado,
         wanderTarget += new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitter,
                                         0,
-                                        Random.Range(0.01f, 1.0f) * wanderJitter);
+                                        Random.Range(0.1f, 1.0f) * wanderJitter);
         wanderTarget.Normalize();
         wanderTarget *= wanderRadius;
 
         
         Vector3 targetLocal = wanderTarget + new Vector3(0, 0, wanderDistance);
         Debug.Log("valor targeLocal : " + targetLocal.ToString());
-        //Vector3 targetWorld = status.GetOrigin().transform.InverseTransformVector(targetLocal);
-        Vector3 targetWorld = status.GetOrigin().transform.TransformVector(targetLocal);
-        Debug.Log("valor targetWorld : " + targetWorld.ToString());
+       // Vector3 targetWorld = status.GetOrigin().transform.InverseTransformVector(targetLocal) + status.GetOrigin().transform.position;
+        Vector3 targetWorld = status.GetOrigin().transform.InverseTransformVector(targetLocal);
+        
 
-        float minMovement = status.MovementValue() + status.GetBrakingDistance(); ///como mínimo el movimiento wander debe de avanzar lo que estipule su
-        ///velocidad más la distancia de frenado, por eso, se lo sumo al valor obtenido, por si se obtuviera un valor inferior en los cálculos anteriores.
-        targetWorld.x += minMovement;
-        targetWorld.z += minMovement;
-        Debug.Log("valor targetWorld : " + targetWorld.ToString());
+        Debug.Log("valor targetWorld  : " + targetWorld.ToString());
         Seek(status,targetWorld,false);
 
     }

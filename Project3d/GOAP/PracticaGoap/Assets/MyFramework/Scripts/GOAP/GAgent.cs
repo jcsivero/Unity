@@ -61,19 +61,19 @@ abstract public class GAgent : BaseMono
         completeActionByDurationInvoked = false;
     }
 
-    void CompleteAction() ///terminó la acción por algún cambio en el estado de las precondiciones o bien porque terminó devolviendo false la
-    //función OnPerform()
+    void CompleteAction() ///terminó la acción corretamente, esto es cuando la funcion OnPerform() termino true.
     {
         currentAction.running_ = false;
         currentAction.PostPerform(false,false);        
     }
 
     void CompleteActionByConditions() ///terminó la acción por algún cambio en el estado de las precondiciones o bien porque terminó devolviendo false la
-    //función OnPerform(). 
+    //función OnPerform(). También puede ser llamada porque la acción es no bloqueante y se econtró un plan con un objetivo más prioritario.
     ///Nota: Tener en cuenta, que esta forma de terminar la acción indica que fue por cambio de las propias precondiciones de la acción, pero el plan
     ///seguirá ejecutándose con las siguientes acciones hasta intentar completar el objetivo. NO SE CREA UN PLAN NUEVO, hay que tenerlo en cuenta porque 
     ///si se quieren utilizar acciones que no tienen realmente final,como la acción de patrullar de un NPC por ejemplo, es mejor que estas acciones sean
-    ///también un objetivo,  o dicho de otra forma, un objetivo por acción para las que nunca tienen por qué terminar.
+    ///también un objetivo,  o dicho de otra forma, un objetivo por acción para las que nunca tienen por qué terminar. En ese caso, para resolver el que terminen
+    ///en algún momento, es bueno definir también esas acciones como no bloqueantes.
     {
         currentAction.running_ = false;
         currentAction.PostPerform(false,true);        
