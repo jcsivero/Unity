@@ -5069,7 +5069,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512415818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 042bf2050e1fc7843b60d4fe928e74fc, type: 3}
   m_Name: 
@@ -21035,7 +21035,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 11394fd94c4af2549b5a5b4f12b9567d, type: 2}
+      objectReference: {fileID: 9100000, guid: 02816652352273848a2feeee750bb4db, type: 2}
     - target: {fileID: 8926438751308492215, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
       propertyPath: m_CullingMode
@@ -21375,7 +21375,7 @@ PrefabInstance:
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
       propertyPath: debugMode_
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
