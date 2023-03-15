@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class GActionPatrolMode : GAction
 {
-  override public bool IsAchievableGiven(GoapStates conditions)
-    {            
-        foreach (KeyValuePair<string, GenericData> p in preconditions_.GetStates())
-        {
-            if (!conditions.HasState(p.Key))
-                return false;
-        }
+  override public bool IsAchievableGiven(GoapStates conditions,bool planMode = false)
+    {
+        
+        if (planMode)
+            foreach (KeyValuePair<string, GenericData> p in preconditions_.GetStates())
+            {
+                if (!conditions.HasState(p.Key))
+                    return false;
+            }
         ///si están todas las precondiciones en el estado del mundo y los estados del nps(del NPC) entonces paso a la función virtual en la que se puede
         ///comprobar los valores de las precondiciones según se necesite.
-        ///Por defecto, solo con que aparezcan las precondiciones es suficiente para dar la acción por válida para agreagar a la cola.
-        ///Por lo que por rendimiento, siempre será preferible eliminar estados del mundo o del NPC si no que cumplen las condiciones y así evitar
-        //tener que entrar a la fucnión para comprobar sus valores, esto debería ser así siempre que sea posible naturalmente.
+        ///Por defecto, solo con que aparezcan las precondiciones es suficiente para dar la acción por válida para agreagar a la cola, pero esto solo
+        //es cierto mientras se crea un plan, después esas precondiciones realmente pueden no pertenecer ni al estado del mundo ni del npc.
+        
         return IsAchievableGivenCustomize(conditions);
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
@@ -40,14 +42,14 @@ public class GActionPatrolMode : GAction
         /*target = inventory.FindItemWithTag("Cubicle");
         if (target == null)
             return false;*/
-        status_.anim_.SetTrigger("Patrol");
+        status_.anim_.SetBool("Patrol",true);
         return true;
     }
 
-    public override bool PostPerform(bool timeOut = false,bool finishedByConditions = false) 
+    public override void PostPerform(bool timeOut = false,bool finishedByConditions = false) 
     {
-                status_.anim_.SetTrigger("Idle");
-                return true;
+                //status_.anim_.SetTrigger("Idle");
+                status_.anim_.SetBool("Patrol",false);
 
     }
     override public  bool OnPerform()

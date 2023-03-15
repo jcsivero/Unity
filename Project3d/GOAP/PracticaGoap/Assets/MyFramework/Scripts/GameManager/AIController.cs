@@ -269,41 +269,47 @@ public void Pursue(Status status,bool withPosY=false)
 
 }    
 
-Vector3 wanderTarget = Vector3.zero;
-public void Wander(Status status)
+
+ Vector3 targetWorld = Vector3.zero;
+
+ ///función para deambular simulando un patrullaje sin waypoints. Puede ser arbitrario con un radio alrededor del NPC o alrededor de un pivotde
+ //representado por la posición de un gameobject.
+public void Wander(Status status,float wanderRadius = 2, float wanderDistance = 1f,float wanderJitter = 1,GameObject aroundPivot = null)
 {
+        if (aroundPivot == null)
+        aroundPivot = status.GetOrigin();     
+
     if (status.debugMode_)
         Debug.Log("=========================================Modo Wander");
+
 
     if (status.GetNavMeshPath().status != UnityEngine.AI.NavMeshPathStatus.PathComplete)  ///si no tiene un path asignado, asigno uno.
     {
         if (status.debugMode_)
             Debug.Log("=========================================Asignando nuevo Modo Wander");
-        float wanderRadius = 2;
-        float wanderDistance = 1f;
-        float wanderJitter = 1;
         
         wanderDistance += status.MovementValue() + status.GetBrakingDistance(); ///como mínimo el movimiento wander debe de avanzar lo que estipule su
         ///velocidad más la distancia de frenado,
-        wanderTarget += new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitter,
+        Vector3 wanderTarget = new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitter,
                                         0,
-                                        Random.Range(0.1f, 1.0f) * wanderJitter);
+                                        Random.Range(-1.0f, 1.0f) * wanderJitter);
         wanderTarget.Normalize();
         wanderTarget *= wanderRadius;
 
-        
         Vector3 targetLocal = wanderTarget + new Vector3(0, 0, wanderDistance);
-        Debug.Log("valor targeLocal : " + targetLocal.ToString());
-       // Vector3 targetWorld = status.GetOrigin().transform.InverseTransformVector(targetLocal) + status.GetOrigin().transform.position;
-        Vector3 targetWorld = status.GetOrigin().transform.InverseTransformVector(targetLocal);
-        
+    
 
-        Debug.Log("valor targetWorld  : " + targetWorld.ToString());
+        targetWorld = aroundPivot.transform.TransformPoint(targetLocal);
+                 
         Seek(status,targetWorld,false);
 
     }
     else
-        Seek(status,status.GetNavMeshTargetPosition(),false);  ///voy a la posición de destino.
+    {
+            Debug.DrawRay(aroundPivot.transform.position,targetWorld - aroundPivot.transform.position ,Color.black);            
+            Seek(status,status.GetNavMeshTargetPosition(),false);  ///voy a la posición de destino.
+    }
+
 
     
 }

@@ -119,10 +119,10 @@
      <Compile Include="Assets\MyFramework\Scripts\Others\Bullet.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
      <Compile Include="Assets\MyFramework\Scripts\FSM\Patrol.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\GOAP\GActions\GActionIdleMode.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GameManager\Commands.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\MyFramework\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\GActions\GActionRepairMode.cs" />
      <None Include="Assets\MyFramework\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\MyFramework\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\MyFramework\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

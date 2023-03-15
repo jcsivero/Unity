@@ -115,8 +115,9 @@ public abstract class GAction : BaseMono
     public bool CheckConditions()
     {
         
-        if ((IsAchievable()) && (IsAchievableGiven(GetAllStates()))) ///si todas el filtrado y todas las precondiciones tando del mundo como del npc están disponibles y se cumplen,
+        if ((IsAchievable()) && (IsAchievableGiven(GetAllStates(),false))) ///si todas el filtrado y todas las precondiciones tando del mundo como del npc están disponibles y se cumplen,
         ///se procede al PrePerform, el cuál todavía puede volver a filtrar y por consiguiente romper el plan creado, obligando a crear un nuevo plan.
+        ///en esta comprobación no se tienen en cuenta las precondiciones volátiles que se pusieron para poder crear algunos planes, pero que no están ni en el estado del mundo ni en el del NPC
             return true;
         else
             return false;
@@ -128,26 +129,59 @@ public abstract class GAction : BaseMono
         return allStates;
     }
     ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
-    abstract public bool IsAchievable();  
+    virtual public bool IsAchievable()
+    {
+          return true;
+    }
     ///ya con las acciones filtradas, compruebo todo el estado, primero compruebo simplemente que estén todas las condiciones presentes.
     ///si es así, esta función llama a IsAchievableGivenCustomize, donde puedo ya manualmente introducir el código para comprobar los valores de cada estado concretamente.
-    abstract public bool IsAchievableGiven(GoapStates conditions); 
+    ///El valor planMode indica que se están comprobando las precondiciones mientras se está intentando crear un plan, o esa, desde la función BuildGraph() de la clase GPlanner.
+    ///Esto es debido a que muchas precondiciones no tienen por que pertenecer ni al estado del mundo ni al del NPC, simplemente están agregadas como
+    ///cadena de precondiciones para poder llegar a un objetivo. El problema es que estas precondiciones adhoc, no se almacen ni en el estado del mundo ni del NPC,
+    ///por lo que a la hora de comprobar si se siguen cumpliendo las precondicones antes de ejecutar una accion(esto se realiza comprobandeo las precondiciones de la acción con el estado
+    //del mundo y del NPC) daría error. Así que la solución es que se permita esta comprobación light de precondiciones a la hora de crear un plan con la varialbe
+    ///planMode = true y cuando se comprueban estas precondiciones antes de ejecutar cada acción, no se compruebe todo el estado de variables del mundo y del NPC, simplemente
+    ///se haga la comprobación manual que se programa para cada acción en concreto.
+    virtual public bool IsAchievableGiven(GoapStates conditions,bool planMode = false )
+    {
+         if (planMode)
+            foreach (KeyValuePair<string, GenericData> p in preconditions_.GetStates())
+            {
+                if (!conditions.HasState(p.Key))
+                    return false;
+            }
+        ///si están todas las precondiciones en el estado del mundo y los estados del nps(del NPC) entonces paso a la función virtual en la que se puede
+        ///comprobar los valores de las precondiciones según se necesite.
+        ///Por defecto, solo con que aparezcan las precondiciones es suficiente para dar la acción por válida para agreagar a la cola, pero esto solo
+        //es cierto mientras se crea un plan, después esas precondiciones realmente pueden no pertenecer ni al estado del mundo ni del npc.
+        
+        return IsAchievableGivenCustomize(conditions);
+    }
     
     ///esta funciónes llamada por IsAchievableGiven y sirve para comprobar las condiciones con su valor correspondiente y deseado, no limitándose simplemetne a comprobar que la precondición
     ///exista en el estado.
-    abstract protected bool IsAchievableGivenCustomize(GoapStates conditions);
+    virtual protected bool IsAchievableGivenCustomize(GoapStates conditions)
+    {
+        return true;
+    }
 
     ///se ejecuta justo antes de iniciar la acción. Se sabe en esta ejecución que el estado del mundo y del NPC se sigue cumpliendo, o sea, todas las precondiciones.
     ///Aún así, si en el PrePerform se devuelve false, el plan entero se detendrá forzando la creación de uno nuevo. Por ejemplo en el PrePerform, se puede realizar
     ///comprobaciones extras antes de iniciar la acción.
-    public abstract bool PrePerform(); 
+    virtual public bool PrePerform()
+    {
+        return true;
+    }
     
     ///esta función es llamada durante la duración de la acción, en cada frame y ya se ha comprobado justo antes de cada llamada, que las condiciones no han cambiado.
     /// si esta función devuelve true, terminará el plan llamando al posperform, indicando que se completó la acción.
     ///después se completará completamente dependiendo de si se estableción un tiempo de duración.
     ///Para continuar la ejecución, esta función devolverá false indicando que no ha terminado su acción mientras siga teniendo cosas que hacer.
 
-    public abstract bool OnPerform();
+    virtual public bool OnPerform()
+    {
+        return true;
+    }
 
         
     ///Esta función no debe ser llamada directamente, en su lugar, se llamará automáticamente si han cambiado las condiciones mientras se ejecuta la acción
@@ -161,6 +195,9 @@ public abstract class GAction : BaseMono
     ///es como un tiempo de espera.
     ///finishedByConditions, indica que se llegó al postperform por algún cambio en las condiciones, de forma que ya no se cumple
 
-    public abstract bool PostPerform(bool timeOut = false, bool finishedByConditions=false); 
+    virtual public  void PostPerform(bool timeOut = false, bool finishedByConditions=false)
+    {
+    
+    }
 
 }

@@ -20,7 +20,8 @@ public class StatusNpc : Status
     [Header("Attributtes")]
     [SerializeField] private int lifes_;
     [SerializeField] private int health_;
-    protected int healthMax_; //se almacenará la variable health inicial para poder conocer en un momento dado, la vida máxima.    
+    
+    [HideInInspector] public int healthMax_; //se almacenará la variable health inicial para poder conocer en un momento dado, la vida máxima.    
     [Header("Way And Hide Points")]
     [Space(5)]
     public string hidePointTag_;
