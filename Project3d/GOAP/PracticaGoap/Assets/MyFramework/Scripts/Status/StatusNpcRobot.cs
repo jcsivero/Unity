@@ -22,7 +22,7 @@ public class StatusNpcRobot : StatusNpc
 [Header("Links to GameObjects")]
 [SerializeField] private GameObject bullet_;
 [SerializeField] private GameObject originOfFire_;
-[SerializeField] private TextMesh  textHealthNpc_;       
+[SerializeField] private TextMesh  hudStateNpc_;       
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables de trigger o suscriber a eventos
@@ -152,19 +152,21 @@ private void InstaciateCommands()
     commandNpcGoapStatesRobotUpdate_ = new CommandNpcGoapStatesRobotUpdate(this);
 }
 
-public TextMesh GetHudHealth()
+public TextMesh GetHud()
 {
-    return textHealthNpc_;
+    return hudStateNpc_;
 }
-public void SetHudHealth(int draft)
+public void SetHud(string draft)
 {
-    textHealthNpc_.text = draft.ToString() + " %";
+    hudStateNpc_.text = draft;
+    
 }
+
 override public void Fire()
-    {
-        GameObject b = Instantiate(bullet_, originOfFire_.transform.position, originOfFire_.transform.rotation);
-        b.GetComponent<Rigidbody>().AddForce(originOfFire_.transform.forward * 700);
-    }
+{
+    GameObject b = Instantiate(bullet_, originOfFire_.transform.position, originOfFire_.transform.rotation);
+    b.GetComponent<Rigidbody>().AddForce(originOfFire_.transform.forward * 700);
+}
 override public void StopFiring()
 {
     CancelInvoke("Fire");

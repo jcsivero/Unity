@@ -19,13 +19,17 @@ public class CommandNpcGoapStatesRobotUpdate : Command
         direction.y = 0; //solo me interesa el ángulo en x
         Vector3 npcDirection = status_.transform.forward;
 
-        status_.gAgent_.npcGoapStates_.SetOrAddState("angle",GenericData.Create<float>(Vector3.Angle(direction, npcDirection)));
-        status_.gAgent_.npcGoapStates_.SetOrAddState("distance",GenericData.Create<float>(direction.magnitude));
-        status_.gAgent_.npcGoapStates_.SetOrAddState("health",GenericData.Create<int>(status_.GetHealth()));
-        status_.gAgent_.npcGoapStates_.SetOrAddState("visibleTarget",GenericData.Create<bool>(GetAIController().CanSeeTarget(status_,status_.GetTarget())));            
-        Debug.Log("distance " + status_.gAgent_.npcGoapStates_.GetState("distance").GetValue<float>().ToString());
-        Debug.Log("angle " + status_.gAgent_.npcGoapStates_.GetState("angle").GetValue<float>().ToString());
-        Debug.Log("visibleTarget" + status_.gAgent_.npcGoapStates_.GetState("visibleTarget").GetValue<bool>().ToString());
+        status_.GetGoapAgent().npcGoapStates_.SetOrAddState("angle",GenericData.Create<float>(Vector3.Angle(direction, npcDirection)));
+        status_.GetGoapAgent().npcGoapStates_.SetOrAddState("distance",GenericData.Create<float>(direction.magnitude));
+        status_.GetGoapAgent().npcGoapStates_.SetOrAddState("health",GenericData.Create<int>(status_.GetHealth()));
+        status_.GetGoapAgent().npcGoapStates_.SetOrAddState("visibleTarget",GenericData.Create<bool>(GetAIController().CanSeeTarget(status_,status_.GetTarget())));            
+        if (status_.debugMode_)
+        {
+            Debug.Log("distance " + status_.GetGoapAgent().npcGoapStates_.GetState("distance").GetValue<float>().ToString());
+            Debug.Log("angle " + status_.GetGoapAgent().npcGoapStates_.GetState("angle").GetValue<float>().ToString());
+            Debug.Log("visibleTarget" + status_.GetGoapAgent().npcGoapStates_.GetState("visibleTarget").GetValue<bool>().ToString());
+
+        }
 
         return true;
     }

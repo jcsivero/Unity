@@ -80,7 +80,7 @@ public class StatusNpc : Status
     public  Animator anim_;
     private  UnityEngine.AI.NavMeshPath navMeshPath_;    
 
-    public GAgent gAgent_; ///acceso al componente Goap del agente en caso de tenerlo agregado al NPC
+    private GAgent goapAgent_; ///acceso al componente Goap del agente en caso de tenerlo agregado al NPC
 
     private int wayPointCurrent_;
     private int wayPointIndex_ = 0 ; ///indice dentro de la lista de waypoints. Solo será el mismo valor que currentWayPoints_ cuando
@@ -100,6 +100,7 @@ public class StatusNpc : Status
 ////Métodos Sobreescritos
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
   
+
 override public float GetTargetMarginPosition()
 {
     return targetMarginPosition_;
@@ -294,7 +295,7 @@ override public float MovementValue()
                 
         
         anim_ = gameObject.GetComponent<Animator>();                        
-        gAgent_ = gameObject.GetComponent<GAgent>();    
+        goapAgent_ = gameObject.GetComponent<GAgent>();    
         navMeshAgent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
         navMeshPath_ = new UnityEngine.AI.NavMeshPath();
         navMeshTargetPositionInfinity_ = new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity); 
@@ -379,6 +380,10 @@ override public float MovementValue()
     }
 
 
+public GAgent GetGoapAgent()
+{
+    return goapAgent_;
+}
 public GameObject GetWayPointGameObjectCurrent()
 {
     return GetStatusWorld().wayPoints_[wayPointTag_][GetWayPointCurrent()];
