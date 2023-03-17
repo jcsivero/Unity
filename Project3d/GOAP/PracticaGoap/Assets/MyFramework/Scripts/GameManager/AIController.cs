@@ -306,7 +306,9 @@ public void Wander(Status status,float wanderRadius = 2, float wanderDistance = 
     }
     else
     {
-            Debug.DrawRay(aroundPivot.transform.position,targetWorld - aroundPivot.transform.position ,Color.black);            
+            if (status.debugMode_)
+                Debug.DrawRay(aroundPivot.transform.position,targetWorld - aroundPivot.transform.position ,Color.black);            
+
             Seek(status,status.GetNavMeshTargetPosition(),false);  ///voy a la posición de destino.
     }
 
@@ -318,12 +320,12 @@ public void Wander(Status status,float wanderRadius = 2, float wanderDistance = 
 public void PatrolMode(StatusNpc status,bool withPosY = false)
 {  
     bool patrol=true;     
-    if (status.GetWayPointCurrentPos(true)== Vector3.zero)
+    if (status.GetWayPointCurrentPos()== Vector3.zero)
         patrol = status.NextWayPoint();     ///inicializo los waytpoints si la posición devuelta es cero.
 
     if (patrol)
     {
-        if ((Seek(status,status.GetWayPointCurrentPos(true),withPosY)) || (CalculateDistanceStep(status.GetWayPointCurrentPos(true),status.GetOrigin().transform.position,withPosY) < status.wayPointsAccuracy_)) 
+        if ((Seek(status,status.GetWayPointCurrentPos(),withPosY)) || (CalculateDistanceStep(status.GetWayPointCurrentPos(),status.GetOrigin().transform.position,withPosY) < status.wayPointsAccuracy_)) 
             status.NextWayPoint();    
 
     }
@@ -469,7 +471,7 @@ public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool in
         ray.direction = -dirPoint;
         pointCol.Raycast(ray, out info, distance);
         //info.point += dirPoint;
-        Debug.DrawRay(rayPos, -dirPoint * distance, Color.red);
+        //Debug.DrawRay(rayPos, -dirPoint * distance, Color.red);
     }
     else
     {
@@ -478,10 +480,10 @@ public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool in
         ray.direction = dirPoint;        
         pointCol.Raycast(ray, out info, distance);
         //info.point -= dirPoint; 
-        Debug.DrawRay(rayPos, dirPoint * distance, Color.red);
+        //Debug.DrawRay(rayPos, dirPoint * distance, Color.red);
     }
        
-        Debug.Log("punto de llegada : " + info.point.ToString() );
+        
     return info.point;
     
     

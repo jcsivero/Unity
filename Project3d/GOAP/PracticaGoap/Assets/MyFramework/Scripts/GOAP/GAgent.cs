@@ -20,6 +20,7 @@ abstract public class GAgent : BaseMono
 {
     public List<GAction> actions_ = new List<GAction>();
     public Dictionary<SubGoal, int> goals_ = new Dictionary<SubGoal, int>();
+    private System.Linq.IOrderedEnumerable<System.Collections.Generic.KeyValuePair<SubGoal, int>> sortedGoals_; ///almaceno los objetivos de este NPC ya ordenados por prioridad de mayor(1) a menor(>1)
     int priorityGoalActual_ ; ///indica la prioridad del objetivo en curso.Esta prioridad es de forma ascendente, prioridad 1 es más que 2.
     public GoapStates npcGoapStates_ = new GoapStates();
     public GInventory inventory_ = new GInventory();
@@ -37,9 +38,11 @@ abstract public class GAgent : BaseMono
     {
         status_ = gameObject.GetComponent<StatusNpc>(); //para acceder al componente Status del Npc en caso de tenerlo agregado.
         
-        planner_ = new GPlanner();
+        planner_ = new GPlanner(status_);
 
         AddGoals(); ///agrego los objetivos de este NPC.
+
+        sortedGoals_ = from entry in goals_ orderby entry.Value ascending select entry;
 
         AddActions(); ///agrego acciones que no fueron agregadas como componenetes desde el inspector. Esto son acciones que tienen un tipo de datos que no es serializable.
         
@@ -88,10 +91,12 @@ abstract public class GAgent : BaseMono
             ///si es así, se dará por iniciada la acción. Sino, se creará un plan nuevo.
             if (currentAction_.CheckConditions())
             {
-                Debug.Log("superado checkconditions");
+                if (status_.debugMode_)
+                    Debug.Log("superado checkconditions");
                 if (currentAction_.PrePerform())
                 {
-                    Debug.Log("superado preperform");
+                    if (status_.debugMode_)
+                        Debug.Log("superado preperform");
                     currentAction_.running_ = true;
                 }
                     
@@ -109,9 +114,8 @@ abstract public class GAgent : BaseMono
     Queue<GAction> GetPlanOrPriorityPlan() ///Devuelve un plan o intenta conseguir uno de mayor prioridad si ya había un plan. Devuelve null si no se consiguió plan
     {
         Queue<GAction> actionQueueDraft = null;                
-        var sortedGoals = from entry in goals_ orderby entry.Value ascending select entry;
-
-        foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
+        
+        foreach (KeyValuePair<SubGoal, int> sg in sortedGoals_)
         {
             if (actionQueue_ == null) ///si no hay ningun plan, o sea, su cola de acciones está a null.
                 actionQueueDraft = planner_.plan(actions_, sg.Key.sgoals, npcGoapStates_);

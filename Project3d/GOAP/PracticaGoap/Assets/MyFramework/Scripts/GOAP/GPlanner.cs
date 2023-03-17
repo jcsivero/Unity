@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+    using UnityEngine;
 
 public class Node
 {
@@ -8,7 +8,7 @@ public class Node
     public float cost;
     public GoapStates state_;
     public GAction action;
-
+    
     // Constructor
     public Node(Node parent, float cost, GoapStates allStates, GAction action)
     {
@@ -31,7 +31,12 @@ public class Node
 
 public class GPlanner : Base
 {
-
+    private StatusNpc status_;
+    public GPlanner(StatusNpc status) //inicializa un plan para un NPC en concreto. Hay un plan o ninguno por NPC y por tanto por Agente
+    {
+        status_ = status;
+    }
+    ///Devuelve un plan, o sea, una cola de acciones. Devuelve null si no se consiguió plan
     public Queue<GAction> plan(List<GAction> actions, Dictionary<string, GenericData> goal, GoapStates npcStates)
     {
 
@@ -52,7 +57,8 @@ public class GPlanner : Base
 
         if (!success)
         {
-            Debug.Log("NO PLAN");
+            if (status_.debugMode_)
+                Debug.Log("NO PLAN");
             return null;
         }
 
@@ -87,10 +93,12 @@ public class GPlanner : Base
             queue.Enqueue(a);
         }
 
-        Debug.Log("The Plan is: ");
-        foreach (GAction a in queue)
+        ///Muestra el plan en funcionamiento, solo a modo de depuración
+        if (status_.debugMode_)
         {
-            Debug.Log("Q: " + a.actionName);
+            Debug.Log("The Plan is: ");
+            foreach (GAction a in queue)
+                Debug.Log("Q: " + a.actionName);            
         }
         return queue;
     }

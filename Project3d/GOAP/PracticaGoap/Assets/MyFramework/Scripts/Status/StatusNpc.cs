@@ -77,7 +77,7 @@ public class StatusNpc : Status
     private Vector3 navMeshTargetPosition_; ///posición  final del path del navmesh.    
 
     private  UnityEngine.AI.NavMeshAgent navMeshAgent_;   
-    public  Animator anim_;
+    [HideInInspector] public  Animator anim_;
     private  UnityEngine.AI.NavMeshPath navMeshPath_;    
 
     private GAgent goapAgent_; ///acceso al componente Goap del agente en caso de tenerlo agregado al NPC
@@ -393,17 +393,16 @@ public int  GetWayPointCurrent()
 {
     return wayPointCurrent_; ///devuelvo el número de waypoints actual, su posición en la lista.
 }
-public Vector3  GetWayPointCurrentPos(bool pointToTarget = true)
+public Vector3  GetWayPointCurrentPos()
 {
-        ///devuelve la posición del waypoint actual normal u ajustada a la base del collider y en el punto de intersección con el target.
-                ///o sea, la posición devuelta por el método CalculatePointTarget() de AIcontroller.
-    if (pointToTarget)
-        return wayPointsPosBase_;
-    else
-        return  wayPointsPosBase_;
+        ///devuelve la posición del waypoint actual normal o ajustada a la base del collider y en el punto de intersección con este NPC
+                ///o sea, la posición devuelta por el método CalculatePointTarget() de AIcontroller. Eso depende de si ese waypoints tenía collider o no
+                //esto se decidión en la funcion NextWayPoint()
+        return  wayPointsPos_;
 
 }
-////Devuelve el número del próximo waypoints a visitar. 
+////Prepara el número del próximo waypoints a visitar. 
+///Devuelve false si no hay waypoints o no se encuentra la etiqueta para este npc.
 ///Aquí también se comprueba que haya waypoints, y se ajusta la posición del siguiente waypoints igual que su posición calculad con CaclculatePointTarget() de AIController()
 //Así no consumo tantos recursos, puesto que solo se recalcula en cada cambio de waypoints.
 public bool NextWayPoint()
@@ -411,7 +410,8 @@ public bool NextWayPoint()
      if(wayPointTag_.Length == 0)                
     {
         Debug.Log("////////////////////////No hay waypoints para este NPC. pasando a modo Wander.//////////"+ gameObject.name);
-        return false; ///esto indica que no hay waypoints para este NPC o que no se encontró objectos con la etiqueta indicada..        
+        wayPointsPos_ = Vector3.zero;
+        return false; ///esto indica que no hay waypoints para este NPC       
     }
         
     else
@@ -419,8 +419,9 @@ public bool NextWayPoint()
         if (!GetStatusWorld().wayPoints_.ContainsKey(wayPointTag_))
         {
             Debug.Log("///////////////////// Etiqueta para waypoint no econtrada/////////////////////" + gameObject.name);
-            wayPointTag_ = "Tag No founded";            
-            return false; ///esto indica que no hay waypoints para este NPC o que no se encontró objectos con la etiqueta indicada.
+            wayPointTag_ = "Tag No founded";      
+            wayPointsPos_ = Vector3.zero;      
+            return false; ///esto indica  que no se encontró objectos con la etiqueta indicada.
         }
         else
         {            
@@ -443,8 +444,19 @@ public bool NextWayPoint()
                     wayPointIndex_ = 0;                            
                                                         
             }
+            
             wayPointsPos_ = GetWayPointGameObjectCurrent().transform.position;
-            wayPointsPosBase_ =  GetAIController().CalculatePointTarget(GetOrigin(),GetWayPointGameObjectCurrent());
+            if (GetWayPointGameObjectCurrent().GetComponent<Collider>() != null) ///si el waypoint tiene colider, entonces su posición la obtengo
+            ///con respecto a la base del collider y con la orientación del NPC hacia ese waypoints.            
+            ///hay que tener cuidado,porque la rutas obtenidas del navmesh, si se especificó un radio muy ancho, ya que si es así, el punto obtenido
+            ///del collider quedaría dentro de una zona no accesible del navmesh, y por consiguiente daría error asignando la ruta.
+            ///Esto no se puede resolver con el valor de la variable waypointsaccuracy o brakingdistance, ya que estos valores se aplican cuando se está llegando al destino,
+            ///o sea, después de tener  un path válido, pero este error se producirían al intentar crear el camino.
+            //Así que la solución es asignar el navmesh lo más posible o bien, amplicar el collider para que coincida con el borde del navmesh generado.
+                wayPointsPos_ =  GetAIController().CalculatePointTarget(GetOrigin(),GetWayPointGameObjectCurrent());
+                
+
+                
         }
 
     }   

@@ -19,7 +19,7 @@ public  abstract class  Status :  BaseMono
     [Header("Links to GameObjects")]
     [SerializeField] private GameObject origin_;
     [SerializeField] private GameObject target_;     
-    public bool atDestination_= false; ///true si se encuentra en el destino fijado con la función seek de AIController
+    [HideInInspector]public bool atDestination_= false; ///true si se encuentra en el destino fijado con la función seek de AIController
     protected Vector3 posReferenceFromChanged_; ///Guarda la posición de referencia contra la que se comprobará si el objeto ha variado su posición más alla del umbral establecidor.
 
     private Vector3 minPos_; ///Posición del valor mínimo del collider. del Npc. Utilizado para obtener posiciones a ras de suelo mucho más fiables para 

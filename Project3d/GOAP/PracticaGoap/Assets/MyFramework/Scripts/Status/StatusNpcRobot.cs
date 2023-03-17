@@ -156,9 +156,10 @@ public TextMesh GetHud()
 {
     return hudStateNpc_;
 }
-public void SetHud(string draft)
+public void SetHud(string draft, Color color)
 {
-    hudStateNpc_.text = draft;
+    hudStateNpc_.color = color;
+    hudStateNpc_.text = draft;    
     
 }
 
