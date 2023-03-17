@@ -46,7 +46,7 @@ public class GActionPatrolMode : GAction
         return true;
     }
 
-    public override void PostPerform(bool timeOut = false,bool finishedByConditions = false) 
+    public override void PostPerform(Reason reason) 
     {
                 //status_.anim_.SetTrigger("Idle");
                 status_.anim_.SetBool("Patrol",false);

@@ -309,9 +309,8 @@ override public float MovementValue()
         Debug.Log("|||||||||||||| Start StatusNpc||||||||||||||||");
         
 
-        if (!suscribeToOnUpdateAllStatusNpc_)
+        if (!suscribeToOnUpdateAllStatusNpc_)        
             OnEnable(); 
-       
         
         
     }
@@ -330,7 +329,6 @@ override public float MovementValue()
         ///Start() del GameManager, o del StatusWorld, , y entonces no tener todo actualizado, como target_ u otras variables.
 
 
-        
     }
         /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
@@ -352,6 +350,7 @@ override public float MovementValue()
     bool OnUpdateStatusNpc()
     {
         SetTarget(GetStatusWorld().GetTarget());
+
         return true;
     }
 

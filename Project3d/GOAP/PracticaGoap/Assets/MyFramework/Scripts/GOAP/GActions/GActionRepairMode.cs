@@ -42,7 +42,7 @@ public class GActionRepairMode : GAction
         return true;
     }
 
-    public override void PostPerform(bool timeOut = false,bool finishedByConditions = false) 
+    public override void PostPerform(Reason reason) 
     {
         /*GWorld.Instance.GetWorld().ModifyState("treatingPatient", 1);
         GWorld.Instance.AddCublicle(target);

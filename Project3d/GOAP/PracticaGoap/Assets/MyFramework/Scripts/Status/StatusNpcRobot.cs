@@ -30,6 +30,7 @@ public class StatusNpcRobot : StatusNpc
     private const string ON_UPDATE_ALL_STATUS_NPC_ROBOT = "ON_UPDATE_ALL_STATUS_NPC_ROBOT";    
     private bool suscribeToOnUpdateAllStatusNpcRobot_ = false;
 
+    private const string ON_GOAP_BREAK_ONLY_THIS_NPC = "ON_GOAP_BREAK_ONLY_THIS_NPC";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -103,6 +104,7 @@ public class StatusNpcRobot : StatusNpc
     {
         if (other.gameObject.tag == "bullet")
         {
+            GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP
             Debug.Log("colision detectada daño en robot " + GetHealth().ToString());
             commandAddOrSubHealth_.Set(-10);                        
             AppendCommand(commandAddOrSubHealth_);                                    
@@ -128,7 +130,7 @@ public class StatusNpcRobot : StatusNpc
 
     bool OnUpdateStatusNpcRobot()
     {
-        SetTarget(GetStatusWorld().GetTarget());
+        
         return true;
     }
     protected new void Update()
@@ -138,7 +140,7 @@ public class StatusNpcRobot : StatusNpc
         {
             AppendCommand(commandHudUpdateStatusNpcRobot_);
             AppendCommand(commandNpcGoapStatesRobotUpdate_);
-            ExecuteCommands();
+            //ExecuteCommands();
 
 
         }
@@ -166,7 +168,7 @@ public void SetHud(string draft, Color color)
 override public void Fire()
 {
     GameObject b = Instantiate(bullet_, originOfFire_.transform.position, originOfFire_.transform.rotation);
-    b.GetComponent<Rigidbody>().AddForce(originOfFire_.transform.forward * 700);
+    b.GetComponent<Rigidbody>().AddForce(originOfFire_.transform.forward * 1000);
 }
 override public void StopFiring()
 {

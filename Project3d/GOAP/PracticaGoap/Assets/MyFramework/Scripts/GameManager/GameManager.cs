@@ -99,10 +99,10 @@ public class GameManager :BaseMono
     {
         if (!ok_)
         {
-            GetManagerMyEvents().TriggerEvent(TRIGGER_ON_UPDATE_ALL_STATUS_NPC) ; ///actualizo todos los objectos.
-            ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
+            GetManagerMyEvents().TriggerEvent(TRIGGER_ON_UPDATE_ALL_STATUS_NPC) ; ///actualizo todos los objectos.            
             ok_ = true;
         }
+        ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
             
     }
    /*   public void LoadNextLevel()

@@ -51,7 +51,7 @@ public class GActionChaseMode : GAction
         return true;
     }
 
-    public override void PostPerform(bool timeOut = false,bool finishedByConditions = false) 
+    public override void PostPerform(Reason reason) 
     {
         status_.SetSpeedMax(speedPrevious_);     
         status_.anim_.SetBool("Chase",false);

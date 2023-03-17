@@ -48,7 +48,7 @@ public class GActionHideMode : GAction
         return false;
     }
 
-    public override void PostPerform(bool timeOut = false,bool finishedByConditions = false) 
+    public override void PostPerform(Reason reason) 
     {
 
         /*GWorld.Instance.GetWorld().ModifyState("treatingPatient", 1);

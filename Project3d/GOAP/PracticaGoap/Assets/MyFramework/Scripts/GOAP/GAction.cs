@@ -14,6 +14,11 @@ public abstract class GAction : BaseMono
     public GameObject target;
     public string targetTag;
     public float duration = 0;
+
+    public bool mandatory_ = true; ///indica si esta acción es obligatoria para poder continuar con la siguiente acción del plan en caso de ser interrumpida
+    ///por ya no cumplirse las precondicones o bien si se ejecutó el evento onGoapBreak. si es true, la acción es obligatoria y se crearía un nuevo plan en caso de 
+    ///interrupción, si es false, se detendrá solo la acción en curso, se ejecutará su posperfom y se continuará con la siguiente acción del plan en caso de haber alguna.
+    ///si fuera la última acción del plan, evidentemente se creará un plan nuevo.
     public bool blockAction_ = true; ///si es false, se intenta crear un nuevo plan en cada frame y si se consigue uno  de mayor prioridad entonces se 
     ///finaliza la acción y se pasa a ejecutar el siguiente plan.Esto es útil para cambiar de plan en base a los cambios en las condiciones de todos
     ///los objetivos y no solo en los de la propia acción, osea, si es true este valor, solo se anulará la acción y creará un nuevo plan si cambian 
@@ -112,15 +117,31 @@ public abstract class GAction : BaseMono
     
     ///comprueba si se sigue cumpliendo el filtrado de esta acción en concreto y si las precondiciones del estado del mundo y del npc siguen siendo válidas.
     ///normalmente se comprueba antes de realizar la acción.
-    public bool CheckConditions()
+    public bool CheckConditions(out Reason reason,bool breakPlanOrAcction)
     {
         
         if ((IsAchievable()) && (IsAchievableGiven(GetAllStates(),false))) ///si todas el filtrado y todas las precondiciones tando del mundo como del npc están disponibles y se cumplen,
-        ///se procede al PrePerform, el cuál todavía puede volver a filtrar y por consiguiente romper el plan creado, obligando a crear un nuevo plan.
-        ///en esta comprobación no se tienen en cuenta las precondiciones volátiles que se pusieron para poder crear algunos planes, pero que no están ni en el estado del mundo ni en el del NPC
-            return true;
-        else
-            return false;
+        {
+            ///se procede al PrePerform, el cuál todavía puede volver a filtrar y por consiguiente romper el plan creado, obligando a crear un nuevo plan.
+            ///en esta comprobación no se tienen en cuenta las precondiciones volátiles que se pusieron para poder crear algunos planes, pero que no están ni en el estado del mundo ni en el del NPC
+            if (!breakPlanOrAcction)            
+            {
+                reason = Reason.success;  
+                return true;
+            }  
+                
+            else
+            {
+                reason = Reason.onGoapBreakCalled;  
+                return false;
+            }
+        }   
+            else
+            {
+                reason = Reason.conditionsAtionsChanged;  
+                return false;
+            }        
+            
     }
     public GoapStates GetAllStates() ///devuelve los estados del mundo junto con los estados del NPC actual.
     {
@@ -195,7 +216,7 @@ public abstract class GAction : BaseMono
     ///es como un tiempo de espera.
     ///finishedByConditions, indica que se llegó al postperform por algún cambio en las condiciones, de forma que ya no se cumple
 
-    virtual public  void PostPerform(bool timeOut = false, bool finishedByConditions=false)
+    virtual public  void PostPerform(Reason reason)
     {
     
     }

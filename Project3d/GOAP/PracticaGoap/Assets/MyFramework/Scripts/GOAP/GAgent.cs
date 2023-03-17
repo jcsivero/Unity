@@ -3,6 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+public enum Reason
+{ /// En la llamada al posperform de cada acción se le indica el motivo.
+    success = 0, ///Indica que la acción se completó correctamente, en el posperform podemos comprobar este valor para actuar en consecuencia.
+                ///tras este valor se continuará a la siguiente acción del plan si quedan acciones pendientes, sino se procederá a generar plan nuevo.
+    timeOut = 1, ///Indica que la acción terminó y esperó el tiempo indicado en su variable duration correctamente.
+                ///tras este valor se continuará a la siguiente acción del plan si quedan acciones pendientes, sino se procederá a generar plan nuevo.
+    conditionsAtionsChanged = 2, ///Indica que las precondiciones de la acción(sin contar las que sirviron para crear el plan, las que llamo precondiciones temporales)
+                                ///ya no se cumplen, por lo que se detendrá la ejecución de la acción en curso y se ejecutará el posperfom con este valor en su parámetro reason.
+                                ///Dependiendo del valor de la variable mandotory(obligatorio) se continuará con la siguiente acción del plan o se creará uno nuevo.
+                                
+
+    onGoapBreakCalled = 3  ///indica que se ejecutó el evento de interrumpir la acción, así que de teniene la acción en curso y se ejecuta el posperfom con este valor para actuar en
+           //consecuencia en caso necesario. 
+           ///Dependiendo del valor de la variable mandotory(obligatorio) se continuará con la siguiente acción del plan o se creará uno nuevo.
+    
+}
 public class SubGoal
 {
     public Dictionary<string, GenericData> sgoals;
@@ -32,6 +48,13 @@ abstract public class GAgent : BaseMono
     public GAction currentAction_;
     SubGoal currentGoal;
     
+    Reason reasonCallPosPerform_; //variable que indica motivo por el que se ejecuta el PostPerform de la acción.
+    public bool breakPlanOrAcction = false; ///variable controlada por el evento OnGoapBreak, que en caso de ejecutarse dicho evento se pondrá a true, y como
+    ///este valor es comprobado en el método CheckConditions() de GActions, interrumpirá la acción en curso obligando a la creación de un plan nuevo dependiendo del valor
+    ///mandatory de la acción.
+    private const string ON_GOAP_BREAK_ONLY_THIS_NPC = "ON_GOAP_BREAK_ONLY_THIS_NPC";
+    private bool suscribeToOnGoapBreakOnlyThisNpc_ = false;
+
 
     // Start is called before the first frame update
     public void Start()
@@ -51,35 +74,66 @@ abstract public class GAgent : BaseMono
         foreach (GAction a in acts)
             actions_.Add(a);
         
-        
-        
+        if (!suscribeToOnGoapBreakOnlyThisNpc_) ///suscribo evento capaz de interrumpir el plan goap en cualquier momento
+            OnEnable(); 
+               
     }
 
+    public void OnEnable()   
+    {        
+        if (!suscribeToOnGoapBreakOnlyThisNpc_) 
+            suscribeToOnGoapBreakOnlyThisNpc_ = GetManagerMyEvents().StartListening(this.gameObject,ON_GOAP_BREAK_ONLY_THIS_NPC,OnGoapBreak); ///creo evento interrumpir plan GOAP en ejecución en cualquier momento.
 
+        
+    }
+        /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    public void OnDisable()
+    {      
+      GetManagerMyEvents().StopListening(ON_GOAP_BREAK_ONLY_THIS_NPC,OnGoapBreak);
+      suscribeToOnGoapBreakOnlyThisNpc_ = false;
+      
+    }
+    bool OnGoapBreak()
+    {
+        breakPlanOrAcction = true; ///indico que se rompa la acción en curso, tal vez el plan entero, dependiendo del valor mandatory de la acción .
+        return true;
+    }
     bool completeActionByDurationInvoked = false;
     void CompleteActionByDuration() ///termina la acción por tiempo. solo cuando la variable duración es mayor de 0.
     {
         currentAction_.running_ = false;
-        currentAction_.PostPerform(true,false);
+        reasonCallPosPerform_ = Reason.timeOut;
+        currentAction_.PostPerform(reasonCallPosPerform_);
         completeActionByDurationInvoked = false;
     }
 
     void CompleteAction() ///terminó la acción corretamente, esto es cuando la funcion OnPerform() termino true.
     {
         currentAction_.running_ = false;
-        currentAction_.PostPerform(false,false);        
+        reasonCallPosPerform_ = Reason.success;
+        currentAction_.PostPerform(reasonCallPosPerform_);        
     }
 
-    void CompleteActionByConditions() ///terminó la acción por algún cambio en el estado de las precondiciones o bien porque terminó devolviendo false la
-    //función OnPerform(). También puede ser llamada porque la acción es no bloqueante y se econtró un plan con un objetivo más prioritario.
+
+    void CompleteActionByConditions() ///terminó la acción por algún cambio en el estado de las precondiciones del mundo, o del NPC.
+    ///No se tienen en cuanta los efectos temporales establecidos en las acciones con el fin de crear un plan.
+    /// También puede ser llamada porque la acción es no bloqueante y se econtró un plan con un objetivo más prioritario.
     ///Nota: Tener en cuenta, que esta forma de terminar la acción indica que fue por cambio de las propias precondiciones de la acción, pero el plan
     ///seguirá ejecutándose con las siguientes acciones hasta intentar completar el objetivo. NO SE CREA UN PLAN NUEVO, hay que tenerlo en cuenta porque 
     ///si se quieren utilizar acciones que no tienen realmente final,como la acción de patrullar de un NPC por ejemplo, es mejor que estas acciones sean
     ///también un objetivo,  o dicho de otra forma, un objetivo por acción para las que nunca tienen por qué terminar. En ese caso, para resolver el que terminen
     ///en algún momento, es bueno definir también esas acciones como no bloqueantes.
     {
-        currentAction_.running_ = false;
-        currentAction_.PostPerform(false,true);        
+        currentAction_.running_ = false;                
+        currentAction_.PostPerform(reasonCallPosPerform_);    
+        if (currentAction_.mandatory_) ///si la acción es obligatoria, indico que no se tiene que crear un plan nuevo poniendo la cola de acciones a nulll
+        {
+            currentAction_= null;
+            actionQueue_ = null; ///como se terminó la acción por cambio de condiciones, se rompe todo el plan para obligar a replanear uno nuevo    
+        }
+        breakPlanOrAcction = false; ///restablezco el valor para que no se rompan más acciones.
     }
 
     void ExecutePlan()
@@ -89,7 +143,7 @@ abstract public class GAgent : BaseMono
             currentAction_ = actionQueue_.Dequeue();
             ///se debe de cumplir todas las condiciones justo antes de ejecutar la acción, por si el estado del mundo o del npc han cambiado.
             ///si es así, se dará por iniciada la acción. Sino, se creará un plan nuevo.
-            if (currentAction_.CheckConditions())
+            if (currentAction_.CheckConditions(out reasonCallPosPerform_,breakPlanOrAcction))
             {
                 if (status_.debugMode_)
                     Debug.Log("superado checkconditions");
@@ -150,7 +204,7 @@ abstract public class GAgent : BaseMono
 
                 if (actionQueueDraft == null) ///si se sigue el plan actual
                 {
-                    if (currentAction_.CheckConditions()) ///compruebo que las condiciones de la acción se siguen cumpliendo.                
+                    if (currentAction_.CheckConditions(out reasonCallPosPerform_,breakPlanOrAcction)) ///compruebo que las condiciones de la acción se siguen cumpliendo.                
                     {                        
                         if (!completeActionByDurationInvoked)
                         {
@@ -164,7 +218,7 @@ abstract public class GAgent : BaseMono
                                     completeActionByDurationInvoked = true;
                                 }
                                 else
-                                    CompleteAction(); ///en caso contrario termino la acción haciendo lo que haya en PostPerform
+                                    CompleteAction(); ///en caso contrario termino la acción haciendo lo que haya en PostPerform con valor success en reason.
 
                             }                                          
                         }
