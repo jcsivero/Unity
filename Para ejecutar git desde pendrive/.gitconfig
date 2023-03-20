@@ -1,0 +1,13 @@
+[http]
+	version = HTTP/2
+[safe]
+	directory = *
+
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[user]
+	name = Juan Siverio
+	email = alu0100585704@ull.edu.es
