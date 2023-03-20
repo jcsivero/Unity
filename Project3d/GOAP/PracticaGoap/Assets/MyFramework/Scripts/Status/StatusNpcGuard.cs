@@ -12,8 +12,6 @@ public class StatusNpcGuard : StatusNpc
  public CommandHudUpdateStatusNpcGuard commandHudUpdateStatusNpcGuard_;
  public CommandNpcGoapStatesGuardUpdate commandNpcGoapStatesGuardUpdate_;
 
-public GameObject keyObject_;
-public GameObject weaponObject_;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
@@ -132,8 +130,7 @@ public GameObject weaponObject_;
     override public bool OnUpdateStatusNpc() ///para sobreescribier el evento de actualizar todos los npc.
     {
         base.OnUpdateStatusNpc();
-        keyObject_ = GetStatusWorld().gameObjectsByName_["Key"][0]; //obtengo el primer gameobject con combre key
-        weaponObject_ = GetStatusWorld().gameObjectsByName_["Weapon"][0]; //obtengo el primer gameobject con combre key
+
         return true;
     }
     bool OnUpdateStatusNpcGuard()

@@ -44,7 +44,9 @@
      <Compile Include="Assets\MyFramework\Scripts\GameManager\Base.cs" />
      <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateStatusPlayer.cs" />
      <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateStatusNpcRobot.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GActionGetKey.cs" />
      <Compile Include="Assets\MyFramework\Scripts\FSM\Hide.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandNpcGoapStatesGuardUpdate.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Common\GActionHideMode.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Robots\GActionPatrolMode.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Base\GInventory.cs" />
@@ -53,14 +55,18 @@
      <Compile Include="Assets\MyFramework\Scripts\Status\ControlGameObjects.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GameManager\GameManager.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Base\GAction.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GAgentGuard.cs" />
      <Compile Include="Assets\MyFramework\Scripts\Commands\CommandNpcGoapStatesRobotUpdate.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Status\StatusNpcGuard.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GameManager\AIController.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Base\GAgent.cs" />
      <Compile Include="Assets\MyFramework\Scripts\Commands\CommandAddOrSubLifes.cs" />
      <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateAll.cs" />
      <Compile Include="Assets\MyFramework\Scripts\FSM\Chase.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GActionGetWeapon.cs" />
      <Compile Include="Assets\MyFramework\Scripts\HUD\HUD_InitialOptions.cs" />
      <Compile Include="Assets\MyFramework\Scripts\Status\StatusNpcRobot.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GActionFleeMode.cs" />
      <Compile Include="Assets\MyFramework\Scripts\Status\StatusNpc.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GameManager\BaseMono.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Robots\GActionChaseMode.cs" />
@@ -68,6 +74,7 @@
      <Compile Include="Assets\MyFramework\Scripts\FSM\NPCBaseFSM.cs" />
      <Compile Include="Assets\MyFramework\Scripts\Commands\CommandAddOrSubEnemy.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Base\GPlanner.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateStatusNpcGuard.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Robots\GAgentRobots.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Base\GStates.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GameManager\MyEvents.cs" />
@@ -81,13 +88,7 @@
      <Compile Include="Assets\MyFramework\Scripts\FSM\Patrol.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GOAP\Common\GActionRepairMode.cs" />
      <Compile Include="Assets\MyFramework\Scripts\GameManager\Commands.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GAgentGuard.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GActionFleeMode.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\Status\StatusNpcGuard.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandHudUpdateStatusNpcGuard.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\Commands\CommandNpcGoapStatesGuardUpdate.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GActionGetWeapon.cs" />
-     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GActionGetKey.cs" />
+     <Compile Include="Assets\MyFramework\Scripts\GOAP\Guard\GActionGoToKillGirld.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

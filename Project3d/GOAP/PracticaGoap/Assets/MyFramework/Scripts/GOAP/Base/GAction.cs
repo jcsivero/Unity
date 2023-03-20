@@ -37,7 +37,7 @@ public abstract class GAction : BaseMono
     public GoapStateInt[] afterEffectsInt_;
     public GoapStateFloat[] afterEffectsFloat_;
     public GoapStateString[] afterEffectsString_;
-    public NavMeshAgent agent;
+    public GAgent goapAgent_;
     public StatusNpc status_;
         
 
@@ -57,9 +57,9 @@ public abstract class GAction : BaseMono
 
     public void Awake()
     {        
-        agent = this.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
-        inventory_ = this.GetComponent<GAgent>().inventory_;
-        npcGoapStates_ = this.GetComponent<GAgent>().npcGoapStates_;
+        goapAgent_ = this.gameObject.GetComponent<GAgent>();
+        inventory_ = goapAgent_.inventory_;
+        npcGoapStates_ = goapAgent_.npcGoapStates_;
         status_ = gameObject.GetComponent<StatusNpc>(); //para acceder al componente Status del Npc en caso de tenerlo agregado.
 
         ///Agrego precondiciones y efectos de tipo entero agregadas en el inspector a la lista de  precondiciones y efectos globales.

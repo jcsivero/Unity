@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5530,7 +5530,7 @@ MonoBehaviour:
     value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
-  agent: {fileID: 0}
+  goapAgent_: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
 --- !u!114 &512415833
@@ -5566,7 +5566,7 @@ MonoBehaviour:
     value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
-  agent: {fileID: 0}
+  goapAgent_: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
 --- !u!114 &512415839
@@ -5602,7 +5602,7 @@ MonoBehaviour:
     value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
-  agent: {fileID: 0}
+  goapAgent_: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
 --- !u!114 &512415844
@@ -5634,7 +5634,7 @@ MonoBehaviour:
     value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
-  agent: {fileID: 0}
+  goapAgent_: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
 --- !u!114 &512415845
@@ -5666,7 +5666,7 @@ MonoBehaviour:
     value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
-  agent: {fileID: 0}
+  goapAgent_: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
 --- !u!1001 &525729916
@@ -24239,6 +24239,9 @@ GameObject:
   - component: {fileID: 482383164421298233}
   - component: {fileID: 482383164421298231}
   - component: {fileID: 482383164421298229}
+  - component: {fileID: 482383164421298241}
+  - component: {fileID: 482383164421298239}
+  - component: {fileID: 482383164421298243}
   m_Layer: 0
   m_Name: castle_guard_01
   m_TagString: Untagged
@@ -24258,20 +24261,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ad54d35d62a334582337ac719d752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: Action
+  actionName: Cure
   cost: 1
   target: {fileID: 0}
   targetTag: 
   duration: 0
   mandatory_: 1
   blockAction_: 1
-  preConditionsFloat_: []
+  preConditionsFloat_:
+  - key: IsHideMode
+    value: 0
   preConditionsString_: []
   preConditionsInt_: []
-  afterEffectsInt_: []
+  afterEffectsInt_:
+  - key: IsRepairMode
+    value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
-  agent: {fileID: 0}
+  goapAgent_: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
 --- !u!1 &482383164421298230
@@ -24312,11 +24319,15 @@ MonoBehaviour:
   blockAction_: 1
   preConditionsFloat_: []
   preConditionsString_: []
-  preConditionsInt_: []
-  afterEffectsInt_: []
+  preConditionsInt_:
+  - key: health
+    value: 0
+  afterEffectsInt_:
+  - key: IsHideMode
+    value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
-  agent: {fileID: 0}
+  goapAgent_: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
 --- !u!1 &482383164421298232
@@ -24356,11 +24367,17 @@ MonoBehaviour:
   blockAction_: 1
   preConditionsFloat_: []
   preConditionsString_: []
-  preConditionsInt_: []
-  afterEffectsInt_: []
+  preConditionsInt_:
+  - key: distance
+    value: 0
+  - key: angle
+    value: 0
+  afterEffectsInt_:
+  - key: IsFlee
+    value: 0
   afterEffectsFloat_: []
   afterEffectsString_: []
-  agent: {fileID: 0}
+  goapAgent_: {fileID: 0}
   status_: {fileID: 0}
   running_: 0
 --- !u!1 &482383164421298234
@@ -24445,8 +24462,6 @@ MonoBehaviour:
   speedMax_: 2
   speedCurrent_: 0
   anim_: {fileID: 0}
-  keyObject_: {fileID: 0}
-  weaponObject_: {fileID: 0}
   hudStateNpc_: {fileID: 1067937944}
 --- !u!1 &482383164421298238
 GameObject:
@@ -24464,6 +24479,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &482383164421298239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482383164421298228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4139dc2b2b3c9c4bb5a3247e2a79faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GetKey
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Key
+  duration: 0
+  mandatory_: 1
+  blockAction_: 1
+  preConditionsFloat_: []
+  preConditionsString_: []
+  preConditionsInt_:
+  - key: IHaveWeapon
+    value: 0
+  afterEffectsInt_:
+  - key: IHaveKey
+    value: 0
+  afterEffectsFloat_: []
+  afterEffectsString_: []
+  goapAgent_: {fileID: 0}
+  status_: {fileID: 0}
+  running_: 0
 --- !u!1 &482383164421298240
 GameObject:
   m_ObjectHideFlags: 0
@@ -24480,6 +24527,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &482383164421298241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482383164421298228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f6875b5396b3a4693fbc1f066c544b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GetWeapon
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Weapon
+  duration: 0
+  mandatory_: 1
+  blockAction_: 1
+  preConditionsFloat_: []
+  preConditionsString_: []
+  preConditionsInt_: []
+  afterEffectsInt_:
+  - key: IHaveWeapon
+    value: 0
+  afterEffectsFloat_: []
+  afterEffectsString_: []
+  goapAgent_: {fileID: 0}
+  status_: {fileID: 0}
+  running_: 0
 --- !u!1 &482383164421298242
 GameObject:
   m_ObjectHideFlags: 0
@@ -24496,6 +24573,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &482383164421298243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482383164421298228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca26e1d794b66246b31c9c0d3100b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GoToKillGirld
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Andromeda
+  duration: 0
+  mandatory_: 1
+  blockAction_: 1
+  preConditionsFloat_: []
+  preConditionsString_: []
+  preConditionsInt_:
+  - key: IHaveKey
+    value: 0
+  afterEffectsInt_:
+  - key: GoToKillGirld
+    value: 0
+  afterEffectsFloat_: []
+  afterEffectsString_: []
+  goapAgent_: {fileID: 0}
+  status_: {fileID: 0}
+  running_: 0
 --- !u!1 &482383164421298244
 GameObject:
   m_ObjectHideFlags: 0
