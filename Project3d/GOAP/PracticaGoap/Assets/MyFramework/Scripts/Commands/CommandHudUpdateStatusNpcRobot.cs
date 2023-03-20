@@ -13,7 +13,7 @@ public class CommandHudUpdateStatusNpcRobot : Command
     public override bool Exec()
     {        
         
-        string newHudNpc;
+        string newHudNpc="";
         Color color = Color.blue; ///por defecto HUD color azul.
 
         newHudNpc = status_.GetHealth().ToString() + "%";                

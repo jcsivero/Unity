@@ -347,7 +347,7 @@ override public float MovementValue()
         
            Debug.Log("------------- destruido objeto StatusNpc--------------- ");
     }
-    bool OnUpdateStatusNpc()
+    virtual public bool OnUpdateStatusNpc()
     {
         SetTarget(GetStatusWorld().GetTarget());
 
