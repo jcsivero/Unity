@@ -22,30 +22,21 @@ public class GActionGetKey : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-        if (npcGoapStates_.GetState("health").GetValue<int>()< 40) ///vida crítica
-            return true;
-        return false;
+        Debug.Log("COMPROBANDO Precondiciones Getkey");
+            return true;        
     }
 
     override public bool IsAchievable() ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
     {
         return true;
     }
-
+    
     public override bool PrePerform()
     {
+        target = GetStatusWorld().gameObjectsByName_[targetTagOrName][0];        ///ahora el objetivo es la posición de la llave
         
-        if (status_.GetAIController().CleverHide(status_,false) != Vector3.zero)
-        {
-            /*target = inventory.FindItemWithTag("Cubicle");
-            if (target == null)
-                return false;*/
-            //status_.anim_.SetBool("move",true);
-
             return true;
 
-        }
-        return false;
     }
 
     public override void PostPerform(Reason reason) 
@@ -55,12 +46,12 @@ public class GActionGetKey : GAction
         GWorld.Instance.AddCublicle(target);
         inventory.RemoveItem(target);
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
-        status_.anim_.SetBool("Hide",false);
+        if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo la llave.
+        npcGoapStates_.SetOrAddState("IHaveKey",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma
        
     }
     override public  bool OnPerform()
     {
-        
-        return status_.GetAIController().GoToCleverHide(status_);
+        return status_.GetAIController().Seek(status_,target.transform.position);
     }
 }

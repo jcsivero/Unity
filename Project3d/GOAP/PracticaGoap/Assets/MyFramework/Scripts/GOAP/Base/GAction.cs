@@ -12,7 +12,7 @@ public abstract class GAction : BaseMono
     public string actionName = "Action";
     public float cost = 1.0f;
     public GameObject target;
-    public string targetTag;
+    public string targetTagOrName;
     public float duration = 0;
 
     public bool mandatory_ = true; ///indica si esta acción es obligatoria para poder continuar con la siguiente acción del plan en caso de ser interrumpida

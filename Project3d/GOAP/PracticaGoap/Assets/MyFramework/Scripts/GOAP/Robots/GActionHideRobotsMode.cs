@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GActionGoToKillGirld : GAction
+public class GActionHideRobotsMode : GAction
 {
   override public bool IsAchievableGiven(GoapStates conditions,bool planMode = false)
     {
@@ -22,22 +22,30 @@ public class GActionGoToKillGirld : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-          Debug.Log("COMPROBANDO Precondiciones GoToKillGirld");
-          
-            return true;        
-        
+        if (npcGoapStates_.GetState("health").GetValue<int>()< 40) ///vida crítica
+            return true;
+        return false;
     }
 
     override public bool IsAchievable() ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
     {
         return true;
     }
-    
+
     public override bool PrePerform()
     {
-         target = GetStatusWorld().gameObjectsByName_[targetTagOrName][0];    ///ahora el objetivo es la chica
-    
-        return true;
+        
+        if (status_.GetAIController().CleverHide(status_,false) != Vector3.zero)
+        {
+            /*target = inventory.FindItemWithTag("Cubicle");
+            if (target == null)
+                return false;*/
+            status_.anim_.SetBool("Hide",true);
+            Debug.Log("pasando a modo hide");
+            return true;
+
+        }
+        return false;
     }
 
     public override void PostPerform(Reason reason) 
@@ -47,12 +55,12 @@ public class GActionGoToKillGirld : GAction
         GWorld.Instance.AddCublicle(target);
         inventory.RemoveItem(target);
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
-        
+        status_.anim_.SetBool("Hide",false);
        
     }
     override public  bool OnPerform()
     {
         
-        return status_.GetAIController().Seek(status_,target.transform.position);
+        return status_.GetAIController().GoToCleverHide(status_);
     }
 }

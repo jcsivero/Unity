@@ -50,9 +50,22 @@ public class GoapStates
     {
         return states_.ContainsKey(key);
     }
+
+    //esta función habría que utilizarla solo cuando se está seguro de que la variable existe en el diccionario de estados.
+    //Lo ideal es utilizar previamente la función GetIfExistState()
     public GenericData GetState(string key)
+    {        
+            return states_[key];
+        
+     
+    }
+    public bool GetIfExistState(string key) ///esta función solo devuelve true si existe la clave, false si no existe. Es  cuando no se necesita
+    ///evaluar el valor de la variable, sino simplemente su existencia.
     {
-        return states_[key];
+        if (states_.ContainsKey(key))
+            return true;
+        else
+            return false;
     }
     public void SetOrAddState(string key, GenericData value) ///actualizo mis estados con un estado nuevo.
     {

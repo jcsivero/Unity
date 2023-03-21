@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GActionHideMode : GAction
+public class GActionHideGuardMode : GAction
 {
   override public bool IsAchievableGiven(GoapStates conditions,bool planMode = false)
     {
@@ -22,7 +22,7 @@ public class GActionHideMode : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-        if (npcGoapStates_.GetState("health").GetValue<int>()< 40) ///vida crítica
+        if (npcGoapStates_.GetState("health").GetValue<int>()< 100) ///vida crítica
             return true;
         return false;
     }
@@ -40,8 +40,7 @@ public class GActionHideMode : GAction
             /*target = inventory.FindItemWithTag("Cubicle");
             if (target == null)
                 return false;*/
-            status_.anim_.SetBool("Hide",true);
-            Debug.Log("pasando a modo hide");
+            status_.GetTargetStatus().PosIsChangedReset(); ///puesto que voy a utilizar la función follow
             return true;
 
         }
@@ -55,12 +54,12 @@ public class GActionHideMode : GAction
         GWorld.Instance.AddCublicle(target);
         inventory.RemoveItem(target);
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
-        status_.anim_.SetBool("Hide",false);
+        
        
     }
     override public  bool OnPerform()
     {
         
-        return status_.GetAIController().GoToCleverHide(status_);
+        return status_.GetAIController().GoToCleverHide(status_,false,false);
     }
 }

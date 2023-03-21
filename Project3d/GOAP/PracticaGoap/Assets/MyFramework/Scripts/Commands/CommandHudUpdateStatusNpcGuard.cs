@@ -28,8 +28,10 @@ public class CommandHudUpdateStatusNpcGuard : Command
             if (status_.GetGoapAgent().currentAction_.actionName == "Attack") 
                 color = Color.black;
 
-            if (status_.GetGoapAgent().currentAction_.actionName == "Hide") 
+            if (status_.GetGoapAgent().currentAction_.actionName == "Hide")             
                 color = Color.red;
+             
+                
 
             if (status_.GetGoapAgent().currentAction_.actionName == "Repair") 
                 color = Color.green;

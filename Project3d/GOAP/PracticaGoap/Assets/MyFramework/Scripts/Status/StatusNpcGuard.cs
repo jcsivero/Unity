@@ -103,12 +103,12 @@ public class StatusNpcGuard : StatusNpc
     {
         if (other.gameObject.tag == "bullet")
         {
+            
             GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP
             Debug.Log("colision detectada daño en Guard " + GetHealth().ToString());
             commandAddOrSubHealth_.Set(-10);                        
             AppendCommand(commandAddOrSubHealth_);                                    
-            
-            transform.LookAt(GetTarget().transform.position); //me giro hacia el jugador que me ha disparado.
+                        
             
             if (GetHealth() <=0.0f)    
             {

@@ -307,7 +307,7 @@ public void Wander(Status status,float wanderRadius = 2, float wanderDistance = 
     else
     {
             if (status.debugMode_)
-                Debug.DrawRay(aroundPivot.transform.position,targetWorld - aroundPivot.transform.position ,Color.black);            
+                Debug.DrawRay(aroundPivot.transform.position,status.GetNavMeshTargetPosition() - aroundPivot.transform.position ,Color.black);            
 
             Seek(status,status.GetNavMeshTargetPosition(),false);  ///voy a la posición de destino.
     }

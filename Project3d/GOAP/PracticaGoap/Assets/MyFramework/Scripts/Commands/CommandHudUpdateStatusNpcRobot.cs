@@ -33,6 +33,10 @@ public class CommandHudUpdateStatusNpcRobot : Command
 
             if (status_.GetGoapAgent().currentAction_.actionName == "Repair") 
                 color = Color.green;
+            
+            if (status_.GetGoapAgent().currentAction_.actionName == "Repair") 
+                color = Color.cyan;
+
 
             if (status_.GetGoapAgent().currentAction_.actionName == "Patrol") ///si estoy en modo Patrol, indico si estoy en wander o waypoints.
             {

@@ -24,14 +24,14 @@ public class GAgentGuard : GAgent
     override public void AddGoals()
     {
         SubGoal subGoal;
-        subGoal = new SubGoal("Flee", GenericData.Create<int>(1), false);
+        subGoal = new SubGoal("IsFleeMode", GenericData.Create<int>(1), false);
         goals_.Add(subGoal, 2);
 
         subGoal  = new SubGoal("IsRepairMode", GenericData.Create<int>(1), false);
         goals_.Add(subGoal , 3);
 
         
-        subGoal = new SubGoal("KillGirld", GenericData.Create<int>(1), false);
+        subGoal = new SubGoal("GoToKillGirld", GenericData.Create<int>(1), false);
         goals_.Add(subGoal, 5);
 
     

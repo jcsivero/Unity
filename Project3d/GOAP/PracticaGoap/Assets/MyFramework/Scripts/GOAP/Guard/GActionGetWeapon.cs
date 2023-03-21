@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GActionGetWeapon : GAction
 {
+
   override public bool IsAchievableGiven(GoapStates conditions,bool planMode = false)
     {
         
@@ -22,9 +23,8 @@ public class GActionGetWeapon : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-        if (npcGoapStates_.GetState("health").GetValue<int>()< 40) ///vida crítica
+            
             return true;
-        return false;
     }
 
     override public bool IsAchievable() ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
@@ -32,22 +32,18 @@ public class GActionGetWeapon : GAction
         return true;
     }
 
-    public override bool PrePerform()
+        public override bool PrePerform()
     {
         
-        if (status_.GetAIController().CleverHide(status_,false) != Vector3.zero)
-        {
             /*target = inventory.FindItemWithTag("Cubicle");
             if (target == null)
                 return false;*/
-            status_.anim_.SetBool("Hide",true);
-            Debug.Log("pasando a modo hide");
+            //status_.anim_.SetBool("Hide",true);
+            target = GetStatusWorld().gameObjectsByName_[targetTagOrName][0];        
             return true;
-
-        }
-        return false;
     }
 
+    
     public override void PostPerform(Reason reason) 
     {
 
@@ -55,12 +51,13 @@ public class GActionGetWeapon : GAction
         GWorld.Instance.AddCublicle(target);
         inventory.RemoveItem(target);
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
-        status_.anim_.SetBool("Hide",false);
-       
+        if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo el arma.
+            npcGoapStates_.SetOrAddState("IHaveWeapon",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma
+     
     }
     override public  bool OnPerform()
     {
         
-        return status_.GetAIController().GoToCleverHide(status_);
+        return status_.GetAIController().Seek(status_,target.transform.position);
     }
 }

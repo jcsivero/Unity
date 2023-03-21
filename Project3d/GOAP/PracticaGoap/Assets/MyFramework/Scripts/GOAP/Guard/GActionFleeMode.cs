@@ -22,9 +22,11 @@ public class GActionFleeMode : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-        if (npcGoapStates_.GetState("health").GetValue<int>()< 40) ///vida crítica
-            return true;
-        return false;
+        
+        if (npcGoapStates_.GetState("distance").GetValue<float>()< status_.GetVisDistance())            
+                
+                        return true;
+       return false;
     }
 
     override public bool IsAchievable() ///puedo filtrar la acción y evitar que sea computada por el planificador teniendo en cuenta cualquier consideración
@@ -34,18 +36,8 @@ public class GActionFleeMode : GAction
 
     public override bool PrePerform()
     {
-        
-        if (status_.GetAIController().CleverHide(status_,false) != Vector3.zero)
-        {
-            /*target = inventory.FindItemWithTag("Cubicle");
-            if (target == null)
-                return false;*/
-            status_.anim_.SetBool("Hide",true);
-            Debug.Log("pasando a modo hide");
-            return true;
-
-        }
-        return false;
+        GetStatusWorld().GetGoapStates().SetOrAddState("protectme",GenericData.Create<bool>(true)); ///indico que deben de protegerme el resto de NPCS
+        return true;
     }
 
     public override void PostPerform(Reason reason) 
@@ -55,12 +47,13 @@ public class GActionFleeMode : GAction
         GWorld.Instance.AddCublicle(target);
         inventory.RemoveItem(target);
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
-        status_.anim_.SetBool("Hide",false);
+        GetStatusWorld().GetGoapStates().RemoveState("protectme");///indico que ya no deben de protegerme.
+        
        
     }
     override public  bool OnPerform()
     {
-        
-        return status_.GetAIController().GoToCleverHide(status_);
+        status_.GetAIController().Flee(status_,status_.GetTarget().transform.position);
+        return false; ///mientras se cumplan las condiciones siempre estaré huyendo.
     }
 }

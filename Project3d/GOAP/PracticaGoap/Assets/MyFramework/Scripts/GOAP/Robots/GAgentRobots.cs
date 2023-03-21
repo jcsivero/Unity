@@ -25,8 +25,10 @@ public class GAgentRobots : GAgent
     {
         SubGoal subGoal;
         subGoal = new SubGoal("IsAttackMode", GenericData.Create<int>(1), false);
-        goals_.Add(subGoal, 2);
+        goals_.Add(subGoal, 1);
 
+        subGoal = new SubGoal("IsProtectMode", GenericData.Create<int>(1), false);
+        goals_.Add(subGoal, 2);
         subGoal  = new SubGoal("IsRepairMode", GenericData.Create<int>(1), false);
         goals_.Add(subGoal , 3);
 

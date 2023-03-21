@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GActionGoToKillGirld : GAction
+public class GActionProtectMode : GAction
 {
   override public bool IsAchievableGiven(GoapStates conditions,bool planMode = false)
     {
@@ -22,9 +22,13 @@ public class GActionGoToKillGirld : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-          Debug.Log("COMPROBANDO Precondiciones GoToKillGirld");
-          
-            return true;        
+        ///comprubo manualmente las condiciones con los valores que me interesa
+        ///Aquí tengo la ventaja de que no necesito comprobar si existe un valor, puesto que IsArchievableGiven ya comprobó que existan todas.
+        
+        if (GetStatusWorld().GetGoapStates().GetIfExistState("protectme"))
+            return true; 
+        else
+            return false;
         
     }
 
@@ -32,27 +36,24 @@ public class GActionGoToKillGirld : GAction
     {
         return true;
     }
-    
+
+   private float speedPrevious_;
     public override bool PrePerform()
-    {
-         target = GetStatusWorld().gameObjectsByName_[targetTagOrName][0];    ///ahora el objetivo es la chica
-    
+    {               
+        speedPrevious_ = status_.GetSpeedMax();
+        status_.SetSpeedMax(speedPrevious_*2);             
+        status_.anim_.SetBool("Chase",true);
         return true;
     }
 
     public override void PostPerform(Reason reason) 
     {
-
-        /*GWorld.Instance.GetWorld().ModifyState("treatingPatient", 1);
-        GWorld.Instance.AddCublicle(target);
-        inventory.RemoveItem(target);
-        GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
-        
-       
+        status_.SetSpeedMax(speedPrevious_);  
+        status_.anim_.SetBool("Chase",false);  
     }
     override public  bool OnPerform()
     {
-        
-        return status_.GetAIController().Seek(status_,target.transform.position);
+        status_.GetAIController().Pursue(status_);
+        return false;
     }
 }
