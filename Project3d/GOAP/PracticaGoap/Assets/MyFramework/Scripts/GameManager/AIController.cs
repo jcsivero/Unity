@@ -493,7 +493,8 @@ public bool CanSeeTarget(Status status,GameObject target)
 {
     RaycastHit raycastInfo;
     Vector3 rayToTarget = target.transform.position - status.GetOrigin().transform.position;
-    Debug.DrawRay(status.GetOrigin().transform.position, rayToTarget ,Color.blue);
+    if (status.debugMode_)
+        Debug.DrawRay(status.GetOrigin().transform.position, rayToTarget ,Color.blue);
 
     if (Physics.Raycast(status.GetOrigin().transform.position, rayToTarget, out raycastInfo))
     {
