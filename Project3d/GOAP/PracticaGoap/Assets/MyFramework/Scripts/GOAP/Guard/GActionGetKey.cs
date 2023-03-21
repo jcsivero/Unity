@@ -40,8 +40,8 @@ public class GActionGetKey : GAction
             /*target = inventory.FindItemWithTag("Cubicle");
             if (target == null)
                 return false;*/
-            status_.anim_.SetBool("Hide",true);
-            Debug.Log("pasando a modo hide");
+            //status_.anim_.SetBool("move",true);
+
             return true;
 
         }
