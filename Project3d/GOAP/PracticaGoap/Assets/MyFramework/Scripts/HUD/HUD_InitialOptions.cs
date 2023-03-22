@@ -7,14 +7,17 @@ using UnityEngine.UI;
 public class HUD_InitialOptions : BaseMono
 {
     // Start is called before the first frame update
-    public void OnPlay()
+    public void OnOneEnemy()
     {
         GetStatusWorld().activeLevel_ = 1;
         SceneManager.LoadScene(GetStatusWorld().activeLevel_);
     }
 
-    public void ContinueGame()
+    public void OnMultiplesEnemies()
     {
-        Debug.Log("Pendiente de cargar valores para continuar partida");
+        GetStatusWorld().activeLevel_ = 2;
+        SceneManager.LoadScene(GetStatusWorld().activeLevel_);
+
+
     }
 }

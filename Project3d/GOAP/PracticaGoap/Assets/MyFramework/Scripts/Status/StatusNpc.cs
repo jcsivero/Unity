@@ -446,15 +446,17 @@ public bool NextWayPoint()
             
             wayPointsPos_ = GetWayPointGameObjectCurrent().transform.position;
             if (GetWayPointGameObjectCurrent().GetComponent<Collider>() != null) ///si el waypoint tiene colider, entonces su posición la obtengo
-            ///con respecto a la base del collider y con la orientación del NPC hacia ese waypoints.            
+            ///utilizando la función CalculatePointTarget() que utiliza el collider para obtener la posición correcta.
             ///hay que tener cuidado,porque la rutas obtenidas del navmesh, si se especificó un radio muy ancho, ya que si es así, el punto obtenido
             ///del collider quedaría dentro de una zona no accesible del navmesh, y por consiguiente daría error asignando la ruta.
-            ///Esto no se puede resolver con el valor de la variable waypointsaccuracy o brakingdistance, ya que estos valores se aplican cuando se está llegando al destino,
+            ///la variable breakingdistance ayuda a obtener un valor adecuado.
+            ///Esto no se puede resolver con el valor de la variable waypointsaccuracy  ya que este valor se aplica cuando se está llegando al destino,
             ///o sea, después de tener  un path válido, pero este error se producirían al intentar crear el camino.
-            //Así que la solución es asignar el navmesh lo más posible o bien, amplicar el collider para que coincida con el borde del navmesh generado.
-                wayPointsPos_ =  GetAIController().CalculatePointTarget(GetOrigin(),GetWayPointGameObjectCurrent());
+            //Otra solucín sería asignar el navmesh lo más posible o bien, ampliar el collider para que coincida con el borde del navmesh generado.
+                wayPointsPos_ =  GetAIController().CalculatePointTarget(GetOrigin(),GetWayPointGameObjectCurrent(),false,GetBrakingDistance());
                 
-
+             if (debugMode_)
+                Debug.Log("punto de target con collider waypoint : " + wayPointsPos_.ToString());
                 
         }
 

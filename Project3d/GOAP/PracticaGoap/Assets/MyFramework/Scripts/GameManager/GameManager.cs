@@ -76,8 +76,9 @@ public class GameManager :BaseMono
         commands_ = new Commands();
 
 
-        //statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
-        //statusWorld_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
+        
+        statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
+        statusWorld_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
 
 
     }

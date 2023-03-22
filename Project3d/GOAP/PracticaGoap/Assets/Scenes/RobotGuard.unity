@@ -2236,7 +2236,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9757c36ea072504e81525e6cf51adf6, type: 2}
+  - {fileID: 2100000, guid: 8eed30711101048d99c7d60453da88a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4424,7 +4424,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9757c36ea072504e81525e6cf51adf6, type: 2}
+  - {fileID: 2100000, guid: 8eed30711101048d99c7d60453da88a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4524,7 +4524,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a05613f015d13d442893e063eb67432b, type: 2}
+  - {fileID: 2100000, guid: 746796746b2ce4273a3e023b949246db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5335,7 +5335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &382592375
 Transform:
   m_ObjectHideFlags: 0
@@ -5390,7 +5390,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a05613f015d13d442893e063eb67432b, type: 2}
+  - {fileID: 2100000, guid: 746796746b2ce4273a3e023b949246db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9311,7 +9311,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9757c36ea072504e81525e6cf51adf6, type: 2}
+  - {fileID: 2100000, guid: 8eed30711101048d99c7d60453da88a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11026,7 +11026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &847612242
 Transform:
   m_ObjectHideFlags: 0
@@ -11094,7 +11094,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a05613f015d13d442893e063eb67432b, type: 2}
+  - {fileID: 2100000, guid: 746796746b2ce4273a3e023b949246db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11633,7 +11633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &888824543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11667,7 +11667,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a05613f015d13d442893e063eb67432b, type: 2}
+  - {fileID: 2100000, guid: 746796746b2ce4273a3e023b949246db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15930,7 +15930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1385464883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15964,7 +15964,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a05613f015d13d442893e063eb67432b, type: 2}
+  - {fileID: 2100000, guid: 746796746b2ce4273a3e023b949246db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16039,8 +16039,8 @@ GameObject:
   - component: {fileID: 1411151657}
   - component: {fileID: 1411151661}
   - component: {fileID: 1411151660}
-  - component: {fileID: 1411151659}
   - component: {fileID: 1411151658}
+  - component: {fileID: 1411151662}
   m_Layer: 0
   m_Name: WayPoints14ConCollider
   m_TagString: Untagged
@@ -16081,19 +16081,6 @@ MonoBehaviour:
   indexWayPoint_: 14
   tagsForHidePoints_: []
   tagsGeneral_: []
---- !u!65 &1411151659
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411151656}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.94, y: 1, z: 1.21}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1411151660
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16114,7 +16101,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9757c36ea072504e81525e6cf51adf6, type: 2}
+  - {fileID: 2100000, guid: 9453a838a07c83e4f8cec2e79dc8b859, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16144,6 +16131,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411151656}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1411151662
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411151656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 1, z: 1.0000002}
+  m_Center: {x: -0.0000019073486, y: -0.000000029802322, z: 0}
 --- !u!1 &1418935200
 GameObject:
   m_ObjectHideFlags: 0
@@ -17381,7 +17381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1507890107
 Transform:
   m_ObjectHideFlags: 0
@@ -17431,7 +17431,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a05613f015d13d442893e063eb67432b, type: 2}
+  - {fileID: 2100000, guid: 746796746b2ce4273a3e023b949246db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23384,7 +23384,7 @@ SkinnedMeshRenderer:
   m_DirtyAABB: 0
 --- !u!95 &482383164411784180
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -23401,7 +23401,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &482383164421063680
 Transform:
   m_ObjectHideFlags: 0
@@ -24428,7 +24429,7 @@ MonoBehaviour:
   visAngle_: 80
   visDistanceToAttack_: 10
   speedRotation_: 2
-  speedMax_: 2
+  speedMax_: 0.5
   speedCurrent_: 0
   anim_: {fileID: 0}
   hudStateNpc_: {fileID: 1067937944}
@@ -25676,7 +25677,7 @@ PrefabInstance:
     - target: {fileID: 8926438751318007412, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
       propertyPath: m_Radius
-      value: 0.87
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926438751318007412, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
@@ -25712,6 +25713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926438751318007418, guid: 3224f8a1b274a3e47997ef974e213266,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.46
       objectReference: {fileID: 0}
     - target: {fileID: 8926438751318007418, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
@@ -25762,7 +25768,7 @@ PrefabInstance:
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
       propertyPath: wayPointTag_
-      value: 
+      value: Robots
       objectReference: {fileID: 0}
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
@@ -25787,7 +25793,7 @@ PrefabInstance:
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
       propertyPath: brakingDistance_
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
@@ -25812,12 +25818,12 @@ PrefabInstance:
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
       propertyPath: wayPointToGoOrder_.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}
       propertyPath: wayPointToGoOrder_.Array.data[0]
-      value: 0
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8926438751318007419, guid: 3224f8a1b274a3e47997ef974e213266,
         type: 3}

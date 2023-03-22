@@ -46,8 +46,12 @@ public class GActionGetKey : GAction
         GWorld.Instance.AddCublicle(target);
         inventory.RemoveItem(target);
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
-        if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo la llave.
-        npcGoapStates_.SetOrAddState("IHaveKey",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma
+        if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo la llave.        
+        {
+             npcGoapStates_.SetOrAddState("IHaveKey",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma
+             Destroy(target); ///destruyo objeto.
+             
+        }   
        
     }
     override public  bool OnPerform()

@@ -176,7 +176,7 @@ public class StatusWorld : Status
     {
         return countEnemies_;
     }
-    public void SetCountEnemies(int draft)
+    public void SetOrAddCountEnemies(int draft)
     {
         countEnemies_ += draft;
     }
@@ -185,7 +185,7 @@ public class StatusWorld : Status
     {
         return totalPoints_;
     }
-    public void SetTotalPoints(int draft)
+    public void SetOrAddTotalPoints(int draft)
     {
        totalPoints_ += draft;
     }

@@ -418,7 +418,7 @@ public Vector3 CleverHide(StatusNpc status,bool withPosY=false)
         }
     
     
-    status.SetHidePointPosBase(CalculatePointTarget(status.GetTarget(),chosenGO,true));
+    status.SetHidePointPosBase(CalculatePointTarget(status.GetTarget(),chosenGO,true,status.GetBrakingDistance()));
     
     if (status.debugMode_)
         Debug.Log("punto de ocultación : " + status.GetHidePointPosBase().ToString());
@@ -444,18 +444,32 @@ public bool GoToCleverHide(StatusNpc status,bool withPosY = false,bool follow=fa
     
     return Seek(status,status.GetHidePointPosBase(),withPosY);    
 }
-///Calcula el punto de destino desde la posición actual hacia el Gameobject final. Lo calcula con respecto a la mínima posicion del collider del objeto destino con el
-///que impactará un RayCast. Así puedo trabajar a varias altura y no verme afectado por la altura de los objetos con pivote en el centro de la maya.
-public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool inverse = false)
+///Calcula el punto de destino desde la posición actual hacia el Gameobject final.
+///El cálculo se realiza:
+//Primero se obtiene la posición del gameobject
+///Después se calcula la mínima posición de su collider y obtenemos el valor para Y, así no nos preocupamos de la altura del objeto.
+///Ahora tenemos la posición del objeto con la Y mínima de su collider.
+///Conseguimos lanzar un rayo en X y Z y no verse afectado por la altura de los objetos con pivote en el centro de la maya y además permite que origen y destino  estén en alturas diferentes.
+///Lanzamos un rayo desde el propio collider del gameobject destino contra si mismo con dirección desde el gameobject origen.
+///Este rayo puede ser se puede lanzar inverso, o sea, desde el sentido contrario pero con la misma dirección.
+///Este rayo al impactar con el collider del objeto destino, nos devuelve el punto exacto, puede ser justo en el lado contrario si era inverso.
+///Ahora se le suma un valor equipará el radio de un posible navmesh en la escena, para que no devueva un punto inaccesible para el navmesh.
+///Este valor  es personalizable pero para las funciones de CleHide y WayPoint cuando utilizan la función CalculatePointTarget(), su valor predeterminado es el 
+///brakingdistance del statusnpc. 
+
+///Debo de tener cuidado con los collider tipo capsula, puesto que por su forma, al lanzar el rayo impactará con el punto inferior y por su forma, incluso sumándole
+///el brakingdistance, puede no devolver una posición válida si se trabaja con navmesh.
+public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool inverse = false, float navMeshradius=0)
 {
 
     Vector3 point = target.transform.position;
-    Collider pointCol = target.GetComponent<Collider>();            
+    Collider pointCol = target.GetComponent<Collider>();              
     point.y = pointCol.bounds.min.y;///compruebo la distancia con la posición mínima de la altura del collider, para evitar calculos erróneos cuando
     ///los pivotes se encuentran en el centro de objetos demasiado altos, en los que daría una distancia  mayor de la que realmente están.             
 
     Vector3 dirPoint = point - origin.transform.position;            
     dirPoint.y = 0.0f;       
+
     dirPoint = dirPoint.normalized;
     Vector3 rayPos = point;
     Ray ray = new Ray();
@@ -470,17 +484,22 @@ public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool in
         ray.origin = rayPos;
         ray.direction = -dirPoint;
         pointCol.Raycast(ray, out info, distance);
-        //info.point += dirPoint;
-        //Debug.DrawRay(rayPos, -dirPoint * distance, Color.red);
+        Debug.Log("Valor antes de operación: " + info.point.ToString());
+        info.point += dirPoint * navMeshradius; 
+        Debug.Log("Valor después de operación: " + info.point.ToString());
+        Debug.DrawRay(rayPos, -dirPoint * distance, Color.red,10);
+        
     }
     else
     {
         rayPos = rayPos - dirPoint * 100;
         ray.origin = rayPos;
         ray.direction = dirPoint;        
-        pointCol.Raycast(ray, out info, distance);
-        //info.point -= dirPoint; 
-        //Debug.DrawRay(rayPos, dirPoint * distance, Color.red);
+        pointCol.Raycast(ray, out info, distance);        
+        Debug.Log("Valor antes de operación: " + info.point.ToString());
+        info.point -= dirPoint * navMeshradius; 
+        Debug.Log("Valor después de operación: " + info.point.ToString());
+        Debug.DrawRay(rayPos, dirPoint * distance, Color.red,10);
     }
        
         

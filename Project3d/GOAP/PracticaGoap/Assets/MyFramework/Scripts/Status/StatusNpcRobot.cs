@@ -59,7 +59,7 @@ public class StatusNpcRobot : StatusNpc
         if (!suscribeToOnUpdateAllStatusNpcRobot_)
             OnEnable(); 
         AppendCommand(commandHudUpdateStatusNpcRobot_); ///se ejecutará en el primer Update() de GameManager.
-        GetStatusWorld().SetCountEnemies(1);
+        GetStatusWorld().SetOrAddCountEnemies(1);
         AppendCommand(GetStatusHud().commandHudUpdateCountEnemies_);
 
     }
@@ -114,8 +114,8 @@ public class StatusNpcRobot : StatusNpc
             if (GetHealth() <=0.0f)    
             {
                 Destroy(this.gameObject);
-                GetStatusWorld().SetTotalPoints(5);
-                GetStatusWorld().SetCountEnemies(-1);
+                GetStatusWorld().SetOrAddTotalPoints(5);
+                GetStatusWorld().SetOrAddCountEnemies(-1);
                 AppendCommand(GetStatusHud().commandHudUpdateCountEnemies_);
                 AppendCommand(GetStatusHud().commandHudUpdateTotalPoints_);
 
