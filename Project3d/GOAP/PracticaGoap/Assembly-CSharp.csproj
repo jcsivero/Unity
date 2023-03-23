@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateTotalPoints.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateKey.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\EventData.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\StatusPlayer.cs" />
@@ -56,6 +57,7 @@
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GActionHideRobotsMode.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GActionPatrolMode.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GInventory.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateHealthPlayer.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Common\GenericData.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandAddOrSubHealth.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\ControlGameObjects.cs" />
@@ -76,6 +78,7 @@
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GAgent.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateHealthGuard.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\WaypointProgressTracker.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\DragRigidbody.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
@@ -96,6 +99,7 @@
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\StatusNpc.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GActionHideGuardMode.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateWeapon.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\BaseMono.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\AlphaButtonClickMask.cs" />
@@ -131,10 +135,6 @@
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\Commands.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\SimpleActivatorMenu.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateHealthPlayer.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateHealthGuard.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateKey.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandHudUpdateWeapon.cs" />
      <None Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

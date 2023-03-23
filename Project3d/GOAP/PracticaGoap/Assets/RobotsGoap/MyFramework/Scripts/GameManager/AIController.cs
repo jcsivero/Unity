@@ -251,8 +251,9 @@ return atDestination;
 public void Flee(Status status,Vector3 location,bool withPosY=false)
 {
     Vector3 fleeVector = location - status.GetOrigin().transform.position;
-    Seek(status, (status.GetOrigin().transform.position - fleeVector).normalized * status.GetBrakingDistance(),withPosY);
+    Seek(status, (status.GetOrigin().transform.position - fleeVector.normalized * status.GetBrakingDistance()),withPosY);
             
+
 }
 
 public void Pursue(Status status,bool withPosY=false)
