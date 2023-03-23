@@ -128,7 +128,8 @@ public class Bot : MonoBehaviour
             ///CleverHide();
             //Hide();
           //Wander();
-          Pursue();
+          //Pursue();
+          Flee(target.transform.position);
     }
 
 }

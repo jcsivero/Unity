@@ -119,6 +119,12 @@ virtual public bool GetNavMeshUse()
 {
     return false;
 }
+
+virtual public float GetNavMeshRadius()
+{
+    return 0.5f;
+}
+
 virtual public void SetNavMeshUseSetDestination(bool value)
 {
 

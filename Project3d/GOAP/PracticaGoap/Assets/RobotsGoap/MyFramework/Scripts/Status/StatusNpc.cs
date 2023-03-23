@@ -52,6 +52,12 @@ StatusNpc : Status
     [Tooltip ("Distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado")]
     public float brakingDistance_=1.0f; ///distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado
     ///utilizar NavMesh.
+    [Tooltip ("Cuando se calcula una posición con CalculatePointTarget() de AiController,(esta función devuelve una posición cerca del GameOject indicado y en la orientación indicada) puede ocurrir que si se tiene un mapa navmesh con un radio muy grande, se podría devolver una posición fuera del navmesh, y por consiguiente una posición no válida, al calcular un HidePoint, un WayPoint de gameobject con collider.... El valor de esta variable se multiplicará  en la misma orientación  del punto obtenido, para así, devolver una posición que compense el radio del navmesh y por lo tanto devolver una posición válida.")]
+    public float navMeshRadius_=0.5f; ///Cuando se calcula una posición con CalculatePointTarget() de AiController,(esta función devuelve una posición cerca del GameOject indicado y en la orientación indicada)
+    ///puede ocurrir que si se tiene un mapa navmesh con un radio muy grande, se podría devolver una posición fuera del navmesh, y por consiguiente una posición no válida, al calcular un HidePoint, un WayPoint de gameobject con 
+    ///collider.... El valor de esta variable se multiplicará  en la misma orientación  del punto obtenido, para así, devolver una posición que compense el radio del navmesh y por lo tanto
+    ///devolver una posición válida.
+
     [Tooltip("Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de utilizar NavMesh.")]
     public float targetMarginPosition_=1.0f; /// Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de 
    
@@ -114,6 +120,10 @@ override public UnityEngine.AI.NavMeshAgent GetNavMeshAgent()
 override public bool GetNavMeshUse()
 {
     return navMeshUse_;
+}
+override public float GetNavMeshRadius()
+{
+    return navMeshRadius_;
 }
 public Vector3 GetHidePointPosBase()
 {
@@ -197,14 +207,14 @@ override public Vector3 GetNavMeshTargetPosition()
 }
 override public void ErasePathNavMesh()
 {
-    if (GetNavMeshUseSetDestination())
-       if (GetNavMeshAgent().pathPending) 
-       {
-           GetNavMeshAgent().ResetPath(); 
-           GetNavMeshPath().ClearCorners(); ///comprobar si con uno solo basta.
-           SetNavMeshPathCurrentIndex(0);
-           SetNavMeshTargetPosition(navMeshTargetPositionInfinity_);
-       }          
+    if (GetNavMeshUse())    
+    {
+        GetNavMeshAgent().ResetPath(); 
+        GetNavMeshPath().ClearCorners(); ///comprobar si con uno solo basta.
+        SetNavMeshPathCurrentIndex(0);
+        SetNavMeshTargetPosition(navMeshTargetPositionInfinity_);
+
+    }
         
 }
 
@@ -455,7 +465,7 @@ public bool NextWayPoint()
             ///Esto no se puede resolver con el valor de la variable waypointsaccuracy  ya que este valor se aplica cuando se está llegando al destino,
             ///o sea, después de tener  un path válido, pero este error se producirían al intentar crear el camino.
             //Otra solucín sería asignar el navmesh lo más posible o bien, ampliar el collider para que coincida con el borde del navmesh generado.
-                wayPointsPos_ =  GetAIController().CalculatePointTarget(GetOrigin(),GetWayPointGameObjectCurrent(),false,GetBrakingDistance());
+                wayPointsPos_ =  GetAIController().CalculatePointTarget(GetOrigin(),GetWayPointGameObjectCurrent(),false,GetNavMeshRadius());
                 
              if (debugMode_)
                 Debug.Log("punto de target con collider waypoint : " + wayPointsPos_.ToString());

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14900,6 +14900,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -25610,6 +25611,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -29509,6 +29511,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -31834,6 +31837,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -32999,6 +33003,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -36184,6 +36189,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -38952,6 +38958,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -45695,6 +45702,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -45849,6 +45857,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -47100,6 +47109,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -49651,6 +49661,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -51077,6 +51088,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -51264,6 +51276,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -52582,6 +52595,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -53209,6 +53223,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -53535,6 +53550,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -54902,6 +54918,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -58476,6 +58493,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -60219,6 +60237,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -61365,6 +61384,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -63256,6 +63276,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -64331,6 +64352,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -64691,6 +64713,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -68836,6 +68859,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -69866,6 +69890,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -72281,6 +72306,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -73401,6 +73427,7 @@ MonoBehaviour:
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
   visDistance_: 30
   visAngle_: 150
@@ -73757,6 +73784,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1170649396}
     m_Modifications:
+    - target: {fileID: 490475869668704405, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: navMeshRadius_
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4019683505144342330, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: m_RootOrder
@@ -73885,6 +73917,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: castle_guard_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
+      propertyPath: navMeshRadius_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
+      propertyPath: targetMarginPosition_
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20a40310b38f21c40b3b44ef92af5c9f, type: 3}
