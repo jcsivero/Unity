@@ -10,7 +10,7 @@ public  abstract class  Status :  BaseMono
     [Header("=============== Status")]
     [Space(5)]               
     [Tooltip("Para depuración. A True, en los Update() se actualizarán las variables que se hayan modificado en el inspector en tiempo de ejecución, o que  interese visualizar su valor en todo momento como la velocidad actual.... ")]
-    public bool debugMode_ = true; ///
+    public bool debugMode_ =false ; ///
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
@@ -18,6 +18,7 @@ public  abstract class  Status :  BaseMono
 
     [Header("Links to GameObjects")]
     [SerializeField] private GameObject origin_;
+    [Tooltip("Si no se establece un target, por defecto se localizará el GameObejct con nombre Player para el jugador, nombre Hud para el Hud, etc")]
     [SerializeField] private GameObject target_;     
     [HideInInspector]public bool atDestination_= false; ///true si se encuentra en el destino fijado con la función seek de AIController
     protected Vector3 posReferenceFromChanged_; ///Guarda la posición de referencia contra la que se comprobará si el objeto ha variado su posición más alla del umbral establecidor.
@@ -255,10 +256,12 @@ public void SetMinPos_()
     }
         
 }
+
+
 public  void Awake()
 {    
     SetOrigin(gameObject);
-    SetMinPos_();
+    SetMinPos_();    
     Debug.Log("|||||||||||||| Awake Status||||||||||||||||");
 
 }
@@ -266,8 +269,18 @@ public  void Awake()
 
 public void Start()
 {
-    InstaciateCommands();
+
+    if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
+        debugMode_ = true;
+
+    if (GetGameManager().debugModeForce_ == DebugModeForce_.noDebug)
+        debugMode_ = false;
+
+    if (debugMode_)
     Debug.Log("|||||||||||||| Start Status||||||||||||||||");
+
+    InstaciateCommands();
+    
     positionPreviousFrame_ = transform.position;
     SetSpeedMax(GetSpeedMax());
     

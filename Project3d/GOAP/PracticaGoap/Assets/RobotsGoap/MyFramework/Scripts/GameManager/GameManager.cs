@@ -4,10 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+public enum DebugModeForce_ ///tipo de depuración
+{
+    noDebug = 0,
+    debug = 1,
+    customize = 2
+}
 [RequireComponent(typeof (StatusWorld))]
 [RequireComponent(typeof (StatusHud))]
 [RequireComponent(typeof (AIController))]
-
 
 public class GameManager :BaseMono
 {
@@ -20,6 +26,9 @@ public class GameManager :BaseMono
     public AIController aiController_;
     public Commands commands_;
     
+
+    [Tooltip("0 Forzar no depuración, 1 Forzar Depuración, 2 Personalizado por componente.")] 
+    public DebugModeForce_ debugModeForce_ = DebugModeForce_.customize;
     private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";
     [HideInInspector ]public bool ok_ = false; //será true, cuando se haya ejecutado el Update de GameManager el primero, asegurando así que puedo establecer
     ///unas condiciones de inicio antes de que comiencen los update del resto de componentes. Si se necesitara actualizar recursos, se puede invocar el evento
@@ -65,6 +74,7 @@ public class GameManager :BaseMono
   
         instance_ = this;
 
+        
         Object.DontDestroyOnLoad(gameObject);
 
         GetManagerMyEvents(); //Creo instancia de gestión de eventos.
@@ -90,6 +100,8 @@ public class GameManager :BaseMono
     void Start()
     {
                 
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
     //aquí ya estoy seguro de que están todas las suscricipones a eventos hechas.            
     
     }    

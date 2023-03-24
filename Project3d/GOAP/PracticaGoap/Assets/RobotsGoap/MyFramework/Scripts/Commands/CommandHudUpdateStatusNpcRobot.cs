@@ -18,7 +18,7 @@ public class CommandHudUpdateStatusNpcRobot : Command
 
         newHudNpc = status_.GetHealth().ToString() + "%";                
         
-        if (status_.GetGoapAgent().currentAction_ != null)
+        if ((status_.GetGoapAgent().currentAction_ != null) && (status_.debugMode_))
         {
             newHudNpc += "\n" + status_.GetGoapAgent().currentAction_.actionName;
 

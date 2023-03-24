@@ -9,19 +9,7 @@ public class StatusHud : Status
 ////Variables públicas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    /*public CommandHudUpdateAll commandHudUpdateAll_; ///comandos comunes    
-    public CommandHudUpdateHealthPlayer commandHudUpdateHealthPlayer_; ///comandos comunes
 
-    public CommandHudUpdateHealthGuard commandHudUpdateHealthGuard_; ///comandos comunes
-
-   public CommandHudUpdateTotalPoints commandHudUpdateTotalPoints_; ///comandos comunes
-
-    public CommandHudUpdateCountEnemies commandHudUpdateCountEnemies_; ///comandos comunes
-
-    public CommandHudUpdateCountEnemies commandHudKey_; ///comandos comunes
-    public CommandHudUpdateCountEnemies commandHudWeapon_; ///comandos comunes
-
-*/
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
@@ -57,8 +45,12 @@ public class StatusHud : Status
     }
    public new void Start()
     {
+        base.Start();
         InstaciateCommands();  
-        Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
+
+        if (debugMode_)
+            Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
+        
         if (GetTarget()== null)
             SetTarget(GameObject.Find("Hud")); ///si no se ha establecido un objeto destino, por defecto para el
             ///gameobject que contendrá el HUD sera el gameobject con etiqueta "Hud"     

@@ -12,7 +12,9 @@ public class StatusPlayer : Status
     [HideInInspector] public CommandAddOrSubHealth commandAddOrSubHealth_;
     [HideInInspector] public CommandAddOrSubLifes commandAddOrSubLifes_; 
 
-    public GameObject bullet_;        
+    public GameObject bullet_; 
+    public GameObject originOfFire_;
+
     [Header("Attributtes")]
     
     [SerializeField] private int healthPlayer_;
@@ -65,11 +67,7 @@ override public int  GetHealth()
     }    
     void Fire()
     {
-        Vector3 position = transform.forward;
-        position.y +=0.5f;
-        //position.z *=2;
-        //position.x *=2;        
-        GameObject b = Instantiate(bullet_,transform.position + position, transform.rotation);
+        GameObject b = Instantiate(bullet_,originOfFire_.transform.position, originOfFire_.transform.rotation);
         b.GetComponent<Rigidbody>().AddForce(b.transform.forward * 1000);
     }
 

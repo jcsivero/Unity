@@ -88,10 +88,13 @@ public class StatusWorld : Status
 
     public new void Start()
     {
+        base.Start();
         InstaciateCommands();  
-        Debug.Log("|||||||||||||| Start StatusWorld||||||||||||||||");
+        if (debugMode_)
+            Debug.Log("|||||||||||||| Start StatusWorld||||||||||||||||");
+
         if (GetTarget()== null)
-            SetTarget(GameObject.FindGameObjectWithTag("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
+            SetTarget(GameObject.Find("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
         
         GetInitialInformation();
         AppendCommand(commandHudUpdateAll_); ///se ejecutará en el primer Update() de GameManager

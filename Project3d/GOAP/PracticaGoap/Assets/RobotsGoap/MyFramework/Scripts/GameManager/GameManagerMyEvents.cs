@@ -81,6 +81,7 @@ public class ManagerMyEvents
     }
     public  void StopListening(object target, string eventName, MyEvents.Delegate_ listener)
     {
+        
         Debug.Log("Unsuscribe on ------------------------ " + eventName );
         MyEvents e = null;
         Dictionary<string, object> targetEvents;

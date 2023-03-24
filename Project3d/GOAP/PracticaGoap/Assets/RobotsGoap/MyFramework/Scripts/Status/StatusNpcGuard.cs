@@ -54,7 +54,9 @@ public class StatusNpcGuard : StatusNpc
     {
         base.Start();
         InstaciateCommands(); 
-       Debug.Log("|||||||||||||| Start StatusNpcGuard||||||||||||||||");
+        if (debugMode_)        
+            Debug.Log("|||||||||||||| Start StatusNpcGuard||||||||||||||||");
+            
         if (!suscribeToOnUpdateAllStatusNpcGuard_)
             OnEnable(); 
         
