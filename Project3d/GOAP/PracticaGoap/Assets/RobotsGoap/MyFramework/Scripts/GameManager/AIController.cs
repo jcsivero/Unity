@@ -163,7 +163,16 @@ private bool recalculatePath(Status status, Vector3 location)
 }
 public bool TargetIsMoved(Status status,Vector3 location)
 {
-    if (Vector3.Distance(location,status.GetNavMeshTargetPosition()) > status.GetTargetMarginPosition())
+    Vector3 v = status.GetNavMeshTargetPosition();
+    v.y = location.y; ///corrigo su posición en Y, puesto que el path calculado por el navmesh, devuelve la posición Y modificada, para ajustarla al suelo,
+    ///por eso la igualo a la posición a la que quiero ir para compensar en la comparación, yestar seguro de si se ha movido o no el objetivo.
+
+
+    Debug.Log("objetivo " + location.ToString());
+    Debug.Log("objetivo guardado " + v.ToString());
+    Debug.Log("objetivo resta con metodo distance " + Vector3.Distance(v,location).ToString());
+    
+    if (Vector3.Distance(location,v) > status.GetTargetMarginPosition())
         return true;
     else
         return false;
@@ -218,7 +227,7 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
         /////////////
         //Versión manual en beta todavía
         /////////////
-    
+            Debug.Log("número de corners : " + status.GetNavMeshPath().corners.Length.ToString());
             if (status.GetNavMeshPath().corners.Length > 1) //como mínimo siempre hay dos cornes, el de la posición inicial y la de  la siguiente posición .
             {
                 if (status.debugMode_)
