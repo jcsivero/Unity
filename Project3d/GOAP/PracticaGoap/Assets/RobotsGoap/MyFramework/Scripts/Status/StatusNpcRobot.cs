@@ -122,6 +122,7 @@ public class StatusNpcRobot : StatusNpc
                 AppendCommand(GetStatusWorld().commandHudUpdateCountEnemies_);              
                 AppendCommand(GetStatusWorld().commandHudUpdateTotalPoints_);                
                 ExecuteCommands();
+               
                 Destroy(this.gameObject);
 
             }

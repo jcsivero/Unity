@@ -12,7 +12,7 @@ public class CommandHudUpdateKey : Command
     public override bool Exec()
     {        
                 
-                GetStatusHud().SetHudKey(Color.white);        
+                GetStatusHud().hudPrincipal_.SetHudKey(Color.white);        
         
         return true;
     }

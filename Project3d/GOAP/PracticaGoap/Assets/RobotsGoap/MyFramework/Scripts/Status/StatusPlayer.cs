@@ -87,6 +87,7 @@ override public int  GetHealth()
             
             if (GetHealth() <= 0)  
             {
+                GetManagerMyEvents().TriggerEvent("OnLose");
                 Destroy(gameObject);
             }
         }

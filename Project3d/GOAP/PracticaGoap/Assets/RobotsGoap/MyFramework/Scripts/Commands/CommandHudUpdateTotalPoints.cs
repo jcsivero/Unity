@@ -12,7 +12,7 @@ public class CommandHudUpdateTotalPoints : Command
     public override bool Exec()
     {        
                 
-                GetStatusHud().SetHudTotalPoints(GetStatusWorld().GetTotalPoints()); 
+                GetStatusHud().hudPrincipal_.SetHudTotalPoints(GetStatusWorld().GetTotalPoints()); 
    
         
         return true;

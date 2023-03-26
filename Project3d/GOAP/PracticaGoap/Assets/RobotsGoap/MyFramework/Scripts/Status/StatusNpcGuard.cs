@@ -113,7 +113,8 @@ public class StatusNpcGuard : StatusNpc
             if (GetHealth() <=0.0f)    
             {
 
-                Destroy(this.gameObject);                                
+                Destroy(this.gameObject);   
+                 GetManagerMyEvents().TriggerEvent("OnVictory");                             
 
             }
                 

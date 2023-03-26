@@ -62,7 +62,7 @@ public class StatusWorld : Status
     /// </summary>
     public new void Awake()
     {
-        //Time.timeScale = 5; ///escala de simulación, de velocidad del juego.
+        
         base.Awake();        
         SetName("StatusWorld");        
         
@@ -97,6 +97,7 @@ public class StatusWorld : Status
             SetTarget(GameObject.Find("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
         
         GetInitialInformation();
+        gameObjectsByName_["HudFinal"][0].SetActive(false);
         AppendCommand(commandHudUpdateAll_); ///se ejecutará en el primer Update() de GameManager
 
     }

@@ -120,13 +120,13 @@
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GStates.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\MyEvents.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\Status.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\StatusHud.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\StatusHud.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GActionAttackMode.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\FSM\Attack.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\StatusWorld.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\StatusWorld.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\Command.cs" />
      <Compile Include="Assets\RobotsGoap\Scritps\Bullet.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
@@ -135,6 +135,9 @@
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\Commands.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\StatusHudInitialOptions.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\StatusHudFinalOptions.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\StatusHudPrincipal.cs" />
      <None Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

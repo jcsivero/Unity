@@ -12,7 +12,7 @@ public class CommandHudUpdateWeapon : Command
     public override bool Exec()
     {        
                 
-                GetStatusHud().SetHudWeapon(Color.white);                        
+                GetStatusHud().hudPrincipal_.SetHudWeapon(Color.white);                        
         
         return true;
     }

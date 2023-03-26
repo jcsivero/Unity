@@ -19,10 +19,10 @@ public class GameManager :BaseMono
 {
     
     public static  GameManager instance_ ;
-        
+    public float simulationVelocity_ = 1; 
     public StatusWorld statusWorld_;
     public StatusHud statusHud_;
-
+ 
     public AIController aiController_;
     public Commands commands_;
     
@@ -71,7 +71,8 @@ public class GameManager :BaseMono
         
         if (instance_!= null && instance_ != this)
             Destroy(gameObject);
-  
+
+        Time.timeScale = simulationVelocity_; ///escala de simulación, de velocidad del juego.
         instance_ = this;
 
         
@@ -81,6 +82,7 @@ public class GameManager :BaseMono
                 
         statusWorld_ = GetComponent<StatusWorld>();
         statusHud_ = GetComponent<StatusHud>();
+        
         aiController_ = GetComponent<AIController>();
 
         commands_ = new Commands();
@@ -90,7 +92,10 @@ public class GameManager :BaseMono
         statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
         statusWorld_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
 
+        ///Registro mis propios eventos para condiciones de victoria o derrota
 
+        GetManagerMyEvents().StartListening("OnVictory",OnVictory);
+        GetManagerMyEvents().StartListening("OnLose",OnLose);
     }
 
     /// <summary>
@@ -100,8 +105,9 @@ public class GameManager :BaseMono
     void Start()
     {
                 
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
+        //  Cursor.visible = false;
+         // Cursor.lockState = CursorLockMode.Locked;
+                
     //aquí ya estoy seguro de que están todas las suscricipones a eventos hechas.            
     
     }    
@@ -118,21 +124,29 @@ public class GameManager :BaseMono
         ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
             
     }
-   /*   public void LoadNextLevel()
-    {
-        if (statusWorld_.activeLevel_ < statusWorld_.numberOfLevels_)    
-            statusWorld_.activeLevel_ ++;
-        else 
-            statusWorld_.activeLevel_ = 1;
-        
-        SceneManager.LoadScene(statusWorld_.activeLevel_);
 
-    }
-    public void ResetLevel()
+
+    public bool OnVictory()
     {
-        SceneManager.LoadScene(statusWorld_.activeLevel_);
+        
+        GetStatusHud().hudFinalOptions_.SetHudFinal("You win");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GetStatusHud().hudFinalOptions_.gameObject.SetActive(true);
+        return true;
     }
-          */
+
+    public bool OnLose()
+    {
+     
+        GetStatusHud().hudFinalOptions_.SetHudFinal("You Lose");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GetStatusHud().hudFinalOptions_.gameObject.SetActive(true);
+        return true;
+    }
+
+          
 
 }
 

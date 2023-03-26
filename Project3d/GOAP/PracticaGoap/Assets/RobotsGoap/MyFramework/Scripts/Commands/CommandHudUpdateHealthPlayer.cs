@@ -13,7 +13,7 @@ public class CommandHudUpdateHealthPlayer : Command
     public override bool Exec()
     {        
                 
-            GetStatusHud().SetHudHealthPlayer(status_.GetHealth()); 
+            GetStatusHud().hudPrincipal_.SetHudHealthPlayer(status_.GetHealth()); 
         
         
         return true;

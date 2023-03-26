@@ -22,8 +22,7 @@ public class GActionGoToKillGirld : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-          Debug.Log("COMPROBANDO Precondiciones GoToKillGirld");
-          
+         
             return true;        
         
     }
@@ -47,6 +46,12 @@ public class GActionGoToKillGirld : GAction
         GWorld.Instance.AddCublicle(target);
         inventory.RemoveItem(target);
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
+     if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo el arma.
+     {
+           // Destroy(target);
+        GetManagerMyEvents().TriggerEvent("OnLose");
+    }
+            
         
        
     }

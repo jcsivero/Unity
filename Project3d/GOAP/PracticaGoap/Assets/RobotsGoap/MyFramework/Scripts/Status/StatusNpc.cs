@@ -35,6 +35,7 @@ StatusNpc : Status
     ///todos los WayPoints detectados con la etiqueta que use este NPC. La indicada por tagWayPointsForThisNpc_;
     public  float wayPointsAccuracy_=1;    
 
+        
     private Vector3  wayPointsPos_; ///posición actual de su transforn del waypoint actual.
     private Vector3  wayPointsPosBase_; ///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo, obtenido mediante la funcion de AIController llamda
     ///CalculatePointToTarget()
@@ -49,6 +50,12 @@ StatusNpc : Status
     public  bool navMeshUse_ = true;     
     [Tooltip ("En caso de utilizar NavMesh, se utilizará SetDestination para el movimiento o si está a false se utilizará mi propia rutina de movimiento.")]
     public bool navMeshUseSetDestination_  = false;
+    [SerializeField]
+    [Tooltip("Velocidad de rotación del Npc utilizada en caso de utilizar mi propia rutina de movimiento NavMesh o cuando no se usa NavMesh. Para velocidad de rotación con NavMesh y rutina de movimiento NavMesh, hay que modifical el valor del complemento NavMesh Angular Speed.")]        
+    private  float speedRotation_ = 2.0f;    
+    [SerializeField]
+    [Tooltip("Velocidad máxima de movimiento, este valor también actualiza e iguala el valor speed del complemento Navmesh en caso de utilizarlo. Así se dispone siempre de un mismo valor de velociad, independientemente de la rutina de movimiento utilizada")]        
+    private  float speedMax_ = 2.0f;    
     [Tooltip ("Distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado")]
     public float brakingDistance_=1.0f; ///distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado
     ///utilizar NavMesh.
@@ -57,9 +64,15 @@ StatusNpc : Status
     ///puede ocurrir que si se tiene un mapa navmesh con un radio muy grande, se podría devolver una posición fuera del navmesh, y por consiguiente una posición no válida, al calcular un HidePoint, un WayPoint de gameobject con 
     ///collider.... El valor de esta variable se multiplicará  en la misma orientación  del punto obtenido, para así, devolver una posición que compense el radio del navmesh y por lo tanto
     ///devolver una posición válida.
-
     [Tooltip("Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de utilizar NavMesh.")]
     public float targetMarginPosition_=1.0f; /// Margen de movimiento de la posición de destino. Si ha cambiado más de este este margen, se recalculará un nuevo path en caso de 
+
+    [Tooltip("En el modo Flee, distancia hacia el nuevo punto de huida")]
+    public float sizeFleeVector_ = 20.0f;
+
+    [Tooltip("RealMovement indica que el movimiento se haga siempre hacia adelante y girando, o sea, para llegar a cualquier ubicacion el NPC avanza mientras se va orientando, esto hay que tener cuidado si los destinos están demasiado cerca y la velocidad de rotación es muy baja o la velocidad del NPC muy alta, porque nunca llegaría al destino. Si realmovement es false, funciona igual que el setdestination de unity, el desplazamiento se realiza siempre directamente hacia la dirección punto destino, y mientras se va girando el personaje. Así nunca hay problemas pero parece menos real, puesto que normalmente avanzamos mientras giramos. O sea, probar hasta dar con una relación velocidad NPC-velocidad de rotación - tipos giros(las rotaciones muy cerradas) que puede hacer el NPC en el escenario")]
+    public bool realMovement_ = true;
+
    
     [SerializeField] 
     [Tooltip("Distancia hacia el objetivo que se puede utilizar como disparador en el Animator o cualquier otro sitio para indicar que el objetivo se encuentra a esa distancia o menos.")]
@@ -70,16 +83,14 @@ StatusNpc : Status
     [SerializeField]
     [Tooltip("Distancia hacia el objetivo que se puede utilizar como disparador en el Animator o cualquier otro sitio para indicar que el objetivo se encuentra a esa distancia o menos. Se suele utilizar para definir una zona de ataque, este valor debería de ser menor que el de visDistance_")]
     private  float visDistanceToAttack_ = 10.0f;    
-    [SerializeField]
-    [Tooltip("Velocidad de rotación del Npc utilizada en caso de utilizar mi propia rutina de movimiento NavMesh o cuando no se usa NavMesh. Para velocidad de rotación con NavMesh y rutina de movimiento NavMesh, hay que modifical el valor del complemento NavMesh Angular Speed.")]        
-    private  float speedRotation_ = 2.0f;    
-    [SerializeField]
-    [Tooltip("Velocidad máxima de movimiento, este valor también actualiza e iguala el valor speed del complemento Navmesh en caso de utilizarlo. Así se dispone siempre de un mismo valor de velociad, independientemente de la rutina de movimiento utilizada")]        
-    private  float speedMax_ = 2.0f;
+
+
     [SerializeField]
     private  float speedCurrent_;       
-    
-    
+    [SerializeField]
+    public bool pathRecalculated_; ///a true si cuando se intento asignar path con seek, no  se pudo conseguir y tuvo que
+    ////ser recalculado automáticamente para conseguir uno. Esta variable es controlada internamente por RecalculatePath() de AiController, la pongo en el inspector
+    ///solo a título de depuración
     private int navMeshPathCurrentIndex_;
         
     private Vector3 navMeshTargetPosition_; ///posición  final del path del navmesh.    

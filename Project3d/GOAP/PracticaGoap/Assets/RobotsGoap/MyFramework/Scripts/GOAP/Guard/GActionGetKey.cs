@@ -22,7 +22,7 @@ public class GActionGetKey : GAction
     }
     override protected bool IsAchievableGivenCustomize(GoapStates conditions)
     {
-        Debug.Log("COMPROBANDO Precondiciones Getkey");
+
             return true;        
     }
 
