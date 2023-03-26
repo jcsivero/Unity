@@ -40,7 +40,7 @@ private float speedPrevious_;
         speedPrevious_ = status_.GetSpeedMax();
         status_.SetSpeedMax(speedPrevious_*2);   
         GetStatusWorld().GetGoapStates().SetOrAddState("protectme",GenericData.Create<bool>(true)); ///indico que deben de protegerme el resto de NPCS
-        status_.ErasePathNavMesh(); //borro cualquier posible path para que funcione correctamente el metodo flee;
+        status_.NavMeshErasePath(); //borro cualquier posible path para que funcione correctamente el metodo flee;
         return true;
     }
 

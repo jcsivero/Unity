@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2007,17 +2007,17 @@ PrefabInstance:
     - target: {fileID: 7599135444191600432, guid: a0460bc9bc853a64ebec15ad4a20e4b9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7599135444191600432, guid: a0460bc9bc853a64ebec15ad4a20e4b9,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7599135444191600432, guid: a0460bc9bc853a64ebec15ad4a20e4b9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7599135444191600432, guid: a0460bc9bc853a64ebec15ad4a20e4b9,
         type: 3}
@@ -9913,7 +9913,17 @@ PrefabInstance:
     - target: {fileID: 490475869668704405, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: navMeshRadius_
-      value: 1
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 490475869668704405, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: brakingDistance_
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 490475869668704405, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: targetMarginPosition_
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4019683505144342330, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -9933,7 +9943,7 @@ PrefabInstance:
     - target: {fileID: 4019683505144342330, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.994656
+      value: -14.99466
       objectReference: {fileID: 0}
     - target: {fileID: 4019683505144342330, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -9992,7 +10002,7 @@ PrefabInstance:
     - target: {fileID: 5246877150400106993, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150400106993, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
@@ -10003,6 +10013,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AutoBraking
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150400106993, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
+      propertyPath: m_AngularSpeed
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567145378, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
@@ -10022,7 +10037,7 @@ PrefabInstance:
     - target: {fileID: 5246877150567145378, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.392
+      value: 2.143
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567145378, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
@@ -10032,7 +10047,7 @@ PrefabInstance:
     - target: {fileID: 5246877150567145378, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.250896
+      value: 5.578
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567145378, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
@@ -10076,12 +10091,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
+      propertyPath: speedMax_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
       propertyPath: navMeshUse_
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: navMeshRadius_
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
+      propertyPath: speedRotation_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
+      propertyPath: brakingDistance_
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
@@ -10092,7 +10122,7 @@ PrefabInstance:
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: navMeshUseSetDestination_
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20a40310b38f21c40b3b44ef92af5c9f, type: 3}

@@ -172,7 +172,7 @@ virtual public float GetTargetMarginPosition()
     return 0;
 }
 
-virtual public void ErasePathNavMesh()
+virtual public void NavMeshErasePath()
 {
 
 }

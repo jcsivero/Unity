@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class AIController : BaseMono
 {
-    [Tooltip ("para utilizar la versión SetDestination mía, en la que compruebo si ya el destino marcado no se ha cambiado y por lo tanto evitar realizar otro setDestination. ")]
-    public bool optimizar= true; ///para utilizar la versión SetDestination mía, en la que compruebo si ya el destino marcado no se ha cambiado y por lo tanto
-    ///evitar realizar otro setDestination. 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Eventos  de esta clase
@@ -67,110 +64,61 @@ private float CalculateDistanceStep(Vector3 v1,Vector3 v2, bool withPosY=false)
 
     return (v1-v2).magnitude; 
 }
-private bool MovementApply(Status status,Vector3 location,bool withPosY=false)
+///RealMovement indica que el movimiento se haga siempre hacia adelante y girando, o sea, para llegar a cualquier ubicacion
+///el NPC avanza mientras se va orientando, esto hay que tener cuidado si los destinos están demasiado cerca y la velocidad de rotación 
+///es muy baja o la velocidad del NPC muy alta, porque nunca llegaría al destino.
+///Si realmovement es false, funciona igual que el setdestination de unity, el desplazamiento se realiza siempre directamente hacia la dirección
+///punto destino, y mientras se va girando el personaje. Así nunca hay problemas pero parece menos real, puesto que normalmente avanzamos mientras giramos.
+///O sea, probar hasta dar con una relación velocidad NPC-velocidad de rotación - tipos giros(las rotaciones muy cerradas) que puede hacer el NPC en el escenario
+private bool MovementApply(Status status,Vector3 location,bool withPosY=false, bool realMovement=true)
 {
+    bool finalCorner=false; ///true se se está yendo al corner final, en cuyo caso se respertará el valor de la variable brakingdistance + la velocidad de movimiento
+    float braking;
+    braking = status.MovementValue(); ///como mínimo debo de estar a una distancia mayor de la velocidad de movimiento, para no pasarme el punto destino
+  
+    if (status.GetNavMeshUse())
+        if ((status.GetNavMeshPathCurrentIndex()+1) >= status.GetNavMeshPath().corners.Length-1)
+        {
+            finalCorner = true;///si es el último corner del path, la distancia de frenado equivale al brakingdistance asigando.
+            ///esto es para no aplicar esa distancia en todos los corner del path calculado
+            braking = status.MovementValue() + status.GetBrakingDistance(); 
 
-    float braking = status.MovementValue() + status.GetBrakingDistance(); ///distancia de frenado 
-
+        }  
+        
     if  (CalculateDistanceStep(location,status.transform.position,withPosY) > braking)
     {
         Quaternion rot =  Quaternion.LookRotation(location-status.transform.position);
         rot.z = 0; /// solo quiero rotar en el eje Y.
         rot.x = 0; /// 
         status.transform.rotation = Quaternion.Slerp(status.transform.rotation,rot, status.GetSpeedRotation() * Time.deltaTime);                    
-        status.transform.Translate(0, 0, status.MovementValue());
+        if (realMovement)
+            status.transform.Translate(0, 0, status.MovementValue());
+        else
+            status.transform.position = status.transform.position + (location - status.transform.position).normalized * status.MovementValue();
         return false;
 
     }
     else
     {
         if (status.debugMode_)
-            Debug.Log("se llegó al destino final o siguiente cornter.........................................................................");
+            Debug.Log("se llegó al destino final o siguiente corner.........................................................................");
+        
+       if (!finalCorner) 
+           status.transform.position = location; ///como estoy a una distancia inferior a la de mi movimiento, me coloco directamente en esa posiión
+            ///esto es importante porque las rutas path obtenidas del navmesh, se ajustan mucho a los bordes, por ejemplo para girar una esquina, y si no me 
+            ///coloco exactmente donde es, el NPC puede quedarse chocando contra la pared de la esquina por ejemplo.
         return true;
     }
         
 
 }
 
-private bool recalculatePath(Status status, Vector3 location)
 
-{
-    if (status.debugMode_)
-        Debug.Log("-----------------------------------------------------------------------------------------------------Recalculando path");
-    bool validPath = false;  ///por defecto indico que no hay path válido. Se intentará conseguir uno válido
-
-    int count = 1; // giro de 5 en 5 grados hasta completar una circunferencia o encontar un path válido.
-    Quaternion rotation = Quaternion.AngleAxis(5,Vector3.up);
-
-    while ((!validPath) && (count < 71))
-    {
-        if (status.GetNavMeshUseSetDestination())
-        {
-            status.GetNavMeshAgent().SetDestination(location);
-            if (status.GetNavMeshAgent().path.status == UnityEngine.AI.NavMeshPathStatus.PathComplete)
-            {
-                validPath = true;
-                status.SetNavMeshTargetPosition(status.GetNavMeshAgent().path.corners[status.GetNavMeshAgent().path.corners.Length-1]); ///igualo a posicion final del path.            
-            }
-                
-            else        
-            {
-                status.ErasePathNavMesh();
-
-                if (status.debugMode_)
-                    Debug.Log("error asignando nuevo path rutina NavMesh SetDestination.................................");
-            }
-                
-        }
-        else
-        {
-        ///////
-        //Versión manual todavía en beta
-        //////    
-            status.GetNavMeshAgent().CalculatePath(location,status.GetNavMeshPath());
-            if (status.GetNavMeshPath().status == UnityEngine.AI.NavMeshPathStatus.PathComplete) ///si se encontró un path correcto
-            {   
-                validPath = true;
-                status.SetNavMeshPathCurrentIndex(0);
-                status.SetNavMeshTargetPosition(status.GetNavMeshPath().corners[status.GetNavMeshPath().corners.Length -1]); ///posición target destino es la última del NavMeshPath en caso de haber sido un 
-                //path correcto.
-            }
-            else        
-            {
-                status.ErasePathNavMesh();
-                if (status.debugMode_)
-                    Debug.Log("error asignando nuevo path.................................");
-                
-                ///obtengo una posición 10 º desplazado según el  valor aleatorio.
-                Vector3 v = location - status.GetOrigin().transform.position;                
-                location = (rotation * v) + status.GetOrigin().transform.position; ///                
-                
-                if (status.debugMode_)
-                {
-                    Debug.DrawRay(status.GetOrigin().transform.position,rotation * v,Color.red,20);
-                    Debug.Log("Intentando Conseguir path alternativo número : " + count.ToString());
-                }
-                                        
-                count++;
-                
-            }
-                
-            
-        }      
-
-    }    
-  return validPath;
-}
 public bool TargetIsMoved(Status status,Vector3 location)
 {
     Vector3 v = status.GetNavMeshTargetPosition();
     v.y = location.y; ///corrigo su posición en Y, puesto que el path calculado por el navmesh, devuelve la posición Y modificada, para ajustarla al suelo,
     ///por eso la igualo a la posición a la que quiero ir para compensar en la comparación, yestar seguro de si se ha movido o no el objetivo.
-
-
-    Debug.Log("objetivo " + location.ToString());
-    Debug.Log("objetivo guardado " + v.ToString());
-    Debug.Log("objetivo resta con metodo distance " + Vector3.Distance(v,location).ToString());
     
     if (Vector3.Distance(location,v) > status.GetTargetMarginPosition())
         return true;
@@ -178,57 +126,102 @@ public bool TargetIsMoved(Status status,Vector3 location)
         return false;
 
 }
+private bool RecalculatePath(Status status, Vector3 location)
 
+{
+    if (status.debugMode_)
+        Debug.Log("-----------------------------------------------------------------------------------------------------Recalculando path");
 
+    bool validPath = false;  ///por defecto indico que no hay path válido. Se intentará conseguir uno válido
+    int count = 1; // giro de 5 en 5 grados hasta completar una circunferencia o encontar un path válido.
+    Vector3 previousLeftVector = Vector3.zero;
+    Vector3 previousRightVector = Vector3.zero;
+    bool tryLeftOrRight = true; ///primero comienzo a probar hacia la derecha(true) después izquierda (false)
+
+    ///El método que usa para conseguir ruta alternativas, es ir alternando 5 grados a la derecha, 5 a la izquierda, así sucesivamente hasta encontrar una posición válida
+    Quaternion rotationRight= Quaternion.AngleAxis(5,Vector3.up);
+    Quaternion rotationLeft= Quaternion.AngleAxis(-5,Vector3.up);
+
+    while ((!validPath) && (count < 71))
+    {        
+        ///////
+        //Versión manual todavía en beta
+        //////    
+        status.GetNavMeshAgent().CalculatePath(location,status.GetNavMeshPath());
+        if (status.GetNavMeshPath().status == UnityEngine.AI.NavMeshPathStatus.PathComplete) ///si se encontró un path correcto
+        {   
+            validPath = true;
+            status.SetNavMeshPathCurrentIndex(0);
+            status.SetNavMeshTargetPosition(status.GetNavMeshPath().corners[status.GetNavMeshPath().corners.Length -1]); ///posición target destino es la última del NavMeshPath en caso de haber sido un 
+            //path correcto.
+        }
+        else        
+        {
+            status.NavMeshErasePath();
+            if (status.debugMode_)
+                Debug.Log("error asignando nuevo path.................................");
+            
+            ///obtengo una posición 10 º desplazado según el  valor aleatorio.
+
+            if (previousRightVector == Vector3.zero) ///en la primera iteración me aseguro de tener un vector
+            {
+                   previousRightVector = location - status.GetOrigin().transform.position; 
+                   previousLeftVector = location - status.GetOrigin().transform.position; 
+            }
+ 
+            if (tryLeftOrRight)
+            {
+                previousRightVector = rotationRight *  previousRightVector;
+                location = previousRightVector + status.GetOrigin().transform.position; ///               
+                tryLeftOrRight = false;
+                if (status.debugMode_)
+                {
+                    Debug.DrawRay(status.GetOrigin().transform.position,previousRightVector,Color.yellow,20);
+                    Debug.Log("Intentando Conseguir path alternativo por la derecha número : " + count.ToString());
+                }
+            }               
+            else
+            {
+                previousLeftVector = rotationLeft * previousLeftVector;
+                location = previousLeftVector + status.GetOrigin().transform.position; ///         
+                tryLeftOrRight = true;       
+                if (status.debugMode_)
+                {
+                    Debug.DrawRay(status.GetOrigin().transform.position,previousLeftVector,Color.red,20);
+                    Debug.Log("Intentando Conseguir path alternativo por la izquierda número : " + count.ToString());
+                }
+            }    
+                                    
+            count++;
+            
+        }
+            
+            
+    }      
+
+  return validPath;
+}
 public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolverá true si llegó al destino.
 {
     bool atDestination = false; ///si he llegado al final del trayecto, esta variable será true 
 
-    if (status.GetNavMeshUse())
-        if (status.GetNavMeshUseSetDestination())
-        {
-            if (optimizar)
-                if (status.GetNavMeshAgent().hasPath)
-                {
-                    if (TargetIsMoved(status,location))
-                    {
-                        if (status.debugMode_)
-                            Debug.Log("objetivo posicion cambiada rutina NavMesh SetDestination. : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
-                        recalculatePath(status,location);                    
-                    }                    
-                    
-                }
-                else 
-                {
-                    if (TargetIsMoved(status,location))
-                    {
-                        if (status.debugMode_)
-                            Debug.Log("asignando nuevo path rutina NavMesh SetDestination.");
-                        recalculatePath(status,location);                    
-                    }
-                    else           
-                    {
-                        if (status.debugMode_)                            
-                            Debug.Log("se llegó al destino final con rutina NavMesh SetDestination.......................................................................");                                         
-                        atDestination = true;                        
-                    }     
-                        
-                        
-                    
-                }
-            else
-                ///la siguiente línea se activa solo para comprobar diferncia de rendimiento
-                status.GetNavMeshAgent().SetDestination(location);///solo para comprobar sin optimizar los desplazamientos y cálculos de path, como mejora                
-                ///los frames por segundos.
-               
-        }
-        else
-        {
         /////////////
-        //Versión manual en beta todavía
+        //Calculo siempre el path y ya después utilizaré mi propio movimiento mediante MovementApply() el cual mueve solo en
+        ///incrementos según la velociad, por lo que tengo que irlo llamando en cada frame, o bien puede elegir usar SetDestination
+        ///con el path calculado. En el caso de SetDestination, es el propio método el que hará mover al NPC, por lo que no hace falta
+        ///llamarlo en cada frame. No obstante , esta rutina también controla y recalcula un path nuevo solo si se ha cambiado de destino
+        ///así que es buena opción llamarla siempre, ya que se encarga además, de que el path este libre de obstáculos, comportamiento que no puedo controlar
+        ////si se usa la versión con SetDestination y sin llamarla en cada movimiento.
+        //llersión manual en beta todavía
         /////////////
-            Debug.Log("número de corners : " + status.GetNavMeshPath().corners.Length.ToString());
-            if (status.GetNavMeshPath().corners.Length > 1) //como mínimo siempre hay dos cornes, el de la posición inicial y la de  la siguiente posición .
+        if (status.GetNavMeshUse())
+        {
+             if (status.debugMode_)
+                Debug.Log("número de corners : " + status.GetNavMeshPath().corners.Length.ToString());
+
+            if (((status.GetNavMeshUseSetDestination()) && (status.GetNavMeshAgent().hasPath)) || ((!status.GetNavMeshUseSetDestination()) && (status.GetNavMeshPath().corners.Length > 1))) 
+            //como mínimo siempre hay dos cornes, el de la posición inicial y la de  la siguiente posición en caso de que haya path.
+            ///esto es así para la version sin Setdestination. Con setdestination compruebo el path con hasPath(aunque también hay corners ya que primero se calculan y después se le asigna con Setpath), con mi versión compruebo si hay corners.
             {
                 if (status.debugMode_)
                     Debug.Log("tiene path");
@@ -236,29 +229,37 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
                 if  (TargetIsMoved(status,location))
                 {
                     if (status.debugMode_)
-                        Debug.Log("objetivo posicion cambiada : " + Vector3.Distance(location,status.GetNavMeshTargetPosition()).ToString());
-                    recalculatePath(status,location);                    
+                        Debug.Log("objetivo posicion cambiada : " );
+                    if (RecalculatePath(status,location))    
+                        if (status.GetNavMeshUseSetDestination())
+                             status.GetNavMeshAgent().SetPath(status.GetNavMeshPath()); ///en caso de usar SetDestination, le asigno el 
+                             ///path obtenido para ejecutarse en background
+
                 }
                 else
-                {                         
-                    if (MovementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1],withPosY))
-                    {
-                        if (status.debugMode_)
-                            Debug.Log("llego  al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
+                {   
 
-                        status.SetNavMeshPathCurrentIndex(status.GetNavMeshPathCurrentIndex() +1);
-                         if (status.GetNavMeshPathCurrentIndex() >= status.GetNavMeshPath().corners.Length-1)
-                         {
+                    ///TO DO. Aquí pondré la llamada a la función que controle colisiones, u otras propiedades para movimiento
+                    ////como una especie de filtro previo antes de realizr el movimiento. 
+
+                    if (!status.GetNavMeshUseSetDestination()) ///si no uso SetDestination, aplico el movimiento manualmente recorriendo los corners.    
+                        if (MovementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1],true))
+                        {
                             if (status.debugMode_)
-                                Debug.Log("llego  al final del path por primera vez: ");
-                            status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
-                            atDestination = true;                            
-                         }
-                                          
-                    }
-                                      
+                                Debug.Log("llego  al corner numero: " + status.GetNavMeshPathCurrentIndex()+1);
+
+                            status.SetNavMeshPathCurrentIndex(status.GetNavMeshPathCurrentIndex() +1);
+                            if (status.GetNavMeshPathCurrentIndex() >= status.GetNavMeshPath().corners.Length-1)
+                            {
+                                if (status.debugMode_)
+                                    Debug.Log("llego  al final del path por primera vez: ");
+                                status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
+                                atDestination = true;                            
+                            }
+                                            
+                        }
+
                 }
-    
             }
             else
             {
@@ -266,8 +267,12 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
                 {
                     if (status.debugMode_)
                         Debug.Log("asignando nuevo path");
+                                                         
+                    if (RecalculatePath(status,location))    
+                        if (status.GetNavMeshUseSetDestination())
+                             status.GetNavMeshAgent().SetPath(status.GetNavMeshPath()); ///en caso de usar SetDestination, le asigno el 
+                             ///path obtenido para ejecutarse en background
 
-                    recalculatePath(status, location);                                                              
                 }
                 else
                 {
@@ -276,46 +281,43 @@ public bool Seek(Status status,Vector3 location,bool withPosY=false) ///devolver
                     atDestination = true;                    
                 }
             }
+                         
+
+                                      
         }
-    else
-          status.atDestination_ = MovementApply(status, location,withPosY);              
+        else
+             status.atDestination_ = MovementApply(status, location,withPosY);  
+
+         
     
 status.atDestination_ = atDestination;
 return atDestination;
 }
 
-public void Flee(Status status,Vector3 location,bool withPosY=false)
+public void Flee(Status status,Vector3 location,float sizeFleeVector = 20f, bool withPosY=false)
 {
     Vector3 fleeVector = Vector3.zero;
     Vector3 v1 = status.GetOrigin().transform.position;
     v1.y = 0;
     location.y = 0;
-    float braking = status.MovementValue() + status.GetBrakingDistance(); ///distancia de frenado 
+    float size = status.MovementValue() * sizeFleeVector; ///distancia de frenado 
     
-    fleeVector = v1 - location;
+    fleeVector = (v1 - location).normalized * size;
 
-    while (fleeVector.magnitude < braking) 
-    {
-        
-            Debug.Log("Aumentando vector flee  braking distance : " +braking.ToString() + " distance flee vector: " + fleeVector.magnitude.ToString());
 
-            fleeVector *= 2;
-    }
-    Debug.Log("nueva magnitud flee vector" + fleeVector.magnitude.ToString() + "nueva posicion "  + (status.GetOrigin().transform.position + fleeVector).ToString());
-    
     if (status.debugMode_)
-        Debug.DrawRay(status.GetOrigin().transform.position, fleeVector,Color.red);
-        
-///Como minimo debo de movermo lo suficiente para que no de que llegué al final del destino, puesto que de lo contrario ocurriría que si no me muevo tampoco avanaría
-///el npc. Por eso multiplico por 2 el braking distance y sumo 1, por si acaso el breakingdistance sea cero.         
-    //if (status.GetNavMeshUse())    
-      //      if (status.GetNavMeshPath().status != UnityEngine.AI.NavMeshPathStatus.PathComplete)  ///si no tiene un path asignado, asigno uno.                            
-                Seek(status, status.GetOrigin().transform.position + fleeVector,withPosY);
-                
-        //    else
-          //      Seek(status, status.GetNavMeshTargetPosition(),true);
-            
+        Debug.DrawRay(status.GetOrigin().transform.position, fleeVector,Color.green);
 
+    
+    if (status.GetNavMeshUse())
+        if (((status.GetNavMeshUseSetDestination()) && (status.GetNavMeshAgent().hasPath)) || ((!status.GetNavMeshUseSetDestination()) && (status.GetNavMeshPath().corners.Length > 1))) 
+            Seek(status, status.GetNavMeshTargetPosition(),withPosY);  
+        else
+          Seek(status, status.GetOrigin().transform.position + fleeVector,withPosY);            
+    else
+        Seek(status, status.GetOrigin().transform.position + fleeVector,withPosY);            
+                
+            
 }
 
 public void Pursue(Status status,bool withPosY=false)

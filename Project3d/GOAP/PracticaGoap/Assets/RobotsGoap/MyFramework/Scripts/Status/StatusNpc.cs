@@ -143,7 +143,7 @@ override public bool SetNavMeshUse(bool navmesh)
     else
     {
         navMeshUse_ = false;
-        ErasePathNavMesh();
+        NavMeshErasePath();
         SetNavMeshUseSetDestination(false); ///si desactivo NavMesh, también desactivo el posible uso de SetDestination
     } 
     return true;  
@@ -205,7 +205,7 @@ override public Vector3 GetNavMeshTargetPosition()
 {
     return navMeshTargetPosition_;
 }
-override public void ErasePathNavMesh()
+override public void NavMeshErasePath()
 {
     if (GetNavMeshUse())    
     {
