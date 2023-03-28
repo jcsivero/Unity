@@ -45,18 +45,21 @@ public class StatusNpcRobot : StatusNpc
     public new void Awake()
     {        
         base.Awake();        
-        
+        Debug.Log("|||||||||||||| Awake StatusNpcRobot||||||||||||||||");
         SetName("StatusNpcRobot");        
         healthMax_ = GetHealth();
-        Debug.Log("|||||||||||||| Awake StatusNpcRobot||||||||||||||||");
+        
 
     }
     public new void Start()
     {
+        
         base.Start();
+        Debug.Log("|||||||||||||| Start StatusNpcRobot||||||||||||||||");        
+        SetTarget(GetLevelManager().GetActualPlayer());
         InstaciateCommands(); 
 
-       Debug.Log("|||||||||||||| Start StatusNpcRobot||||||||||||||||");
+       
         if (!suscribeToOnUpdateAllStatusNpcRobot_)
             OnEnable();         
         
@@ -148,15 +151,11 @@ public class StatusNpcRobot : StatusNpc
     protected new void Update()
     {
         base.Update();
-        if (GetGameManager().ok_)
-        {
             AppendCommand(commandHudUpdateStatusNpcRobot_);
             AppendCommand(commandNpcGoapStatesRobotUpdate_);
             ExecuteCommands();
 
-
-        }
-    }
+ }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

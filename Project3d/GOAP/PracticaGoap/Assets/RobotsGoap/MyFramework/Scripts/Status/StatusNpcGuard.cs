@@ -44,18 +44,20 @@ public class StatusNpcGuard : StatusNpc
     public new void Awake()
     {        
         base.Awake();                
+        Debug.Log("|||||||||||||| Awake StatusNpcGuard||||||||||||||||");
         SetName("StatusNpcGuard");        
         healthMax_ = GetHealth();
-
-        Debug.Log("|||||||||||||| Awake StatusNpcGuard||||||||||||||||");
+        
 
     }
     public new void Start()
     {
         base.Start();
+        Debug.Log("|||||||||||||| Start StatusNpcGuard||||||||||||||||");
+        SetTarget(GetLevelManager().GetActualPlayer());
         InstaciateCommands(); 
         if (debugMode_)        
-            Debug.Log("|||||||||||||| Start StatusNpcGuard||||||||||||||||");
+            
             
         if (!suscribeToOnUpdateAllStatusNpcGuard_)
             OnEnable(); 
@@ -138,14 +140,11 @@ public class StatusNpcGuard : StatusNpc
     protected new void Update()
     {
         base.Update();
-        if (GetGameManager().ok_)
-        {
+        
             AppendCommand(commandHudUpdateStatusNpcGuard_);
             AppendCommand(commandNpcGoapStatesGuardUpdate_);
             ExecuteCommands();
 
-
-        }
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase

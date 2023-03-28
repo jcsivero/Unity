@@ -30,10 +30,9 @@ public class GameManager :BaseMono
 
     [Tooltip("0 Forzar no depuración, 1 Forzar Depuración, 2 Personalizado por componente.")] 
     public DebugModeForce_ debugModeForce_ = DebugModeForce_.customize;
-    private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";
-    [HideInInspector ]public bool ok_ = false; //será true, cuando se haya ejecutado el Update de GameManager el primero, asegurando así que puedo establecer
-    ///unas condiciones de inicio antes de que comiencen los update del resto de componentes. Si se necesitara actualizar recursos, se puede invocar el evento
-    ///al que se adjuntan los scripts.
+    private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";    
+    public  bool readyEngine_ = false; 
+    public  bool firtUpdate_ = false; 
     
      public static GameManager Instance()  /// llamar solo desde después de los Awake, para asegurarse que la instancia está creada. O sea, se puede llamar desde OnEnable() o Start()
     {
@@ -98,7 +97,8 @@ public class GameManager :BaseMono
         }
         else
         {
-            instance_.ok_ = false;            
+            instance_.readyEngine_ = false;           
+            instance_.firtUpdate_ = false;             
             Destroy(gameObject);
 
         }
@@ -111,7 +111,7 @@ public class GameManager :BaseMono
     /// </summary>
     void Start()
     {
-                
+
         //  Cursor.visible = false;
          // Cursor.lockState = CursorLockMode.Locked;
                 
@@ -121,12 +121,14 @@ public class GameManager :BaseMono
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
+
+
     void Update()
     {
-        if (!ok_)
+        if (!firtUpdate_)
         {
             GetManagerMyEvents().TriggerEvent(TRIGGER_ON_UPDATE_ALL_STATUS_NPC) ; ///actualizo todos los objectos.            
-            ok_ = true;
+            firtUpdate_ = true;
         }
         ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
             
@@ -156,6 +158,7 @@ public class GameManager :BaseMono
           
 
 }
+
 
 
 

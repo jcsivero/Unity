@@ -33,13 +33,16 @@ override public int  GetHealth()
     public new void Awake()
     {
         base.Awake();             
+        Debug.Log("|||||||||||||| Awake StatusPlayer||||||||||||||||");
         SetName("StatusPlayer");  
               
-        Debug.Log("|||||||||||||| Awake StatusPlayer||||||||||||||||");
+        
 
     }
     new void  Start()
     {
+        base.Start();
+          Debug.Log("|||||||||||||| Start StatusPlayer||||||||||||||||");
         InstaciateCommands();                
         
     }
@@ -47,12 +50,10 @@ override public int  GetHealth()
     protected new void Update()
     {
         base.Update();
-        if (GetGameManager().ok_)
-        {
+        
         if (Input.GetMouseButtonDown(0))
              Fire();
-
-        }
+        
     }
 
     private void InstaciateCommands()

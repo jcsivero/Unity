@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class BaseMono : MonoBehaviour
 {
-    private GameManager instanceGameManager_;
-    private ManagerMyEvents instanceManagerMyEvents_;
-    
-    private AIController instanceAIController_;
-    
+      
     virtual public GameManager GetGameManager()
     {
-        if (instanceGameManager_ == null)
-            instanceGameManager_ = GameManager.Instance();
-        return instanceGameManager_;
+        return GameManager.Instance();;
     }
 
    ///Ejecutar como minimo desde el método Start, para asegurar que los gameobjects están creados.
 
     virtual public ManagerMyEvents GetManagerMyEvents()
     {
-        if (instanceManagerMyEvents_ == null)
-          instanceManagerMyEvents_ =  ManagerMyEvents.Instance();
-        return instanceManagerMyEvents_;
+        return  ManagerMyEvents.Instance();;
     }
 
     virtual public AIController GetAIController()
     {
-        if (instanceAIController_ == null)
-          instanceAIController_ =  GetGameManager().aiController_;
-        return instanceAIController_;
+        return  GetGameManager().aiController_;
+    }
+    virtual public bool ReadyEngine()
+    {
+        if (!GetGameManager().readyEngine_)
+        {
+            ///si todavía no esta listo el motor, o sea, el gameobject con el scripts levelmanager.cs no ha ejecutado ya su método Start()
+            ///entonces localizo el component levelmanager.cs.
+            GetGameManager().levelManager_ = FindFirstObjectByType<LevelManager>();
+
+            if (GetGameManager().levelManager_ == null)
+            {
+                Debug.Log("!!!!!!!Error. No se encontró LevelManager, osea, el componente script LevelManager.cs adjunto.!!!!!!");
+                GetGameManager().readyEngine_ = false;
+            }
+            else 
+                GetGameManager().levelManager_.Start(); ///ejecuto método start de levelmanager, el cual es el que realmente me dirá si está el motor listo o no.                
+        
+        }
+        return GetGameManager().readyEngine_;        
     }
     virtual public World GetWorld()
     {
+
         return  GetGameManager().world_;
     }
 
@@ -42,13 +52,14 @@ public class BaseMono : MonoBehaviour
     }
    virtual public HudWorld GetHudWorld()
     {
-        return  GetGameManager().hudWorld_;
+        
+        return GetGameManager().hudWorld_;
+            
     }
 
    virtual public LevelManager GetLevelManager()
    {
-        if (GetGameManager().levelManager_ == null)
-            GetGameManager().levelManager_ = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+ 
         return GetGameManager().levelManager_ ;
    }
    virtual public void  SetLevelManager(LevelManager levelManager)
@@ -56,17 +67,12 @@ public class BaseMono : MonoBehaviour
         GetGameManager().levelManager_ = levelManager;
    }
    virtual public HudLevel GetHudLevel()
-    {
-        if (GetLevelManager().hudLevel_ != null)  
+    {      
             return GetLevelManager().hudLevel_;
         
-        return null; ///indico que todavía no se ha ejecutado el método start del gameobject que contien el script levelmanager.cs, el cual se
-        ///asignaría como level manager en el gamemanager.
     }
     virtual public void SetHudLevel(HudLevel level)
     {
-         if (GetHudLevel() == null) ///si aún no hay hud de nivel en el gamemanager, lo localizo.
-
 
          GetLevelManager().hudLevel_ = level;
     }
@@ -75,10 +81,23 @@ public class BaseMono : MonoBehaviour
         return  GetGameManager().commands_;
 
     }
-
-   virtual public void AppendCommand(Command draft)
+  virtual public Command GetCommand(string name,object pointer = null)
     {
-        GetGameManager().commands_.AppendCommand(draft);
+        return  GetCommands().GetCommand(name, pointer);
+
+    }
+
+   virtual public void AppendCommand(string name,object pointer = null)
+    {
+        GetGameManager().commands_.AppendCommand(name,pointer);
+        
+
+    }
+
+    virtual public void CreateCommand(string name, Command command, object pointer=null)
+    {
+        GetCommands().CreateCommand(name, command,  pointer);
+        
         
     }
     virtual public void ExecuteCommands()

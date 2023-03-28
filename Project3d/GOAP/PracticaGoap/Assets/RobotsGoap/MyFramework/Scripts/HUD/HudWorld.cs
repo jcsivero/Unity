@@ -16,9 +16,6 @@ public class HudWorld : Hud
     [SerializeField] private Image  hudWeapon_;
     [SerializeField] private Image  hudKey_;
 
-  
-
- 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Eventos  de esta clase
@@ -36,13 +33,12 @@ public class HudWorld : Hud
    public new void Start()
     {
         base.Start();
-
-        InstaciateCommands();  
-
-        if (debugMode_)
-            Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
-        SetHudWorld(this);
         
+        Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
+        
+        InstaciateCommands();  
+      
+                
      
     }    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

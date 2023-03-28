@@ -364,10 +364,7 @@ override public float MovementValue()
     protected new void Update()
     {  
         base.Update();
-        if (GetGameManager().ok_)
-        {
-             
-        }
+        
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

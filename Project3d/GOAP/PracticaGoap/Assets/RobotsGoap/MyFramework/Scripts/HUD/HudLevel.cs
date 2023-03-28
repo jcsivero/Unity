@@ -49,7 +49,8 @@ public class HudLevel : Hud
         InstaciateCommands();  
 
         if (debugMode_)
-            Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");        
+            Debug.Log("|||||||||||||| Start HudLevel||||||||||||||||");        
+          
         
     }    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,5 +62,25 @@ public class HudLevel : Hud
 
     }    
 
-   
+    ////Métodos virtuales para todas las clases de nivel que se hagan.
+    
+     virtual public string GetHudFinal()
+    {        
+        return null;
+    }
+    virtual public void SetHudFinal(string drat)
+    {
+     
+    }
+
+    virtual public void LoadMenuLevel()
+    {
+
+       
+
+    }
+    virtual public void ResetLevel()
+    {
+       
+    }
 }

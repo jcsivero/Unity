@@ -283,6 +283,9 @@ public void Start()
     if (debugMode_)
      Debug.Log("|||||||||||||| Start Status||||||||||||||||");
 
+    if (!ReadyEngine())
+        Debug.Log("Engine no funcional. LevelManager no cargado o función GetInitialInformation de LevelManager no ejecutada con éxito");
+
     if (!suscribeToOnUpdateAllStatus_)        
             OnEnable(); 
 
@@ -324,8 +327,6 @@ public void Start()
 /// </summary>
 protected void Update()
 {
-    if (GetGameManager().ok_)
-    {
         if (debugMode_)
         {
             ///solo a modo de depuración, se pierde rendimiento pero estos métodos actualizan variables modificadas desde el inspector
@@ -344,7 +345,6 @@ protected void Update()
         SetSpeedCurrent(Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime));        
         positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad            
         
-    }
     
 }
 

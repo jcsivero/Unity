@@ -5,7 +5,6 @@ using UnityEngine;
 public class LevelManager : BaseMono
 {
     public bool debugMode_;
-
     public HudLevel hudLevel_;
     public GameObject actualPlayer_;
     public GameObject actualEnemy_;
@@ -20,7 +19,7 @@ public class LevelManager : BaseMono
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public void Awake()
+virtual    public void Awake()
     {
                         
         ///Inicializo variables de control de objecots.        
@@ -43,7 +42,7 @@ public class LevelManager : BaseMono
         
     }    
 
-    public void Start()
+virtual    public void Start()
     {    
         if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
             debugMode_ = true;
@@ -51,25 +50,48 @@ public class LevelManager : BaseMono
         if (GetGameManager().debugModeForce_ == DebugModeForce_.noDebug)
             debugMode_ = false;
 
-        InstaciateCommands();  
-        
         if (debugMode_)
-            Debug.Log("|||||||||||||| Start StatusWorld||||||||||||||||");
+            Debug.Log("|||||||||||||| Start LevelManager||||||||||||||||");
 
-        SetLevelManager(this);
-        //if (GetTarget()== null)
-          //  SetTarget(GameObject.Find("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
+        if (GetInitialInformation())
+        {
+            GetGameManager().readyEngine_ = true;
+            SetLevelManager(this);
+        }
+        else 
+        {
+            GetGameManager().readyEngine_ = false;
+            SetLevelManager(null);
+
+        }
+
+        if (GetGameManager().readyEngine_)
+            InstaciateCommands();  
         
-        GetInitialInformation();
-        //gameObjectsByName_["HudFinal"][0].SetActive(false);
-        //AppendCommand(commandHudUpdateAll_); ///se ejecutará en el primer Update() de GameManager
+    
 
     }
 
 
-void GetInitialInformation()
+virtual public bool GetInitialInformation()
     {
-        ///Obtengo y clasifico la información de los GameObjects ya cargados.
+        GetGameManager().hudWorld_ = FindFirstObjectByType<HudWorld>();
+
+        if (GetGameManager().hudWorld_ == null)
+        {
+            Debug.Log("!!!!!!!!!Error. No se encontró HudWorld, o sea, el componente script HudWorld.cs o clase descendiente");
+            return false;
+        }
+
+
+        hudLevel_ = FindFirstObjectByType<HudLevel>();
+
+        if (hudLevel_ == null)
+        {
+            Debug.Log("!!!!!!!!!Error. No se encontró HudLevel, o sea, el componente script HudLevel.cs o clase descendiente");
+            return false;
+        }
+
 
         ControlGameObjects controlGameObjects;
         List<GameObject> refToGameObjets;
@@ -146,13 +168,23 @@ void GetInitialInformation()
             
 
         }
+    return true; ///si se pudo obtener toda la información, se da por correcto.Esto propicia el poner readyengine a true
         
 }
 
 
-    private void InstaciateCommands()
+virtual    public void InstaciateCommands()
     {
 
 
+    }
+
+virtual    public GameObject GetActualPlayer()
+    {
+        return actualPlayer_;
+    }
+virtual    public GameObject GetActualEnemy()
+    {
+        return actualEnemy_;
     }
 }

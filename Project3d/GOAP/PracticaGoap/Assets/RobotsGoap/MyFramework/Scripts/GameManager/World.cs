@@ -8,17 +8,7 @@ public class World : BaseMono
     ////Iniciación de comandos Comandos que no requieren de parámetros o bien se inicializan con un único parámetro en el contructor,
     /// por lo que se puede solo generar una única instancia de ellos y reutilizarla tantas veces como se quiera.
     bool debugMode_;
-    public CommandHudUpdateAll commandHudUpdateAll_; ///comandos comunes    
-    public CommandHudUpdateHealthPlayer commandHudUpdateHealthPlayer_; ///comandos comunes
-
-    public CommandHudUpdateHealthGuard commandHudUpdateHealthGuard_; ///comandos comunes
-
-   public CommandHudUpdateTotalPoints commandHudUpdateTotalPoints_; ///comandos comunes
-
-    public CommandHudUpdateCountEnemies commandHudUpdateCountEnemies_; ///comandos comunes
-
-    public CommandHudUpdateKey commandHudUpdateKey_; ///comandos comunes
-    public CommandHudUpdateWeapon commandHudUpdateWeapon_; ///comandos comunes
+    
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables públicas propias de esta clase
@@ -102,11 +92,7 @@ public class World : BaseMono
     private void InstaciateCommands()
     {
      
-        commandHudUpdateAll_ = new CommandHudUpdateAll();                
-        commandHudUpdateCountEnemies_ = new CommandHudUpdateCountEnemies();
-        commandHudUpdateTotalPoints_ = new CommandHudUpdateTotalPoints();
-        commandHudUpdateWeapon_ = new CommandHudUpdateWeapon();
-        commandHudUpdateKey_ = new CommandHudUpdateKey();
+                
 
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

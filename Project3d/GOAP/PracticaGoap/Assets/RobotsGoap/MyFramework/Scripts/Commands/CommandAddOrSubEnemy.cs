@@ -16,7 +16,7 @@ public class CommandAddOrSubEnemy : Command
     }
     public override bool Exec()
     {        
-        GetStatusWorld().SetOrAddCountEnemies(GetStatusWorld().GetCountEnemies()+ amount_);        
+        GetWorld().SetOrAddCountEnemies(GetWorld().GetCountEnemies()+ amount_);        
         
         return true;
     }

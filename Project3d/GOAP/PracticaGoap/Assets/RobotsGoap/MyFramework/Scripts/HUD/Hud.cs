@@ -10,9 +10,6 @@ public class Hud : BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public bool debugMode_;
 
-  /*[SerializeField] public StatusHudPrincipal hudPrincipal_;
- [SerializeField] public StatusHudInitialOptions hudInitialOptions_;
-  [SerializeField] public StatusHudFinalOptions hudFinalOptions_;*/
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
@@ -36,7 +33,6 @@ public class Hud : BaseMono
     }
    public void Start()
     {
-        InstaciateCommands();  
 
         if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
             debugMode_ = true;
@@ -47,6 +43,10 @@ public class Hud : BaseMono
         if (debugMode_)
             Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
         
+        if (!ReadyEngine())
+            Debug.Log("Engine no funcional. LevelManager no cargado o función GetInitialInformation de LevelManager no ejecutada con éxito");
+
+        InstaciateCommands();  
         
         //if (GetTarget()== null)
           //  SetTarget(GameObject.Find("Hud")); ///si no se ha establecido un objeto destino, por defecto para el
@@ -60,12 +60,7 @@ public class Hud : BaseMono
     private void InstaciateCommands()
     {
 
-     
-        /*commandHudUpdateAll_ = new CommandHudUpdateAll();                
-        commandHudUpdateCountEnemies_ = new CommandHudUpdateCountEnemies();
-        commandHudUpdateTotalPoints_ = new CommandHudUpdateTotalPoints();
-        commandHudUpdateWeapon_ = new CommandHudUpdateWeapon();
-        commandHudUpdateKey_ = new CommandHudUpdateKey();*/
+
     }    
 
  

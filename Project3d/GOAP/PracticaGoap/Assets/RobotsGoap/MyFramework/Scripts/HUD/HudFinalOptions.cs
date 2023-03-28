@@ -12,8 +12,6 @@ public class HudFinalOptions : HudLevel
  [SerializeField] private Text  hudTextFinal_;
 
 
-
-
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
@@ -21,16 +19,16 @@ public class HudFinalOptions : HudLevel
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
-     public string GetHudFinal()
+override    public string GetHudFinal()
     {
         return hudTextFinal_.text;
     }
-    public void SetHudFinal(string drat)
+override public void SetHudFinal(string drat)
     {
         hudTextFinal_.text = drat;
     }
 
-      public void LoadMenuLevel()
+override      public void LoadMenuLevel()
     {
 
             GetWorld().activeLevel_ = 0;
@@ -38,7 +36,7 @@ public class HudFinalOptions : HudLevel
         SceneManager.LoadScene(GetWorld().activeLevel_);
 
     }
-    public void ResetLevel()
+override    public void ResetLevel()
     {
         SceneManager.LoadScene(GetWorld().activeLevel_);
     }
@@ -61,9 +59,7 @@ public class HudFinalOptions : HudLevel
 
         if (debugMode_)
             Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
-        
-        
-        SetHudLevel(this);
+                        
         this.gameObject.SetActive(false); ///desactivo el HUD final para que no se vea.
         
     }    
