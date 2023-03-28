@@ -3,35 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class StatusHudInitialOptions : Status
+public class HudFinalOptions : HudLevel
 {
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables públicas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
+ [SerializeField] private Text  hudTextFinal_;
+
+
 
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
-    public void OnOneEnemy()
-    {
-        GetStatusWorld().activeLevel_ = 1;
-        SceneManager.LoadScene(GetStatusWorld().activeLevel_);
-    }
 
-    public void OnMultiplesEnemies()
-    {
-        GetStatusWorld().activeLevel_ = 2;
-        SceneManager.LoadScene(GetStatusWorld().activeLevel_);
-
-
-    }
- 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+     public string GetHudFinal()
+    {
+        return hudTextFinal_.text;
+    }
+    public void SetHudFinal(string drat)
+    {
+        hudTextFinal_.text = drat;
+    }
 
+      public void LoadMenuLevel()
+    {
+
+            GetWorld().activeLevel_ = 0;
+        
+        SceneManager.LoadScene(GetWorld().activeLevel_);
+
+    }
+    public void ResetLevel()
+    {
+        SceneManager.LoadScene(GetWorld().activeLevel_);
+    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Eventos  de esta clase
@@ -40,10 +50,8 @@ public class StatusHudInitialOptions : Status
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     public new void Awake()
-    {
-        base.Awake();           
-        SetName("StatusHudInitialOptions");        
-        Debug.Log("|||||||||||||| Awake StatusHud||||||||||||||||");
+    {    
+        base.Awake();
 
     }
    public new void Start()
@@ -54,7 +62,10 @@ public class StatusHudInitialOptions : Status
         if (debugMode_)
             Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
         
-        GetStatusHud().hudInitialOptions_ = this;
+        
+        SetHudLevel(this);
+        this.gameObject.SetActive(false); ///desactivo el HUD final para que no se vea.
+        
     }    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase

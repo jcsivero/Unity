@@ -25,7 +25,7 @@ public class GActionProtectMode : GAction
         ///comprubo manualmente las condiciones con los valores que me interesa
         ///Aquí tengo la ventaja de que no necesito comprobar si existe un valor, puesto que IsArchievableGiven ya comprobó que existan todas.
         
-        if (GetStatusWorld().GetGoapStates().GetIfExistState("protectme"))
+        if (GetWorld().GetGoapStates().GetIfExistState("protectme"))
             return true; 
         else
             return false;

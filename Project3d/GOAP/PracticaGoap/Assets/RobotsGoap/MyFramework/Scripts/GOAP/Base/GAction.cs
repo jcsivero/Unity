@@ -145,7 +145,7 @@ public abstract class GAction : BaseMono
     }
     public GoapStates GetAllStates() ///devuelve los estados del mundo junto con los estados del NPC actual.
     {
-        GoapStates allStates = new GoapStates(GetStatusWorld().GetGoapStates());
+        GoapStates allStates = new GoapStates(GetWorld().GetGoapStates());
         allStates.SetOrAddStates(npcGoapStates_);
         return allStates;
     }

@@ -2,20 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class StatusHud : Status
+using UnityEngine.SceneManagement;
+public class HudLevel : Hud
 {
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables públicas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-  [SerializeField] public StatusHudPrincipal hudPrincipal_;
- [SerializeField] public StatusHudInitialOptions hudInitialOptions_;
-  [SerializeField] public StatusHudFinalOptions hudFinalOptions_;
+
+
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+    public void OnOneEnemy()
+    {
+        GetWorld().activeLevel_ = 1;
+        SceneManager.LoadScene(GetWorld().activeLevel_);
+    }
 
+    public void OnMultiplesEnemies()
+    {
+        GetWorld().activeLevel_ = 2;
+        SceneManager.LoadScene(GetWorld().activeLevel_);
+
+
+    }
  
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
@@ -28,12 +39,9 @@ public class StatusHud : Status
         /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public new void Awake()
+    public  new void Awake()
     {
-        base.Awake();           
-        SetName("StatusHud");        
-        Debug.Log("|||||||||||||| Awake StatusHud||||||||||||||||");
-
+        base.Awake();
     }
    public new void Start()
     {
@@ -41,13 +49,7 @@ public class StatusHud : Status
         InstaciateCommands();  
 
         if (debugMode_)
-            Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
-        
-        
-        //if (GetTarget()== null)
-          //  SetTarget(GameObject.Find("Hud")); ///si no se ha establecido un objeto destino, por defecto para el
-            ///gameobject que contendrá el HUD sera el gameobject con etiqueta "Hud"     
-        
+            Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");        
         
     }    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,8 +61,5 @@ public class StatusHud : Status
 
     }    
 
- 
-    
-
-
+   
 }

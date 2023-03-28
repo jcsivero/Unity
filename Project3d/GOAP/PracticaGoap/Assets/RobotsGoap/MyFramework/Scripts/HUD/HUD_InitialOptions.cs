@@ -9,14 +9,14 @@ public class HUD_InitialOptions : BaseMono
     // Start is called before the first frame update
     public void OnOneEnemy()
     {
-        GetStatusWorld().activeLevel_ = 1;
-        SceneManager.LoadScene(GetStatusWorld().activeLevel_);
+        GetWorld().activeLevel_ = 1;
+        SceneManager.LoadScene(GetWorld().activeLevel_);
     }
 
     public void OnMultiplesEnemies()
     {
-        GetStatusWorld().activeLevel_ = 2;
-        SceneManager.LoadScene(GetStatusWorld().activeLevel_);
+        GetWorld().activeLevel_ = 2;
+        SceneManager.LoadScene(GetWorld().activeLevel_);
 
 
     }

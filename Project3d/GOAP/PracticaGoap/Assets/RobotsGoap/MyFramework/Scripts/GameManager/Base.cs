@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Base
 {
-    private GameManager instanceGameManager_;
+      private GameManager instanceGameManager_;
     private ManagerMyEvents instanceManagerMyEvents_;
-
+    
     private AIController instanceAIController_;
-
+    
     virtual public GameManager GetGameManager()
     {
         if (instanceGameManager_ == null)
@@ -16,6 +16,10 @@ public class Base
         return instanceGameManager_;
     }
 
+   virtual public LevelManager GetLevelManager()
+   {
+        return GetGameManager().levelManager_;
+   }
     virtual public ManagerMyEvents GetManagerMyEvents()
     {
         if (instanceManagerMyEvents_ == null)
@@ -29,13 +33,19 @@ public class Base
           instanceAIController_ =  GetGameManager().aiController_;
         return instanceAIController_;
     }
-    virtual public StatusWorld GetStatusWorld()
+    virtual public World GetStatusWorld()
     {
-        return  GetGameManager().statusWorld_;
+        return  GetGameManager().world_;
     }
-   virtual public StatusHud GetStatusHud()
+   virtual public Hud GetHudWorld()
     {
-        return  GetGameManager().statusHud_;
+        return  GetGameManager().hudWorld_;
+    }
+
+
+   virtual public Hud GetHudLevel()
+    {
+        return GetLevelManager().hudLevel_;
     }
 
    virtual public Commands GetCommands()
@@ -49,10 +59,9 @@ public class Base
         GetGameManager().commands_.AppendCommand(draft);
         
     }
-    virtual public void ExecuteCommands(Command draft)
+    virtual public void ExecuteCommands()
     {
         GetGameManager().commands_.ExecuteCommands();
         
     }
-
 }

@@ -39,7 +39,7 @@ public class GActionGetWeapon : GAction
             if (target == null)
                 return false;*/
             //status_.anim_.SetBool("Hide",true);
-            target = GetStatusWorld().gameObjectsByName_[targetTagOrName][0];        
+            target = GetLevelManager().gameObjectsByName_[targetTagOrName][0];        
             return true;
     }
 
@@ -53,7 +53,7 @@ public class GActionGetWeapon : GAction
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
         if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo el arma.
         {
-            AppendCommand(GetStatusWorld().commandHudUpdateWeapon_);
+            AppendCommand(GetWorld().commandHudUpdateWeapon_);
             npcGoapStates_.SetOrAddState("IHaveWeapon",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma
             Destroy(target);
         }

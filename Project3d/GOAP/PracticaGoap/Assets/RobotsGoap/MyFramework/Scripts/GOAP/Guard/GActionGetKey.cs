@@ -33,7 +33,7 @@ public class GActionGetKey : GAction
     
     public override bool PrePerform()
     {
-        target = GetStatusWorld().gameObjectsByName_[targetTagOrName][0];        ///ahora el objetivo es la posición de la llave
+        target = GetLevelManager().gameObjectsByName_[targetTagOrName][0];        ///ahora el objetivo es la posición de la llave
         
             return true;
 
@@ -49,7 +49,7 @@ public class GActionGetKey : GAction
         if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo la llave.        
         {
              npcGoapStates_.SetOrAddState("IHaveKey",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma
-             AppendCommand(GetStatusWorld().commandHudUpdateKey_);
+             AppendCommand(GetWorld().commandHudUpdateKey_);
              Destroy(target); ///destruyo objeto.
              
         }   

@@ -12,7 +12,7 @@ public class CommandHudUpdateCountEnemies : Command
     public override bool Exec()
     {        
                 
-                GetStatusHud().hudPrincipal_.SetHudCountEnemies(GetStatusWorld().GetCountEnemies());                
+                //GetStatusHud().hudPrincipal_.SetHudCountEnemies(GetStatusWorld().GetCountEnemies());                
         
         
         return true;

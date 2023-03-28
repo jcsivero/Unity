@@ -58,7 +58,7 @@ override public int  GetHealth()
     private void InstaciateCommands()
     {
         
-        GetStatusWorld().commandHudUpdateHealthPlayer_= new CommandHudUpdateHealthPlayer(this);
+        GetWorld().commandHudUpdateHealthPlayer_= new CommandHudUpdateHealthPlayer(this);
         commandAddOrSubHealth_ = new CommandAddOrSubHealth(this);
         commandAddOrSubLifes_ = new CommandAddOrSubLifes(this);
         
@@ -82,7 +82,7 @@ override public int  GetHealth()
         {
             commandAddOrSubHealth_.Set(-10);
             AppendCommand(commandAddOrSubHealth_);
-            AppendCommand(GetStatusWorld().commandHudUpdateHealthPlayer_);                                    
+            AppendCommand(GetWorld().commandHudUpdateHealthPlayer_);                                    
             ExecuteCommands();
             
             if (GetHealth() <= 0)  

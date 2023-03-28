@@ -37,6 +37,10 @@ public  abstract class  Status :  BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables de trigger o suscriber a eventos
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+    private const string ON_UPDATE_ALL_STATUS = "ON_UPDATE_ALL_STATUS";
+    private bool suscribeToOnUpdateAllStatus_ = false;
+
+
 public void PosIsChangedReset()
 {    
     posReferenceFromChanged_ = transform.position;
@@ -277,7 +281,10 @@ public void Start()
         debugMode_ = false;
 
     if (debugMode_)
-    Debug.Log("|||||||||||||| Start Status||||||||||||||||");
+     Debug.Log("|||||||||||||| Start Status||||||||||||||||");
+
+    if (!suscribeToOnUpdateAllStatus_)        
+            OnEnable(); 
 
     InstaciateCommands();
     
@@ -285,8 +292,33 @@ public void Start()
     SetSpeedMax(GetSpeedMax());
     
     
+        
 }
+ virtual public void OnEnable()   
+    {        
+        if (!suscribeToOnUpdateAllStatus_) 
+            suscribeToOnUpdateAllStatus_ = GetManagerMyEvents().StartListening(ON_UPDATE_ALL_STATUS,OnUpdateAllStatus); ///creo evento para actualizar  todos los StatusNpcRobots.
+        ///Este evento es lanzado por GameManager,cuando ha actualizado todas las variables iniciales del estado del mundo.
+        ///Después se puede utilizar para informar a todos los objetos a la vez y que se actualizen.
+        ///Esto no lo hago directamente en el Start() porque no sabemos en que orden son ejecutados,y podría haber Start() que se ejecutan antes que el 
+        ///Start() del GameManager, o del StatusWorld, , y entonces no tener todo actualizado, como target_ u otras variables.
 
+
+    }
+        /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    virtual public void OnDisable()
+    {      
+      GetManagerMyEvents().StopListening(ON_UPDATE_ALL_STATUS,OnUpdateAllStatus);
+      suscribeToOnUpdateAllStatus_ = false;
+      
+    }
+    virtual public bool OnUpdateAllStatus()
+    {
+        
+        return true;
+    }
 /// <summary>
 /// Update is called every frame, if the MonoBehaviour is enabled.
 /// </summary>

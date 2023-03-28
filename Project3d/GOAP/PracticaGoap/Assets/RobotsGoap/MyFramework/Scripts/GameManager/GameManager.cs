@@ -11,8 +11,7 @@ public enum DebugModeForce_ ///tipo de depuración
     debug = 1,
     customize = 2
 }
-[RequireComponent(typeof (StatusWorld))]
-[RequireComponent(typeof (StatusHud))]
+[RequireComponent(typeof (World))]
 [RequireComponent(typeof (AIController))]
 
 public class GameManager :BaseMono
@@ -20,8 +19,10 @@ public class GameManager :BaseMono
     
     public static  GameManager instance_ ;
     public float simulationVelocity_ = 1; 
-    public StatusWorld statusWorld_;
-    public StatusHud statusHud_;
+    public World world_;
+    public HudWorld hudWorld_;
+
+    public LevelManager levelManager_;
  
     public AIController aiController_;
     public Commands commands_;
@@ -69,33 +70,39 @@ public class GameManager :BaseMono
     {
         Debug.Log("Iniciado instancia GameManager desde Awake");
         
-        if (instance_!= null && instance_ != this)
+        if (instance_ == null)
+        {
+            Time.timeScale = simulationVelocity_; ///escala de simulación, de velocidad del juego.
+            instance_ = this;    
+            Object.DontDestroyOnLoad(gameObject);
+
+            GetManagerMyEvents(); //Creo instancia de gestión de eventos.
+                    
+            world_ = GetComponent<World>();
+            hudWorld_ = GetComponent<HudWorld>();
+            
+            aiController_ = GetComponent<AIController>();
+
+            commands_ = new Commands();
+
+
+            
+            world_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
+            world_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
+
+            ///Registro mis propios eventos para condiciones de victoria o derrota
+
+            GetManagerMyEvents().StartListening("OnVictory",OnVictory);
+            GetManagerMyEvents().StartListening("OnLose",OnLose);
+
+        }
+        else
+        {
+            instance_.ok_ = false;            
             Destroy(gameObject);
 
-        Time.timeScale = simulationVelocity_; ///escala de simulación, de velocidad del juego.
-        instance_ = this;
+        }
 
-        
-        Object.DontDestroyOnLoad(gameObject);
-
-        GetManagerMyEvents(); //Creo instancia de gestión de eventos.
-                
-        statusWorld_ = GetComponent<StatusWorld>();
-        statusHud_ = GetComponent<StatusHud>();
-        
-        aiController_ = GetComponent<AIController>();
-
-        commands_ = new Commands();
-
-
-        
-        statusWorld_.numberOfLevels_ = SceneManager.sceneCountInBuildSettings -1; //descuento la escena del menú inicial
-        statusWorld_.activeLevel_ =SceneManager.GetActiveScene().buildIndex;
-
-        ///Registro mis propios eventos para condiciones de victoria o derrota
-
-        GetManagerMyEvents().StartListening("OnVictory",OnVictory);
-        GetManagerMyEvents().StartListening("OnLose",OnLose);
     }
 
     /// <summary>
@@ -129,20 +136,20 @@ public class GameManager :BaseMono
     public bool OnVictory()
     {
         
-        GetStatusHud().hudFinalOptions_.SetHudFinal("You win");
+        //GetStatusHud().hudFinalOptions_.SetHudFinal("You win");
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        GetStatusHud().hudFinalOptions_.gameObject.SetActive(true);
+        //GetStatusHud().hudFinalOptions_.gameObject.SetActive(true);
         return true;
     }
 
     public bool OnLose()
     {
      
-        GetStatusHud().hudFinalOptions_.SetHudFinal("You Lose");
+        //GetStatusHud().hudFinalOptions_.SetHudFinal("You Lose");
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        GetStatusHud().hudFinalOptions_.gameObject.SetActive(true);
+        ///GetStatusHud().hudFinalOptions_.gameObject.SetActive(true);
         return true;
     }
 

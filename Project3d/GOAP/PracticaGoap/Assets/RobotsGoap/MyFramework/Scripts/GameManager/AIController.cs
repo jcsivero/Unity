@@ -446,7 +446,7 @@ if(status.hidePointTag_.Length == 0)
 }
 else
 {
-    if (!GetStatusWorld().hidePoints_.ContainsKey(status.hidePointTag_))
+    if (!GetLevelManager().hidePoints_.ContainsKey(status.hidePointTag_))
     {
         Debug.Log("///////////////////// Etiqueta para HidePoint no econtrada/////////////////////" + status.gameObject.name);
         status.hidePointTag_ = "Tag No founded";            
@@ -456,7 +456,7 @@ else
         float dist = Mathf.Infinity;
         Vector3 chosenSpot = Vector3.zero;
         
-        List<GameObject> draft = GetStatusWorld().hidePoints_[status.hidePointTag_];   
+        List<GameObject> draft = GetLevelManager().hidePoints_[status.hidePointTag_];   
         GameObject chosenGO = null;
         for (int i = 0; i <  draft.Count; i++)
         {
@@ -496,7 +496,7 @@ public Vector3 CleverHide(StatusNpc status,bool withPosY=false)
         float dist = Mathf.Infinity;
         Vector3 chosenSpot = Vector3.zero;
         Vector3 chosenDir = Vector3.zero;
-        if (!GetStatusWorld().hidePoints_.ContainsKey(status.hidePointTag_))
+        if (!GetLevelManager().hidePoints_.ContainsKey(status.hidePointTag_))
         {
             Debug.Log("///////////////////// Etiqueta para HidePoint no econtrada/////////////////////" + status.gameObject.name);
             status.hidePointTag_ = "Tag No founded";            
@@ -504,7 +504,7 @@ public Vector3 CleverHide(StatusNpc status,bool withPosY=false)
 
                    
         ///Primero obtengo todos los Hidepoint asignados a esta etiqueta, o sea, la del NPC
-        List<GameObject> draft = GetStatusWorld().hidePoints_[status.hidePointTag_];            
+        List<GameObject> draft = GetLevelManager().hidePoints_[status.hidePointTag_];            
         GameObject chosenGO = draft[0];
         Collider hideCol = chosenGO.GetComponent<Collider>();
 

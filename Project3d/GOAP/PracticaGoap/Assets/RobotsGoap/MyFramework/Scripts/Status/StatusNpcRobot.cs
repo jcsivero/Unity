@@ -60,11 +60,11 @@ public class StatusNpcRobot : StatusNpc
         if (!suscribeToOnUpdateAllStatusNpcRobot_)
             OnEnable();         
         
-        GetStatusWorld().SetOrAddCountEnemies(1);
+        GetWorld().SetOrAddCountEnemies(1);
         AppendCommand(commandHudUpdateStatusNpcRobot_); ///se ejecutará en el primer Update() de GameManager.
 
     }
-    public new void OnEnable()   
+    override public void OnEnable()   
     {
         base.OnEnable();
         if (!suscribeToOnUpdateAllStatusNpcRobot_) 
@@ -80,7 +80,7 @@ public class StatusNpcRobot : StatusNpc
         /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
     /// </summary>
-    public new void OnDisable()
+    override public void OnDisable()
     {
       base.OnDisable();      
       GetManagerMyEvents().StopListening(ON_UPDATE_ALL_STATUS_NPC_ROBOT,OnUpdateStatusNpcRobot);
@@ -116,11 +116,11 @@ public class StatusNpcRobot : StatusNpc
             {                
                 commandAddOrSubEnemy_.Set(-1);
 
-                GetStatusWorld().SetOrAddTotalPoints(5);
+                GetWorld().SetOrAddTotalPoints(5);
                 
                 AppendCommand(commandAddOrSubEnemy_);  
-                AppendCommand(GetStatusWorld().commandHudUpdateCountEnemies_);              
-                AppendCommand(GetStatusWorld().commandHudUpdateTotalPoints_);                
+                AppendCommand(GetWorld().commandHudUpdateCountEnemies_);              
+                AppendCommand(GetWorld().commandHudUpdateTotalPoints_);                
                 ExecuteCommands();
                
                 Destroy(this.gameObject);
@@ -134,6 +134,12 @@ public class StatusNpcRobot : StatusNpc
         
     }
 
+    public override bool OnUpdateAllStatus()
+    {
+         base.OnUpdateAllStatus();
+         ///código propio de esta clase.
+        return true;
+    }
     bool OnUpdateStatusNpcRobot()
     {
         

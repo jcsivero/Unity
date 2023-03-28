@@ -108,7 +108,7 @@ public class StatusNpcGuard : StatusNpc
             GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP            
             commandAddOrSubHealth_.Set(-10);                        
             AppendCommand(commandAddOrSubHealth_);                                    
-            AppendCommand(GetStatusWorld().commandHudUpdateHealthGuard_);
+            AppendCommand(GetWorld().commandHudUpdateHealthGuard_);
             
             if (GetHealth() <=0.0f)    
             {
@@ -124,9 +124,9 @@ public class StatusNpcGuard : StatusNpc
         
     }
 
-    override public bool OnUpdateStatusNpc() ///para sobreescribier el evento de actualizar todos los npc.
+    override public bool OnUpdateAllStatus() ///para sobreescribier el evento de actualizar todos los npc.
     {
-        base.OnUpdateStatusNpc();
+        base.OnUpdateAllStatus();
 
         return true;
     }
@@ -153,7 +153,7 @@ public class StatusNpcGuard : StatusNpc
 private void InstaciateCommands()
 {        
     
-    GetStatusWorld().commandHudUpdateHealthGuard_= new CommandHudUpdateHealthGuard(this); ///este comando vale con  una única instancia, así que modifico la instancia global
+    GetWorld().commandHudUpdateHealthGuard_= new CommandHudUpdateHealthGuard(this); ///este comando vale con  una única instancia, así que modifico la instancia global
     commandHudUpdateStatusNpcGuard_ = new CommandHudUpdateStatusNpcGuard(this);
     commandNpcGoapStatesGuardUpdate_ = new CommandNpcGoapStatesGuardUpdate(this);
     

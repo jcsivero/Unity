@@ -34,7 +34,7 @@ public class GActionGoToKillGirld : GAction
     
     public override bool PrePerform()
     {
-         target = GetStatusWorld().gameObjectsByName_[targetTagOrName][0];    ///ahora el objetivo es la chica
+         target = GetLevelManager().gameObjectsByName_[targetTagOrName][0];    ///ahora el objetivo es la chica
     
         return true;
     }

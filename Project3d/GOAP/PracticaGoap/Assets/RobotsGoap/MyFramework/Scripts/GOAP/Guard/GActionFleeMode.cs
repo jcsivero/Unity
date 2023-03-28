@@ -39,7 +39,7 @@ private float speedPrevious_;
         status_.anim_.SetBool("Run",true);
         speedPrevious_ = status_.GetSpeedMax();
         status_.SetSpeedMax(speedPrevious_*2);   
-        GetStatusWorld().GetGoapStates().SetOrAddState("protectme",GenericData.Create<bool>(true)); ///indico que deben de protegerme el resto de NPCS
+        GetWorld().GetGoapStates().SetOrAddState("protectme",GenericData.Create<bool>(true)); ///indico que deben de protegerme el resto de NPCS
         status_.NavMeshErasePath(); //borro cualquier posible path para que funcione correctamente el metodo flee;
         return true;
     }
@@ -53,7 +53,7 @@ private float speedPrevious_;
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
         status_.anim_.SetBool("Run",false);
         status_.SetSpeedMax(speedPrevious_);  
-        GetStatusWorld().GetGoapStates().RemoveState("protectme");///indico que ya no deben de protegerme.
+        GetWorld().GetGoapStates().RemoveState("protectme");///indico que ya no deben de protegerme.
         
        
     }

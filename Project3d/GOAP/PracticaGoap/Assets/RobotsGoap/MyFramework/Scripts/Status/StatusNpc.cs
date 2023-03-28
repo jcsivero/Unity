@@ -110,12 +110,6 @@ StatusNpc : Status
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////Variables de trigger o suscriber a eventos
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-    private const string ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";
-    private bool suscribeToOnUpdateAllStatusNpc_ = false;
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
   
@@ -332,9 +326,6 @@ override public float MovementValue()
         Debug.Log("|||||||||||||| Start StatusNpc||||||||||||||||");
         
 
-        if (!suscribeToOnUpdateAllStatusNpc_)        
-            OnEnable(); 
-        
         
     }
 
@@ -342,25 +333,17 @@ override public float MovementValue()
     /// <summary>
     /// This function is called when the object becomes enabled and active.
     /// </summary>
-    public void OnEnable()   
+    override public void OnEnable()   
     {        
-        if (!suscribeToOnUpdateAllStatusNpc_) 
-            suscribeToOnUpdateAllStatusNpc_ = GetManagerMyEvents().StartListening(ON_UPDATE_ALL_STATUS_NPC,OnUpdateStatusNpc); ///creo evento para actualizar  todos los StatusNpcRobots.
-        ///Este evento es lanzado por GameManager,cuando ha actualizado todas las variables iniciales del estado del mundo.
-        ///Después se puede utilizar para informar a todos los objetos a la vez y que se actualizen.
-        ///Esto no lo hago directamente en el Start() porque no sabemos en que orden son ejecutados,y podría haber Start() que se ejecutan antes que el 
-        ///Start() del GameManager, o del StatusWorld, , y entonces no tener todo actualizado, como target_ u otras variables.
-
+        base.OnEnable();
 
     }
         /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
     /// </summary>
-    public void OnDisable()
+    override public void OnDisable()
     {      
-      GetManagerMyEvents().StopListening(ON_UPDATE_ALL_STATUS_NPC,OnUpdateStatusNpc);
-      suscribeToOnUpdateAllStatusNpc_ = false;
-      
+      base.OnDisable();
     }
        /// <summary>
     /// This function is called when the MonoBehaviour will be destroyed.
@@ -370,10 +353,10 @@ override public float MovementValue()
         
            Debug.Log("------------- destruido objeto StatusNpc--------------- ");
     }
-    virtual public bool OnUpdateStatusNpc()
+    override public bool OnUpdateAllStatus()
     {
-        SetTarget(GetStatusWorld().GetTarget());
-
+        base.OnUpdateAllStatus();
+        //código propio de esta clase
         return true;
     }
 
@@ -408,7 +391,7 @@ public GAgent GetGoapAgent()
 }
 public GameObject GetWayPointGameObjectCurrent()
 {
-    return GetStatusWorld().wayPoints_[wayPointTag_][GetWayPointCurrent()];
+    return GetLevelManager().wayPoints_[wayPointTag_][GetWayPointCurrent()];
  ////devuelve el GameObject del waypoints actual
 }
 public int  GetWayPointCurrent()
@@ -438,7 +421,7 @@ public bool NextWayPoint()
         
     else
     {
-        if (!GetStatusWorld().wayPoints_.ContainsKey(wayPointTag_))
+        if (!GetLevelManager().wayPoints_.ContainsKey(wayPointTag_))
         {
             Debug.Log("///////////////////// Etiqueta para waypoint no econtrada/////////////////////" + gameObject.name);
             wayPointTag_ = "Tag No founded";      
@@ -453,7 +436,7 @@ public bool NextWayPoint()
                 SetWayPointCurrent(wayPointIndex_);                            
                 wayPointIndex_++;
 
-                if (wayPointIndex_ >= GetStatusWorld().wayPoints_[wayPointTag_].Count)
+                if (wayPointIndex_ >= GetLevelManager().wayPoints_[wayPointTag_].Count)
                     wayPointIndex_ = 0;                                
                 
             }
