@@ -20,6 +20,7 @@ public class LevelManager : BaseMono
     /// </summary>
 override public void Awake()
     {
+        
         SetName("LevelManager");      
         Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");                        
 
@@ -44,9 +45,11 @@ override public void Awake()
     }    
 
 override public void Start()
-    {    
+    {            
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");                        
-            
+
+    if (!GetGameManager().readyEngine_)
+    {
         if (GetInitialInformation())
         {
             GetGameManager().readyEngine_ = true;
@@ -64,22 +67,25 @@ override public void Start()
         
     
 
+
+    }
     }
 
 
 virtual public bool GetInitialInformation()
     {
-        GetGameManager().hudWorld_ = FindFirstObjectByType<HudWorld>();
+        GetGameManager().hudWorld_ = GameObject.Find("HudWorld").GetComponentInChildren<HudWorld>();
+        //GetGameManager().hudWorld_ = FindFirstObjectByType<HudWorld>();
 
         if (GetGameManager().hudWorld_ == null)
         {
             Debug.Log("!!!!!!!!!Error. No se encontró HudWorld, o sea, el componente script HudWorld.cs o clase descendiente");
             return false;
         }
-
-
-        hudLevel_ = FindFirstObjectByType<HudLevel>();
-
+     
+        
+        hudLevel_ = GameObject.Find("HudLevel").GetComponent<HudLevel>();
+        
         if (hudLevel_ == null)
         {
             Debug.Log("!!!!!!!!!Error. No se encontró HudLevel, o sea, el componente script HudLevel.cs o clase descendiente");

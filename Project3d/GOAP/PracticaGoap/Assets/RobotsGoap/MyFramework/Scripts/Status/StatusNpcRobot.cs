@@ -61,7 +61,7 @@ public class StatusNpcRobot : StatusNpc
         
         GetWorld().SetOrAddCountEnemies(1);
         GetHudWorld().SetValue<int>("HudCountEnemies",GetWorld().GetCountEnemies());
-
+        AppendCommand("StatusNpcRobotHudUpdate",this); ///se ejecutará en el primer Update() de GameManager.                
 
     }
     override public void OnEnable()   

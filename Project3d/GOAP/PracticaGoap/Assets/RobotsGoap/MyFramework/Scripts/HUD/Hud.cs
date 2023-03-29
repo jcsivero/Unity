@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class HudLevel : Hud
+{
+    // Start is called before the first frame update
+
+}
+public class HudWorld :Hud
+{
+    // Start is called before the first frame update
+  
+}
+
 public class Hud : BaseMono
 {
     protected CompositeData values_;
@@ -69,3 +80,4 @@ public class Hud : BaseMono
 
 
 }
+

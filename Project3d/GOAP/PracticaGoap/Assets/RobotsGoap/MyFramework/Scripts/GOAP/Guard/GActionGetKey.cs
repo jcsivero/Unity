@@ -49,7 +49,7 @@ public class GActionGetKey : GAction
         if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo la llave.        
         {
              npcGoapStates_.SetOrAddState("IHaveKey",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma             
-             GetHudWorld().SetValue<Color>("keyColor",Color.white);             
+             GetHudWorld().SetValue<Color>("HudKeyColor",Color.white);             
              Destroy(target); ///destruyo objeto.
              
         }   

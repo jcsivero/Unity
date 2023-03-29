@@ -51,7 +51,7 @@ public class StatusNpcGuard : StatusNpc
         base.Start();
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");         
         
-        SetTarget(GetLevelManager().GetActualPlayer());
+        SetTarget(GetLevelManager().GetActualPlayer());        
         InstaciateCommands(); 
         if (debugMode_)        
             
@@ -59,7 +59,7 @@ public class StatusNpcGuard : StatusNpc
         if (!suscribeToOnUpdateAllStatusNpcGuard_)
             OnEnable(); 
 
-        
+        GetHudWorld().SetValue<int>("HudHealthGuard",GetHealth());
         AppendCommand("StatusNpcGuardHudUpdate",this); ///se ejecutará en el primer Update() de GameManager.                
 
     }

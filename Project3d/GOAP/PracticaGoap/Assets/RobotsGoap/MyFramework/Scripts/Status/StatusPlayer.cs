@@ -41,8 +41,9 @@ override public int  GetHealth()
     {
         base.Start();                
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
-
-        InstaciateCommands();                
+        InstaciateCommands();            
+        GetHudWorld().SetValue<int>("HudHealthPlayer",GetHealth());
+            
         
     }
 

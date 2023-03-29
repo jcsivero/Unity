@@ -58,11 +58,9 @@
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Common\GenericData.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\ControlGameObjects.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\SmoothFollow.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudWorld.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\GameManager.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GAction.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\World.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudLevel.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\TimedObjectActivator.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GAgentGuard.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandStatusNpcRobotGoapStatesUpdate.cs" />
@@ -83,6 +81,7 @@
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\FSM\Chase.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GActionGetWeapon.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudLevel1FinalOptions.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\CurveControlledBob.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\FollowTarget.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
@@ -125,10 +124,11 @@
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\FSM\Patrol.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Common\GActionRepairMode.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudFinalOptions.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudWorld1.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\Commands.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudWorldInitialOptions.cs" />
      <None Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

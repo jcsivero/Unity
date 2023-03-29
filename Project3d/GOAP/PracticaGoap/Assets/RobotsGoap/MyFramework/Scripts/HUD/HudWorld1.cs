@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class HudWorld : Hud
+
+
+public class HudWorld1 : HudWorld
 {
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables públicas propias de esta clase
@@ -28,7 +30,8 @@ public class HudWorld : Hud
         base.Awake();           
         SetName("HudWorld");
         Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
-        
+        InitializeValues();    ///inicializo las variables propias de esta clase en AWake, para que otros objetos puedas actualizarlas desde Start, ya que 
+        ///si pongo esta inicialización en Start, puede ejecutarse depués de otros métodos start que ya hayan puesto datos.
 
     }
    override public  void Start()
@@ -37,7 +40,7 @@ public class HudWorld : Hud
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
         
     
-        InitializeValues();    
+        
         InstaciateCommands();  
       
                 

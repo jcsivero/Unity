@@ -18,11 +18,15 @@ public class ControlGameObjects : BaseMono
     override public void Awake()
     {
         base.Awake();
+        SetName("ControlGameObjects");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+           
 
     }
     override public void Start()
     {
         base.Start();
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
     }
 
 

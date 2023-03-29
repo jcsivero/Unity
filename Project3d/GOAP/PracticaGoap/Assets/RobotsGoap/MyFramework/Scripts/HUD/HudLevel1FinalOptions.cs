@@ -3,31 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class HudLevel : Hud
+public class HudLevel1FinalOptions : HudLevel
 {
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables públicas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+    [SerializeField] private Text  hudTextFinal_;
 
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
-    public void OnOneEnemy()
-    {
-        GetWorld().activeLevel_ = 1;
-        SceneManager.LoadScene(GetWorld().activeLevel_);
-    }
 
-    public void OnMultiplesEnemies()
-    {
-        GetWorld().activeLevel_ = 2;
-        SceneManager.LoadScene(GetWorld().activeLevel_);
-
-
-    }
- 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
@@ -42,14 +29,19 @@ public class HudLevel : Hud
     override public  void Awake()
     {
         base.Awake();
+        SetName("Hud");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+        InitializeValues();    ///inicializo las variables propias de esta clase en AWake, para que otros objetos puedas actualizarlas desde Start, ya que 
+        ///si pongo esta inicialización en Start, puede ejecutarse depués de otros métodos start que ya hayan puesto datos.
+
+
     }
    override public void Start()
     {
         base.Start();
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
         InstaciateCommands();  
-
-        if (debugMode_)
-            Debug.Log("|||||||||||||| Start HudLevel||||||||||||||||");        
+        gameObject.SetActive(false);
           
         
     }    
@@ -61,26 +53,40 @@ public class HudLevel : Hud
 
 
     }    
+private void InitializeValues()
+    {
+        SetValue<string>("HudTextFinal",hudTextFinal_.text);
+        ///Creo e inicializo variables con los valores actuales del Hud, por si fueron puestos desde el inspector.
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Variables privadas propias de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+override public void UpdateHud()
+    {
+        if (updatePending_)
+        {
+            SetHudFinalText();
+            updatePending_ = false;
 
+        }
     ////Métodos virtuales para todas las clases de nivel que se hagan.
-    
-     virtual public string GetHudFinal()
+    }
+
+public void SetHudFinalText()
     {        
-        return null;
-    }
-    virtual public void SetHudFinal(string drat)
-    {
-     
+        hudTextFinal_.text = GetValue<string>("HudTextfinal");
     }
 
-    virtual public void LoadMenuLevel()
+     public void LoadMenuLevel()
     {
 
-       
+            GetWorld().activeLevel_ = 0;
+        
+        SceneManager.LoadScene(GetWorld().activeLevel_);
 
     }
-    virtual public void ResetLevel()
+public void ResetLevel()
     {
-       
+        SceneManager.LoadScene(GetWorld().activeLevel_);
     }
 }

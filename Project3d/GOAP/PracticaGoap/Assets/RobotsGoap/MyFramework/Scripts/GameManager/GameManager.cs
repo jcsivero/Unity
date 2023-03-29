@@ -135,7 +135,7 @@ public class GameManager :BaseMono
             firtUpdate_ = false;
         }
         GetHudWorld().UpdateHud();
-        GetHudLevel().UpdateHud();
+        //GetHudLevel().UpdateHud();
         ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
             
     }
@@ -146,7 +146,8 @@ public class GameManager :BaseMono
         {
             ///si todavía no esta listo el motor, o sea, el gameobject con el scripts levelmanager.cs no ha ejecutado ya su método Start()
             ///entonces localizo el component levelmanager.cs.
-            GetGameManager().levelManager_ = FindFirstObjectByType<LevelManager>();
+            GetGameManager().levelManager_ = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
 
             if (GetGameManager().levelManager_ == null)
             {
