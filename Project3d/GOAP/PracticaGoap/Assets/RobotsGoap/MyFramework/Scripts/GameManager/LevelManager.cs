@@ -86,6 +86,9 @@ virtual public bool GetInitialInformation()
             return false;
         }
 
+        ///asigno actual player, actual enemi ,etc según valores de controlgameobjects. por el momento directamente
+        if (actualPlayer_ == null)
+            actualPlayer_ = GameObject.Find("Player");///por defecto el usuairo llamado player
 
         ControlGameObjects controlGameObjects;
         List<GameObject> refToGameObjets;

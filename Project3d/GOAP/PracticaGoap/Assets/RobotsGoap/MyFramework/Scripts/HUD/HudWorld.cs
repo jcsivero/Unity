@@ -56,10 +56,10 @@ public class HudWorld : Hud
         SetValue<Color>("HudWeaponColor",hudWeapon_.color);
         SetValue<Color>("HudKeyColor",hudKey_.color);
         
-        SetValue<int>("HudHealthPlayer",int.Parse(hudTextHealthPlayer_.text));
-        SetValue<int>("HudHealthGuard",int.Parse(hudTextHealthGuard_.text));
-        SetValue<int>("HudTotalPoints",int.Parse(hudTextTotalPoints_.text));
-        SetValue<int>("HudCountEnemies",int.Parse(hudTextCountEnemies_.text));
+        SetValue<int>("HudHealthPlayer",0);
+        SetValue<int>("HudHealthGuard",0);
+        SetValue<int>("HudTotalPoints",0);
+        SetValue<int>("HudCountEnemies",0);
         ///Creo e inicializo variables con los valores actuales del Hud, por si fueron puestos desde el inspector.
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +95,7 @@ public class HudWorld : Hud
  
      public void SetHudHealthPlayer()
     {
-        hudTextHealthPlayer_.text = GetValue<float>("HudHealthPlayer").ToString() + " %";
+        hudTextHealthPlayer_.text = GetValue<int>("HudHealthPlayer").ToString() + " %";
         
     }
 

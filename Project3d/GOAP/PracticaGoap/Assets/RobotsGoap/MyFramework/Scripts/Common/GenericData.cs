@@ -9,12 +9,12 @@ public class GenericData
 {
         [SerializeField]
         private object data_;
-        private bool hasChanged; //si ha cambiado la variable puesto que se ha realizao un Set, se activa. Se activa en cada Set() no comprueba si realmente ha cambiado su valor
+        private bool hasChanged_; //si ha cambiado la variable puesto que se ha realizao un Set, se activa. Se activa en cada Set() no comprueba si realmente ha cambiado su valor
 
         private GenericData(object value)
         {
             data_ =  value;   
-            hasChanged = true;                                            
+            hasChanged_ = true;                                            
 
         }
         public static GenericData Create<T>(T value)
@@ -27,12 +27,12 @@ public class GenericData
         public void Set<T>(T value) 
         {
             data_ = value;      
-            hasChanged = true;      
+            hasChanged_ = true;      
         }
 
         public void ClearFlagChanged()
         {
-            hasChanged  = false; ///restablezco el flag de cambiada la variable
+            hasChanged_  = false; ///restablezco el flag de cambiada la variable
         }
         public T GetValue<T>()
         {        

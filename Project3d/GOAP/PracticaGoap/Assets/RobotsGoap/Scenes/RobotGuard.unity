@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -107,9 +107,9 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.4
-    agentHeight: 1
-    agentSlope: 45
-    agentClimb: 0.2
+    agentHeight: 1.5
+    agentSlope: 30
+    agentClimb: 0.1
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -167,7 +167,6 @@ GameObject:
   - component: {fileID: 39450427}
   - component: {fileID: 39450426}
   - component: {fileID: 39450425}
-  - component: {fileID: 39450424}
   m_Layer: 0
   m_Name: Cube (38)
   m_TagString: Untagged
@@ -190,23 +189,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &39450424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39450422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &39450425
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -379,7 +361,6 @@ GameObject:
   - component: {fileID: 64904283}
   - component: {fileID: 64904282}
   - component: {fileID: 64904281}
-  - component: {fileID: 64904280}
   m_Layer: 0
   m_Name: Cube (25)
   m_TagString: Untagged
@@ -402,23 +383,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &64904280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64904278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &64904281
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -663,7 +627,6 @@ GameObject:
   - component: {fileID: 129829525}
   - component: {fileID: 129829524}
   - component: {fileID: 129829523}
-  - component: {fileID: 129829522}
   m_Layer: 0
   m_Name: Cube (24)
   m_TagString: Untagged
@@ -686,23 +649,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &129829522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129829520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &129829523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -985,7 +931,6 @@ GameObject:
   - component: {fileID: 176466860}
   - component: {fileID: 176466859}
   - component: {fileID: 176466858}
-  - component: {fileID: 176466857}
   m_Layer: 0
   m_Name: Cube (39)
   m_TagString: Untagged
@@ -1008,23 +953,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &176466857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176466855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &176466858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1100,7 +1028,6 @@ GameObject:
   - component: {fileID: 181440662}
   - component: {fileID: 181440661}
   - component: {fileID: 181440660}
-  - component: {fileID: 181440659}
   m_Layer: 0
   m_Name: Cube (17)
   m_TagString: Untagged
@@ -1123,23 +1050,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &181440659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181440657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &181440660
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1509,7 +1419,6 @@ GameObject:
   - component: {fileID: 328284236}
   - component: {fileID: 328284235}
   - component: {fileID: 328284234}
-  - component: {fileID: 328284233}
   m_Layer: 0
   m_Name: Cube (34)
   m_TagString: Untagged
@@ -1532,23 +1441,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &328284233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328284231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &328284234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1721,7 +1613,6 @@ GameObject:
   - component: {fileID: 346206014}
   - component: {fileID: 346206013}
   - component: {fileID: 346206012}
-  - component: {fileID: 346206011}
   m_Layer: 0
   m_Name: Cube (36)
   m_TagString: Untagged
@@ -1744,23 +1635,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &346206011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 346206009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &346206012
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1836,7 +1710,6 @@ GameObject:
   - component: {fileID: 354786735}
   - component: {fileID: 354786734}
   - component: {fileID: 354786733}
-  - component: {fileID: 354786732}
   m_Layer: 0
   m_Name: Cube (35)
   m_TagString: Untagged
@@ -1859,23 +1732,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &354786732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354786730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &354786733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2087,7 +1943,6 @@ GameObject:
   - component: {fileID: 371602170}
   - component: {fileID: 371602169}
   - component: {fileID: 371602168}
-  - component: {fileID: 371602167}
   m_Layer: 0
   m_Name: Cube (20)
   m_TagString: Untagged
@@ -2110,23 +1965,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &371602167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371602165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &371602168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2202,7 +2040,6 @@ GameObject:
   - component: {fileID: 375864750}
   - component: {fileID: 375864749}
   - component: {fileID: 375864748}
-  - component: {fileID: 375864752}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -2288,23 +2125,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &375864752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375864747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1 &382592374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,7 +2335,6 @@ GameObject:
   - component: {fileID: 420355121}
   - component: {fileID: 420355120}
   - component: {fileID: 420355119}
-  - component: {fileID: 420355118}
   m_Layer: 0
   m_Name: Cube (27)
   m_TagString: Untagged
@@ -2538,23 +2357,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &420355118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 420355116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &420355119
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3461,7 +3263,6 @@ GameObject:
   - component: {fileID: 655462186}
   - component: {fileID: 655462185}
   - component: {fileID: 655462184}
-  - component: {fileID: 655462188}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -3547,23 +3348,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &655462188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655462183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1 &673025258
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,7 +3360,6 @@ GameObject:
   - component: {fileID: 673025261}
   - component: {fileID: 673025260}
   - component: {fileID: 673025259}
-  - component: {fileID: 673025263}
   m_Layer: 0
   m_Name: Cube (9)
   m_TagString: Untagged
@@ -3662,23 +3445,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &673025263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673025258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1 &714451418
 GameObject:
   m_ObjectHideFlags: 0
@@ -4116,7 +3882,6 @@ GameObject:
   - component: {fileID: 774585106}
   - component: {fileID: 774585105}
   - component: {fileID: 774585104}
-  - component: {fileID: 774585103}
   m_Layer: 0
   m_Name: Cube (26)
   m_TagString: Untagged
@@ -4139,23 +3904,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &774585103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774585101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &774585104
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4325,7 +4073,6 @@ GameObject:
   - component: {fileID: 809625574}
   - component: {fileID: 809625573}
   - component: {fileID: 809625572}
-  - component: {fileID: 809625577}
   m_Layer: 0
   m_Name: Cube (12)
   m_TagString: Untagged
@@ -4427,23 +4174,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &809625577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809625571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1 &816814200
 GameObject:
   m_ObjectHideFlags: 0
@@ -4456,7 +4186,6 @@ GameObject:
   - component: {fileID: 816814205}
   - component: {fileID: 816814204}
   - component: {fileID: 816814203}
-  - component: {fileID: 816814202}
   m_Layer: 0
   m_Name: Cube (23)
   m_TagString: Untagged
@@ -4479,23 +4208,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &816814202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 816814200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &816814203
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5152,7 +4864,6 @@ GameObject:
   - component: {fileID: 921106049}
   - component: {fileID: 921106048}
   - component: {fileID: 921106047}
-  - component: {fileID: 921106046}
   m_Layer: 0
   m_Name: Cube (21)
   m_TagString: Untagged
@@ -5175,23 +4886,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &921106046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921106044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &921106047
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5398,7 +5092,6 @@ GameObject:
   - component: {fileID: 973956861}
   - component: {fileID: 973956860}
   - component: {fileID: 973956859}
-  - component: {fileID: 973956863}
   m_Layer: 0
   m_Name: Cube (6)
   m_TagString: Untagged
@@ -5484,23 +5177,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &973956863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973956858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1 &976348105
 GameObject:
   m_ObjectHideFlags: 0
@@ -5943,7 +5619,6 @@ GameObject:
   - component: {fileID: 1114785602}
   - component: {fileID: 1114785601}
   - component: {fileID: 1114785600}
-  - component: {fileID: 1114785604}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -6029,23 +5704,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1114785604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114785599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1 &1125915202
 GameObject:
   m_ObjectHideFlags: 0
@@ -6155,7 +5813,6 @@ GameObject:
   - component: {fileID: 1153810240}
   - component: {fileID: 1153810239}
   - component: {fileID: 1153810238}
-  - component: {fileID: 1153810237}
   m_Layer: 0
   m_Name: Cube (40)
   m_TagString: Untagged
@@ -6178,23 +5835,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1153810237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153810235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1153810238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6438,7 +6078,6 @@ GameObject:
   - component: {fileID: 1201518750}
   - component: {fileID: 1201518749}
   - component: {fileID: 1201518748}
-  - component: {fileID: 1201518747}
   m_Layer: 0
   m_Name: Cube (31)
   m_TagString: Untagged
@@ -6461,23 +6100,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1201518747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1201518745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1201518748
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6553,7 +6175,6 @@ GameObject:
   - component: {fileID: 1202400824}
   - component: {fileID: 1202400823}
   - component: {fileID: 1202400822}
-  - component: {fileID: 1202400821}
   m_Layer: 0
   m_Name: Cube (22)
   m_TagString: Untagged
@@ -6576,23 +6197,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1202400821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202400819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1202400822
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6668,7 +6272,6 @@ GameObject:
   - component: {fileID: 1204133115}
   - component: {fileID: 1204133114}
   - component: {fileID: 1204133113}
-  - component: {fileID: 1204133112}
   m_Layer: 0
   m_Name: Cube (15)
   m_TagString: Untagged
@@ -6691,23 +6294,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1204133112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204133110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1204133113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6880,7 +6466,6 @@ GameObject:
   - component: {fileID: 1219757022}
   - component: {fileID: 1219757021}
   - component: {fileID: 1219757020}
-  - component: {fileID: 1219757024}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -6966,23 +6551,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1219757024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219757019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1 &1246338366
 GameObject:
   m_ObjectHideFlags: 0
@@ -7820,7 +7388,6 @@ GameObject:
   - component: {fileID: 1467002679}
   - component: {fileID: 1467002678}
   - component: {fileID: 1467002677}
-  - component: {fileID: 1467002676}
   m_Layer: 0
   m_Name: Cube (16)
   m_TagString: Untagged
@@ -7843,23 +7410,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1467002676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1467002674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1467002677
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8104,7 +7654,6 @@ GameObject:
   - component: {fileID: 1555516268}
   - component: {fileID: 1555516267}
   - component: {fileID: 1555516266}
-  - component: {fileID: 1555516265}
   m_Layer: 0
   m_Name: Cube (19)
   m_TagString: Untagged
@@ -8127,23 +7676,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1555516265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555516263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1555516266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8219,7 +7751,6 @@ GameObject:
   - component: {fileID: 1566353193}
   - component: {fileID: 1566353192}
   - component: {fileID: 1566353191}
-  - component: {fileID: 1566353190}
   m_Layer: 0
   m_Name: Cube (33)
   m_TagString: Untagged
@@ -8242,23 +7773,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1566353190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1566353188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1566353191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9030,7 +8544,6 @@ GameObject:
   - component: {fileID: 1679970270}
   - component: {fileID: 1679970269}
   - component: {fileID: 1679970268}
-  - component: {fileID: 1679970267}
   m_Layer: 0
   m_Name: Cube (13)
   m_TagString: Untagged
@@ -9053,23 +8566,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1679970267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679970265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1679970268
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9145,7 +8641,6 @@ GameObject:
   - component: {fileID: 1688027858}
   - component: {fileID: 1688027857}
   - component: {fileID: 1688027856}
-  - component: {fileID: 1688027860}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -9231,23 +8726,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1688027860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688027855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1001 &1703430469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9334,7 +8812,6 @@ GameObject:
   - component: {fileID: 1703479865}
   - component: {fileID: 1703479864}
   - component: {fileID: 1703479863}
-  - component: {fileID: 1703479862}
   m_Layer: 0
   m_Name: Cube (29)
   m_TagString: Untagged
@@ -9357,23 +8834,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1703479862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703479860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1703479863
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9713,7 +9173,6 @@ GameObject:
   - component: {fileID: 1794645524}
   - component: {fileID: 1794645523}
   - component: {fileID: 1794645522}
-  - component: {fileID: 1794645521}
   m_Layer: 0
   m_Name: Cube (14)
   m_TagString: Untagged
@@ -9736,23 +9195,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1794645521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794645519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1794645522
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10219,7 +9661,6 @@ GameObject:
   - component: {fileID: 1886644008}
   - component: {fileID: 1886644007}
   - component: {fileID: 1886644006}
-  - component: {fileID: 1886644010}
   m_Layer: 0
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -10305,23 +9746,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1886644010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886644005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!1 &1893418065
 GameObject:
   m_ObjectHideFlags: 0
@@ -10431,7 +9855,6 @@ GameObject:
   - component: {fileID: 1899694288}
   - component: {fileID: 1899694287}
   - component: {fileID: 1899694286}
-  - component: {fileID: 1899694285}
   m_Layer: 0
   m_Name: Cube (37)
   m_TagString: Untagged
@@ -10454,23 +9877,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1899694285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1899694283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1899694286
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10891,7 +10297,6 @@ GameObject:
   - component: {fileID: 1977843055}
   - component: {fileID: 1977843054}
   - component: {fileID: 1977843053}
-  - component: {fileID: 1977843052}
   m_Layer: 0
   m_Name: Cube (10)
   m_TagString: Untagged
@@ -10914,23 +10319,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1977843052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977843050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &1977843053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11256,7 +10644,6 @@ GameObject:
   - component: {fileID: 2129608993}
   - component: {fileID: 2129608992}
   - component: {fileID: 2129608991}
-  - component: {fileID: 2129608990}
   m_Layer: 0
   m_Name: Cube (28)
   m_TagString: Untagged
@@ -11279,23 +10666,6 @@ Transform:
   m_Father: {fileID: 1418935204}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &2129608990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2129608988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6807ce7cdb8fca544ba70c7a01b0d47f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 0
-  tagsForWayPoints_: []
-  indexWayPoint_: 0
-  tagsForHidePoints_: []
-  tagsGeneral_: []
 --- !u!65 &2129608991
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11502,7 +10872,7 @@ PrefabInstance:
     - target: {fileID: 5246877150400106993, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: m_Radius
-      value: 2
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150400106993, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
@@ -11638,6 +11008,11 @@ PrefabInstance:
         type: 3}
       propertyPath: navMeshUseSetDestination_
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236595, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.37
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20a40310b38f21c40b3b44ef92af5c9f, type: 3}

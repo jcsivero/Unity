@@ -17,8 +17,12 @@ public class ControlGameObjects : BaseMono
     
     override public void Awake()
     {
- 
+        base.Awake();
 
+    }
+    override public void Start()
+    {
+        base.Start();
     }
 
 

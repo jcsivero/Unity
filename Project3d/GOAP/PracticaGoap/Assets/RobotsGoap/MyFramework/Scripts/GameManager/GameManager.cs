@@ -32,7 +32,7 @@ public class GameManager :BaseMono
     public DebugModeForce_ debugModeForce_ = DebugModeForce_.customize;
     private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";    
     public  bool readyEngine_ = false; 
-    public  bool firtUpdate_ = false; 
+    public  bool firtUpdate_ = true; 
     
      public static GameManager Instance()  /// llamar solo desde después de los Awake, para asegurarse que la instancia está creada. O sea, se puede llamar desde OnEnable() o Start()
     {
@@ -129,10 +129,10 @@ public class GameManager :BaseMono
 
     void Update()
     {
-        if (!firtUpdate_)
+        if (firtUpdate_)
         {
             GetManagerMyEvents().TriggerEvent(TRIGGER_ON_UPDATE_ALL_STATUS_NPC) ; ///actualizo todos los objectos.            
-            firtUpdate_ = true;
+            firtUpdate_ = false;
         }
         GetHudWorld().UpdateHud();
         GetHudLevel().UpdateHud();

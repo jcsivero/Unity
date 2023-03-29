@@ -28,6 +28,7 @@ public class Hud : BaseMono
         base.Awake();
         SetName("Hud");      
         Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+        values_ = new CompositeData("Valores para este Hud");
         
 
     }
@@ -35,8 +36,7 @@ public class Hud : BaseMono
     {
         base.Start();
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
-
-        values_ = new CompositeData("Valores para este Hud");
+        
          InstaciateCommands();  
         
     }    
