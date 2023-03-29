@@ -9,9 +9,6 @@ public class StatusPlayer : Status
     ///
     ///comandos usados por esta clase. Al poder modificar sus atributos, se crea uno por cada clase
     ///
-    [HideInInspector] public CommandAddOrSubHealth commandAddOrSubHealth_;
-    [HideInInspector] public CommandAddOrSubLifes commandAddOrSubLifes_; 
-
     public GameObject bullet_; 
     public GameObject originOfFire_;
 
@@ -30,19 +27,21 @@ override public int  GetHealth()
     return healthPlayer_;
 }
    
-    public new void Awake()
+    override public  void Awake()
     {
         base.Awake();             
-        Debug.Log("|||||||||||||| Awake StatusPlayer||||||||||||||||");
         SetName("StatusPlayer");  
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+        
               
         
 
     }
-    new void  Start()
+    override public   void  Start()
     {
-        base.Start();
-          Debug.Log("|||||||||||||| Start StatusPlayer||||||||||||||||");
+        base.Start();                
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
+
         InstaciateCommands();                
         
     }
@@ -59,9 +58,6 @@ override public int  GetHealth()
     private void InstaciateCommands()
     {
         
-        GetWorld().commandHudUpdateHealthPlayer_= new CommandHudUpdateHealthPlayer(this);
-        commandAddOrSubHealth_ = new CommandAddOrSubHealth(this);
-        commandAddOrSubLifes_ = new CommandAddOrSubLifes(this);
         
     
 
@@ -81,10 +77,9 @@ override public int  GetHealth()
     {
         if (other.gameObject.tag == "bullet")
         {
-            commandAddOrSubHealth_.Set(-10);
-            AppendCommand(commandAddOrSubHealth_);
-            AppendCommand(GetWorld().commandHudUpdateHealthPlayer_);                                    
-            ExecuteCommands();
+            SetHealth(GetHealth()-10);
+            GetHudWorld().SetValue<int>("HudHealthPlayer",GetHealth());
+            
             
             if (GetHealth() <= 0)  
             {

@@ -65,9 +65,12 @@ public class GameManager :BaseMono
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    void Awake()
+    override public void Awake()
     {
-        Debug.Log("Iniciado instancia GameManager desde Awake");
+        
+        SetName("GameManager");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+        
         
         if (instance_ == null)
         {
@@ -77,8 +80,8 @@ public class GameManager :BaseMono
 
             GetManagerMyEvents(); //Creo instancia de gestión de eventos.
                     
-            world_ = GetComponent<World>();
-            hudWorld_ = GetComponent<HudWorld>();
+            Debug.Log("referencia al mundo");
+            world_ = GetComponent<World>();            
             
             aiController_ = GetComponent<AIController>();
 
@@ -109,9 +112,10 @@ public class GameManager :BaseMono
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
     /// </summary>
-    void Start()
+    override public void Start()
     {
-
+        
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
         //  Cursor.visible = false;
          // Cursor.lockState = CursorLockMode.Locked;
                 
@@ -130,11 +134,31 @@ public class GameManager :BaseMono
             GetManagerMyEvents().TriggerEvent(TRIGGER_ON_UPDATE_ALL_STATUS_NPC) ; ///actualizo todos los objectos.            
             firtUpdate_ = true;
         }
+        GetHudWorld().UpdateHud();
+        GetHudLevel().UpdateHud();
         ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
             
     }
 
+    override public bool ReadyEngine()
+    {
+        if (!GetGameManager().readyEngine_)
+        {
+            ///si todavía no esta listo el motor, o sea, el gameobject con el scripts levelmanager.cs no ha ejecutado ya su método Start()
+            ///entonces localizo el component levelmanager.cs.
+            GetGameManager().levelManager_ = FindFirstObjectByType<LevelManager>();
 
+            if (GetGameManager().levelManager_ == null)
+            {
+                Debug.Log("!!!!!!!Error. No se encontró LevelManager, osea, el componente script LevelManager.cs adjunto.!!!!!!");
+                GetGameManager().readyEngine_ = false;
+            }
+            else 
+                GetGameManager().levelManager_.Start(); ///ejecuto método start de levelmanager, el cual es el que realmente me dirá si está el motor listo o no.                
+        
+        }
+        return GetGameManager().readyEngine_;        
+    }
     public bool OnVictory()
     {
         

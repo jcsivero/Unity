@@ -15,11 +15,11 @@ public class CommandHudWorldUpdateAll : Command
         
         ///Actualizo vida del Player
 
-        GetWorld().commandHudUpdateHealthPlayer_.Exec();
+        /*GetWorld().commandHudUpdateHealthPlayer_.Exec();
         GetWorld().commandHudUpdateHealthGuard_.Exec();
         GetWorld().commandHudUpdateTotalPoints_.Exec();
         GetWorld().commandHudUpdateCountEnemies_.Exec();
-
+*/
         ///Actualizo número de vidas.
         return true;
     }

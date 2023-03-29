@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : BaseMono
-{
-    public bool debugMode_;
+{    
     public HudLevel hudLevel_;
     public GameObject actualPlayer_;
     public GameObject actualEnemy_;
@@ -19,9 +18,11 @@ public class LevelManager : BaseMono
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-virtual    public void Awake()
+override public void Awake()
     {
-                        
+        SetName("LevelManager");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");                        
+
         ///Inicializo variables de control de objecots.        
         wayPoints_= new Dictionary<string,List<GameObject>>();        
         hidePoints_ = new Dictionary<string,List<GameObject>>();
@@ -38,21 +39,14 @@ virtual    public void Awake()
             world.ModifyState("freeCubicle", cubes.Length);*/
 
 
-        Debug.Log("|||||||||||||| Awake StatusWorld||||||||||||||||");
+        
         
     }    
 
-virtual    public void Start()
+override public void Start()
     {    
-        if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
-            debugMode_ = true;
-
-        if (GetGameManager().debugModeForce_ == DebugModeForce_.noDebug)
-            debugMode_ = false;
-
-        if (debugMode_)
-            Debug.Log("|||||||||||||| Start LevelManager||||||||||||||||");
-
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");                        
+            
         if (GetInitialInformation())
         {
             GetGameManager().readyEngine_ = true;

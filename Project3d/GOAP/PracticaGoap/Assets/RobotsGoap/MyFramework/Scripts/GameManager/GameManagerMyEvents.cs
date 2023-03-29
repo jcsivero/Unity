@@ -8,6 +8,8 @@ public class ManagerMyEvents
     private Dictionary<object, Dictionary<string,object>> events_;
     public static  ManagerMyEvents instance_;
 
+
+
     ~ManagerMyEvents()  
     {
         Debug.Log("Destruida instancia ManagerMyEvents desde destructor");
@@ -21,8 +23,12 @@ public class ManagerMyEvents
 
     private ManagerMyEvents()
     {
-          Debug.Log("Iniciado instancia ManagerMyEvents desde contructor");
+        
+        Debug.Log("Iniciado instancia desde contructor ManagerMyEvents" );
+          
+
           events_ = new Dictionary<object, Dictionary<string,object>>();  
+
                     
 
     }
@@ -200,16 +206,16 @@ public class ManagerMyEvents
         } 
        
     }
-    public  EventDataReturned TriggerEvent<T>(string eventName,T data)
+    public  DataExitReturned TriggerEvent<T>(string eventName,T data)
     {   
         return TriggerEvent<T>(null,eventName,data);
 
     }
-    public  EventDataReturned TriggerEvent<T>(object target,  string eventName, T data)
+    public  DataExitReturned TriggerEvent<T>(object target,  string eventName, T data)
     {
         Debug.Log("Trigger **************** " + eventName );
         MyEvents<T> e = null;
-        EventDataReturned valueToReturn = new EventDataReturned();
+        DataExitReturned valueToReturn = new DataExitReturned();
 
         Dictionary<string, object> targetEvents;
 

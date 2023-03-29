@@ -51,7 +51,7 @@ public class GPlanner : Base
         }
 
         List<Node> leaves = new List<Node>();
-        Node start = new Node(null, 0.0f, GetWorld().GetGoapStates(), npcStates, null);
+        Node start = new Node(null, 0.0f, GetWorldStates(), npcStates, null);
 
         bool success = BuildGraph(start, leaves, usableActions, goal);
 

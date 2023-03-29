@@ -53,7 +53,7 @@ public class GActionGetWeapon : GAction
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
         if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo el arma.
         {
-            AppendCommand(GetWorld().commandHudUpdateWeapon_);
+            GetHudWorld().SetValue<Color>("weaponColor",Color.white); 
             npcGoapStates_.SetOrAddState("IHaveWeapon",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma
             Destroy(target);
         }

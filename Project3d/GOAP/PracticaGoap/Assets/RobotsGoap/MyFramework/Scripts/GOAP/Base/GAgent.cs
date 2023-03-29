@@ -57,8 +57,10 @@ abstract public class GAgent : BaseMono
 
 
     // Start is called before the first frame update
-    public void Start()
+    override public void Start()    
     {
+        SetName("GAgents");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");    
         status_ = gameObject.GetComponent<StatusNpc>(); //para acceder al componente Status del Npc en caso de tenerlo agregado.
         
         planner_ = new GPlanner(status_);

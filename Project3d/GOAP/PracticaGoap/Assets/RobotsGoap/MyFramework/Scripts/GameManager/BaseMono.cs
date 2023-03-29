@@ -4,7 +4,44 @@ using UnityEngine;
 
 public class BaseMono : MonoBehaviour
 {
-      
+    public bool debugMode_ =false ; ///
+    protected string name_;
+    virtual public  void Awake()
+    {    
+        SetName("BaseMono");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+
+    }
+
+
+    virtual public void Start()
+    {
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
+
+        if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
+            debugMode_ = true;
+
+        if (GetGameManager().debugModeForce_ == DebugModeForce_.noDebug)
+            debugMode_ = false;
+        
+
+        if (!ReadyEngine())
+            Debug.Log("Engine no funcional. LevelManager no cargado o función GetInitialInformation de LevelManager no ejecutada con éxito");
+        
+            
+    }        
+    virtual public GoapStates GetWorldStates()
+    {
+        return GetWorld().GetWorldStates();
+    }
+    virtual public  string GetName()
+    {
+        return name_;
+    }
+    public  void SetName(string draft)
+    {
+        name_ = draft;
+    } 
     virtual public GameManager GetGameManager()
     {
         return GameManager.Instance();;
@@ -24,20 +61,7 @@ public class BaseMono : MonoBehaviour
     virtual public bool ReadyEngine()
     {
         if (!GetGameManager().readyEngine_)
-        {
-            ///si todavía no esta listo el motor, o sea, el gameobject con el scripts levelmanager.cs no ha ejecutado ya su método Start()
-            ///entonces localizo el component levelmanager.cs.
-            GetGameManager().levelManager_ = FindFirstObjectByType<LevelManager>();
-
-            if (GetGameManager().levelManager_ == null)
-            {
-                Debug.Log("!!!!!!!Error. No se encontró LevelManager, osea, el componente script LevelManager.cs adjunto.!!!!!!");
-                GetGameManager().readyEngine_ = false;
-            }
-            else 
-                GetGameManager().levelManager_.Start(); ///ejecuto método start de levelmanager, el cual es el que realmente me dirá si está el motor listo o no.                
-        
-        }
+            GetGameManager().ReadyEngine();
         return GetGameManager().readyEngine_;        
     }
     virtual public World GetWorld()

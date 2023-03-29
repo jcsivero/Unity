@@ -39,11 +39,11 @@ public class HudLevel : Hud
         /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public  new void Awake()
+    override public  void Awake()
     {
         base.Awake();
     }
-   public new void Start()
+   override public void Start()
     {
         base.Start();
         InstaciateCommands();  

@@ -55,8 +55,11 @@ public abstract class GAction : BaseMono
         effects_ = new GoapStates();
     }
 
-    public void Awake()
+    override public void Awake()
     {        
+        SetName("GAction");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");                         
+
         goapAgent_ = this.gameObject.GetComponent<GAgent>();
         inventory_ = goapAgent_.inventory_;
         npcGoapStates_ = goapAgent_.npcGoapStates_;
@@ -145,7 +148,7 @@ public abstract class GAction : BaseMono
     }
     public GoapStates GetAllStates() ///devuelve los estados del mundo junto con los estados del NPC actual.
     {
-        GoapStates allStates = new GoapStates(GetWorld().GetGoapStates());
+        GoapStates allStates = new GoapStates(GetWorldStates());
         allStates.SetOrAddStates(npcGoapStates_);
         return allStates;
     }

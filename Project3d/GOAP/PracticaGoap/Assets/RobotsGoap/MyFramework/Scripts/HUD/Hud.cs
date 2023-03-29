@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 public class Hud : BaseMono
 {
- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////Variables públicas propias de esta clase
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public bool debugMode_;
-
+    protected CompositeData values_;
+    public bool updatePending_ = true; 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
@@ -26,32 +23,21 @@ public class Hud : BaseMono
         /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public void Awake()
+    override public void Awake()
     {
-        Debug.Log("|||||||||||||| Awake Hud||||||||||||||||");
+        base.Awake();
+        SetName("Hud");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+        
 
     }
-   public void Start()
+   override public void Start()
     {
+        base.Start();
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
 
-        if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
-            debugMode_ = true;
-
-        if (GetGameManager().debugModeForce_ == DebugModeForce_.noDebug)
-            debugMode_ = false;
-
-        if (debugMode_)
-            Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
-        
-        if (!ReadyEngine())
-            Debug.Log("Engine no funcional. LevelManager no cargado o función GetInitialInformation de LevelManager no ejecutada con éxito");
-
-        InstaciateCommands();  
-        
-        //if (GetTarget()== null)
-          //  SetTarget(GameObject.Find("Hud")); ///si no se ha establecido un objeto destino, por defecto para el
-            ///gameobject que contendrá el HUD sera el gameobject con etiqueta "Hud"     
-        
+        values_ = new CompositeData("Valores para este Hud");
+         InstaciateCommands();  
         
     }    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,63 +46,26 @@ public class Hud : BaseMono
     private void InstaciateCommands()
     {
 
-
     }    
 
- 
-
-    virtual public Image GetHudWeapon()
+    public CompositeData GetValues()
     {
-        return null;
+        return values_;
     }
-    virtual public void SetHudWeapon(Color color )
+    public T GetValue<T>(string key)
+    {
+        return values_.Get<T>(key);
+    }
+   public void SetValue<T>(string key, T value)
+    {
+        values_.Set<T>(key,value);      
+        updatePending_ = true;  
+    }
+
+    virtual public void UpdateHud()
     {
         
     }
 
-    virtual public Image GetHudKey()
-    {
-        return null;
-    }
-    virtual public void SetHudKey(Color color )
-    {
-        
-    }
-
-     virtual public string GetHudHealthPlayer()
-    {
-        return null;
-    }
-    virtual public void SetHudHealthPlayer(float drat)
-    {
-        
-    }
-
-
-   virtual public string GetHudHealthGuard()
-    {
-        return null;
-    }
-    virtual public void SetHudHealthGuard(float drat)
-    {
-        
-    }   
-virtual public string GetHudCountEnemies()
-    {
-        return null;
-    }
-virtual public void SetHudCountEnemies(float drat)
-    {
-        
-    }
-
-virtual public string GetHudTotalPoints()
-    {
-        return null;
-    }
-virtual public void SetHudTotalPoints(float drat)
-    {
-       
-    }
 
 }

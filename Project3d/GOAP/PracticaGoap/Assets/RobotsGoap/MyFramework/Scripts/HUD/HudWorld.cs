@@ -23,19 +23,21 @@ public class HudWorld : Hud
         /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public new void Awake()
+    override public  void Awake()
     {
         base.Awake();           
+        SetName("HudWorld");
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
         
-        Debug.Log("|||||||||||||| Awake HudWorld||||||||||||||||");
 
     }
-   public new void Start()
+   override public  void Start()
     {
         base.Start();
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
         
-        Debug.Log("|||||||||||||| Start StatusHud||||||||||||||||");
-        
+    
+        InitializeValues();    
         InstaciateCommands();  
       
                 
@@ -49,62 +51,70 @@ public class HudWorld : Hud
 
 
     }    
+    private void InitializeValues()
+    {
+        SetValue<Color>("HudWeaponColor",hudWeapon_.color);
+        SetValue<Color>("HudKeyColor",hudKey_.color);
+        
+        SetValue<int>("HudHealthPlayer",int.Parse(hudTextHealthPlayer_.text));
+        SetValue<int>("HudHealthGuard",int.Parse(hudTextHealthGuard_.text));
+        SetValue<int>("HudTotalPoints",int.Parse(hudTextTotalPoints_.text));
+        SetValue<int>("HudCountEnemies",int.Parse(hudTextCountEnemies_.text));
+        ///Creo e inicializo variables con los valores actuales del Hud, por si fueron puestos desde el inspector.
+    }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+    override public void UpdateHud()
+    {
+        if (updatePending_)
+        {
+            SetHudCountEnemies();
+            SetHudHealthGuard();
+            SetHudHealthPlayer();
+            SetHudKey();
+            SetHudWeapon();
+            SetHudTotalPoints();
+            updatePending_ = false;
 
-
-    override public Image GetHudWeapon()
-    {
-        return hudWeapon_;
-    }
-    override public void SetHudWeapon(Color color )
-    {
-        hudWeapon_.color = color;
-    }
-
-    override public Image GetHudKey()
-    {
-        return hudKey_;
-    }
-    override public void SetHudKey(Color color )
-    {
-        hudKey_.color = color;
-    }
-    override public string GetHudHealthPlayer()
-    {
-        return hudTextHealthPlayer_.text;
-    }
-    override public void SetHudHealthPlayer(float drat)
-    {
-        hudTextHealthPlayer_.text = drat.ToString() + " %";
+        }
     }
 
 
-   override public string GetHudHealthGuard()
+     public void SetHudWeapon( )
     {
-        return hudTextHealthGuard_.text;
+
+        hudWeapon_.color = GetValue<Color>("HudWeaponColor");
     }
-    override public void SetHudHealthGuard(float drat)
+
+     public void SetHudKey( )
     {
-        hudTextHealthGuard_.text = drat.ToString() + " %";
+        hudKey_.color = GetValue<Color>("HudKeyColor");
+    }
+     
+ 
+     public void SetHudHealthPlayer()
+    {
+        hudTextHealthPlayer_.text = GetValue<float>("HudHealthPlayer").ToString() + " %";
+        
+    }
+
+    public void SetHudHealthGuard()
+    {
+        hudTextHealthGuard_.text =GetValue<int>("HudHealthGuard").ToString() + " %";
     }   
-    override public string GetHudCountEnemies()
+    public string GetHudCountEnemies()
     {
         return hudTextCountEnemies_.text;
     }
-override     public void SetHudCountEnemies(float drat)
+     public void SetHudCountEnemies()
     {
-        hudTextCountEnemies_.text = "Enemigos Actuales : " + drat.ToString();
+        hudTextCountEnemies_.text =  "Enemigos Actuales : " + GetValue<int>("HudCountEnemies").ToString();
     }
-
-    override public string GetHudTotalPoints()
+  
+    public void SetHudTotalPoints()
     {
-        return hudTextTotalPoints_.text;
-    }
-    override public void SetHudTotalPoints(float drat)
-    {
-        hudTextTotalPoints_.text = "Puntos " + drat.ToString() ;
+        hudTextTotalPoints_.text = "Puntos " + GetValue<int>("HudTotalPoints").ToString() ;
     }
 
    

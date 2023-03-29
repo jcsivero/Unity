@@ -15,10 +15,6 @@ StatusNpc : Status
     //[Tooltip("")]
     //[HideInInspector]
     //[Range(1.0f, 10.0f)]
-    [HideInInspector] public CommandAddOrSubEnemy commandAddOrSubEnemy_;
-    [HideInInspector] public CommandAddOrSubHealth commandAddOrSubHealth_;
-    [HideInInspector] public CommandAddOrSubLifes commandAddOrSubLifes_; ///comandos comunes
-
     [Header("=============== StatusNpc")]
     [Space(5)]
     [Header("Attributtes")]
@@ -302,10 +298,11 @@ override public float MovementValue()
         /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public new void Awake()
+    override public void Awake()
     {
         base.Awake();        
-        SetName("StatusNpc");
+        SetName("StatusNpc");            
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
         wayPointsPos_ = Vector3.zero;
         wayPointsPosBase_ = Vector3.zero;
                 
@@ -316,14 +313,15 @@ override public float MovementValue()
         navMeshPath_ = new UnityEngine.AI.NavMeshPath();
         navMeshTargetPositionInfinity_ = new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity); 
         SetNavMeshTargetPosition(navMeshTargetPositionInfinity_);        
-        Debug.Log("|||||||||||||| Awake StatusNpc||||||||||||||||");
+
 
     }
-    public new void Start()
+    override public void Start()
     {
-        base.Start();        
+        base.Start();    
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");    
         InstaciateCommands();       
-        Debug.Log("|||||||||||||| Start StatusNpc||||||||||||||||");
+        
         
 
         
@@ -374,10 +372,7 @@ override public float MovementValue()
     {
         
     
-        commandAddOrSubEnemy_ = new CommandAddOrSubEnemy();
-        commandAddOrSubHealth_ = new CommandAddOrSubHealth(this);
-        commandAddOrSubLifes_ = new CommandAddOrSubLifes(this);
-
+  
 
     }
 

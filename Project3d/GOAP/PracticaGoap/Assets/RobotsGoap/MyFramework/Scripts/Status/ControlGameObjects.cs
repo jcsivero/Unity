@@ -15,7 +15,7 @@ public class ControlGameObjects : BaseMono
     //objeto
     
     
-    void Awake()
+    override public void Awake()
     {
  
 

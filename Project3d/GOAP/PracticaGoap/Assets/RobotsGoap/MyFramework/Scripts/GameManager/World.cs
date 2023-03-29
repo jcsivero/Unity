@@ -5,10 +5,6 @@ using UnityEngine;
 public class World : BaseMono
 {
 
-    ////Iniciación de comandos Comandos que no requieren de parámetros o bien se inicializan con un único parámetro en el contructor,
-    /// por lo que se puede solo generar una única instancia de ellos y reutilizarla tantas veces como se quiera.
-    bool debugMode_;
-    
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables públicas propias de esta clase
@@ -45,10 +41,13 @@ public class World : BaseMono
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    public  void Awake()
+    override public  void Awake()
     {
         
-       
+       //base.Awake();
+       SetName("World");      
+       Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+        
         ///Inicializo variables de control de objecots.        
 
         worldStates_ = new GoapStates();
@@ -62,22 +61,17 @@ public class World : BaseMono
             world.ModifyState("freeCubicle", cubes.Length);*/
 
 
-        Debug.Log("|||||||||||||| Awake StatusWorld||||||||||||||||");
+        
         
     }    
 
-    public void Start()
+    override public void Start()
     {
-        if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
-            debugMode_ = true;
-
-        if (GetGameManager().debugModeForce_ == DebugModeForce_.noDebug)
-            debugMode_ = false;
-
+        //base.Start();
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
+        InitializeValues(); //inicializo valores de variables y variables GoapStates.
         InstaciateCommands();  
-        if (debugMode_)
-            Debug.Log("|||||||||||||| Start World||||||||||||||||");
-
+        
         //if (GetTarget()== null)
           //  SetTarget(GameObject.Find("Player")); ///si no se ha establecido un objeto destino, por defecto para los NPC es el GameObject con etiqueta "Player"
                 
@@ -94,6 +88,18 @@ public class World : BaseMono
      
                 
 
+    }
+
+    private void InitializeValues()
+    {
+        /*GetWorldStates().SetOrAddState("healthPlayer",GenericData.Create<int>())
+
+                SetValue<int>("healthPlayer",int.Parse(hudTextHealthPlayer_.text));
+        SetValue<int>("healthGuard",int.Parse(hudTextHealthGuard_.text));
+        SetValue<int>("totalPoints",int.Parse(hudTextTotalPoints_.text));
+        SetValue<int>("countenemies",int.Parse(hudTextCountEnemies_.text));*/
+
+        ///Creo e inicializo variables con los valores actuales del Hud, por si fueron puestos desde el inspector.
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Funciones exclusivas  de esta clase
@@ -124,7 +130,7 @@ public class World : BaseMono
     {        
         return GetTarget().GetComponent<Status>().GetHealth();
     }*/
-    public GoapStates GetGoapStates()
+    override public GoapStates GetWorldStates()
     {
         return worldStates_;
     }    

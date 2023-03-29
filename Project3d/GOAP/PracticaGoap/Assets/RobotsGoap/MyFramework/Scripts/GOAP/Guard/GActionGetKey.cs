@@ -48,8 +48,8 @@ public class GActionGetKey : GAction
         GWorld.Instance.GetWorld().ModifyState("freeCubicle", 1);*/
         if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo la llave.        
         {
-             npcGoapStates_.SetOrAddState("IHaveKey",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma
-             AppendCommand(GetHudLevel().commandHudUpdateKey_);
+             npcGoapStates_.SetOrAddState("IHaveKey",GenericData.Create<bool>(true)); ///creo un estado del npc indicando que ya tengo el arma             
+             GetHudWorld().SetValue<Color>("keyColor",Color.white);             
              Destroy(target); ///destruyo objeto.
              
         }   

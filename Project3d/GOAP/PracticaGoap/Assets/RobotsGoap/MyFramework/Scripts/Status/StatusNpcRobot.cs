@@ -5,12 +5,6 @@ using UnityEngine;
 public class StatusNpcRobot : StatusNpc
 {    
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////Variables públicas propias de esta clase
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
- public CommandHudUpdateStatusNpcRobot commandHudUpdateStatusNpcRobot_;
- public CommandNpcGoapStatesRobotUpdate commandNpcGoapStatesRobotUpdate_;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,20 +36,22 @@ public class StatusNpcRobot : StatusNpc
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     
-    public new void Awake()
+    override public  void Awake()
     {        
-        base.Awake();        
-        Debug.Log("|||||||||||||| Awake StatusNpcRobot||||||||||||||||");
-        SetName("StatusNpcRobot");        
+        base.Awake();       
+        SetName("StatusNpcRobot");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||"); 
+        
+        
         healthMax_ = GetHealth();
         
 
     }
-    public new void Start()
+    override public  void Start()
     {
         
         base.Start();
-        Debug.Log("|||||||||||||| Start StatusNpcRobot||||||||||||||||");        
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");         
         SetTarget(GetLevelManager().GetActualPlayer());
         InstaciateCommands(); 
 
@@ -64,7 +60,8 @@ public class StatusNpcRobot : StatusNpc
             OnEnable();         
         
         GetWorld().SetOrAddCountEnemies(1);
-        AppendCommand(commandHudUpdateStatusNpcRobot_); ///se ejecutará en el primer Update() de GameManager.
+        GetHudWorld().SetValue<int>("HudCountEnemies",GetWorld().GetCountEnemies());
+
 
     }
     override public void OnEnable()   
@@ -110,22 +107,18 @@ public class StatusNpcRobot : StatusNpc
         {
             GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP
             Debug.Log("colision detectada daño en robot " + GetHealth().ToString());
-            commandAddOrSubHealth_.Set(-10);                        
-            AppendCommand(commandAddOrSubHealth_);                                    
+            SetHealth(GetHealth()-10);
             
             transform.LookAt(GetTarget().transform.position); //me giro hacia el jugador que me ha disparado.
             
             if (GetHealth() <=0.0f)    
             {                
-                commandAddOrSubEnemy_.Set(-1);
+                GetWorld().SetOrAddCountEnemies(-1);        
+                GetHudWorld().SetValue<int>("HudCountEnemies",GetWorld().GetCountEnemies());
 
                 GetWorld().SetOrAddTotalPoints(5);
+                GetHudWorld().SetValue<int>("HudTotalPoints",GetWorld().GetTotalPoints());
                 
-                AppendCommand(commandAddOrSubEnemy_);  
-                AppendCommand(GetWorld().commandHudUpdateCountEnemies_);              
-                AppendCommand(GetWorld().commandHudUpdateTotalPoints_);                
-                ExecuteCommands();
-               
                 Destroy(this.gameObject);
 
             }
@@ -151,8 +144,8 @@ public class StatusNpcRobot : StatusNpc
     protected new void Update()
     {
         base.Update();
-            AppendCommand(commandHudUpdateStatusNpcRobot_);
-            AppendCommand(commandNpcGoapStatesRobotUpdate_);
+            AppendCommand("StatusNpcRobotGoapStatesUpdate",this);
+            AppendCommand("StatusNpcRobotHudUpdate",this);    
             ExecuteCommands();
 
  }
@@ -161,8 +154,10 @@ public class StatusNpcRobot : StatusNpc
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 private void InstaciateCommands()
 {        
-    commandHudUpdateStatusNpcRobot_ = new CommandHudUpdateStatusNpcRobot(this);
-    commandNpcGoapStatesRobotUpdate_ = new CommandNpcGoapStatesRobotUpdate(this);
+    CreateCommand("StatusNpcRobotHudUpdate",new CommandStatusNpcRobotHudUpdate(this), this);
+    CreateCommand("StatusNpcRobotGoapStatesUpdate",new CommandStatusNpcRobotGoapStatesUpdate(this), this);
+    
+    
 }
 
 public TextMesh GetHud()
@@ -193,11 +188,9 @@ override public void StartFiring()
 override public void HealthRecovery()
 {
     if (GetHealth() < healthMax_) ///para no sobrepasar la recarga de vida máxima
-    {
-        commandAddOrSubHealth_.Set(10);
-        AppendCommand(commandAddOrSubHealth_);    
-
-    }
+        SetHealth(GetHealth()+10);
+        
+            
 }
 override public void StartHealthRecovery()
 {

@@ -9,10 +9,6 @@ public class StatusNpcGuard : StatusNpc
 ////Variables públicas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
- public CommandHudUpdateStatusNpcGuard commandHudUpdateStatusNpcGuard_;
- public CommandNpcGoapStatesGuardUpdate commandNpcGoapStatesGuardUpdate_;
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,19 +37,20 @@ public class StatusNpcGuard : StatusNpc
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     
-    public new void Awake()
+    override public  void Awake()
     {        
-        base.Awake();                
-        Debug.Log("|||||||||||||| Awake StatusNpcGuard||||||||||||||||");
-        SetName("StatusNpcGuard");        
+        base.Awake();       
+        SetName("StatusNpcGuard");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");                         
         healthMax_ = GetHealth();
         
 
     }
-    public new void Start()
+    override public void Start()
     {
         base.Start();
-        Debug.Log("|||||||||||||| Start StatusNpcGuard||||||||||||||||");
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");         
+        
         SetTarget(GetLevelManager().GetActualPlayer());
         InstaciateCommands(); 
         if (debugMode_)        
@@ -61,8 +58,9 @@ public class StatusNpcGuard : StatusNpc
             
         if (!suscribeToOnUpdateAllStatusNpcGuard_)
             OnEnable(); 
+
         
-        AppendCommand(commandHudUpdateStatusNpcGuard_); ///se ejecutará en el primer Update() de GameManager.                
+        AppendCommand("StatusNpcGuardHudUpdate",this); ///se ejecutará en el primer Update() de GameManager.                
 
     }
     public new void OnEnable()   
@@ -105,12 +103,10 @@ public class StatusNpcGuard : StatusNpc
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "bullet")
-        {
-            
+        {                        
             GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP            
-            commandAddOrSubHealth_.Set(-10);                        
-            AppendCommand(commandAddOrSubHealth_);                                    
-            AppendCommand(GetWorld().commandHudUpdateHealthGuard_);
+            SetHealth(GetHealth()-10);
+            GetHudWorld().SetValue<int>("healthGuard",GetHealth());
             
             if (GetHealth() <=0.0f)    
             {
@@ -140,10 +136,10 @@ public class StatusNpcGuard : StatusNpc
     protected new void Update()
     {
         base.Update();
-        
-            AppendCommand(commandHudUpdateStatusNpcGuard_);
-            AppendCommand(commandNpcGoapStatesGuardUpdate_);
-            ExecuteCommands();
+                    ;
+            AppendCommand("StatusNpcGuardGoapStatesUpdate",this);
+            AppendCommand("StatusNpcGuardHudUpdate",this);        
+            //ExecuteCommands();
 
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,10 +147,10 @@ public class StatusNpcGuard : StatusNpc
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 private void InstaciateCommands()
 {        
+
     
-    GetWorld().commandHudUpdateHealthGuard_= new CommandHudUpdateHealthGuard(this); ///este comando vale con  una única instancia, así que modifico la instancia global
-    commandHudUpdateStatusNpcGuard_ = new CommandHudUpdateStatusNpcGuard(this);
-    commandNpcGoapStatesGuardUpdate_ = new CommandNpcGoapStatesGuardUpdate(this);
+    CreateCommand("StatusNpcGuardHudUpdate",new CommandStatusNpcGuardHudUpdate(this), this);
+    CreateCommand("StatusNpcGuardGoapStatesUpdate",new CommandStatusNpcGuardGoapStatesUpdate(this), this);
     
 }
 
@@ -174,8 +170,9 @@ override public void HealthRecovery()
 {
     if (GetHealth() < healthMax_) ///para no sobrepasar la recarga de vida máxima
     {
-        commandAddOrSubHealth_.Set(10);
-        AppendCommand(commandAddOrSubHealth_);    
+        SetHealth(GetHealth()+10);
+        GetHudWorld().SetValue<int>("HudHealthGuard",GetHealth());
+        
 
     }
 }

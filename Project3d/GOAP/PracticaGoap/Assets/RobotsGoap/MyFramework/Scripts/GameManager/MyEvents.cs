@@ -38,7 +38,7 @@ public class MyEvents : MyEventsBase
 public class MyEvents<T> : MyEventsBase
 {    
     
-    public delegate void Delegate_(T data, EventDataReturned valueToReturn);
+    public delegate void Delegate_(T data, DataExitReturned valueToReturn);
     public event Delegate_ delegate_;
     
     public void AddListener(Delegate_ d)
@@ -55,7 +55,7 @@ public class MyEvents<T> : MyEventsBase
     {
         delegate_ = null;        
     } 
-    public  void Invoke(T data, EventDataReturned valueToReturn)
+    public  void Invoke(T data, DataExitReturned valueToReturn)
     {
         
         if (delegate_ == null)        

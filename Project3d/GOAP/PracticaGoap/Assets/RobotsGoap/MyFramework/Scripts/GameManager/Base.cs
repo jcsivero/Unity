@@ -4,7 +4,33 @@ using UnityEngine;
 
 public class Base
 {
-   
+    public bool debugMode_ =false ; ///
+    protected string name_ = "Base";
+    public Base()
+    {
+        SetName("Base");
+        Debug.Log("|||||||||||||| Contructor + " + GetName().ToString() +"||||||||||||||||");
+
+        if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
+            debugMode_ = true;
+
+        if (GetGameManager().debugModeForce_ == DebugModeForce_.noDebug)
+            debugMode_ = false;
+        
+            
+    }      
+    virtual public GoapStates GetWorldStates()
+    {
+        return GetWorld().GetWorldStates();
+    }
+    public  string GetName()
+    {
+        return name_;
+    }
+    public  void SetName(string draft)
+    {
+        name_ = draft;
+    } 
     virtual public GameManager GetGameManager()
     {
         return GameManager.Instance();;
@@ -23,7 +49,9 @@ public class Base
     }
     virtual public bool ReadyEngine()
     {
-        return GetGameManager().readyEngine_;
+        if (!GetGameManager().readyEngine_)
+            GetGameManager().ReadyEngine();
+        return GetGameManager().readyEngine_;        
     }
     virtual public World GetWorld()
     {
@@ -66,7 +94,7 @@ public class Base
         return  GetGameManager().commands_;
 
     }
-  virtual public Command GetCommand(string name,object pointer = null)
+ virtual public Command GetCommand(string name,object pointer = null)
     {
         return  GetCommands().GetCommand(name, pointer);
 
@@ -91,4 +119,6 @@ public class Base
         GetGameManager().commands_.ExecuteCommands();
         
     }
+
+      
 }

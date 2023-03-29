@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandHudUpdateStatusNpcGuard : Command
+public class CommandStatusNpcGuardHudUpdate : Command
 {    
     private StatusNpcGuard status_;
-    public CommandHudUpdateStatusNpcGuard(StatusNpcGuard status)
+    public CommandStatusNpcGuardHudUpdate(StatusNpcGuard status)
     {
         status_ =  status;
     }

@@ -9,31 +9,20 @@ public class AIController : BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Eventos  de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-    void Awake()
+    override public void Awake()
     {
-        Debug.Log("creada instancia AIController awake");
+        SetName("AiController");      
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+        
         
     }
-     void OnEnable()
-    {
-                                
-        
-    }
-
     
-    /// <summary>
-    /// This function is called when the behaviour becomes disabled or inactive.
-    /// </summary>
-    void OnDisable()
-    {
-
-    }
     ///
     // Use this for initialization
-    void Start()
+    override public void Start()
     {
-        Debug.Log("ejecutando start AIController");
-        
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+                
 
     }
     /// <summary>

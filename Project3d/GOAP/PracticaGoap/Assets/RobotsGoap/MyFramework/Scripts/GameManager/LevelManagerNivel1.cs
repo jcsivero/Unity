@@ -11,13 +11,13 @@ public class LevelManagerNivel1 : LevelManager
     }
 override public void InstaciateCommands()
     {
-        base.InstaciateCommands();
+     /*   base.InstaciateCommands();
         GetCommands().CreateCommand("HudLevelUpdateAll",new CommandHudLevelUpdateAll());
         GetCommands().CreateCommand("HudWorldUpdateAll",new CommandHudWorldUpdateAll());
         GetCommands().CreateCommand("HudUpdateCountEnemies", new CommandHudUpdateCountEnemies());
         GetCommands().CreateCommand("HudUpdateKey", new CommandHudUpdateKey());
         GetCommands().CreateCommand("HudUpdateTotalPoints", new CommandHudUpdateTotalPoints());
-
+*/
 
     }
 

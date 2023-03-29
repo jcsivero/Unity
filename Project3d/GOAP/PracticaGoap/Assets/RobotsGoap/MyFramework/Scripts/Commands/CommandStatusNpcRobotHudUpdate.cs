@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandHudUpdateStatusNpcRobot : Command
+public class CommandStatusNpcRobotHudUpdate : Command
 {    
     private StatusNpcRobot status_;
-    public CommandHudUpdateStatusNpcRobot(StatusNpcRobot status)
+    public CommandStatusNpcRobotHudUpdate(StatusNpcRobot status)
     {
         status_ =  status;
     }

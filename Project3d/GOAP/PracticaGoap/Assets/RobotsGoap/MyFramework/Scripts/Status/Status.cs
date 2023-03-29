@@ -10,7 +10,7 @@ public  abstract class  Status :  BaseMono
     [Header("=============== Status")]
     [Space(5)]               
     [Tooltip("Para depuración. A True, en los Update() se actualizarán las variables que se hayan modificado en el inspector en tiempo de ejecución, o que  interese visualizar su valor en todo momento como la velocidad actual.... ")]
-    public bool debugMode_ =false ; ///
+   
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables privadas propias de esta clase
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
@@ -33,12 +33,92 @@ public  abstract class  Status :  BaseMono
     ///posición del objeto y la del detino mayor que targetMarginPosition, obligando así a recalcular, eso si se utiliza NavMesh.
 
 
-    private string name_ = "Status";
+    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Variables de trigger o suscriber a eventos
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
     private const string ON_UPDATE_ALL_STATUS = "ON_UPDATE_ALL_STATUS";
     private bool suscribeToOnUpdateAllStatus_ = false;
+
+override public  void Awake()
+{    
+    base.Awake();
+    SetName("Status");      
+    Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+    SetOrigin(gameObject);
+    SetMinPos_();    
+        
+
+}
+
+
+override public void Start()
+{
+    base.Start();
+    Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
+
+    if (!suscribeToOnUpdateAllStatus_)        
+            OnEnable(); 
+
+    InstaciateCommands();
+    
+    positionPreviousFrame_ = transform.position;
+    SetSpeedMax(GetSpeedMax());
+    
+    
+        
+}
+ virtual public void OnEnable()   
+    {        
+        if (!suscribeToOnUpdateAllStatus_) 
+            suscribeToOnUpdateAllStatus_ = GetManagerMyEvents().StartListening(ON_UPDATE_ALL_STATUS,OnUpdateAllStatus); ///creo evento para actualizar  todos los StatusNpcRobots.
+        ///Este evento es lanzado por GameManager,cuando ha actualizado todas las variables iniciales del estado del mundo.
+        ///Después se puede utilizar para informar a todos los objetos a la vez y que se actualizen.
+        ///Esto no lo hago directamente en el Start() porque no sabemos en que orden son ejecutados,y podría haber Start() que se ejecutan antes que el 
+        ///Start() del GameManager, o del StatusWorld, , y entonces no tener todo actualizado, como target_ u otras variables.
+
+
+    }
+        /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    virtual public void OnDisable()
+    {      
+      GetManagerMyEvents().StopListening(ON_UPDATE_ALL_STATUS,OnUpdateAllStatus);
+      suscribeToOnUpdateAllStatus_ = false;
+      
+    }
+    virtual public bool OnUpdateAllStatus()
+    {
+        
+        return true;
+    }
+/// <summary>
+/// Update is called every frame, if the MonoBehaviour is enabled.
+/// </summary>
+protected void Update()
+{
+        if (debugMode_)
+        {
+            ///solo a modo de depuración, se pierde rendimiento pero estos métodos actualizan variables modificadas desde el inspector
+            ///para realizar depuración y pruebas en ejecución. En producto final se pueden quitar.            
+            SetSpeedMax(GetSpeedMax());
+            
+        ////Metodo propio, es una sola variable de velocidad independiente de Navmesh, CharacterController o cualqueir otro método.
+        ///Se basa en la magnitud de la diferencia de posición  en la pantalla en valor absoluto, dividido entre el tiempo de cada frame.
+
+            
+            SetNavMeshUse(GetNavMeshUse()); ///para actualizar en modo debug. O sea, si cambio en el inspector el valor se actualice inmediatamente.
+            SetNavMeshUseSetDestination(GetNavMeshUseSetDestination());
+        }
+
+
+        SetSpeedCurrent(Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime));        
+        positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad            
+        
+    
+}
+
 
 
 public void PosIsChangedReset()
@@ -52,10 +132,6 @@ public bool PosIsChanged() ///indica si el objeto ha cambiado su posición más 
     
     return false;
             
-}
-public  string GetName()
-{
-    return name_;
 }
 
 public  GameObject GetOrigin()
@@ -86,10 +162,7 @@ virtual public  int  GetLifes()
 return 0;
 }  
 
-public  void SetName(string draft)
-{
-name_ = draft;
-}  
+ 
 
 public  void SetTarget(GameObject target)
 {
@@ -261,92 +334,6 @@ public void SetMinPos_()
         
 }
 
-
-public  void Awake()
-{    
-    SetOrigin(gameObject);
-    SetMinPos_();    
-    Debug.Log("|||||||||||||| Awake Status||||||||||||||||");
-
-}
-
-
-public void Start()
-{
-
-    if (GetGameManager().debugModeForce_ == DebugModeForce_.debug)
-        debugMode_ = true;
-
-    if (GetGameManager().debugModeForce_ == DebugModeForce_.noDebug)
-        debugMode_ = false;
-
-    if (debugMode_)
-     Debug.Log("|||||||||||||| Start Status||||||||||||||||");
-
-    if (!ReadyEngine())
-        Debug.Log("Engine no funcional. LevelManager no cargado o función GetInitialInformation de LevelManager no ejecutada con éxito");
-
-    if (!suscribeToOnUpdateAllStatus_)        
-            OnEnable(); 
-
-    InstaciateCommands();
-    
-    positionPreviousFrame_ = transform.position;
-    SetSpeedMax(GetSpeedMax());
-    
-    
-        
-}
- virtual public void OnEnable()   
-    {        
-        if (!suscribeToOnUpdateAllStatus_) 
-            suscribeToOnUpdateAllStatus_ = GetManagerMyEvents().StartListening(ON_UPDATE_ALL_STATUS,OnUpdateAllStatus); ///creo evento para actualizar  todos los StatusNpcRobots.
-        ///Este evento es lanzado por GameManager,cuando ha actualizado todas las variables iniciales del estado del mundo.
-        ///Después se puede utilizar para informar a todos los objetos a la vez y que se actualizen.
-        ///Esto no lo hago directamente en el Start() porque no sabemos en que orden son ejecutados,y podría haber Start() que se ejecutan antes que el 
-        ///Start() del GameManager, o del StatusWorld, , y entonces no tener todo actualizado, como target_ u otras variables.
-
-
-    }
-        /// <summary>
-    /// This function is called when the behaviour becomes disabled or inactive.
-    /// </summary>
-    virtual public void OnDisable()
-    {      
-      GetManagerMyEvents().StopListening(ON_UPDATE_ALL_STATUS,OnUpdateAllStatus);
-      suscribeToOnUpdateAllStatus_ = false;
-      
-    }
-    virtual public bool OnUpdateAllStatus()
-    {
-        
-        return true;
-    }
-/// <summary>
-/// Update is called every frame, if the MonoBehaviour is enabled.
-/// </summary>
-protected void Update()
-{
-        if (debugMode_)
-        {
-            ///solo a modo de depuración, se pierde rendimiento pero estos métodos actualizan variables modificadas desde el inspector
-            ///para realizar depuración y pruebas en ejecución. En producto final se pueden quitar.            
-            SetSpeedMax(GetSpeedMax());
-            
-        ////Metodo propio, es una sola variable de velocidad independiente de Navmesh, CharacterController o cualqueir otro método.
-        ///Se basa en la magnitud de la diferencia de posición  en la pantalla en valor absoluto, dividido entre el tiempo de cada frame.
-
-            
-            SetNavMeshUse(GetNavMeshUse()); ///para actualizar en modo debug. O sea, si cambio en el inspector el valor se actualice inmediatamente.
-            SetNavMeshUseSetDestination(GetNavMeshUseSetDestination());
-        }
-
-
-        SetSpeedCurrent(Mathf.Abs((transform.position - positionPreviousFrame_).magnitude/Time.deltaTime));        
-        positionPreviousFrame_ = transform.position;  ///variable necesaria  para calcular la velocidad            
-        
-    
-}
 
 
 }
