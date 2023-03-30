@@ -11,6 +11,7 @@ public class AIController : BaseMono
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     override public void Awake()
     {
+        base.Awake();
         SetName("AiController");      
         Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
         
@@ -21,6 +22,7 @@ public class AIController : BaseMono
     // Use this for initialization
     override public void Start()
     {
+        base.Start();
         Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
                 
 
@@ -162,6 +164,8 @@ private bool RecalculatePath(StatusNpc status, Vector3 location, bool recalcuteP
     if (status.debugMode_)
         Debug.Log("-----------------------------------------------------------------------------------------------------Recalculando path");
     
+    ///voy a intentar recalcular el path para conseguir uno, antes de darlo por erróneo.
+    status.pathRecalculated_ = false; 
     bool pathValid = GetPath(status,location);
     
     if (pathValid)  ///intento conseguir primero el path, asumiendo que se da una posición correcta.
@@ -170,8 +174,7 @@ private bool RecalculatePath(StatusNpc status, Vector3 location, bool recalcuteP
     if (!recalcutePathAutomatic)
         return false; ///devuelvo que no se ha conseguido path. Aquí no he intentado recalcularlo.
 
-    ///voy a intentar recalcular el path para conseguir uno, antes de darlo por erróneo.
-    status.pathRecalculated_ = false; 
+    
     int count = 1; // giro de 5 en 5 grados hasta completar una circunferencia o encontar un path válido.
     Vector3 previousLeftVector = Vector3.zero;
     Vector3 previousRightVector = Vector3.zero;

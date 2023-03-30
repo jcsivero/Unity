@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/RobotsGoap/Scenes/RobotGuard.unity
     guid: e043ff36ebad94dc48ce2b8572d1ea37
   - enabled: 1
-    path: Assets/RobotsGoap/Scenes/RobotGuardMultiple.unity
+    path: Assets/RobotsGoap/Scenes/RobotGuardMultipleold.unity
     guid: 5094ce44a0f8ac545bb2a578a9811e19
   m_configObjects: {}

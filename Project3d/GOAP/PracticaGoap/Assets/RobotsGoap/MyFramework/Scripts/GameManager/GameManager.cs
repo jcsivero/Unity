@@ -20,7 +20,7 @@ public class GameManager :BaseMono
     public static  GameManager instance_ ;
     public float simulationVelocity_ = 1; 
     public World world_;
-    public HudWorld hudWorld_;
+    public HudWorldBase hudWorld_;
 
     public LevelManager levelManager_;
  
@@ -32,7 +32,7 @@ public class GameManager :BaseMono
     public DebugModeForce_ debugModeForce_ = DebugModeForce_.customize;
     private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";    
     public  bool readyEngine_ = false; 
-    public  bool firtUpdate_ = true; 
+    //public  bool firtUpdate_ = true; 
     
      public static GameManager Instance()  /// llamar solo desde después de los Awake, para asegurarse que la instancia está creada. O sea, se puede llamar desde OnEnable() o Start()
     {
@@ -67,7 +67,7 @@ public class GameManager :BaseMono
     /// </summary>
     override public void Awake()
     {
-        
+        base.Awake();
         SetName("GameManager");      
         Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
         
@@ -79,8 +79,7 @@ public class GameManager :BaseMono
             Object.DontDestroyOnLoad(gameObject);
 
             GetManagerMyEvents(); //Creo instancia de gestión de eventos.
-                    
-            Debug.Log("referencia al mundo");
+                                
             world_ = GetComponent<World>();            
             
             aiController_ = GetComponent<AIController>();
@@ -101,7 +100,7 @@ public class GameManager :BaseMono
         else
         {
             instance_.readyEngine_ = false;           
-            instance_.firtUpdate_ = false;             
+            //instance_.firtUpdate_ = false;             
             Destroy(gameObject);
 
         }
@@ -114,7 +113,7 @@ public class GameManager :BaseMono
     /// </summary>
     override public void Start()
     {
-        
+        base.Start();
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
         //  Cursor.visible = false;
          // Cursor.lockState = CursorLockMode.Locked;
@@ -129,13 +128,9 @@ public class GameManager :BaseMono
 
     void Update()
     {
-        if (firtUpdate_)
-        {
             GetManagerMyEvents().TriggerEvent(TRIGGER_ON_UPDATE_ALL_STATUS_NPC) ; ///actualizo todos los objectos.            
-            firtUpdate_ = false;
-        }
         GetHudWorld().UpdateHud();
-        //GetHudLevel().UpdateHud();
+        GetHudLevel().UpdateHud();
         ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
             
     }
@@ -151,7 +146,7 @@ public class GameManager :BaseMono
 
             if (GetGameManager().levelManager_ == null)
             {
-                Debug.Log("!!!!!!!Error. No se encontró LevelManager, osea, el componente script LevelManager.cs adjunto.!!!!!!");
+                Debug.Log("!!!!!!!!!Error. GameObject con nombre LevelManager no econtrado o el componente LevelManager.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.");                
                 GetGameManager().readyEngine_ = false;
             }
             else 
@@ -163,20 +158,25 @@ public class GameManager :BaseMono
     public bool OnVictory()
     {
         
-        //GetStatusHud().hudFinalOptions_.SetHudFinal("You win");
+        
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        //GetStatusHud().hudFinalOptions_.gameObject.SetActive(true);
+        GetHudLevel().SetValue<string>("HudTextFinal","You Win");
+        GetHudLevel().gameObject.SetActive(true);
+
+        
         return true;
     }
 
     public bool OnLose()
     {
      
-        //GetStatusHud().hudFinalOptions_.SetHudFinal("You Lose");
+        
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        ///GetStatusHud().hudFinalOptions_.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;        
+        GetHudLevel().SetValue<string>("HudTextFinal","You Lose");
+        GetHudLevel().gameObject.SetActive(true);
+        
         return true;
     }
 

@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_2021_3_21;UNITY_2021_3;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_MANAGED_UNITYTLS;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;PLATFORM_WEBGL;TEXTCORE_1_0_OR_NEWER;UNITY_WEBGL;UNITY_WEBGL_API;UNITY_DISABLE_WEB_VERIFICATION;UNITY_GFX_USE_PLATFORM_VSYNC;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_SPATIALTRACKING;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_2021_3_21;UNITY_2021_3;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;CROSS_PLATFORM_INPUT;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -37,98 +37,101 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\CompositeData.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Common\CompositeData.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\StatusPlayer.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\GameManagerMyEvents.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\Base.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GActionProtectMode.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\Events\GameManagerMyEvents.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Common\Base.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Robots\GActionProtectMode.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\DynamicShadowSettings.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandStatusNpcRobotHudUpdate.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Commands\CommandStatusNpcRobotHudUpdate.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\SimpleMouseRotator.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GActionGetKey.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Guard\GActionGetKey.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\LerpControlledBob.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\FSM\Hide.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandStatusNpcGuardGoapStatesUpdate.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Commands\CommandStatusNpcGuardGoapStatesUpdate.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\PlatformSpecificContent.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GActionHideRobotsMode.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GActionPatrolMode.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GInventory.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Robots\GActionHideRobotsMode.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Robots\GActionPatrolMode.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GoapBase\GInventory.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Common\GenericData.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\ControlGameObjects.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Common\ControlGameObjects.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\SmoothFollow.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\GameManager.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GAction.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GoapBase\GAction.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\World.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\TimedObjectActivator.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GAgentGuard.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandStatusNpcRobotGoapStatesUpdate.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GActionGoToKillGirld.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Guard\GAgentGuard.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Commands\CommandStatusNpcRobotGoapStatesUpdate.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Guard\GActionGoToKillGirld.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HudBase\HudLevelBase.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\WaypointCircuit.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\CameraRefocus.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\TimedObjectDestructor.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\StatusNpcGuard.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Status\StatusNpcGuard.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\AIController.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GAgent.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GoapBase\GAgent.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\WaypointProgressTracker.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\LevelManager.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\DragRigidbody.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\FSM\Chase.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GActionGetWeapon.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudLevel1FinalOptions.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Guard\GActionGetWeapon.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\HUD\HudLevelFinalOptions.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\CurveControlledBob.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\FollowTarget.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\StatusNpcRobot.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\LevelManagerNivel1.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Status\StatusNpcRobot.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\LevelManager\LevelManagerNivel1.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\ForcedReset.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GActionFleeMode.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Guard\GActionFleeMode.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HudBase\HudWorldBase.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\ObjectResetter.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\HUD\HudWorldInitialOptions.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\StatusNpc.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Guard\GActionHideGuardMode.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Guard\GActionHideGuardMode.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\Hud.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\BaseMono.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HudBase\HudBase.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Common\BaseMono.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\AlphaButtonClickMask.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GActionChaseMode.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Robots\GActionChaseMode.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\AutoMoveAndRotate.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\FOVKick.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\FSM\NPCBaseFSM.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GPlanner.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GoapBase\GPlanner.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\CommandStatusNpcGuardHudUpdate.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Commands\CommandStatusNpcGuardHudUpdate.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\EventSystemChecker.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\ActivateTrigger.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GAgentRobots.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Base\GStates.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\MyEvents.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Robots\GAgentRobots.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GoapBase\GStates.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\LevelManager\LevelManagerNivel2.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\Events\MyEvents.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Status\Status.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Robots\GActionAttackMode.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Robots\GActionAttackMode.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\FSM\Attack.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\Commands\Command.cs" />
+     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\Command.cs" />
      <Compile Include="Assets\RobotsGoap\Scritps\Bullet.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\FSM\Patrol.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GOAP\Common\GActionRepairMode.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudWorld1.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\Goap\Common\GActionRepairMode.cs" />
+     <Compile Include="Assets\RobotsGoap\Scritps\HUD\HudWorld.cs" />
      <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\GameManager\Commands.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\SimpleActivatorMenu.cs" />
-     <Compile Include="Assets\RobotsGoap\MyFramework\Scripts\HUD\HudWorldInitialOptions.cs" />
      <None Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
@@ -137,6 +140,9 @@
     </Reference>
     <Reference Include="UnityEngine.AIModule">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+        <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.ARModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AccessibilityModule">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.AccessibilityModule.dll</HintPath>
@@ -155,6 +161,12 @@
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+        <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+        <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
@@ -315,8 +327,8 @@
     <Reference Include="UnityEngine.VideoModule">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.WebGLModule">
-        <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\PlaybackEngines\WebGLSupport\Managed\UnityEngine.WebGLModule.dll</HintPath>
+    <Reference Include="UnityEngine.VirtualTexturingModule">
+        <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.WindModule">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>

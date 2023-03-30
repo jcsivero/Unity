@@ -44,7 +44,7 @@ public class World : BaseMono
     override public  void Awake()
     {
         
-       //base.Awake();
+       base.Awake();
        SetName("World");      
        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
         
@@ -67,7 +67,7 @@ public class World : BaseMono
 
     override public void Start()
     {
-        //base.Start();
+        base.Start();
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
         InitializeValues(); //inicializo valores de variables y variables GoapStates.
         InstaciateCommands();  

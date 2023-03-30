@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : BaseMono
 {    
-    public HudLevel hudLevel_;
+    public HudLevelBase hudLevel_;
     public GameObject actualPlayer_;
     public GameObject actualEnemy_;
     public Dictionary<string,List<GameObject>> wayPoints_;    
@@ -74,21 +74,21 @@ override public void Start()
 
 virtual public bool GetInitialInformation()
     {
-        GetGameManager().hudWorld_ = GameObject.Find("HudWorld").GetComponentInChildren<HudWorld>();
+        GetGameManager().hudWorld_ = GameObject.Find("HudWorld").GetComponentInChildren<HudWorldBase>();
         //GetGameManager().hudWorld_ = FindFirstObjectByType<HudWorld>();
 
         if (GetGameManager().hudWorld_ == null)
         {
-            Debug.Log("!!!!!!!!!Error. No se encontró HudWorld, o sea, el componente script HudWorld.cs o clase descendiente");
+            Debug.Log("!!!!!!!!!Error. GameObject con nombre HudWorld no econtrado o el componente HudWorld.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.");
             return false;
         }
      
         
-        hudLevel_ = GameObject.Find("HudLevel").GetComponent<HudLevel>();
+        hudLevel_ = GameObject.Find("HudLevel").GetComponent<HudLevelBase>();
         
         if (hudLevel_ == null)
         {
-            Debug.Log("!!!!!!!!!Error. No se encontró HudLevel, o sea, el componente script HudLevel.cs o clase descendiente");
+            Debug.Log("!!!!!!!!!Error. GameObject con nombre HudLevel no econtrado o el componente HudLevel.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.");            
             return false;
         }
 

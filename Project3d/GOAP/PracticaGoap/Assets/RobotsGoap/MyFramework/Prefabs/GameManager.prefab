@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3320831302467458227
+--- !u!1 &4149927827315117666
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2626980262826253669}
-  - component: {fileID: 2543299720459618623}
-  - component: {fileID: 2543299720459618620}
-  - component: {fileID: 2543299720459618618}
-  - component: {fileID: 2543299720459618619}
+  - component: {fileID: 3744355545822971828}
+  - component: {fileID: 3803829437685486574}
+  - component: {fileID: 3803829437685486573}
+  - component: {fileID: 6494318866823828183}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -20,90 +19,71 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2626980262826253669
+--- !u!4 &3744355545822971828
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320831302467458227}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.766422, y: 5.32, z: -0.06867259}
+  m_GameObject: {fileID: 4149927827315117666}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2543299720459618623
+--- !u!114 &3803829437685486574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320831302467458227}
+  m_GameObject: {fileID: 4149927827315117666}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 149e01b745793934cab1ce12880bb947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusWorld_: {fileID: 0}
-  statusHud_: {fileID: 0}
+  debugMode_: 0
+  simulationVelocity_: 1
+  world_: {fileID: 0}
+  hudWorld_: {fileID: 0}
+  levelManager_: {fileID: 0}
   aiController_: {fileID: 0}
-  ok_: 0
---- !u!114 &2543299720459618620
+  debugModeForce_: 0
+  readyEngine_: 0
+  firtUpdate_: 0
+--- !u!114 &3803829437685486573
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320831302467458227}
+  m_GameObject: {fileID: 4149927827315117666}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90e83ea39c2bb5c4092fe6555a899fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2543299720459618618
+  debugMode_: 0
+--- !u!114 &6494318866823828183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320831302467458227}
+  m_GameObject: {fileID: 4149927827315117666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c33a3c1da82931d4d9ca3bb806924c19, type: 3}
+  m_Script: {fileID: 11500000, guid: 29b976dddadf4104ab6c021531f7a8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode_: 1
-  origin_: {fileID: 0}
-  target_: {fileID: 0}
-  atDestination_: 0
-  navMeshTargetPositionInfinity_: {x: 0, y: 0, z: 0}
-  hudTextHealthPlayer_: {fileID: 0}
-  hudTextCountEnemies_: {fileID: 0}
-  hudTextTotalPoints_: {fileID: 0}
---- !u!114 &2543299720459618619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320831302467458227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a12c25b3e9818e43a8f040e660e0238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode_: 1
-  origin_: {fileID: 0}
-  target_: {fileID: 0}
-  atDestination_: 0
-  navMeshTargetPositionInfinity_: {x: 0, y: 0, z: 0}
+  debugMode_: 0
   lifesPlayer_: 0
   numberOfLevels_: 0
   countEnemies_: 0
   activeLevel_: 0
   totalPoints_: 0
   levelPoints_: 0
-  allGameObjects_: []

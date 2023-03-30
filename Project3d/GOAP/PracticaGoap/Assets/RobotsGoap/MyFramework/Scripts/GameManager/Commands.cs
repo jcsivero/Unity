@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Commands : Base
 {
-    //private Dictionary<object, Dictionary<string,Command>> available_;
-    private Dictionary<object, CompositeData> available_;
+        private Dictionary<object, CompositeData> available_;
      ///listado de comandos disponibles, son los que se han creado. así se pueden instanciar solo los que se necesitan.
     public Queue<Command> commands_; // cola de comandos pendientes de  ejecutar.
        
@@ -23,7 +22,7 @@ public class Commands : Base
             
         
         commands_ = new Queue<Command>();
-        //available_ = new Dictionary<object, Dictionary<string,Command>>();
+        
         available_ = new  Dictionary<object, CompositeData>();
         
     }
@@ -42,7 +41,8 @@ public class Commands : Base
     override public void ExecuteCommands()
     {
         foreach (Command draft in commands_)
-                draft.Exec();
+                if (draft != null)
+                    draft.Exec();
         commands_.Clear();
     }
 
