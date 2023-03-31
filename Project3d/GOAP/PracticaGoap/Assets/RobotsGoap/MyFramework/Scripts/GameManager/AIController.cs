@@ -158,7 +158,7 @@ private bool GetPath(StatusNpc status, Vector3 location)
         }
 
 }
-private bool RecalculatePath(StatusNpc status, Vector3 location, bool recalcutePathAutomatic = true)
+private bool RecalculatePath(StatusNpc status, Vector3 location)
 
 {
     if (status.debugMode_)
@@ -171,7 +171,7 @@ private bool RecalculatePath(StatusNpc status, Vector3 location, bool recalcuteP
     if (pathValid)  ///intento conseguir primero el path, asumiendo que se da una posición correcta.
         return true;
 
-    if (!recalcutePathAutomatic)
+    if (!status.recalculatePathAutomatic)
         return false; ///devuelvo que no se ha conseguido path. Aquí no he intentado recalcularlo.
 
     
@@ -228,7 +228,7 @@ private bool RecalculatePath(StatusNpc status, Vector3 location, bool recalcuteP
         
   return pathValid;
 }
-public bool Seek(StatusNpc status,Vector3 location,bool withPosY=false, bool recalcutePathAutomatic = true)///devolverá true si llegó al destino.
+public bool Seek(StatusNpc status,Vector3 location,bool withPosY=false)///devolverá true si llegó al destino.
 {
     bool atDestination = false; ///si he llegado al final del trayecto, esta variable será true 
 
@@ -258,7 +258,7 @@ public bool Seek(StatusNpc status,Vector3 location,bool withPosY=false, bool rec
                 {
                     if (status.debugMode_)
                         Debug.Log("objetivo posicion cambiada : " );
-                    if (RecalculatePath(status,location,recalcutePathAutomatic))    
+                    if (RecalculatePath(status,location))    
                         if (status.GetNavMeshUseSetDestination())
                              status.GetNavMeshAgent().SetPath(status.GetNavMeshPath()); ///en caso de usar SetDestination, le asigno el 
                              ///path obtenido para ejecutarse en background
@@ -282,7 +282,8 @@ public bool Seek(StatusNpc status,Vector3 location,bool withPosY=false, bool rec
                                 if (status.debugMode_)
                                     Debug.Log("llego  al final del path por primera vez: ");
                                 status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
-                                atDestination = true;                            
+                                atDestination = true;      
+                                status.pathRecalculated_ = false;                       
                             }
                                             
                         }
@@ -296,7 +297,7 @@ public bool Seek(StatusNpc status,Vector3 location,bool withPosY=false, bool rec
                     if (status.debugMode_)
                         Debug.Log("asignando nuevo path");
                                                          
-                    if (RecalculatePath(status,location,recalcutePathAutomatic))    
+                    if (RecalculatePath(status,location))    
                         if (status.GetNavMeshUseSetDestination())
                              status.GetNavMeshAgent().SetPath(status.GetNavMeshPath()); ///en caso de usar SetDestination, le asigno el 
                              ///path obtenido para ejecutarse en background
@@ -307,6 +308,7 @@ public bool Seek(StatusNpc status,Vector3 location,bool withPosY=false, bool rec
                     if (status.debugMode_)
                         Debug.Log("ESTOY EN EL FINAL: ");
                     atDestination = true;   
+                    status.pathRecalculated_ = false;  
                     status.NavMeshErasePath();                 
                 }
             }
@@ -338,9 +340,12 @@ public void Flee(StatusNpc status,Vector3 location, bool withPosY=false)
         Debug.DrawRay(status.GetOrigin().transform.position, fleeVector,Color.green);
 
     
-    if (status.GetNavMeshUse())
-        if (((status.GetNavMeshUseSetDestination()) && (status.GetNavMeshAgent().hasPath)) || ((!status.GetNavMeshUseSetDestination()) && (status.GetNavMeshPath().corners.Length > 1))) 
+    if (status.GetNavMeshUse())        
+        if (status.pathRecalculated_)      
+          if (((status.GetNavMeshUseSetDestination()) && (status.GetNavMeshAgent().hasPath)) && (status.GetNavMeshAgent().remainingDistance > status.GetNavMeshAgent().stoppingDistance )|| ((!status.GetNavMeshUseSetDestination()) && (status.GetNavMeshPath().corners.Length > 1))) 
             Seek(status, status.GetNavMeshTargetPosition(),withPosY);  
+          else
+            Seek(status, status.GetOrigin().transform.position + fleeVector,withPosY);            
         else
           Seek(status, status.GetOrigin().transform.position + fleeVector,withPosY);            
     else
@@ -395,7 +400,7 @@ public void Wander(StatusNpc status,float wanderRadius = 2, float wanderDistance
 
         targetWorld = aroundPivot.transform.TransformPoint(targetLocal);
                  
-        Seek(status,targetWorld,false,true);
+        Seek(status,targetWorld,false);
 
     }
     else
@@ -419,7 +424,7 @@ public void PatrolMode(StatusNpc status,bool withPosY = false)
 
     if (patrol)
     {
-        if ((Seek(status,status.GetWayPointCurrentPos(),withPosY,false)) || (CalculateDistanceStep(status.GetWayPointCurrentPos(),status.GetOrigin().transform.position,withPosY) < status.wayPointsAccuracy_)) 
+        if ((Seek(status,status.GetWayPointCurrentPos(),withPosY)) || (CalculateDistanceStep(status.GetWayPointCurrentPos(),status.GetOrigin().transform.position,withPosY) < status.wayPointsAccuracy_)) 
             status.NextWayPoint();    
 
     }
@@ -527,7 +532,7 @@ public Vector3 CleverHide(StatusNpc status,bool withPosY=false)
 ///del punto de ocultación en base al movimiento del objeto target, o sea, activar la variable follow, previmente debe de haberse ejecutado
 ///la funcion PosIsChangedReset() para reiniciar el contador de detección de movimiento.
 //Por defecto no utiliza el reclculado de ruta en caso de fallar, se supone que ya ha sido probado bien por el programador
-public bool GoToCleverHide(StatusNpc status,bool withPosY = false,bool follow=false, bool recalcutePathAutomatic = false)
+public bool GoToCleverHide(StatusNpc status,bool withPosY = false,bool follow=false)
 {
     if (follow)
         if (status.GetTargetStatus().PosIsChanged())
@@ -536,8 +541,8 @@ public bool GoToCleverHide(StatusNpc status,bool withPosY = false,bool follow=fa
             status.GetTargetStatus().PosIsChangedReset();         
         }
             
-    
-    return Seek(status,status.GetHidePointPosBase(),withPosY,recalcutePathAutomatic);    
+
+    return Seek(status,status.GetHidePointPosBase(),withPosY);    
 }
 ///Calcula el punto de destino desde la posición actual hacia el Gameobject final.
 ///El cálculo se realiza:

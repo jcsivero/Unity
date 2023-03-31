@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GActionGetKey : GAction
 {
+    Vector3 goTo_ = Vector3.zero;
   override public bool IsAchievableGiven(GoapStates conditions,bool planMode = false)
     {
         
@@ -34,7 +35,7 @@ public class GActionGetKey : GAction
     public override bool PrePerform()
     {
         target = GetLevelManager().gameObjectsByName_[targetTagOrName][0];        ///ahora el objetivo es la posición de la llave
-        
+        goTo_= status_.GetAIController().CalculatePointTarget(status_.GetOrigin(),target,false,status_.GetNavMeshRadius());
             return true;
 
     }
@@ -57,6 +58,6 @@ public class GActionGetKey : GAction
     }
     override public  bool OnPerform()
     {
-        return status_.GetAIController().Seek(status_,target.transform.position);
+        return status_.GetAIController().Seek(status_,goTo_);
     }
 }

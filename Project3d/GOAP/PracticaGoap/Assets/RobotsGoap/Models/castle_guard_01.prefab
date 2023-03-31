@@ -137,9 +137,9 @@ GameObject:
   - component: {fileID: 5246877150567145378}
   - component: {fileID: 5246877150559989826}
   - component: {fileID: 5246877150400106993}
+  - component: {fileID: 5246877150567236595}
   - component: {fileID: 5246877150567236491}
   - component: {fileID: 5246877150567236493}
-  - component: {fileID: 5246877150567236595}
   - component: {fileID: 5246877150567236483}
   - component: {fileID: 5246877150567236599}
   - component: {fileID: 5246877150567236489}
@@ -214,6 +214,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &5246877150567236595
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5246877150567236482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.63
+  m_Height: 4.3709016
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.277145, z: 0}
 --- !u!114 &5246877150567236491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,14 +254,19 @@ MonoBehaviour:
   wayPointsAccuracy_: 1
   navMeshUse_: 1
   navMeshUseSetDestination_: 0
+  speedRotation_: 2
+  speedMax_: 0.5
   brakingDistance_: 1
+  navMeshRadius_: 0.5
   targetMarginPosition_: 1
+  sizeFleeVector_: 20
+  realMovement_: 1
+  speedCurrent_: 0
+  recalculatePathAutomatic: 1
+  pathRecalculated_: 0
   visDistance_: 10
   visAngle_: 80
   visDistanceToAttack_: 10
-  speedRotation_: 2
-  speedMax_: 0.5
-  speedCurrent_: 0
   anim_: {fileID: 0}
   hudStateNpc_: {fileID: 5647903257364671278}
 --- !u!114 &5246877150567236493
@@ -262,23 +281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc5615f93bcff546a3a747cd87c8691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode_: 0
   actions_: []
   currentAction_: {fileID: 0}
   breakPlanOrAcction: 0
---- !u!136 &5246877150567236595
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5246877150567236482}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.63
-  m_Height: 4.3709016
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.277145, z: 0}
 --- !u!114 &5246877150567236483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ad54d35d62a334582337ac719d752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode_: 0
   actionName: Cure
   cost: 1
   target: {fileID: 0}
@@ -323,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f6875b5396b3a4693fbc1f066c544b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode_: 0
   actionName: GetWeapon
   cost: 1
   target: {fileID: 0}
@@ -353,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4139dc2b2b3c9c4bb5a3247e2a79faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode_: 0
   actionName: GetKey
   cost: 1
   target: {fileID: 0}
@@ -385,6 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca26e1d794b66246b31c9c0d3100b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode_: 0
   actionName: GoToKillGirld
   cost: 1
   target: {fileID: 0}
@@ -417,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bb073725ee58744abc383b2899eae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode_: 0
   actionName: Flee
   cost: 1
   target: {fileID: 0}
@@ -449,6 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97146745a69209947bef6b573c50cf50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode_: 0
   actionName: HideFollow
   cost: 1
   target: {fileID: 0}

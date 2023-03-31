@@ -5,6 +5,7 @@ using UnityEngine;
 public class GActionGetWeapon : GAction
 {
 
+    Vector3 goTo_ = Vector3.zero;
   override public bool IsAchievableGiven(GoapStates conditions,bool planMode = false)
     {
         
@@ -39,7 +40,8 @@ public class GActionGetWeapon : GAction
             if (target == null)
                 return false;*/
             //status_.anim_.SetBool("Hide",true);
-            target = GetLevelManager().gameObjectsByName_[targetTagOrName][0];        
+            target = GetLevelManager().gameObjectsByName_[targetTagOrName][0];      
+             goTo_= status_.GetAIController().CalculatePointTarget(status_.GetOrigin(),target,false,status_.GetNavMeshRadius());  
             return true;
     }
 
@@ -63,6 +65,6 @@ public class GActionGetWeapon : GAction
     override public  bool OnPerform()
     {
         
-        return status_.GetAIController().Seek(status_,target.transform.position);
+        return status_.GetAIController().Seek(status_,goTo_);
     }
 }

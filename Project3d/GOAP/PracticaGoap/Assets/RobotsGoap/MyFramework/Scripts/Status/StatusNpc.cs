@@ -53,7 +53,7 @@ StatusNpc : Status
     [Tooltip("Velocidad máxima de movimiento, este valor también actualiza e iguala el valor speed del complemento Navmesh en caso de utilizarlo. Así se dispone siempre de un mismo valor de velociad, independientemente de la rutina de movimiento utilizada")]        
     private  float speedMax_ = 2.0f;    
     [Tooltip ("Distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado")]
-    public float brakingDistance_=1.0f; ///distancia de parado antes de llegar al destino final o a si se está usando mi rutina propia, también afecta a los diferentes corners  del path calculado
+    public float brakingDistance_=1.0f; ///distancia de parado antes de llegar al destino final. Si se está usando mi rutina propia, solo afecta al corner final
     ///utilizar NavMesh.
     [Tooltip ("Cuando se calcula una posición con CalculatePointTarget() de AiController,(esta función devuelve una posición cerca del GameOject indicado y en la orientación indicada) puede ocurrir que si se tiene un mapa navmesh con un radio muy grande, se podría devolver una posición fuera del navmesh, y por consiguiente una posición no válida, al calcular un HidePoint, un WayPoint de gameobject con collider.... El valor de esta variable se multiplicará  en la misma orientación  del punto obtenido, para así, devolver una posición que compense el radio del navmesh y por lo tanto devolver una posición válida.")]
     public float navMeshRadius_=0.5f; ///Cuando se calcula una posición con CalculatePointTarget() de AiController,(esta función devuelve una posición cerca del GameOject indicado y en la orientación indicada)
@@ -68,8 +68,16 @@ StatusNpc : Status
 
     [Tooltip("RealMovement indica que el movimiento se haga siempre hacia adelante y girando, o sea, para llegar a cualquier ubicacion el NPC avanza mientras se va orientando, esto hay que tener cuidado si los destinos están demasiado cerca y la velocidad de rotación es muy baja o la velocidad del NPC muy alta, porque nunca llegaría al destino. Si realmovement es false, funciona igual que el setdestination de unity, el desplazamiento se realiza siempre directamente hacia la dirección punto destino, y mientras se va girando el personaje. Así nunca hay problemas pero parece menos real, puesto que normalmente avanzamos mientras giramos. O sea, probar hasta dar con una relación velocidad NPC-velocidad de rotación - tipos giros(las rotaciones muy cerradas) que puede hacer el NPC en el escenario")]
     public bool realMovement_ = true;
-
-   
+    [SerializeField]
+    private  float speedCurrent_;       
+    [SerializeField]
+     [Tooltip("Indica si sse quiere que automáticamente se busca una ruta alternativa utilizando navmesh, en caso de obtener una posición errónea.")]
+    public bool recalculatePathAutomatic = true; ///indica si sse quiere que automáticamente se busca una ruta alternativa utilizando navmesh, en caso de obtener
+    ///una posición errónea.
+    public bool pathRecalculated_; ///a true si cuando se intento asignar path con seek, no  se pudo conseguir y tuvo que
+    ////ser recalculado automáticamente para conseguir uno. Esta variable es controlada internamente por RecalculatePath() de AiController, la pongo en el inspector
+    ///solo a título de depuración
+       
     [SerializeField] 
     [Tooltip("Distancia hacia el objetivo que se puede utilizar como disparador en el Animator o cualquier otro sitio para indicar que el objetivo se encuentra a esa distancia o menos.")]
     private  float visDistance_ = 20.0f;
@@ -80,13 +88,6 @@ StatusNpc : Status
     [Tooltip("Distancia hacia el objetivo que se puede utilizar como disparador en el Animator o cualquier otro sitio para indicar que el objetivo se encuentra a esa distancia o menos. Se suele utilizar para definir una zona de ataque, este valor debería de ser menor que el de visDistance_")]
     private  float visDistanceToAttack_ = 10.0f;    
 
-
-    [SerializeField]
-    private  float speedCurrent_;       
-    [SerializeField]
-    public bool pathRecalculated_; ///a true si cuando se intento asignar path con seek, no  se pudo conseguir y tuvo que
-    ////ser recalculado automáticamente para conseguir uno. Esta variable es controlada internamente por RecalculatePath() de AiController, la pongo en el inspector
-    ///solo a título de depuración
     private int navMeshPathCurrentIndex_;
         
     private Vector3 navMeshTargetPosition_; ///posición  final del path del navmesh.    
