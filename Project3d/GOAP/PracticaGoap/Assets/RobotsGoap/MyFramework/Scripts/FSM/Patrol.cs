@@ -20,7 +20,7 @@ public class Patrol : NPCBaseFSM
         UpdateState();        
 
 
-        aiController_.PatrolMode(npc_,false);
+        aiController_.PatrolMode(npc_);
         
         
     }

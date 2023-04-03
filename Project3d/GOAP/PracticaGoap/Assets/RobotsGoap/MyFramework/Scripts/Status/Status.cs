@@ -22,16 +22,10 @@ public  abstract class  Status :  BaseMono
     [SerializeField] private GameObject target_;     
     [HideInInspector]public bool atDestination_= false; ///true si se encuentra en el destino fijado con la función seek de AIController
     protected Vector3 posReferenceFromChanged_; ///Guarda la posición de referencia contra la que se comprobará si el objeto ha variado su posición más alla del umbral establecidor.
-
-    private Vector3 minPos_; ///Posición del valor mínimo del collider. del Npc. Utilizado para obtener posiciones a ras de suelo mucho más fiables para 
-    ///no fallar en los Navmesh. La función CalculatePointTarget() de AIController realiza algo parecedolo mismo pero consumiendo más recursos.,
-    //En los StatusNpc se calcula desde el inicio.
     protected Vector3 positionPreviousFrame_; ///utilizado para averiguar la velocidad entre cambios de frames.
 
 
-    [HideInInspector ]public Vector3 navMeshTargetPositionInfinity_; ///posición  infinita para cuando se quiere recalcular un path, así obligamos a que siempre haya una diferencia entre la
-    ///posición del objeto y la del detino mayor que targetMarginPosition, obligando así a recalcular, eso si se utiliza NavMesh.
-
+    
 
     
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,8 +39,7 @@ override public  void Awake()
     base.Awake();
     SetName("Status");      
     Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
-    SetOrigin(gameObject);
-    SetMinPos_();    
+    SetOrigin(gameObject);    
         
 
 }
@@ -320,19 +313,7 @@ virtual public float MovementValue()
     return 0;
     
 }
-public Vector3 GetMinPos_()
-{   
-    return minPos_;
-}
-public void SetMinPos_()
-{
-    if (GetOrigin().GetComponent<Collider>() != null)
-    {
-            minPos_ = transform.position;
-            minPos_.y = GetOrigin().GetComponent<Collider>().bounds.min.y;
-    }
-        
-}
+
 
 
 

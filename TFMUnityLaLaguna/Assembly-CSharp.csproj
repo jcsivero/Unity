@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{082f7e8f-54a3-2a0e-4abe-80e3859c83c0}</ProjectGuid>
+    <ProjectGuid>{9bfcea5f-0a92-f78a-e904-636fd86daaa9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -36,105 +36,105 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\Status\StatusPlayer.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\DynamicShadowSettings.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\EventSystemChecker.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\WaypointProgressTracker.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\ObjectResetter.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\PlatformSpecificContent.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\WaypointCircuit.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\SimpleMouseRotator.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\CameraRefocus.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\SmoothFollow.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\CurveControlledBob.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\AlphaButtonClickMask.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\FollowTarget.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\DragRigidbody.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\TimedObjectDestructor.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\AutoMoveAndRotate.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\LerpControlledBob.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\ForcedReset.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\FOVKick.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\ActivateTrigger.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\TimedObjectActivator.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\FPSCounter.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Standard Assets\Utility\SimpleActivatorMenu.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\Common\BaseMono.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GameManager\World.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GameManager\Events\MyEvents.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\Status\Status.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GameManager\Commands.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\FSM\Hide.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\FSM\NPCBaseFSM.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\FSM\Attack.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GameManager\GameManager.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GameManager\AIController.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GoapBase\GAgent.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\Common\Base.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\Common\GenericData.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GoapBase\GPlanner.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GoapBase\GInventory.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\Common\ControlGameObjects.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\HudBase\HudWorldBase.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\HudBase\HudLevelBase.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\FSM\Chase.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\FSM\Patrol.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GameManager\Events\GameManagerMyEvents.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\HudBase\HudBase.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GoapBase\GStates.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\Status\StatusNpc.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GameManager\Command.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\Common\CompositeData.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GameManager\LevelManager.cs" />
-     <Compile Include="Assets\TFMLaLaguna\MyFramework\Scripts\GoapBase\GAction.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\LevelManager\LevelManagerNivel1.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\HUD\HudWorld.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\HUD\HudLevelFinalOptions.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Bullet.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\HUD\HudWorldInitialOptions.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\LevelManager\LevelManagerNivel2.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Guard\GActionGetKey.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Guard\GActionHideGuardMode.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Guard\GAgentGuard.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Commands\CommandStatusNpcGuardGoapStatesUpdate.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Commands\CommandStatusNpcRobotGoapStatesUpdate.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Commands\CommandStatusNpcRobotHudUpdate.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Guard\GActionGetWeapon.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Guard\GActionFleeMode.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Robots\GActionHideRobotsMode.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Robots\GActionProtectMode.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Robots\GActionChaseMode.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Robots\GAgentRobots.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Robots\GActionAttackMode.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Robots\GActionPatrolMode.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Status\StatusNpcRobot.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Commands\CommandStatusNpcGuardHudUpdate.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Common\GActionRepairMode.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Goap\Guard\GActionGoToKillGirld.cs" />
-     <Compile Include="Assets\TFMLaLaguna\Scritps\Status\StatusNpcGuard.cs" />
-     <None Include="Assets\TFMLaLaguna\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
-     <None Include="Assets\TFMLaLaguna\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
-     <None Include="Assets\TFMLaLaguna\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\Common\CompositeData.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\Status\StatusPlayer.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Robots\GActionProtectMode.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\DynamicShadowSettings.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Commands\CommandStatusNpcRobotHudUpdate.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Guard\GActionGetKey.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\LerpControlledBob.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\FSM\Hide.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Commands\CommandStatusNpcGuardGoapStatesUpdate.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\PlatformSpecificContent.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Robots\GActionPatrolMode.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GameManager\World.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\TimedObjectActivator.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Guard\GAgentGuard.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\HudBase\HudLevelBase.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\CameraRefocus.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Status\StatusNpcGuard.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GoapBase\GAgent.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GameManager\LevelManager.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\FSM\Chase.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\HUD\HudLevelFinalOptions.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\CurveControlledBob.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Guard\GActionFleeMode.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\HUD\HudWorldInitialOptions.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Guard\GActionHideGuardMode.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\Common\BaseMono.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Robots\GActionChaseMode.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\AutoMoveAndRotate.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Commands\CommandStatusNpcGuardHudUpdate.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GoapBase\GStates.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\LevelManager\LevelManagerNivel2.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GameManager\Events\MyEvents.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\Status\Status.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GameManager\Command.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\FSM\Patrol.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Common\GActionRepairMode.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GameManager\Commands.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\FPSCounter.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GameManager\Events\GameManagerMyEvents.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\Common\Base.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\SimpleMouseRotator.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Robots\GActionHideRobotsMode.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GoapBase\GInventory.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\Common\GenericData.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\Common\ControlGameObjects.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\SmoothFollow.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GameManager\GameManager.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GoapBase\GAction.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Commands\CommandStatusNpcRobotGoapStatesUpdate.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Guard\GActionGoToKillGirld.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\WaypointCircuit.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\TimedObjectDestructor.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GameManager\AIController.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\WaypointProgressTracker.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\DragRigidbody.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Guard\GActionGetWeapon.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\FollowTarget.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Status\StatusNpcRobot.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\LevelManager\LevelManagerNivel1.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\ForcedReset.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\HudBase\HudWorldBase.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\ObjectResetter.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\Status\StatusNpc.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\HudBase\HudBase.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\AlphaButtonClickMask.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\FOVKick.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\FSM\NPCBaseFSM.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\GoapBase\GPlanner.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\EventSystemChecker.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Utility\ActivateTrigger.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Robots\GAgentRobots.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Goap\Robots\GActionAttackMode.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\MyFramework\Scripts\FSM\Attack.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\Bullet.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
+     <Compile Include="Assets\TFMLaLagunaUnity\Scritps\HUD\HudWorld.cs" />
+     <None Include="Assets\TFMLaLagunaUnity\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\TFMLaLagunaUnity\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -382,10 +382,10 @@
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="ReportGeneratorMerged">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\PackageCache\com.unity.testtools.codecoverage@1.2.2\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\PackageCache\com.unity.testtools.codecoverage@1.2.2\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
@@ -760,73 +760,73 @@
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
-        <HintPath>C:\git\Unity\TFMLaLaguna\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+        <HintPath>C:\git\Unity\TFMUnityLaLaguna\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

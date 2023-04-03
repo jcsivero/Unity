@@ -88,6 +88,19 @@ StatusNpc : Status
     [Tooltip("Distancia hacia el objetivo que se puede utilizar como disparador en el Animator o cualquier otro sitio para indicar que el objetivo se encuentra a esa distancia o menos. Se suele utilizar para definir una zona de ataque, este valor debería de ser menor que el de visDistance_")]
     private  float visDistanceToAttack_ = 10.0f;    
 
+
+    public float YminPosCollider_; ///Posición del valor mínimo del collider. del Npc. Utilizado para obtener posiciones a ras de suelo mucho más fiables para 
+    ///no fallar en los Navmesh. La función CalculatePointTarget() de AIController realiza algo parecedolo mismo pero consumiendo más recursos.,
+    //En los StatusNpc se calcula desde el inicio. Es el valor de Y, o sea, la altura a la que se encuentra el valor inferior del collider.
+
+    public float YminPosNavMesh_; ///con la que toca el suelo el NPC. Se obtiene con la posición del pivote NPC restándole el baseoffset del agente navmesh.
+    ///es en base a  este valor con el que se comprueba cuando el NPC se acerca  a cada corner. Es utilizado por la función CalculateDistanceStep() de AiController
+    ///Es el valor de la altura Y, en la que el NPc toca con el Navmesh.
+
+    public float sizePivotNpcToNavMeshPointSurface_;    
+    [HideInInspector ]public Vector3 navMeshTargetPositionInitial_ = Vector3.zero; ///posición  inicial para  cuando se quiere recalcular un path, así obligamos a que siempre haya una diferencia entre la
+    ///posición del objeto y la del detino mayor que targetMarginPosition, obligando así a recalcular, eso si se utiliza NavMesh.
+    
     private int navMeshPathCurrentIndex_;
         
     private Vector3 navMeshTargetPosition_; ///posición  final del path del navmesh.    
@@ -107,9 +120,125 @@ StatusNpc : Status
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Eventos  de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    override public void Awake()
+    {
+        base.Awake();        
+        SetName("StatusNpc");            
+        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
+        wayPointsPos_ = Vector3.zero;
+        wayPointsPosBase_ = Vector3.zero;
+                
+        
+        anim_ = gameObject.GetComponent<Animator>();                        
+        goapAgent_ = gameObject.GetComponent<GAgent>();    
+        navMeshAgent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        navMeshPath_ = new UnityEngine.AI.NavMeshPath();
+        navMeshTargetPositionInitial_ =Vector3.zero;
+        SetNavMeshTargetPosition(navMeshTargetPositionInitial_);        
+
+    }
+    override public void Start()
+    {
+        base.Start();    
+        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");    
+        InstaciateCommands();       
+        
+        
+
+        
+    }
+
+       // Start is called before the first frame update
+    /// <summary>
+    /// This function is called when the object becomes enabled and active.
+    /// </summary>
+    override public void OnEnable()   
+    {        
+        base.OnEnable();
+
+    }
+        /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    override public void OnDisable()
+    {      
+      base.OnDisable();
+    }
+       /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
+    /// </summary>
+    void OnDestroy()
+    {
+        
+           Debug.Log("------------- destruido objeto StatusNpc--------------- ");
+    }
+    override public bool OnUpdateAllStatus()
+    {
+        base.OnUpdateAllStatus();
+        //código propio de esta clase
+        return true;
+    }
+
+
+    protected new void Update()
+    {  
+        base.Update();
+        
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////Funciones exclusivas  de esta clase
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void InstaciateCommands()
+    {
+        
+    
+  
+
+    }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
   
+public float GetYMinPosCollider_()
+{   
+    if (GetOrigin().GetComponent<Collider>()!= null)
+    {
+        YminPosCollider_ = GetOrigin().GetComponent<Collider>().bounds.min.y;
+        return YminPosCollider_;
+    }   
+    return 0;
+}
+
+  
+public float GetYMinPosNavMesh_()
+{   
+   /* if (GetNavMeshAgent()!= null)
+    {
+        YminPosNavMesh_ = transform.position.y - GetNavMeshAgent().baseOffset/2 +0.3f; ///hay que sumar 0.3f puesto que parece que es lo que ocupa el navmesh
+        return  YminPosNavMesh_;
+    }
+        
+    
+    return 0;*/
+    return transform.position.y - YminPosNavMesh_;
+}
+
+public float GetSizePivotNpcToNavMeshPointSurface()
+{
+    return sizePivotNpcToNavMeshPointSurface_;
+}
+public void SetSizePivotNpcToNavMeshPointSurface()
+{
+    sizePivotNpcToNavMeshPointSurface_ = transform.position.y - GetNavMeshPath().corners[0].y;
+}
 
 override public float GetTargetMarginPosition()
 {
@@ -214,7 +343,7 @@ override public void NavMeshErasePath()
         GetNavMeshAgent().ResetPath(); 
         GetNavMeshPath().ClearCorners(); ///comprobar si con uno solo basta.
         SetNavMeshPathCurrentIndex(0);
-        SetNavMeshTargetPosition(navMeshTargetPositionInfinity_);
+        SetNavMeshTargetPosition(navMeshTargetPositionInitial_);
 
     }
         
@@ -293,90 +422,6 @@ override public float MovementValue()
 {
     return speedMax_ * Time.deltaTime; ////puedo poner también por valor de movimiento del ratón, ejes...
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////Eventos  de esta clase
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    override public void Awake()
-    {
-        base.Awake();        
-        SetName("StatusNpc");            
-        Debug.Log("|||||||||||||| Awake + " + GetName().ToString() +"||||||||||||||||");
-        wayPointsPos_ = Vector3.zero;
-        wayPointsPosBase_ = Vector3.zero;
-                
-        
-        anim_ = gameObject.GetComponent<Animator>();                        
-        goapAgent_ = gameObject.GetComponent<GAgent>();    
-        navMeshAgent_ = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        navMeshPath_ = new UnityEngine.AI.NavMeshPath();
-        navMeshTargetPositionInfinity_ = new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity); 
-        SetNavMeshTargetPosition(navMeshTargetPositionInfinity_);        
-
-
-    }
-    override public void Start()
-    {
-        base.Start();    
-        Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");    
-        InstaciateCommands();       
-        
-        
-
-        
-    }
-
-       // Start is called before the first frame update
-    /// <summary>
-    /// This function is called when the object becomes enabled and active.
-    /// </summary>
-    override public void OnEnable()   
-    {        
-        base.OnEnable();
-
-    }
-        /// <summary>
-    /// This function is called when the behaviour becomes disabled or inactive.
-    /// </summary>
-    override public void OnDisable()
-    {      
-      base.OnDisable();
-    }
-       /// <summary>
-    /// This function is called when the MonoBehaviour will be destroyed.
-    /// </summary>
-    void OnDestroy()
-    {
-        
-           Debug.Log("------------- destruido objeto StatusNpc--------------- ");
-    }
-    override public bool OnUpdateAllStatus()
-    {
-        base.OnUpdateAllStatus();
-        //código propio de esta clase
-        return true;
-    }
-
-
-    protected new void Update()
-    {  
-        base.Update();
-        
-    }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////Funciones exclusivas  de esta clase
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private void InstaciateCommands()
-    {
-        
-    
-  
-
-    }
-
 
 public GAgent GetGoapAgent()
 {
