@@ -25,7 +25,7 @@ public class StatusNpcGuard : StatusNpc
     private const string ON_UPDATE_ALL_STATUS_NPC_GUARD = "ON_UPDATE_ALL_STATUS_NPC_GUARD";    
     private bool suscribeToOnUpdateAllStatusNpcGuard_ = false;
 
-    private const string ON_GOAP_BREAK_ONLY_THIS_NPC = "ON_GOAP_BREAK_ONLY_THIS_NPC";
+   
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -104,7 +104,7 @@ public class StatusNpcGuard : StatusNpc
     {
         if (other.gameObject.tag == "bullet")
         {                        
-            GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP            
+            GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_GAGENT_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP            
             SetHealth(GetHealth()-10);
             GetHudWorld().SetValue<int>("healthGuard",GetHealth());
             
@@ -112,7 +112,7 @@ public class StatusNpcGuard : StatusNpc
             {
 
                 Destroy(this.gameObject);   
-                 GetManagerMyEvents().TriggerEvent("OnVictory");                             
+                 GetManagerMyEvents().TriggerEvent("ON_VICTORY");                             
 
             }
                 
@@ -135,6 +135,8 @@ public class StatusNpcGuard : StatusNpc
     }
     protected new void Update()
     {
+       if (GetLevelManager().paused)
+        return;
         base.Update();
                     
             AppendCommand("StatusNpcGuardGoapStatesUpdate",this);

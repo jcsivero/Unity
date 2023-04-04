@@ -5,6 +5,51 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lagua_mat
+    second: {fileID: 2100000, guid: 2f9e8541f65802a459fba5d733bff70b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcall_mat
+    second: {fileID: 2100000, guid: 97b819ea0d69d394a867d3a3e933178f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcami_mat
+    second: {fileID: 2100000, guid: 3581a7fbb8d4eed4aa2a036a2f3dee5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcult1_mat
+    second: {fileID: 2100000, guid: 390913cf2f8bb8d41af8c76ff41063b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcult2_mat
+    second: {fileID: 2100000, guid: e5b28acf1d08b434288f69444431cf3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcult3_mat
+    second: {fileID: 2100000, guid: 8722e886ef67ad742987e7c102201cd8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcult46_mat
+    second: {fileID: 2100000, guid: 95591f6e5ad811248abd2df276494761, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lmont_mat.001
+    second: {fileID: 2100000, guid: 758a798c0e28a8b47900efae0484699b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lvega_mat.001
+    second: {fileID: 2100000, guid: 5894f988be5d5dc499a95174e4ffc5d6, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: lagua_BaseColor

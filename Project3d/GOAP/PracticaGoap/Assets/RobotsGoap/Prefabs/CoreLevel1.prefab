@@ -143,7 +143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 256922487335056054}
-  - component: {fileID: 256922487335056055}
+  - component: {fileID: 4903859529118327746}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -166,7 +166,7 @@ Transform:
   m_Father: {fileID: 256922487991730975}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &256922487335056055
+--- !u!114 &4903859529118327746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,6 +183,8 @@ MonoBehaviour:
   actualPlayer_: {fileID: 0}
   actualEnemy_: {fileID: 0}
   allGameObjects_: []
+  paused: 0
+  suscribeToOnPaused_: 0
 --- !u!1 &256922487442530936
 GameObject:
   m_ObjectHideFlags: 0

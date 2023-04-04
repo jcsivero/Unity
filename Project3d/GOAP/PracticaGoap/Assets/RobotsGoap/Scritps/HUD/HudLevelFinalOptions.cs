@@ -74,7 +74,7 @@ override public void UpdateHud()
 
 public void SetHudFinalText()
     {        
-        hudTextFinal_.text = GetValue<string>("HudTextfinal");
+        hudTextFinal_.text = GetValue<string>("HudTextFinal");
     }
 
      public void LoadGameMenu()

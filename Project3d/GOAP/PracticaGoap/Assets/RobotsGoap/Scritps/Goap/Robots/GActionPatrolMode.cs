@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GActionPatrolMode : GAction
-{    Vector3 goTo_ = Vector3.zero;
+{
   override public bool IsAchievableGiven(GoapStates conditions,bool planMode = false)
     {
         
@@ -43,9 +43,7 @@ public class GActionPatrolMode : GAction
         if (target == null)
             return false;*/
         status_.anim_.SetBool("Patrol",true);
-         target = GetLevelManager().gameObjectsByName_["Key"][0];        ///ahora el objetivo es la posición de la llave
-        goTo_= status_.GetAIController().CalculatePointTarget(status_.GetOrigin(),target,false,status_.GetNavMeshRadius());
-        
+         
         return true;
     }
 
@@ -57,8 +55,8 @@ public class GActionPatrolMode : GAction
     }
     override public  bool OnPerform()
     {
-        //status_.GetAIController().PatrolMode(status_,false);
-        status_.GetAIController().Seek(status_,goTo_);
+        status_.GetAIController().PatrolMode(status_);
+        
         return false; ///devuevlo false puesto que en modo patrol esta acción no debe de terminar nunca a  no ser que cambien las condiciones.
 
     }

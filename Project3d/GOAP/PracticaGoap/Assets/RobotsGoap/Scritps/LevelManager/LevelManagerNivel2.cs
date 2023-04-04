@@ -12,6 +12,7 @@ public class LevelManagerNivel2 : LevelManager
     override public void Start()
     {
         base.Start();
+        GetWorld().SetCountEnemies(0);
     }
 override public void InstaciateCommands()
     {

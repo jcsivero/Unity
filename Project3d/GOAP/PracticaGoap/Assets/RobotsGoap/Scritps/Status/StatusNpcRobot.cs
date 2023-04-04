@@ -23,8 +23,7 @@ public class StatusNpcRobot : StatusNpc
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private const string ON_UPDATE_ALL_STATUS_NPC_ROBOT = "ON_UPDATE_ALL_STATUS_NPC_ROBOT";    
     private bool suscribeToOnUpdateAllStatusNpcRobot_ = false;
-
-    private const string ON_GOAP_BREAK_ONLY_THIS_NPC = "ON_GOAP_BREAK_ONLY_THIS_NPC";
+    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////Métodos Sobreescritos
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -105,7 +104,7 @@ public class StatusNpcRobot : StatusNpc
     {
         if (other.gameObject.tag == "bullet")
         {
-            GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP
+            GetManagerMyEvents().TriggerEvent(this.gameObject, ON_GOAP_BREAK_ONLY_THIS_GAGENT_NPC); ///ejecuto el evento que provocará un cambio en el plan GOAP
             Debug.Log("colision detectada daño en robot " + GetHealth().ToString());
             SetHealth(GetHealth()-10);
             
@@ -117,8 +116,7 @@ public class StatusNpcRobot : StatusNpc
                 GetHudWorld().SetValue<int>("HudCountEnemies",GetWorld().GetCountEnemies());
 
                 GetWorld().SetOrAddTotalPoints(5);
-                GetHudWorld().SetValue<int>("HudTotalPoints",GetWorld().GetTotalPoints());
-                
+                GetHudWorld().SetValue<int>("HudTotalPoints",GetWorld().GetTotalPoints());                 
                 Destroy(this.gameObject);
 
             }
@@ -143,6 +141,9 @@ public class StatusNpcRobot : StatusNpc
     }
     protected new void Update()
     {
+        if (GetLevelManager().paused)
+            return;
+
         base.Update();
             AppendCommand("StatusNpcRobotGoapStatesUpdate",this);
             AppendCommand("StatusNpcRobotHudUpdate",this);    

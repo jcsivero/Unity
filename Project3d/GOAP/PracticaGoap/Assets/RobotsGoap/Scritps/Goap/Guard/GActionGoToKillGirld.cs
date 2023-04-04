@@ -49,7 +49,7 @@ public class GActionGoToKillGirld : GAction
      if (reason == Reason.success) ///si terminó correctamente y no fue por cambiode condicoines o evento de interrupción, indico que tengo el arma.
      {
            // Destroy(target);
-        GetManagerMyEvents().TriggerEvent("OnLose");
+        GetManagerMyEvents().TriggerEvent("ON_LOSE");
     }
             
         
