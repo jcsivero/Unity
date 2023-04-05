@@ -29,8 +29,7 @@ StatusNpc : Status
     public string wayPointTag_;  
     public int[] wayPointToGoOrder_; ///indica el orden de los WayPoints a visitar, en caso de tenerlos. Si su tamaño es cero, se visitarán
     ///todos los WayPoints detectados con la etiqueta que use este NPC. La indicada por tagWayPointsForThisNpc_;
-    public  float wayPointsAccuracy_=1;    
-
+    public  float wayPointsAccuracy_=1;
         
     private Vector3  wayPointsPos_; ///posición actual de su transforn del waypoint actual.
     private Vector3  wayPointsPosBase_; ///posición del Waypoint actual respecto a la base del colllider y dirección hacia un objetivo, obtenido mediante la funcion de AIController llamda
@@ -83,9 +82,15 @@ StatusNpc : Status
     [Header("Behavior")]           
     [Header("Behavior: Flee Mode")]      
     [Tooltip("En el modo Flee, distancia hacia el nuevo punto de huida")]
+    public bool FleeCollisionControl_ = false;
     public float sizeFleeVector_ = 20.0f;
 
     [Header("Behavior: Wander Mode")]          
+
+     public bool WanderCollisionControl_ = false;
+    [Tooltip("Se utilizará la posición de este GameObject para pivotar alrededor de él en el modo Wander, según radio y distancia")]
+    public GameObject aroundPivot_ ; 
+
     [Tooltip("Distancia a la que colocar el punto calculado en base al radio, ese será el punto definitivo al que se realizará el patrullaje.")]
     public float wanderDistance =1 ;
     [Tooltip("Radio al que se alejará el punto aleatorio obtenido para patrullaje")]

@@ -66,33 +66,13 @@ private bool MovementApply(StatusNpc status,Vector3 location,float customizeBrak
         Quaternion rot =  Quaternion.LookRotation(location-status.transform.position);
         rot.z = 0; /// solo quiero rotar en el eje Y.
         rot.x = 0; /// 
-        status.transform.rotation = Quaternion.Slerp(status.transform.rotation,rot, status.GetSpeedRotation() * Time.deltaTime);                    
-        if (status.realMovement_)
-        {
-            ///truco que se me ocurrió de los ángulos agudos para saber si me he pasado un corner por tener baja rotación o lo que sea, y seguir automáticamente hacia el
+        status.transform.rotation = Quaternion.Slerp(status.transform.rotation,rot, status.GetSpeedRotation() * Time.deltaTime);     
+                    ///truco que se me ocurrió de los ángulos agudos para saber si me he pasado un corner por tener baja rotación o lo que sea, y seguir automáticamente hacia el
             ///siguiente corner, en lugar de quedarse intentando llegar dando vueltas. Esto debería de funcionar incluso aunque no se haya llegado a la distancia de velocidad
             //del corner correspondiente. Esto es útil solo con la variable de movimiento real activao realMovement y cuando se encuentra en situaciones de giros muy pronunciados
             ///que no se compensan con la velocidad de rotación asignada.
 
-            
-
-          /* if (status.GetNavMeshPathCurrentIndex()+2 <= status.GetNavMeshPath().corners.Length-1) 
-            {  ///solo si quedan los cornes suficiente para poder triangular.
-                Vector3 myPosition = status.transform.position;
-                myPosition.y -=  status.GetNavMeshPointSurfaceToPivotNpc();         
-                Vector3 vectorNpcToNextCorner = location - myPosition;      
-
-                Vector3 vectorCornerToCornerPlus = status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+2] - location;
-                float angle = Vector3.Angle(-vectorNpcToNextCorner,vectorCornerToCornerPlus);                
-                if (debugMode_)
-                    Debug.Log("Seek: Ángulo entre el opuesto de vectorNpcToNextCorner y vectorCornerToCornerPlus: " + angle.ToString());                
-                if (angle < 90)
-                    return true;
-
-                
-
-            }*/
-            
+        
               ///solo si quedan los cornes suficiente para poder triangular.
                 Vector3 myPosition = status.transform.position;
                 myPosition.y -=  status.GetNavMeshPointSurfaceToPivotNpc();         
@@ -109,12 +89,14 @@ private bool MovementApply(StatusNpc status,Vector3 location,float customizeBrak
                 if (angle < 90)
                     return true;
 
-                status.transform.Translate(0, 0, status.MovementValue());                
-        }               
+        if (status.realMovement_)                
+                status.transform.Translate(0, 0, status.MovementValue());                         
         else
         {
-            location.y += status.GetNavMeshPointSurfaceToPivotNpc();         
-            status.transform.position = status.transform.position + (location -status.transform.position).normalized * status.MovementValue();            
+            
+            location.y += status.GetNavMeshPointSurfaceToPivotNpc();                     
+            status.transform.position = status.transform.position + (location -status.transform.position).normalized * status.MovementValue();  
+
         }
         return false;
 
@@ -175,7 +157,10 @@ private bool GetPath(StatusNpc status, Vector3 location)
         }
 
 }
-private bool RecalculatePath(StatusNpc status, Vector3 location)
+
+///collisionControl será un raycas que se aplicará desde el objeto hacia la localización y en caso de que se produzca colisión, se seguirá recalculando una nueva
+//ruta, con el mismo procdimiento de ir rotando 5 grados.
+private bool RecalculatePath(StatusNpc status, Vector3 location,bool collisionControl = false)
 
 {
     if (status.debugMode_)
@@ -185,7 +170,14 @@ private bool RecalculatePath(StatusNpc status, Vector3 location)
     status.pathRecalculated_ = false; 
     bool pathValid = GetPath(status,location);
     
-    if (pathValid)  ///intento conseguir primero el path, asumiendo que se da una posición correcta.
+    if (pathValid && collisionControl)
+         if (ThereIsObstacule(status,status.GetNavMeshTargetPosition()))
+         {   pathValid = false;
+            status.NavMeshErasePath();
+            Debug.Log("<color=red Colisión detectada</color");
+         }
+
+    if (pathValid)  ///intento conseguir primero el path, asumiendo que se da una posición correcta.       
         return true;
 
     if (!status.recalculatePathAutomatic)
@@ -237,6 +229,14 @@ private bool RecalculatePath(StatusNpc status, Vector3 location)
                                 
         count++;
         pathValid =  GetPath(status,location); ///intento con la nueva posición    
+        if (pathValid && collisionControl)
+             if (ThereIsObstacule(status,status.GetNavMeshTargetPosition()))
+             {
+                pathValid = false;
+                status.NavMeshErasePath();
+                Debug.Log("<color=red Colisión detectada</color");
+             }
+                
     }
                  
     if (pathValid)
@@ -247,7 +247,7 @@ private bool RecalculatePath(StatusNpc status, Vector3 location)
 }
 
 
-public bool Seek(StatusNpc status,Vector3 location,float customizeBrakingDistance=Mathf.Infinity,int maxCorner=0 )///devolverá true si llegó al destino.
+public bool Seek(StatusNpc status,Vector3 location,float customizeBrakingDistance=Mathf.Infinity,bool collisionControl = false)///devolverá true si llegó al destino.
 {
     bool atDestination = false; ///si he llegado al final del trayecto, esta variable será true 
 
@@ -269,7 +269,7 @@ public bool Seek(StatusNpc status,Vector3 location,float customizeBrakingDistanc
             {
                 if (status.debugMode_)
                     Debug.Log("Seek: objetivo posicion cambiada : " );
-                if (RecalculatePath(status,location))    
+                if (RecalculatePath(status,location,collisionControl))    
                     if (status.GetNavMeshUseSetDestination())
                             status.GetNavMeshAgent().SetPath(status.GetNavMeshPath()); ///en caso de usar SetDestination, le asigno el 
                             ///path obtenido para ejecutarse en background                        
@@ -285,7 +285,7 @@ public bool Seek(StatusNpc status,Vector3 location,float customizeBrakingDistanc
                     Debug.Log("Seek: tiene path");
 
                     ///TO DO. Aquí pondré la llamada a la función que controle colisiones, u otras propiedades para movimiento
-                    ////como una especie de filtro previo antes de realizr el movimiento. 
+                    ////como una especie de filtro previo antes de realizr el movimiento. Para evitar tropezar contra objetos que se interpongan en el camino 
 
                     if (!status.GetNavMeshUseSetDestination()) ///si no uso SetDestination, aplico el movimiento manualmente recorriendo los corners.    
                         if (MovementApply(status, status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+1],customizeBrakingDistance))
@@ -297,15 +297,12 @@ public bool Seek(StatusNpc status,Vector3 location,float customizeBrakingDistanc
                             if (status.GetNavMeshPathCurrentIndex() >= status.GetNavMeshPath().corners.Length-1)
                             {
                                 if (status.debugMode_)
-                                    Debug.Log("Seek: llego al final del path por primera vez: ");
-                                //status.GetNavMeshPath().ClearCorners(); ///elimino los cornes anteriores para crear nuevos.
+                                    Debug.Log("Seek: llego al final del path por primera vez: ");                                
                                 status.NavMeshErasePath();   
                                 atDestination = true;      
-                                status.pathRecalculated_ = false;                       
                             }
                                             
                         }
-
                 
             }
             else
@@ -315,7 +312,7 @@ public bool Seek(StatusNpc status,Vector3 location,float customizeBrakingDistanc
 
                 status.NavMeshErasePath();   
                 atDestination = true;      
-                status.pathRecalculated_ = false;   
+   
             }
                                       
         }
@@ -347,18 +344,18 @@ public void Flee(StatusNpc status,Vector3 location)
           if (((status.GetNavMeshUseSetDestination()) && (status.GetNavMeshAgent().hasPath)) && (status.GetNavMeshAgent().remainingDistance > status.GetNavMeshAgent().stoppingDistance )|| ((!status.GetNavMeshUseSetDestination()) && (status.GetNavMeshPath().corners.Length > 1))) 
           {
                         
-            if (status.GetNavMeshPathCurrentIndex() == 0) ///me aseguro que solo huye hacia el prmer corner conseguido, por si consiguió una ruta que atravesara algún muro debido a un flee vector amplio
-                Seek(status, status.GetNavMeshTargetPosition(),0);  
-            else  
-                Seek(status, status.GetOrigin().transform.position + fleeVector,0);                     
+            //if (status.GetNavMeshPathCurrentIndex() == 0) ///me aseguro que solo huye hacia el prmer corner conseguido, por si consiguió una ruta que atravesara algún muro debido a un flee vector amplio
+                Seek(status, status.GetNavMeshTargetPosition(),0,status.FleeCollisionControl_);  
+            //else  
+              //  Seek(status, status.GetOrigin().transform.position + fleeVector,0,status.FleeCollisionControl_);                     
           }
 
           else
-            Seek(status, status.GetOrigin().transform.position + fleeVector,0);            
+            Seek(status, status.GetOrigin().transform.position + fleeVector,0,status.FleeCollisionControl_);            
         else
-          Seek(status, status.GetOrigin().transform.position + fleeVector,0);            
+          Seek(status, status.GetOrigin().transform.position + fleeVector,0,status.FleeCollisionControl_);            
     else
-        Seek(status, status.GetOrigin().transform.position + fleeVector,0);     
+        Seek(status, status.GetOrigin().transform.position + fleeVector,0,status.FleeCollisionControl_);     
                 
             
 }
@@ -383,10 +380,10 @@ public void Pursue(StatusNpc status)
 
  ///función para deambular simulando un patrullaje sin waypoints. Puede ser arbitrario con un radio alrededor del NPC o alrededor de un pivotde
  //representado por la posición de un gameobject.
-public void Wander(StatusNpc status,float wanderJitter = 1,GameObject aroundPivot = null)
+public void Wander(StatusNpc status,float wanderJitter = 1)
 {
-        if (aroundPivot == null)
-        aroundPivot = status.GetOrigin();     
+        if (status.aroundPivot_ == null)
+        status.aroundPivot_ = status.GetOrigin();     
 
     if (status.debugMode_)
         Debug.Log("Seek: =========================================Modo Wander");
@@ -411,24 +408,23 @@ public void Wander(StatusNpc status,float wanderJitter = 1,GameObject aroundPivo
         Vector3 targetLocal = wanderTarget + new Vector3(0, 0, draftWanderDistance);
     
 
-        targetWorld = aroundPivot.transform.TransformPoint(targetLocal);
-        Seek(status,targetWorld,0);
+        targetWorld = status.aroundPivot_.transform.TransformPoint(targetLocal);
+        Seek(status,targetWorld,0,status.WanderCollisionControl_);
 
     }
     else
     {
             if (status.debugMode_)
-                Debug.DrawRay(aroundPivot.transform.position,status.GetNavMeshTargetPosition() - aroundPivot.transform.position ,Color.black);            
+                Debug.DrawRay(status.aroundPivot_.transform.position,status.GetNavMeshTargetPosition() - status.aroundPivot_.transform.position ,Color.black);            
             
-            if (status.GetNavMeshPathCurrentIndex() == 0)  ///aquí me aseguro de que solo realiza movimiento hasta el primer corner obtenido, para evitar
+            
+           // if (status.GetNavMeshPathCurrentIndex() == 0)  ///aquí me aseguro de que solo realiza movimiento hasta el primer corner obtenido, para evitar
             ///que por ejemplo estuviera patrullando cerca de un  muro, y si se hubiea elegido un radio amplio, podría dar un punto de patrullaje hacia el otro
             ///lado del muro.
-                Seek(status, status.GetNavMeshTargetPosition(),0);  ///voy a la posición de destino y no tengo en cuenta distancia de frenado.
-            else 
-                status.NavMeshErasePath(); 
-           
-
-           // Seek(status,status.GetNavMeshTargetPosition(),0);  ///voy a la posición de destino y no tengo en cuenta distancia de frenado.
+                Seek(status, status.GetNavMeshTargetPosition(),0,status.WanderCollisionControl_);  ///voy a la posición de destino y no tengo en cuenta distancia de frenado.
+            //else 
+              //  status.NavMeshErasePath(); 
+                
     }
 
 
@@ -626,6 +622,19 @@ public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool in
     
 }
 
+public bool ThereIsObstacule(StatusNpc status,Vector3 target)
+{   
+    //Vector3 fwd = status.transform.TransformDirection(Vector3.forward);
+    Debug.Log("<color=red> Seek: Comprobando obstáculos </color>");
+     Vector3 myPosition;
+    myPosition = status.transform.position;
+    myPosition.y -= status.GetNavMeshPointSurfaceToPivotNpc();         
+    Debug.DrawRay(myPosition,target -myPosition, Color.white,20);
+    return  Physics.Raycast(myPosition,target -myPosition,(target -myPosition).magnitude);
+    
+    
+    
+}
 public bool CanSeeTarget(Status status,GameObject target)
 {
     RaycastHit raycastInfo;

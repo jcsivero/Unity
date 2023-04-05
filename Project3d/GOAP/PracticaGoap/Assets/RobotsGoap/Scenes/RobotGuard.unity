@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.6
+    agentRadius: 0.3
     agentHeight: 1
     agentSlope: 45
     agentClimb: 0.1
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.2
+    cellSize: 0.1
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -1826,7 +1826,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382592374}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9, y: 11.29, z: 21.6}
+  m_LocalPosition: {x: -9, y: 11.01, z: 21.6}
   m_LocalScale: {x: 6.935202, y: 4.355306, z: 7.3041}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1903,8 +1903,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382592374}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &382592380
-BoxCollider:
+--- !u!64 &382592380
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1913,9 +1913,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.16, y: 2, z: 1.16}
-  m_Center: {x: -0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &420355116
 GameObject:
   m_ObjectHideFlags: 0
@@ -5808,7 +5809,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: wanderRadius
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -5833,7 +5834,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: wanderDistance
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -5849,6 +5850,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -9927,7 +9933,7 @@ PrefabInstance:
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
@@ -9947,6 +9953,11 @@ PrefabInstance:
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: brakingDistance_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
+      propertyPath: FleeCollisionControl_
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
