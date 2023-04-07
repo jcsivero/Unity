@@ -171,6 +171,7 @@ private bool RecalculatePath(StatusNpc status, Vector3 location,bool collisionCo
     bool pathValid = GetPath(status,location);
     
     if (pathValid && collisionControl)
+        
          if (ThereIsObstacule(status,status.GetNavMeshTargetPosition()))
          {   pathValid = false;
             status.NavMeshErasePath();
@@ -184,16 +185,17 @@ private bool RecalculatePath(StatusNpc status, Vector3 location,bool collisionCo
         return false; ///devuelvo que no se ha conseguido path. Aquí no he intentado recalcularlo.
 
     
-    int count = 1; // giro de 5 en 5 grados hasta completar una circunferencia o encontar un path válido.
+    int count = 1; // giro de 10 en 10 grados hasta completar una circunferencia o encontar un path válido.
     Vector3 previousLeftVector = Vector3.zero;
     Vector3 previousRightVector = Vector3.zero;
-    bool tryLeftOrRight = true; ///primero comienzo a probar hacia la derecha(true) después izquierda (false)
-
+    
+    int tryLeftOrRight = Random.Range(0,2); /// aleatoriamente eligo el lado hacia el que probar. 1 derecha  ,0 izquierda
+    Debug.Log("numero aleatorio : " +tryLeftOrRight.ToString());
     ///El método que usa para conseguir ruta alternativas, es ir alternando 5 grados a la derecha, 5 a la izquierda, así sucesivamente hasta encontrar una posición válida
-    Quaternion rotationRight= Quaternion.AngleAxis(5,Vector3.up);
-    Quaternion rotationLeft= Quaternion.AngleAxis(-5,Vector3.up);
+    Quaternion rotationRight= Quaternion.AngleAxis(10,Vector3.up);
+    Quaternion rotationLeft= Quaternion.AngleAxis(-10,Vector3.up);
 
-    while ((!pathValid) && (count < 71))
+    while ((!pathValid) && (count < 35))
     {        
        
         ///obtengo una posición 5 º desplazado a la derecho o a la izquierda
@@ -204,11 +206,12 @@ private bool RecalculatePath(StatusNpc status, Vector3 location,bool collisionCo
                 previousLeftVector = location - status.GetOrigin().transform.position; 
         }
 
-        if (tryLeftOrRight)
+        if (tryLeftOrRight==1)
         {
             previousRightVector = rotationRight *  previousRightVector;
             location = previousRightVector + status.GetOrigin().transform.position; ///               
-            tryLeftOrRight = false;
+            tryLeftOrRight = Random.Range(0,2);
+            Debug.Log("numero aleatorio : " +tryLeftOrRight.ToString());
             if (status.debugMode_)
             {
                 Debug.DrawRay(status.GetOrigin().transform.position,previousRightVector,Color.yellow,20);
@@ -219,7 +222,8 @@ private bool RecalculatePath(StatusNpc status, Vector3 location,bool collisionCo
         {
             previousLeftVector = rotationLeft * previousLeftVector;
             location = previousLeftVector + status.GetOrigin().transform.position; ///         
-            tryLeftOrRight = true;       
+            tryLeftOrRight = Random.Range(0,2);     
+            Debug.Log("numero aleatorio : " +tryLeftOrRight.ToString());  
             if (status.debugMode_)
             {
                 Debug.DrawRay(status.GetOrigin().transform.position,previousLeftVector,Color.red,20);

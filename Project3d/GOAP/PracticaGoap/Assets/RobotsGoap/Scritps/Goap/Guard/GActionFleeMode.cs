@@ -38,7 +38,7 @@ private float speedPrevious_;
     {
         status_.anim_.SetBool("Run",true);
         speedPrevious_ = status_.GetSpeedMax();
-        status_.SetSpeedMax(speedPrevious_*2);   
+        status_.SetSpeedMax(speedPrevious_*4);   
         GetWorldStates().SetOrAddState("protectme",GenericData.Create<bool>(true)); ///indico que deben de protegerme el resto de NPCS
         status_.NavMeshErasePath(); //borro cualquier posible path para que funcione correctamente el metodo flee;
         return true;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -242,6 +242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
       propertyPath: navMeshUseSetDestination_
       value: 0
       objectReference: {fileID: 0}
@@ -365,6 +370,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e0b87de4662404470bf7b97555adf19b, type: 2}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Height
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.49
+      objectReference: {fileID: 0}
     - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: m_Center.y
@@ -1037,7 +1052,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -1068,6 +1083,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -2150,7 +2170,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -2181,6 +2201,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -3058,7 +3083,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -3089,6 +3114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -3348,7 +3378,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -3379,6 +3409,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -3832,7 +3867,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -3863,6 +3898,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -4976,7 +5016,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -5007,6 +5047,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -6497,6 +6542,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
       propertyPath: navMeshUseSetDestination_
       value: 0
       objectReference: {fileID: 0}
@@ -6620,6 +6670,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 25746e760d9d5410f81414b307db1cb9, type: 2}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Height
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.49
+      objectReference: {fileID: 0}
     - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: m_Center.y
@@ -6987,7 +7047,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -7018,6 +7078,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -7341,6 +7406,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
       propertyPath: navMeshUseSetDestination_
       value: 0
       objectReference: {fileID: 0}
@@ -7464,6 +7534,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ac2c7c14fabb248dd856512df5e6107c, type: 2}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Height
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.49
+      objectReference: {fileID: 0}
     - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: m_Center.y
@@ -8038,7 +8118,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -8069,6 +8149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -9829,7 +9914,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -9860,6 +9945,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -10261,6 +10351,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
       propertyPath: navMeshUseSetDestination_
       value: 0
       objectReference: {fileID: 0}
@@ -10384,6 +10479,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e0b87de4662404470bf7b97555adf19b, type: 2}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Height
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.49
+      objectReference: {fileID: 0}
     - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: m_Center.y
@@ -10614,7 +10719,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -10645,6 +10750,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -11848,7 +11958,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -11879,6 +11989,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -12163,7 +12278,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -12194,6 +12309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -16215,7 +16335,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -16246,6 +16366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -17040,6 +17165,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
       propertyPath: navMeshUseSetDestination_
       value: 0
       objectReference: {fileID: 0}
@@ -17163,6 +17293,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 56c492eb0711d455eadd80fb5b802d73, type: 2}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Height
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.49
+      objectReference: {fileID: 0}
     - target: {fileID: 4978256945662902771, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: m_Center.y
@@ -18799,7 +18939,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -18830,6 +18970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -19599,7 +19744,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -19630,6 +19775,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -20586,7 +20736,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -20617,6 +20767,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -21609,7 +21764,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -21640,6 +21795,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -22611,7 +22771,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -22642,6 +22802,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -22901,7 +23066,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -22932,6 +23097,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -23380,7 +23550,7 @@ PrefabInstance:
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
       propertyPath: realMovement_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -23411,6 +23581,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetMarginPosition_
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
+        type: 3}
+      propertyPath: WanderCollisionControl_
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1940958576901071660, guid: 53b92cd87441cbf40951e5ca595a11ec,
         type: 3}
@@ -23740,12 +23915,12 @@ PrefabInstance:
     - target: {fileID: 3803829437685486574, guid: a6c9bb05f5401a543a1fd2e5d8a7009a,
         type: 3}
       propertyPath: debugModeForce_
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3803829437685486574, guid: a6c9bb05f5401a543a1fd2e5d8a7009a,
         type: 3}
       propertyPath: simulationVelocity_
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4149927827315117666, guid: a6c9bb05f5401a543a1fd2e5d8a7009a,
         type: 3}
@@ -23883,8 +24058,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
+      propertyPath: visDistance_
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
       propertyPath: realMovement_
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
@@ -23899,11 +24079,16 @@ PrefabInstance:
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: sizeFleeVector_
-      value: 30
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
         type: 3}
       propertyPath: brakingDistance_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
+        type: 3}
+      propertyPath: FleeCollisionControl_
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5246877150567236491, guid: 20a40310b38f21c40b3b44ef92af5c9f,
