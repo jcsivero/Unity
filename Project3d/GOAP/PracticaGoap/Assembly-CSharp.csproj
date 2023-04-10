@@ -133,6 +133,8 @@
      <Compile Include="Assets\RobotsGoap\RMLibUnity\GameManager\Events\ManagerMyEvents.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\RobotsGoap\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+     <Compile Include="Assets\RobotsGoap\RMLibUnity\GameManager\CameraController.cs" />
+     <Compile Include="Assets\RobotsGoap\RMLibUnity\GameManager\MapActions.cs" />
      <None Include="Assets\RobotsGoap\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\RobotsGoap\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
