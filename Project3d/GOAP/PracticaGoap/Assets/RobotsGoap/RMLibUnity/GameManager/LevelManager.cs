@@ -69,8 +69,8 @@ override public void Start()
             InstaciateCommands();  
         
         Time.timeScale = GetGameManager().simulationVelocity_; ///escala de simulación, de velocidad del juego.
-       // Cursor.visible = false;
-       // Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
         paused = false;
         GetLevelManager().gameObjectsByName_["Camera2"][0].SetActive(false); ///desactivo la camara 2
 
@@ -128,7 +128,7 @@ public bool OnPause()
     else
     {
         Time.timeScale = GetGameManager().simulationVelocity_;
-        //Cursor.visible = false;
+        Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;                    
         GetHudLevel().gameObject.SetActive(false);            
 
