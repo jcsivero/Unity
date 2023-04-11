@@ -14,6 +14,8 @@ public class LevelManagerNivel1 : LevelManager
         base.Start();
         GetWorld().SetCountEnemies(0);
         GetWorld().SetTotalPoints(0);
+        
+         GameObject.Find("CanvasMobile").SetActive(GetGameManager().mobilVesion_);
     }
 override public void InstaciateCommands()
     {

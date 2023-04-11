@@ -8,6 +8,7 @@ public class HudWorldInitialOptions : HudWorldBase
 {
 
 [SerializeField] private Text  hudTextDebug_;
+[SerializeField] private Text  hudTextMobilVersion_;
     override public  void Awake()
     {
         base.Awake();           
@@ -81,5 +82,20 @@ public class HudWorldInitialOptions : HudWorldBase
         
         Debug.Log("Saliendo");
         Application.Quit(0);
+    }
+        public void OnOffMobilVersion()
+    {
+        GetGameManager().mobilVesion_ = !GetGameManager().mobilVesion_;
+
+        SetHudMobilVersion();            
+    }
+
+    private void SetHudMobilVersion()
+    {
+          if (GetGameManager().mobilVesion_)
+            hudTextMobilVersion_.text = "Mobil Version ON";
+        else 
+            hudTextMobilVersion_.text = "Mobil Version OFF";
+            
     }
 }

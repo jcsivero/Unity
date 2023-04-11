@@ -26,7 +26,7 @@ public class BaseMono : MonoBehaviour
         
 
         if (!ReadyEngine())
-            Debug.Log("Engine no funcional. LevelManager no cargado o función GetInitialInformation de LevelManager no ejecutada con éxito");
+            Debug.Log("<color=red> Error Grave: Engine no funcional. LevelManager no cargado o función GetInitialInformation de LevelManager no ejecutada con éxito</color>");
         
             
     }        

@@ -69,8 +69,8 @@ override public void Start()
             InstaciateCommands();  
         
         Time.timeScale = GetGameManager().simulationVelocity_; ///escala de simulación, de velocidad del juego.
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
+       // Cursor.lockState = CursorLockMode.Locked;
         paused = false;
         GetLevelManager().gameObjectsByName_["Camera2"][0].SetActive(false); ///desactivo la camara 2
 
@@ -97,17 +97,6 @@ virtual public void OnDisable()
     GetManagerMyEvents().StopListening(ON_PAUSE,OnPause);
     suscribeToOnPaused_ = false;
       
-}
-/// <summary>
-/// Update is called every frame, if the MonoBehaviour is enabled.
-/// </summary>
-void Update()
-{
-    if (Input.GetKeyDown(KeyCode.Escape))
-    {
-         Debug.Log("ejecutando on_pause");
-         GetManagerMyEvents().TriggerEvent("ON_PAUSE");  
-    }
 }
 
 
@@ -139,8 +128,8 @@ public bool OnPause()
     else
     {
         Time.timeScale = GetGameManager().simulationVelocity_;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;                    
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;                    
         GetHudLevel().gameObject.SetActive(false);            
 
     }
@@ -155,7 +144,7 @@ virtual public bool GetInitialInformation()
 
         if (GetGameManager().hudWorld_ == null)
         {
-            Debug.Log("!!!!!!!!!Error. GameObject con nombre HudWorld no econtrado o el componente HudWorld.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.");
+            Debug.Log("<color=red> Error grave: !!!!!!!!!Error. GameObject con nombre HudWorld no econtrado o el componente HudWorld.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.</color>");
             return false;
         }
      
@@ -164,13 +153,24 @@ virtual public bool GetInitialInformation()
         
         if (hudLevel_ == null)
         {
-            Debug.Log("!!!!!!!!!Error. GameObject con nombre HudLevel no econtrado o el componente HudLevel.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.");            
+            Debug.Log("<color=red>Error grave: !!!!!!!!!Error. GameObject con nombre HudLevel no econtrado o el componente HudLevel.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.</color>");            
             return false;
         }
 
         ///asigno actual player, actual enemi ,etc según valores de controlgameobjects. por el momento directamente
         if (actualPlayer_ == null)
             actualPlayer_ = GameObject.Find("Player");///por defecto el usuairo llamado player
+
+        GetGameManager().inputController_ = GameObject.Find("InputController").GetComponentInChildren<InputController>();        
+
+        if (GetGameManager().inputController_ == null)
+        {
+            Debug.Log("<color=red> Error grave: !!!!!!!!!Error. GameObject con nombre InputController no econtrado o el componente InputController.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.</color>");
+            return false;
+        }
+             
+        GetGameManager().inputController_.characterControllerPlayer_ = actualPlayer_.GetComponent<CharacterController>();
+        GetGameManager().inputController_.cameraController_ = actualPlayer_.GetComponentInChildren<Camera>();
 
         ControlGameObjects controlGameObjects;
         List<GameObject> refToGameObjets;

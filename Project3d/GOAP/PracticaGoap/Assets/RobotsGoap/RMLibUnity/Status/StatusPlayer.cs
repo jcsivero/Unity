@@ -54,7 +54,7 @@ override public int  GetHealth()
 
         base.Update();
         
-        if (Input.GetMouseButtonDown(0))
+        if (GetGameManager().inputController_.attack_)
              Fire();
         
     }

@@ -13,6 +13,7 @@ public enum DebugModeForce ///tipo de depuración
 [RequireComponent(typeof (World))]
 [RequireComponent(typeof (AIController))]
 
+
 public class GameManager :BaseMono
 {
     
@@ -20,6 +21,8 @@ public class GameManager :BaseMono
     public float simulationVelocity_ = 1; 
     public World world_;
     public HudWorldBase hudWorld_;
+
+    public InputController inputController_;
 
     public LevelManager levelManager_;
  
@@ -29,6 +32,7 @@ public class GameManager :BaseMono
 
     [Tooltip("0 Forzar no depuración, 1 Forzar Depuración, 2 Personalizado por componente.")] 
     public DebugModeForce debugModeForce_ = DebugModeForce.customize;
+    public bool mobilVesion_ = false;
     private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";    
     public  bool readyEngine_ = false; 
     public  bool firstUpdate_ = true; 
@@ -86,6 +90,8 @@ public class GameManager :BaseMono
             world_ = GetComponent<World>();            
             
             aiController_ = GetComponent<AIController>();
+            
+            
 
             commands_ = new Commands();
 
@@ -118,7 +124,7 @@ public class GameManager :BaseMono
         base.Start();
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
         
-                
+        
     //aquí ya estoy seguro de que están todas las suscricipones a eventos hechas.            
     
     }    
@@ -136,6 +142,12 @@ public class GameManager :BaseMono
             firstUpdate_ = false;
         }
         
+        if (inputController_.escape_)
+        {
+            Debug.Log("ejecutando on_pause");
+            GetManagerMyEvents().TriggerEvent("ON_PAUSE");  
+        }
+
         GetHudWorld().UpdateHud();
         GetHudLevel().UpdateHud();
         ExecuteCommands(); ///ejecuto todos los comandos que estén en cola.
@@ -153,7 +165,7 @@ public class GameManager :BaseMono
 
             if (GetGameManager().levelManager_ == null)
             {
-                Debug.Log("!!!!!!!!!Error. GameObject con nombre LevelManager no econtrado o el componente LevelManager.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.");                
+                Debug.Log("<color=red>Error grave: !!!!!!!!!Error. GameObject con nombre LevelManager no econtrado o el componente LevelManager.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.</color>");                
                 GetGameManager().readyEngine_ = false;
             }
             else 
