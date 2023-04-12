@@ -53,7 +53,7 @@ MonoBehaviour:
   inputController_: {fileID: 0}
   levelManager_: {fileID: 0}
   aiController_: {fileID: 0}
-  debugModeForce_: 1
+  debugModeForce_: 0
   mobilVesion_: 0
   readyEngine_: 0
   firstUpdate_: 1

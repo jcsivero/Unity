@@ -69,10 +69,13 @@ override public void Start()
             InstaciateCommands();  
         
         Time.timeScale = GetGameManager().simulationVelocity_; ///escala de simulación, de velocidad del juego.
-        Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;        
+        if (!GetGameManager().mobilVesion_)
+            Cursor.lockState = CursorLockMode.Locked;
+        else        
+            Cursor.lockState = CursorLockMode.None;
         paused = false;
-        GetLevelManager().gameObjectsByName_["Camera2"][0].SetActive(false); ///desactivo la camara 2
+
 
         if (!suscribeToOnPaused_)        
             OnEnable();         
@@ -129,7 +132,11 @@ public bool OnPause()
     {
         Time.timeScale = GetGameManager().simulationVelocity_;
         Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;                    
+        if (!GetGameManager().mobilVesion_)
+            Cursor.lockState = CursorLockMode.Locked;
+        else        
+            Cursor.lockState = CursorLockMode.None;        
+        
         GetHudLevel().gameObject.SetActive(false);            
 
     }
@@ -168,9 +175,13 @@ virtual public bool GetInitialInformation()
             Debug.Log("<color=red> Error grave: !!!!!!!!!Error. GameObject con nombre InputController no econtrado o el componente InputController.cs o clase heredada dentro de ese gameobject o alguno de sus hijos.</color>");
             return false;
         }
-             
-        GetGameManager().inputController_.characterControllerPlayer_ = actualPlayer_.GetComponent<CharacterController>();
-        GetGameManager().inputController_.cameraController_ = actualPlayer_.GetComponentInChildren<Camera>();
+
+        if (actualPlayer_ != null)             
+        {
+            GetGameManager().inputController_.characterControllerPlayer_ = actualPlayer_.GetComponent<CharacterController>();
+            GetGameManager().inputController_.cameraController_ = actualPlayer_.GetComponentInChildren<Camera>();
+
+        }
 
         ControlGameObjects controlGameObjects;
         List<GameObject> refToGameObjets;

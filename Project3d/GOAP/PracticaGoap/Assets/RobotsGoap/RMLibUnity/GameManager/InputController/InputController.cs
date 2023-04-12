@@ -16,7 +16,7 @@ public class InputController : BaseMono
     public float jumpHeight_= 2;
     public float speed_=3.0f;
 
-    public float sensitivyX = 50;
+    public float sensitivyX = 80;
 
     public float sensitivyY = 50;
     
@@ -60,29 +60,43 @@ public class InputController : BaseMono
         mapActions_.Enable();
         mapActions_.Movement.Enable();
         
+        if (GetGameManager().mobilVesion_) ///la sensibilidad para versiones móviles la divido entre 3, porque si no, sería demasiado movimiento para los gestos
+        {
+            sensitivyX /= 5;
+            sensitivyY /= 5;
+        }
+
+            
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         gravity_ = gravityMultiplier_ * -9.84f;
+        if (characterControllerPlayer_ != null)
+        {
+            InputJump();
+            InputMove();
+            InputMoveMouse();
+            InputAttack();
+            InputEscape();
 
-        InputJump();
-        InputMove();
-        InputMoveMouse();
-        InputAttack();
-        InputEscape();
+            characterControllerPlayer_.transform.Rotate(Vector3.up * mouseX_);
+
+            characterControllerPlayer_.Move( characterControllerPlayer_.transform.forward * moveY_ + characterControllerPlayer_.transform.right * moveX_);                
+            playerVelocity_.y += gravity_ * Time.deltaTime;
+            characterControllerPlayer_.Move(playerVelocity_ * Time.deltaTime);
+        }
+        
+
         if (cameraController_!= null)
         {
             xRotation_ -= mouseY_;
             xRotation_ = Mathf.Clamp(xRotation_,-90,90);
             cameraController_.transform.localRotation = Quaternion.Euler(xRotation_,0,0);
         }
-        characterControllerPlayer_.transform.Rotate(Vector3.up * mouseX_);
 
-        characterControllerPlayer_.Move( characterControllerPlayer_.transform.forward * moveY_ + characterControllerPlayer_.transform.right * moveX_);                
-        playerVelocity_.y += gravity_ * Time.deltaTime;
-        characterControllerPlayer_.Move(playerVelocity_ * Time.deltaTime);
 
 
     }
@@ -132,6 +146,7 @@ public class InputController : BaseMono
     }
     public void InputJump()
     {
+       
        bool jumpActions = false;
         if (characterControllerPlayer_.isGrounded && playerVelocity_.y < 0)
             playerVelocity_.y = 0f;

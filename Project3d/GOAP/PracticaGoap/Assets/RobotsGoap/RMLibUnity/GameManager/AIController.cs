@@ -139,7 +139,7 @@ private bool GetPath(StatusNpc status, Vector3 location)
             {                
                     for (int i = 0; i <status.GetNavMeshPath().corners.Length -1;i++)
                     {   
-                        Debug.DrawRay(status.GetNavMeshPath().corners[i],status.GetNavMeshPath().corners[i+1] -status.GetNavMeshPath().corners[i],Color.blue,20);                    
+                        DrawLine(status.GetNavMeshPath().corners[i],status.GetNavMeshPath().corners[i+1] -status.GetNavMeshPath().corners[i],Color.blue,20);                    
                         Debug.Log("Seek: posicion corner : " +status.GetNavMeshPath().corners[i+1].ToString() );
                         
                     }
@@ -214,7 +214,7 @@ private bool RecalculatePath(StatusNpc status, Vector3 location,bool collisionCo
             Debug.Log("numero aleatorio : " +tryLeftOrRight.ToString());
             if (status.debugMode_)
             {
-                Debug.DrawRay(status.GetOrigin().transform.position,previousRightVector,Color.yellow,20);
+                DrawLine(status.GetOrigin().transform.position,previousRightVector,Color.yellow,20);
                 Debug.Log("Seek: Intentando Conseguir path alternativo por la derecha número : " + count.ToString());
             }
         }               
@@ -226,7 +226,7 @@ private bool RecalculatePath(StatusNpc status, Vector3 location,bool collisionCo
             Debug.Log("numero aleatorio : " +tryLeftOrRight.ToString());  
             if (status.debugMode_)
             {
-                Debug.DrawRay(status.GetOrigin().transform.position,previousLeftVector,Color.red,20);
+                DrawLine(status.GetOrigin().transform.position,previousLeftVector,Color.red,20);
                 Debug.Log("Seek: Intentando Conseguir path alternativo por la izquierda número : " + count.ToString());
             }
         }    
@@ -341,7 +341,7 @@ public void Flee(StatusNpc status,Vector3 location)
 
 
     if (status.debugMode_)
-        Debug.DrawRay(status.GetOrigin().transform.position, fleeVector,Color.green);
+        DrawLine(status.GetOrigin().transform.position, fleeVector,Color.green);
 
     if (status.GetNavMeshUse())        
         if (status.pathRecalculated_)      
@@ -374,7 +374,7 @@ public void Pursue(StatusNpc status)
     if (status.GetSpeedCurrent() > 0.0f)
         lookAhead = targetDir.magnitude * status.GetTargetStatus().GetSpeedCurrent() * Time.deltaTime * 5 / status.GetSpeedCurrent();        
     
-    Debug.DrawRay(status.GetTarget().transform.position, status.GetTarget().transform.forward * lookAhead,Color.red);
+    DrawLine(status.GetTarget().transform.position, status.GetTarget().transform.forward * lookAhead,Color.red);
     Seek(status,status.GetTarget().transform.position + status.GetTarget().transform.forward * lookAhead);
 
 }    
@@ -419,7 +419,7 @@ public void Wander(StatusNpc status,float wanderJitter = 1)
     else
     {
             if (status.debugMode_)
-                Debug.DrawRay(status.aroundPivot_.transform.position,status.GetNavMeshTargetPosition() - status.aroundPivot_.transform.position ,Color.black);            
+                DrawLine(status.aroundPivot_.transform.position,status.GetNavMeshTargetPosition() - status.aroundPivot_.transform.position ,Color.black);            
             
             
            // if (status.GetNavMeshPathCurrentIndex() == 0)  ///aquí me aseguro de que solo realiza movimiento hasta el primer corner obtenido, para evitar
@@ -490,7 +490,7 @@ else
         chosenSpot.y = chosenGO.GetComponent<Collider>().bounds.min.y; ///emito el rayo desde la base de la figura, puesto que el punto de pivote podría estar demasiado alto si la figura es muy
     ///alta y tiene el pivote centrado, dándome un punto que normalmente sea inaccesible para el navmesh navigation.
         Seek(status, chosenSpot,0);
-        Debug.DrawRay(status.GetOrigin().transform.position,chosenSpot- status.GetOrigin().transform.position ,Color.yellow);
+        DrawLine(status.GetOrigin().transform.position,chosenSpot- status.GetOrigin().transform.position ,Color.yellow);
             
     }
 
@@ -606,7 +606,7 @@ public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool in
         pointCol.Raycast(ray, out info, distance);        
         info.point += dirPoint * navMeshRadius;         
         if (origin.GetComponent<Status>().debugMode_)
-            Debug.DrawRay(rayPos, -dirPoint * distance, Color.red,10);
+            DrawLine(rayPos, -dirPoint * distance, Color.red,10);
         
     }
     else
@@ -617,7 +617,7 @@ public Vector3 CalculatePointTarget(GameObject origin, GameObject target,bool in
         pointCol.Raycast(ray, out info, distance);        
         info.point -= dirPoint * navMeshRadius; 
         if (origin.GetComponent<Status>().debugMode_)
-            Debug.DrawRay(rayPos, dirPoint * distance, Color.red,10);
+            DrawLine(rayPos, dirPoint * distance, Color.red,10);
     }
        
         
@@ -633,7 +633,7 @@ public bool ThereIsObstacule(StatusNpc status,Vector3 target)
      Vector3 myPosition;
     myPosition = status.transform.position;
     myPosition.y -= status.GetNavMeshPointSurfaceToPivotNpc();         
-    Debug.DrawRay(myPosition,target -myPosition, Color.white,20);
+    DrawLine(myPosition,target -myPosition, Color.white,20);
     return  Physics.Raycast(myPosition,target -myPosition,(target -myPosition).magnitude);
     
     
@@ -648,7 +648,9 @@ public bool CanSeeTarget(Status status,GameObject target)
     {
         if (status.debugMode_)
         {
-            Debug.DrawRay(status.GetOrigin().transform.position, rayToTarget ,Color.magenta);
+            
+            
+            DrawLine(status.GetOrigin().transform.position, rayToTarget ,Color.magenta);
             Debug.Log("Seek: raycast + " + raycastInfo.transform.gameObject.tag + " " +raycastInfo.transform.gameObject.name) ;
         }
             
@@ -658,6 +660,22 @@ public bool CanSeeTarget(Status status,GameObject target)
     }
     return false;
 }
-
+void DrawLine(Vector3 start, Vector3 dir, Color color, float duration =0.02f)
+         {
+             GameObject myLine = new GameObject();
+             myLine.transform.position = start;
+             myLine.AddComponent<LineRenderer>();
+             LineRenderer lr = myLine.GetComponent<LineRenderer>();
+             lr.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+             
+             //lr.sharedMaterial.SetColor("_Color",color);
+             lr.startColor = color;
+             lr.endColor = color;
+             lr.startWidth = 0.01f;
+             lr.endWidth = 0.01f;             
+             lr.SetPosition(0, start);
+             lr.SetPosition(1, start + dir);
+             GameObject.Destroy(myLine, duration);
+         }
 
 }

@@ -14,7 +14,8 @@ public class LevelManagerNivel2 : LevelManager
         base.Start();
         GetWorld().SetCountEnemies(0);
              
-         GameObject.Find("CanvasMobile").SetActive(GetGameManager().mobilVesion_);
+         gameObjectsByName_["CanvasMobile"][0].SetActive(GetGameManager().mobilVesion_);
+         GetLevelManager().gameObjectsByName_["Camera2"][0].SetActive(false); ///desactivo la camara 2
     }
 override public void InstaciateCommands()
     {

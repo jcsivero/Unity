@@ -31,7 +31,7 @@ public class GameManager :BaseMono
     
 
     [Tooltip("0 Forzar no depuración, 1 Forzar Depuración, 2 Personalizado por componente.")] 
-    public DebugModeForce debugModeForce_ = DebugModeForce.customize;
+    public DebugModeForce debugModeForce_ = DebugModeForce.noDebug;
     public bool mobilVesion_ = false;
     private const string TRIGGER_ON_UPDATE_ALL_STATUS_NPC = "ON_UPDATE_ALL_STATUS_NPC";    
     public  bool readyEngine_ = false; 
@@ -123,6 +123,7 @@ public class GameManager :BaseMono
     {
         base.Start();
         Debug.Log("|||||||||||||| Start + " + GetName().ToString() +"||||||||||||||||");
+        Screen.fullScreen = true;
         
         
     //aquí ya estoy seguro de que están todas las suscricipones a eventos hechas.            
