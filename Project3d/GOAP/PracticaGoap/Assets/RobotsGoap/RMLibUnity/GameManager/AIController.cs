@@ -52,49 +52,54 @@ private bool MovementApply(StatusNpc status,Vector3 location,float customizeBrak
     braking = status.MovementValue(); ////en movimiento sin NavMesh, no se aplica la distancia de frenado, solo la distancia de movimiento.
 
     if (status.GetNavMeshUse())
-        if ((status.GetNavMeshPathCurrentIndex()+1) >= status.GetNavMeshPath().corners.Length-1)
-        {
+        if ((status.GetNavMeshPathCurrentIndex()+1) >= status.GetNavMeshPath().corners.Length-1)        
             if (customizeBrakingDistance != Mathf.Infinity)
                 braking += customizeBrakingDistance; ///distancia de frenado personalizada, viene bien en muchos caso, como en el flee mode por ejemplo, para
                 ///que no esté aplicando la distancia de frenado global en la huida.
             else
                 braking += status.GetBrakingDistance();  ///configuración de frenado global             
-
-        }          
+        
     if  (CalculateDistanceStep(location,status) > braking)
     {
         Quaternion rot =  Quaternion.LookRotation(location-status.transform.position);
         rot.z = 0; /// solo quiero rotar en el eje Y.
         rot.x = 0; /// 
         status.transform.rotation = Quaternion.Slerp(status.transform.rotation,rot, status.GetSpeedRotation() * Time.deltaTime);     
-                    ///truco que se me ocurrió de los ángulos agudos para saber si me he pasado un corner por tener baja rotación o lo que sea, y seguir automáticamente hacia el
-            ///siguiente corner, en lugar de quedarse intentando llegar dando vueltas. Esto debería de funcionar incluso aunque no se haya llegado a la distancia de velocidad
-            //del corner correspondiente. Esto es útil solo con la variable de movimiento real activao realMovement y cuando se encuentra en situaciones de giros muy pronunciados
-            ///que no se compensan con la velocidad de rotación asignada.
+                    
+        if (status.GetNavMeshUse())                    
+        {
+        ///truco que se me ocurrió de los ángulos agudos para saber si me he pasado un corner por tener baja rotación o lo que sea, y seguir automáticamente hacia el
+        ///siguiente corner, en lugar de quedarse intentando llegar dando vueltas. Esto debería de funcionar incluso aunque no se haya llegado a la distancia de velocidad
+        //del corner correspondiente. Esto es útil solo con la variable de movimiento real activao realMovement y cuando se encuentra en situaciones de giros muy pronunciados
+        ///que no se compensan con la velocidad de rotación asignada.
 
-        
-              ///solo si quedan los cornes suficiente para poder triangular.
-                Vector3 myPosition = status.transform.position;
-                myPosition.y -=  status.GetNavMeshPointSurfaceToPivotNpc();         
-                Vector3 vectorNpcToNextCorner = location - myPosition;      
-                Vector3 vectorCornerToCornerPlus = Vector3.zero;
-                if (status.GetNavMeshPathCurrentIndex()+2 <= status.GetNavMeshPath().corners.Length-1) 
-                     vectorCornerToCornerPlus = status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+2] - location;
-                else
-                    vectorCornerToCornerPlus = (location - status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()]);
+    
+            ///solo si quedan los cornes suficiente para poder triangular.
+            Vector3 myPosition = status.transform.position;
+            myPosition.y -=  status.GetNavMeshPointSurfaceToPivotNpc();         
+            Vector3 vectorNpcToNextCorner = location - myPosition;      
+            Vector3 vectorCornerToCornerPlus = Vector3.zero;
+            if (status.GetNavMeshPathCurrentIndex()+2 <= status.GetNavMeshPath().corners.Length-1) 
+                    vectorCornerToCornerPlus = status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()+2] - location;
+            else
+                vectorCornerToCornerPlus = (location - status.GetNavMeshPath().corners[status.GetNavMeshPathCurrentIndex()]);
 
-                float angle = Vector3.Angle(-vectorNpcToNextCorner,vectorCornerToCornerPlus);                
-                if (debugMode_)
-                    Debug.Log("Seek: Ángulo entre el opuesto de vectorNpcToNextCorner y vectorCornerToCornerPlus: " + angle.ToString());                
-                if (angle < 90)
-                    return true;
+            float angle = Vector3.Angle(-vectorNpcToNextCorner,vectorCornerToCornerPlus);                
+            if (debugMode_)
+                Debug.Log("Seek: Ángulo entre el opuesto de vectorNpcToNextCorner y vectorCornerToCornerPlus: " + angle.ToString());                
+            if (angle < 90)
+                return true;
 
+
+        }
         if (status.realMovement_)                
                 status.transform.Translate(0, 0, status.MovementValue());                         
         else
         {
             
-            location.y += status.GetNavMeshPointSurfaceToPivotNpc();                     
+            if (status.GetNavMeshUse()) 
+                location.y += status.GetNavMeshPointSurfaceToPivotNpc();                     
+            
             status.transform.position = status.transform.position + (location -status.transform.position).normalized * status.MovementValue();  
 
         }
@@ -103,8 +108,13 @@ private bool MovementApply(StatusNpc status,Vector3 location,float customizeBrak
     }
     else
     {
-        location.y += status.GetNavMeshPointSurfaceToPivotNpc();
-        status.transform.position = location + (status.transform.position - location).normalized * braking;
+        if (status.GetNavMeshUse()) 
+        {
+            location.y += status.GetNavMeshPointSurfaceToPivotNpc();
+            status.transform.position = location + (status.transform.position - location).normalized * braking;
+        }
+        else
+        status.transform.position = status.transform.position + (location -status.transform.position).normalized * status.MovementValue(); 
                
         return true;
     }
