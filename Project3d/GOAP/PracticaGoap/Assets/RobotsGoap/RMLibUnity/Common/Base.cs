@@ -59,7 +59,7 @@ public class Base
         return  GetGameManager().world_;
     }
 
-    virtual public void SetHudWorld(HudWorld world)
+    virtual public void SetHudWorld(HudWorldBase world)
     {         
          GetGameManager().hudWorld_ = world;
     }
