@@ -183,6 +183,8 @@ MonoBehaviour:
   actualPlayer_: {fileID: 0}
   actualEnemy_: {fileID: 0}
   allGameObjects_: []
+  paused: 0
+  suscribeToOnPaused_: 0
 --- !u!1 &256922487442530936
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,12 +372,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 30
+    m_Right: 30
+    m_Top: 30
+    m_Bottom: 30
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 30
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
