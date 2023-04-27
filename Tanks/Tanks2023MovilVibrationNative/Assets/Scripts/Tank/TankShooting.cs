@@ -117,8 +117,15 @@ public class TankShooting : MonoBehaviour
         // Set the fired flag so only Fire is only called once.
         m_Fired = true;
 
-        AndroidJavaObject effect = GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>("createOneShot", 1000,100);
-        GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            using (AndroidJavaObject effect = GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>("createOneShot", 10L,GameManager.vibrationEffectClass.GetStatic<int>("DEFAULT_AMPLITUDE")))
+            {
+                GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
+            }
+            
+        }
+
         
         // Create an instance of the shell and store a reference to it's rigidbody.
         Rigidbody shellInstance =

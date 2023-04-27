@@ -39,16 +39,12 @@ public class GameManager : MonoBehaviour
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
     
-        unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-        if (currentActivity != null) 
-        {
-            vibrator = currentActivity.Call<AndroidJavaObject>("getSystemService", "vibrator");
-            vibrationEffectClass = new AndroidJavaClass("android.os.VibrationEffect");
-        }
-
-        /*using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-        using (AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
+        //Handheld.Vibrate(); ///hago vibrar el móvil con Unity.
+#if UNITY_ANDROID
+    if (Application.platform == RuntimePlatform.Android)
+    {
+        using (unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        using ( currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
         {
             if (currentActivity != null) 
             {
@@ -57,10 +53,12 @@ public class GameManager : MonoBehaviour
             }
 
         }   
-        using (AndroidJavaObject effect = GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>("createOneShot", 2000,vibrationEffectClass.GetStatic<int>("DEFAULT_AMPLITUDE")))
-        { 
-            GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
-        }*/
+       
+           
+    }
+
+#endif
+
         SpawnAllTanks();
         SetCameraTargets();
 
