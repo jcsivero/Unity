@@ -23,6 +23,47 @@ public class GameManager : MonoBehaviour
 
     const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
+    //Referencias a los objetos necesarios para vibración
+    private static AndroidJavaObject vibrator = null;
+    private static AndroidJavaClass vibrationEffectClass = null;
+    private static AndroidJavaClass unityPlayer = null;
+    private static AndroidJavaObject currentActivity = null;
+    private void InitializeVibration()
+    {
+    #if UNITY_ANDROID
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            using (unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+            using ( currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
+            {
+                if (currentActivity != null) 
+                {
+                    vibrator = currentActivity.Call<AndroidJavaObject>("getSystemService", "vibrator");
+                    vibrationEffectClass = new AndroidJavaClass("android.os.VibrationEffect");
+                }
+
+            }   
+        
+            
+        }
+
+    #endif
+    }
+    static public void Vibration(long time)
+    {
+        
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            using (AndroidJavaObject effect = 
+            GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>
+            ("createOneShot", time,GameManager.vibrationEffectClass.GetStatic<int>("DEFAULT_AMPLITUDE")))
+            {
+                GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
+            }
+            
+            
+        }
+    }
     private void Start()
     {
         // This line fixes a change to the physics engine.
@@ -31,7 +72,10 @@ public class GameManager : MonoBehaviour
         // Create the delays so they only have to be made once.
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
+    
+        //Handheld.Vibrate(); ///hago vibrar el móvil con Unity.
 
+        InitializeVibration();
         SpawnAllTanks();
         SetCameraTargets();
 

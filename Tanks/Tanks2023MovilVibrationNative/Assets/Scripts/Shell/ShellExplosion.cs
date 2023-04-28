@@ -64,25 +64,7 @@ public class ShellExplosion : MonoBehaviour
         m_ExplosionAudio.Play();
 
         
-
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            using (AndroidJavaObject effect = GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>("createOneShot", 100L,GameManager.vibrationEffectClass.GetStatic<int>("DEFAULT_AMPLITUDE")))
-            {
-                GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
-            }
-            
-            
-        }
-
-        /*using (AndroidJavaObject effect = GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>("createOneShot", 1000,-1))
-        { 
-            GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
-        }*/
-
-//        AndroidJavaObject effect = GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>("createOneShot", 1000,100);
-  //      GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
-
+        GameManager.Vibration(100);
 
         // Once the particles have finished, destroy the gameobject they are on.
         ParticleSystem.MainModule mainModule = m_ExplosionParticles.main;
