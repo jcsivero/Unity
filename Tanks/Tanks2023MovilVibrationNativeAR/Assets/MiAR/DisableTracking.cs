@@ -33,9 +33,15 @@ public class DisableTracking : MonoBehaviour
         arRayCastManager_.enabled = !arRayCastManager_.enabled;
         makeAppearOnPlane_.enabled = !makeAppearOnPlane_.enabled;
         aRPlaneManager_.enabled = !aRPlaneManager_.enabled;
-
-        GameObject.FindWithTag("MainCamera").GetComponent<ARCameraBackground>().enabled = !GameObject.FindWithTag("MainCamera").GetComponent<ARCameraBackground>().enabled;
-
+        
+        ARCameraManager draft = GameObject.FindWithTag("MainCamera").GetComponent<ARCameraManager>();        
+        //ARCameraBackground draft = GameObject.FindWithTag("MainCamera").GetComponent<ARCameraBackground>();
+        draft.enabled = !draft.enabled;        
+        bool trackablesEnables = draft.enabled;
+        if (!trackablesEnables)
+            Camera.main.clearFlags = CameraClearFlags.Skybox;
+        else
+            Camera.main.clearFlags = CameraClearFlags.Nothing;
 
 
     }
