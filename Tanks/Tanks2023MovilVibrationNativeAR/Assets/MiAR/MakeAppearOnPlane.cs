@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using Unity.XR.CoreUtils;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -9,7 +10,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
     /// Moves the ARSessionOrigin in such a way that it makes the given content appear to be
     /// at a given location acquired via a raycast.
     /// </summary>
-    [RequireComponent(typeof(ARSessionOrigin))]
+    [RequireComponent(typeof(XROrigin))]
     [RequireComponent(typeof(ARRaycastManager))]
     public class MakeAppearOnPlane : MonoBehaviour
     {
@@ -41,12 +42,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_Rotation = value;
                 if (m_SessionOrigin != null)
                     m_SessionOrigin.MakeContentAppearAt(content, content.transform.position, m_Rotation);
+                    
             }
         }
 
         void Awake()
         {
-            m_SessionOrigin = GetComponent<ARSessionOrigin>();
+            m_SessionOrigin = GetComponent<XROrigin>();
             m_RaycastManager = GetComponent<ARRaycastManager>();
         }
 
@@ -71,8 +73,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
-        ARSessionOrigin m_SessionOrigin;
-
+        XROrigin m_SessionOrigin;
+        
         ARRaycastManager m_RaycastManager;
     }
 }
