@@ -97,11 +97,14 @@ public class TankMovement : MonoBehaviour
         //m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
         //m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
         
-        m_MovementInputValue = CrossPlatformInputManager.GetAxis(m_MovementAxisName);
-        m_TurnInputValue = CrossPlatformInputManager.GetAxis(m_TurnAxisName);
+        //m_MovementInputValue = CrossPlatformInputManager.GetAxis(m_MovementAxisName);
+        //m_TurnInputValue = CrossPlatformInputManager.GetAxis(m_TurnAxisName);
 
-            //m_MovementInputValue = playerInput_.actions["Move"].ReadValue<float>();
-            //m_TurnInputValue = playerInput_.actions["Turn"].ReadValue<float>();
+        ///
+        ///lectura modo polling del nuevo sistema de entrada.
+        ///
+        //m_MovementInputValue = playerInput_.actions["Move"].ReadValue<float>();
+           ///m_TurnInputValue = playerInput_.actions["Turn"].ReadValue<float>();
 
         EngineAudio ();
     }

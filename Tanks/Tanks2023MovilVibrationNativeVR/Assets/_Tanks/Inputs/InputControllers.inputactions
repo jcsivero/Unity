@@ -40,51 +40,9 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "e1c5c0ed-6b1d-4229-8974-52e7483b20fc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "AD",
-                    "id": "efb6eee6-48f1-40a4-8672-926302217b0a",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Turn",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "a36f211e-0e54-4c1a-94ab-a8529bb95537",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "f11ab5d8-d13c-474a-bcee-03d0c54996f1",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
                 {
                     "name": "Flechas",
                     "id": "1c61c902-d508-4226-b4c4-ec00b36a9401",
@@ -115,39 +73,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "WA",
-                    "id": "b101590d-33ba-4960-bbad-ab11a02fffbb",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "positive",
-                    "id": "474a81d1-e096-4a19-9e56-ecd8eede30cf",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "577120ca-796d-4439-aea0-c1988936aed3",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -209,7 +134,7 @@
                 {
                     "name": "",
                     "id": "6ded211b-09dd-4e78-ba23-168d31c3852c",
-                    "path": "<OculusTouchController>{RightHand}/gripPressed",
+                    "path": "<XRController>{LeftHand}/gripPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -219,34 +144,12 @@
                 },
                 {
                     "name": "",
-                    "id": "63921be1-c20d-468f-8d0f-8f74c4188f0c",
-                    "path": "<OculusTouchController>/thumbstickClicked",
+                    "id": "dbef4cc1-0ec8-4fbc-8f5f-aa782395ab35",
+                    "path": "<XRController>{LeftHand}/primary2DAxis",
                     "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c2427219-2620-4f4e-be73-a1f458893e1a",
-                    "path": "<OculusTouchController>{RightHand}/thumbstick",
-                    "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "groups": "",
                     "action": "Joystick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ab682ec3-5e9d-4988-bd12-40369a590de9",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

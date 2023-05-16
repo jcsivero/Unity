@@ -42,25 +42,25 @@ public class GameManager : MonoBehaviour
                     vibrationEffectClass = new AndroidJavaClass("android.os.VibrationEffect");
                 }
 
-            }   
-        
-            
+            }
+   
+
         }
 
-    #endif
+#endif
     }
     static public void Vibration(long time)
     {
         
         if (Application.platform == RuntimePlatform.Android)
         {
-            using (AndroidJavaObject effect = 
-            GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>
-            ("createOneShot", time,GameManager.vibrationEffectClass.GetStatic<int>("DEFAULT_AMPLITUDE")))
-            {
-                GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
-            }
-            
+                        using (AndroidJavaObject effect = 
+                        GameManager.vibrationEffectClass.CallStatic<AndroidJavaObject>
+                        ("createOneShot", time,GameManager.vibrationEffectClass.GetStatic<int>("DEFAULT_AMPLITUDE")))
+                        {
+                            GameManager.vibrator.Call("vibrate", effect); ///vibración con API nativa de Android
+                        }
+     
             
         }
     }
@@ -111,7 +111,8 @@ public class GameManager : MonoBehaviour
         }
 
         // These are the targets the camera should follow.
-        m_CameraControl.m_Targets = targets;
+     //
+     //m_CameraControl.m_Targets = targets;
     }
 
 
@@ -149,7 +150,7 @@ public class GameManager : MonoBehaviour
         DisableTankControl();
 
         // Snap the camera's zoom and position to something appropriate for the reset tanks.
-        m_CameraControl.SetStartPositionAndSize();
+        //m_CameraControl.SetStartPositionAndSize();
 
         // Increment the round number and display text showing the players what round it is.
         m_RoundNumber++;

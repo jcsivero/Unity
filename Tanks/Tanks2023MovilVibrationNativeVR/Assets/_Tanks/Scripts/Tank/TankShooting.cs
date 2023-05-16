@@ -57,7 +57,7 @@ public class TankShooting : MonoBehaviour
             Fire();
         }
                 // Otherwise, if the fire button has just started being pressed...
-      /*  else if (playerInput_.actions["Fire"].WasPressedThisFrame())
+        else if (playerInput_.actions["Fire"].WasPressedThisFrame())
         {
             // ... reset the fired flag and reset the launch force.
             m_Fired = false;
@@ -80,8 +80,8 @@ public class TankShooting : MonoBehaviour
         {
             // ... launch the shell.
             Fire();
-        }*/
-        
+        }
+        /*
         // Otherwise, if the fire button has just started being pressed...
         else if (CrossPlatformInputManager.GetButtonDown(m_FireButton))
         {
@@ -106,7 +106,7 @@ public class TankShooting : MonoBehaviour
         {
             // ... launch the shell.
             Fire();
-        }
+        }*/
     }
 
 

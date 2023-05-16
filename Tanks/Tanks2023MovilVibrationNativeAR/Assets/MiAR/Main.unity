@@ -3330,7 +3330,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CameraControl
       value: 
-      objectReference: {fileID: 48981254}
+      objectReference: {fileID: 0}
     - target: {fileID: 4052174812939158931, guid: d0d9d3c234f84824e940df92ddf5e714,
         type: 3}
       propertyPath: m_Name
