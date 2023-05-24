@@ -42,15 +42,16 @@ public class GActionPatrolMode : GAction
         /*target = inventory.FindItemWithTag("Cubicle");
         if (target == null)
             return false;*/
-        //status_.anim_.SetBool("Patrol",true);
+        status_.anim_.SetBool("ToWalking",true);
          
         return true;
     }
 
     public override void PostPerform(Reason reason) 
     {
-                //status_.anim_.SetTrigger("Idle");
-                //status_.anim_.SetBool("Patrol",false);
+        //status_.anim_.SetTrigger("Idle");
+        //status_.anim_.SetBool("Patrol",false);
+        status_.anim_.SetBool("ToWalking", false);
 
     }
     override public  bool OnPerform()

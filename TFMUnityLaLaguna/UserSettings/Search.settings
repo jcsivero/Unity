@@ -11,6 +11,9 @@ scopes = {
 	"last_search.310DEAF1" = "CAMERA"
 	"OpenInspectorPreview.310DEAF1" = "0"
 	"currentGroup.310DEAF1" = "all"
+	"last_search.110DEAF1" = "h: t=MeshFilter vertices>=1024"
+	"OpenInspectorPreview.110DEAF1" = "0"
+	"currentGroup.110DEAF1" = "scene"
 }
 providers = {
 	adb = {
@@ -62,6 +65,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"h: t=MeshFilter vertices>=1024"
 ]
 searchItemFavorites = [
 ]

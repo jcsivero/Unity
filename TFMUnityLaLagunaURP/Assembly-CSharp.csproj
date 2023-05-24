@@ -69,6 +69,7 @@
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\FSM\Chase.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\Status\StatusPlayer.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\_TFMLaLagunaUnity\Scripts\GAgentMujerHumilde.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\Common\BaseMono.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\Common\GenericData.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\GameManager\Command.cs" />
@@ -88,8 +89,8 @@
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\Common\CompositeData.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\GoapBase\GAction.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\FSM\Attack.cs" />
+    <Compile Include="Assets\_TFMLaLagunaUnity\Scripts\GAgentCaballeroCaminando.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\GameManager\AIController.cs" />
-    <Compile Include="Assets\_TFMLaLagunaUnity\Scripts\GAgentCura.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\Status\StatusNpc.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\GameManager\LevelManager.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\Others\AnimatedBlendShapesV2.cs" />
