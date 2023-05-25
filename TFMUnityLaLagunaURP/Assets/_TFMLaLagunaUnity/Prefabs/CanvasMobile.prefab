@@ -469,7 +469,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3287427667891912996}
   - component: {fileID: 3287427667891912985}
-  - component: {fileID: 3287427667891912984}
   - component: {fileID: 231609256143041887}
   m_Layer: 5
   m_Name: LeftJoystick
@@ -496,7 +495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 22.155, y: -146.69415}
+  m_AnchoredPosition: {x: 22.15503, y: -146.69415}
   m_SizeDelta: {x: 394.81, y: 307.2289}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3287427667891912985
@@ -507,41 +506,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3287427667891912997}
   m_CullTransparentMesh: 1
---- !u!114 &3287427667891912984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3287427667891912997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d677f1681015749b15c436eec6d880, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovementRange: 80
-  m_DynamicOriginRange: 100
-  m_ControlPath: <Gamepad>/leftStick
-  m_Behaviour: 0
-  m_UseIsolatedInputActions: 0
-  m_PointerDownAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  m_PointerMoveAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!114 &231609256143041887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,7 +597,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -689,7 +655,6 @@ GameObject:
   - component: {fileID: 6774761277311342484}
   - component: {fileID: 6725581950596101621}
   - component: {fileID: 5889432944723766667}
-  - component: {fileID: 256670909587419036}
   m_Layer: 5
   m_Name: Home
   m_TagString: Untagged
@@ -714,7 +679,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 53.040344, y: -29.951782}
+  m_AnchoredPosition: {x: 53.040283, y: -29.951782}
   m_SizeDelta: {x: 86.1, y: 97.513}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6774761277311342484
@@ -799,19 +764,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &256670909587419036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7002128537788557159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ControlPath: <Keyboard>/escape
 --- !u!1 &9107594043867101653
 GameObject:
   m_ObjectHideFlags: 0
