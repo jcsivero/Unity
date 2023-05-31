@@ -92,7 +92,7 @@ public class InputController : BaseMono
                 characterControllerPlayer_.Move(playerVelocity_ * Time.deltaTime);
 
             }
-            else
+            else if (GetLevelManager().GetActualPlayer() != null)
             {                
                 GetLevelManager().GetActualPlayer().transform.Rotate(Vector3.up * mouseX_);
                 GetLevelManager().GetActualPlayer().transform.Translate(GetLevelManager().GetActualPlayer().transform.forward * moveY_ + GetLevelManager().GetActualPlayer().transform.right * moveX_,Space.World);

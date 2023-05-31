@@ -9,6 +9,8 @@ EditorBuildSettings:
     path: Assets/_TFMLaLagunaUnity/Scenes/TFMLaLaguna.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 91e3a3c63e79ed54e8c18abd8460ced1,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: b233c2045af0eb845bcfef4dfa57115d,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: cbf5fec5c42aa2143a65a0b1722505f5,
