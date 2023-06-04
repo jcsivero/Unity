@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{D69B8A74-4931-AD48-24F5-4971E02F1483}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{51E22779-1E19-833F-3B24-FA95CF70A58B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.Interaction.Toolkit.Samples.StarterAssets", "Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj", "{C54FD48B-47DF-50C6-B50A-44F14A281297}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{26F64CC4-7620-CFEC-CE69-199066624C4B}"
@@ -19,6 +21,10 @@ Global
 		{D69B8A74-4931-AD48-24F5-4971E02F1483}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D69B8A74-4931-AD48-24F5-4971E02F1483}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D69B8A74-4931-AD48-24F5-4971E02F1483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51E22779-1E19-833F-3B24-FA95CF70A58B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E22779-1E19-833F-3B24-FA95CF70A58B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E22779-1E19-833F-3B24-FA95CF70A58B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E22779-1E19-833F-3B24-FA95CF70A58B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C54FD48B-47DF-50C6-B50A-44F14A281297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C54FD48B-47DF-50C6-B50A-44F14A281297}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C54FD48B-47DF-50C6-B50A-44F14A281297}.Release|Any CPU.ActiveCfg = Release|Any CPU

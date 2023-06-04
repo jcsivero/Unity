@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1fee637ed8d86644c9b309bc977cdb5c
+guid: 401e9111afda30a4fa946804662a202e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: MujerHumildeHablando
+      name: MujerHumildeCaminando
       takeName: Scene
       internalID: -623603649343465320
-      firstFrame: 21
-      lastFrame: 160
+      firstFrame: 221
+      lastFrame: 260
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -62,11 +62,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 21
     - serializedVersion: 16
-      name: MujerHumildeCaminando
+      name: MujerHumildeHablando
       takeName: Scene
       internalID: -1609281748187839663
-      firstFrame: 220
-      lastFrame: 260
+      firstFrame: 21
+      lastFrame: 139
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -95,17 +95,18 @@ ModelImporter:
     lODScreenPercentages:
     - 0.25
     - 0.125
+    - 0.0625
     - 0.01
     globalScale: 0.1
-    meshCompression: 1
+    meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -113,12 +114,12 @@ ModelImporter:
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
-    bakeAxisConversion: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 1
+    optimizeBones: 0
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8

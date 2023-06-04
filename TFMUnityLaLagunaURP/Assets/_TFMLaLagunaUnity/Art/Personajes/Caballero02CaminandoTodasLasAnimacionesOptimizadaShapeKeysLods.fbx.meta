@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ea7da8987fc78b45a61baca415022d7
+guid: 02670ca4acd205a4e84b4a21426cd39f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -66,17 +66,18 @@ ModelImporter:
     lODScreenPercentages:
     - 0.25
     - 0.125
+    - 0.0625
     - 0.01
     globalScale: 0.1
-    meshCompression: 1
+    meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -89,7 +90,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 1
+    optimizeBones: 0
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
