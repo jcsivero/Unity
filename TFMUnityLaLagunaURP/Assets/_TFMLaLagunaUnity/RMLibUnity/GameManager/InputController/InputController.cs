@@ -59,7 +59,7 @@ public class InputController : BaseMono
        if (mapActions_ == null)
             mapActions_=new MapActions();
         
-        mapActions_.Enable();
+        //mapActions_.Enable();
         mapActions_.Movement.Enable();
         
         if (GetGameManager().mobilVesion_) ///la sensibilidad para versiones móviles la divido entre 3, porque si no, sería demasiado movimiento para los gestos
