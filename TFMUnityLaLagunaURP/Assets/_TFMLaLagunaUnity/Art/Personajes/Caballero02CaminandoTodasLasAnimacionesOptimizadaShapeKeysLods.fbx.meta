@@ -3,7 +3,232 @@ guid: 02670ca4acd205a4e84b4a21426cd39f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_4_FRONT_4402
+    second: {fileID: 2100000, guid: d90375775e033014d8190f592c00f7c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_4_FRONT_4402.001
+    second: {fileID: 2100000, guid: e7c476d39adf2384e8eae37e533916f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_4_FRONT_4402.002
+    second: {fileID: 2100000, guid: ebaf54dc1c7f0d64b9a2fa1d9b08646b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_4_FRONT_4402.004
+    second: {fileID: 2100000, guid: 70dea9423eac9d340ab660f92ede8540, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_8_Copy_1_FRONT_4423
+    second: {fileID: 2100000, guid: f37ac56706a57fd4686d09218f8746df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_8_Copy_1_FRONT_4423.001
+    second: {fileID: 2100000, guid: 6297af408349bb943bdf54426c81df57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_8_Copy_1_FRONT_4423.002
+    second: {fileID: 2100000, guid: 022a604d613b68f4384ef9a1c1f22e7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_8_Copy_1_FRONT_4423.004
+    second: {fileID: 2100000, guid: e2c96d82ca1c8954bb5e2156a3ec7a94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_8_FRONT_4411
+    second: {fileID: 2100000, guid: 8b916bdb237261a4bb498301f09b3627, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_8_FRONT_4411.001
+    second: {fileID: 2100000, guid: 43211b945bbc89b4b823643d845e5906, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_8_FRONT_4411.002
+    second: {fileID: 2100000, guid: 97972084c578a08459bd35a6ee17ce81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_8_FRONT_4411.004
+    second: {fileID: 2100000, guid: 5b843944fa791c148b5e946d0b08acb8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_9_FRONT_4418
+    second: {fileID: 2100000, guid: 2e71fd78d2e4a1543baaf909a0f24721, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_9_FRONT_4418.001
+    second: {fileID: 2100000, guid: 47a1cee1908e355419df7069b562aa51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_9_FRONT_4418.002
+    second: {fileID: 2100000, guid: 859305b8f123fba4daefe4ac5715a766, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FABRIC_9_FRONT_4418.004
+    second: {fileID: 2100000, guid: 48a8e0aae85ebdf4d8a4c3b9dcf669e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Front_Back_FRONT_4397
+    second: {fileID: 2100000, guid: f4937dde7212a7a4fa54b5bc799e39b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Front_Back_FRONT_4397.001
+    second: {fileID: 2100000, guid: 4d2bfbd0ab96a82438403afef13a7c47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Front_Back_FRONT_4397.002
+    second: {fileID: 2100000, guid: aed44eb9e229091459c40bb568033995, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Front_Back_FRONT_4397.004
+    second: {fileID: 2100000, guid: 1b89250b7e385484eb7adf93041b4b26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Ojos
+    second: {fileID: 2100000, guid: bc410aa4ac056cc43b29583f33e29c9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Ojos.001
+    second: {fileID: 2100000, guid: 1fac523b970600d4db86b37794df9675, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Ojos.002
+    second: {fileID: 2100000, guid: b6e4470ec651760409e69c893a401c79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Ojos.004
+    second: {fileID: 2100000, guid: 539ba301e80ffee418ba712a557bb96a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Pelo
+    second: {fileID: 2100000, guid: 10e86b06884de4e4b89270a2451d699a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Pelo.001
+    second: {fileID: 2100000, guid: ed79f2eaf798eff4e8084e910794e42e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Pelo.002
+    second: {fileID: 2100000, guid: a433f6f35a0f714458bc8590f249143f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Pelo.004
+    second: {fileID: 2100000, guid: 7955497cd7e678f42842c4bdc50e75af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Zapatos
+    second: {fileID: 2100000, guid: b8cc4c1369c556148846a84189110ae2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Zapatos.001
+    second: {fileID: 2100000, guid: f2f030a24745b264d998985ca962fadc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Zapatos.002
+    second: {fileID: 2100000, guid: 40760302e812bb147aa91acd36e6d47c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Zapatos.004
+    second: {fileID: 2100000, guid: 5b69fd14a6da2444ebc5e4ef4a00d5ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_labios
+    second: {fileID: 2100000, guid: 321594e4f41da3a4aa56371d3ff39c7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_labios.001
+    second: {fileID: 2100000, guid: d0d1c5584af5c7a4ea7759f20213004f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_labios.002
+    second: {fileID: 2100000, guid: 3e7406d52208a80418f48e6e9005ab81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_mangas__FRONT_4392
+    second: {fileID: 2100000, guid: 53ee11e3ed045a946bf89748157620e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_mangas__FRONT_4392.001
+    second: {fileID: 2100000, guid: e589c79d51b8d9746b1bbed9c6dd0966, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_mangas__FRONT_4392.002
+    second: {fileID: 2100000, guid: ac87577948b1af64bb6138cb3e3ec49a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_mangas__FRONT_4392.004
+    second: {fileID: 2100000, guid: b3bde1df21735304b8186c7e412a647d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_piel
+    second: {fileID: 2100000, guid: 77e8e8f87242c4a4d8867ccae05b5fd0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_piel.001
+    second: {fileID: 2100000, guid: 03fff6d86235bb541b58dcd390d0a17e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_piel.002
+    second: {fileID: 2100000, guid: 69f132d86d8e67a46a5a9894e12fe9f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_piel.004
+    second: {fileID: 2100000, guid: bf7480f584539274ba8dc9a8e81a549c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material4626
+    second: {fileID: 2100000, guid: 4ae8e17ad982a504fbbaea1126e0eab6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material4626.001
+    second: {fileID: 2100000, guid: 34fcbc9b503c2b3489621ab31d76ae95, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -68,7 +293,7 @@ ModelImporter:
     - 0.125
     - 0.0625
     - 0.01
-    globalScale: 0.1
+    globalScale: 0.09
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -123,7 +348,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.1
+    globalScale: 0.09
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

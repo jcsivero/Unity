@@ -121,9 +121,11 @@
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\FSM\Attack.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\Scripts\GAgentCaballeroCaminando.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\GameManager\AIController.cs" />
+    <Compile Include="Assets\_TFMLaLagunaUnity\Scripts\GAgentCura.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+    <Compile Include="Assets\_TFMLaLagunaUnity\Scripts\GAgentMonja.cs" />
     <Compile Include="Assets\Scripts\LookAt.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\_TFMLaLagunaUnity\RMLibUnity\Status\StatusNpc.cs" />
@@ -149,7 +151,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\Wispy Sky\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
