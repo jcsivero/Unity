@@ -7,6 +7,7 @@ public class movement : MonoBehaviour
     public MapActions mapActions_;
 
     private Rigidbody rb_;
+    private CharacterController characterController_;
     public float speed_ = 50;
     public float mouseX_;
     public float mouseY_;
@@ -19,20 +20,24 @@ public class movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb_ = GetComponent<Rigidbody>();
+      //  rb_ = GetComponent<Rigidbody>();
+        //characterController_ = GetComponent<CharacterController>();
+        //characterController_.detectCollisions = false;
 
         if (mapActions_ == null)
             mapActions_ = new MapActions();
         //mapActions_.Enable();
         mapActions_.Movement.Enable();
-
+        
     }
 
     // Update is called once per frame
     private void Update()
     {
 
-        //   transform.position += new Vector3(moveX_, 0, moveY_);
+        transform.position += new Vector3(moveX_, 0, moveY_);
+        
+        //characterController_.Move(new Vector3(moveX_, 0, moveY_));
         //rb_.MovePosition(transform.position + new Vector3(moveX_, 0, moveY_));
         InputMove();
 
@@ -41,7 +46,7 @@ public class movement : MonoBehaviour
     {
         
 
-        rb_.MovePosition(transform.position + new Vector3(moveX_, 0, moveY_));
+        //rb_.MovePosition(transform.position + new Vector3(moveX_, 0, moveY_));
 
     }
 
