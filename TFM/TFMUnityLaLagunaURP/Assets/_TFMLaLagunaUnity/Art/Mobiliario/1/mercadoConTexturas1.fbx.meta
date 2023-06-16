@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: dd805312d0dfbbb4e81158b95bfbed2f
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AN313-Tomatoes-732x549-Thumb
+    second: {fileID: 2800000, guid: 7d8427a344e8292439c1e72957b8aa5b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Barrel_Stand_Base_Color
+    second: {fileID: 2800000, guid: 2daa0bb2808f1144889b67ad8daf5c8c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Barrel_Stand_Roughness
+    second: {fileID: 2800000, guid: e5d3631d7c4b10342a94730fad841017, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Handles_Base_Color
+    second: {fileID: 2800000, guid: 0f61591fad11dbb418b3db8832d1895a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Handles_Roughness
+    second: {fileID: 2800000, guid: 4f8baadf61d036f4fbadcb15e095352a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Main.001_Base_Color
+    second: {fileID: 2800000, guid: 5806167b755db464fa4188cd591d61e2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Main.001_Roughness
+    second: {fileID: 2800000, guid: d08292bf2c7c45a4291e861eae32a1f2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Poles.001_Base_Color
+    second: {fileID: 2800000, guid: 04a8ecd5a593f6b49bf654cc27466589, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Poles.001_Roughness
+    second: {fileID: 2800000, guid: 9a06cdab88306814ab67c58ff8f34a2f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Side_Panel_Base_Color
+    second: {fileID: 2800000, guid: c22771c6add75274da62b8fec11c34a2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Side_Panel_Roughness
+    second: {fileID: 2800000, guid: 10f37cef0ce2e5a4c968328c8a15d2d7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Wheels.001_Base_Color
+    second: {fileID: 2800000, guid: b5e43b835bc1f1543acc3cd61f5b5873, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_Wheels.001_Roughness
+    second: {fileID: 2800000, guid: 6f66dbeb9fd70c447ac7e9c0ceb87442, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Meat_Hanging_Frame_Base_Color
+    second: {fileID: 2800000, guid: d8811e8ef800410429b24944d6d59b1e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Meat_Hanging_Frame_Roughness
+    second: {fileID: 2800000, guid: c58853f270b24e04bab3f77e5aecb1bc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_Bands_Base_Color
+    second: {fileID: 2800000, guid: 00c1c98558912c14db805191d4d4a2e4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_Bands_Roughness
+    second: {fileID: 2800000, guid: 2044354186473f9489ac9aebfb38456d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Wicker_1024_albedo
+    second: {fileID: 2800000, guid: cb8a3aeb2d91d3143b7140e1dbf915bc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Wicker_1024_roughness
+    second: {fileID: 2800000, guid: efb204a6675ea034f8bdf7b89a3016f0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wheel_Shaft.001_Base_Color
+    second: {fileID: 2800000, guid: 9844d724d941ffc4f8dfd18d234d2d85, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wheel_Shaft.001_Roughness
+    second: {fileID: 2800000, guid: d54c0b8fe19d0634d88f2e508b4bc5d2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WoodPlanksWorn19_COL_VAR1_1K
+    second: {fileID: 2800000, guid: 7e8f573dbe4f0ff4f9376f4979ff429a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WoodPlanksWorn19_GLOSS_1K
+    second: {fileID: 2800000, guid: 60f9ba491cfd51f4495ab1df6ce9d2a7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wooden_Barrel_Base_Color
+    second: {fileID: 2800000, guid: 10f2897d68c50db49abf0c2acd02d64b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wooden_Barrel_Roughness
+    second: {fileID: 2800000, guid: fb54176029c0608438ec9e71e85de1c0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: istockphoto-182921998-612x612
+    second: {fileID: 2800000, guid: 0098560cc2b36f148979504176137b14, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 1
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 0
+    importPhysicalCameras: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 0
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
