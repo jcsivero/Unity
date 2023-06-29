@@ -3,9 +3,34 @@ guid: 0475d2ed4283a354e82cd808835bb5f6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lagua_mat
+    second: {fileID: 2100000, guid: 4da5e82ddde4fa64f8c05c38f518cb7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcami_mat
+    second: {fileID: 2100000, guid: f86e495bc1c08a3478ec95a10d8a604f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcult2_mat
+    second: {fileID: 2100000, guid: f86e495bc1c08a3478ec95a10d8a604f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lmont_mat.001
+    second: {fileID: 2100000, guid: a11205d1489f69146bc3c6f6f2e81be5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lvega_mat.001
+    second: {fileID: 2100000, guid: 7a5d9e021d2a3cb41896de33b9789037, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -16,8 +41,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

@@ -3,9 +3,49 @@ guid: a4e5e043073236143ab3a66ae4dec51f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcall_mat
+    second: {fileID: 2100000, guid: b8fb8603ed6689b4dac3b09bed8612af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcall_mat.001
+    second: {fileID: 2100000, guid: b8fb8603ed6689b4dac3b09bed8612af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcall_mat.002
+    second: {fileID: 2100000, guid: b8fb8603ed6689b4dac3b09bed8612af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcami_mat
+    second: {fileID: 2100000, guid: f86e495bc1c08a3478ec95a10d8a604f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcult1_mat
+    second: {fileID: 2100000, guid: ba6191ca341d5c94787fbd6c649435ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcult2_mat
+    second: {fileID: 2100000, guid: e50b02532476e7d40b3410562c28a01c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lcult3_mat
+    second: {fileID: 2100000, guid: 0bb7d27a4f9011b4e86f8e0d01d1d29a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lvega_mat.001
+    second: {fileID: 2100000, guid: 7a5d9e021d2a3cb41896de33b9789037, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -16,8 +56,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

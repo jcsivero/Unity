@@ -65,7 +65,7 @@ ModelImporter:
       name: UmbellulariaCalifornica_0
     second: {fileID: 2800000, guid: 33de5793e4b874544a052906fb2c80bd, type: 3}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -76,8 +76,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
