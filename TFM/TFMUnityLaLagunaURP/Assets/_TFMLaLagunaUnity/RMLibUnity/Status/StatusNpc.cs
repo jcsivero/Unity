@@ -55,6 +55,9 @@ StatusNpc : Status
     [Tooltip ("En caso de utilizar NavMesh, se utilizará SetDestination para el movimiento o si está a false se utilizará mi propia rutina de movimiento si está activada la opción navmeshUse. Al utilizar esta opción, la rotación y el brakingdistance serán los que indiquen el component del agente navmesh agregado.")]
     public bool navMeshUseSetDestination_  = false;
 
+    [Tooltip("En caso de detectar colisiones, usa otra ruta")]
+    public bool CollisionControl_ = false;
+
     [Header("Movement: Opciones Comunes para mi propia rutina NavMesh y navmesh SetDestination")] 
     [Tooltip ("Cuando se calcula una posición con CalculatePointTarget() de AiController,(esta función devuelve una posición cerca del GameOject indicado y en la orientación indicada) puede ocurrir que si se tiene un mapa navmesh con un radio muy grande, se podría devolver una posición fuera del navmesh, y por consiguiente una posición no válida, al calcular un HidePoint, un WayPoint de gameobject con collider.... El valor de esta variable se multiplicará  en la misma orientación  del punto obtenido, para así, devolver una posición que compense el radio del navmesh y por lo tanto devolver una posición válida.")]
     public float navMeshRadius_=0.5f; ///Cuando se calcula una posición con CalculatePointTarget() de AiController,(esta función devuelve una posición cerca del GameOject indicado y en la orientación indicada)
