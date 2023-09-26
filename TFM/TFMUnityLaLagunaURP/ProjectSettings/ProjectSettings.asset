@@ -155,7 +155,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.TFMUnityLaLagunaURP_VR
-    Standalone: com.DefaultCompany.TFMUnityLaLagunaURP
+    Standalone: com.DefaultCompany.TFMUnityLaLagunaURP-VR
     iPhone: com.Unity-Technologies.com.unity.template.urp-blank
   buildNumber:
     Standalone: 0

@@ -19,3 +19,4 @@ EditorBuildSettings:
       type: 2}
     xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 239e5cc949e70764eb1df93efff43f97,
       type: 2}
+  m_UseUCBPForAssetBundles: 0
