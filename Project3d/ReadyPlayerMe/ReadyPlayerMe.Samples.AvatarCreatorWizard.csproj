@@ -75,8 +75,8 @@
     <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\UI\StateMachine\StateMachine.cs" />
     <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\ProfileManager.cs" />
     <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\UI\PanelSwitcher.cs" />
-    <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\Utils\CameraZoom.cs" />
     <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\UI\CategoryUICreator.cs" />
+    <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\Utils\CameraZoom.cs" />
     <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\UI\Buttons\AvatarButton.cs" />
     <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\UI\LoadingManager.cs" />
     <Compile Include="Assets\Ready Player Me\Core\Samples\AvatarCreatorSamples\AvatarCreatorWizard\Scripts\UI\AvatarCreatorStateMachine.cs" />
@@ -610,16 +610,16 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@7dcdc439b230\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@7dcdc439b230\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
